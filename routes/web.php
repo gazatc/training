@@ -14,5 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('jobs');
+});
+Route::get('/job-single', function () {
+    return view('single-job');
+});
+Route::get('/employers', function () {
+    return view('employers');
+});
+Route::get('/employer-single', function () {
+    return view('single-employer');
+});
+Route::get('/jobseeker-single', function () {
+    return view('single-jobseeker');
 });
