@@ -28,3 +28,6 @@ Route::get('/employer-single', function () {
 Route::get('/jobseeker-single', function () {
     return view('single-jobseeker');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

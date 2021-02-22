@@ -216,8 +216,9 @@
                                     </ul>
                                 </div>
 
-                                <a href="" class="block text-center rounded-lg mt-6 bg-blue-900 text-white font-semibold text-lg px-4 py-2">
-                                    عرض السيرة الذاتية الكاملة
+                                <a href="" class="flex items-center justify-center text-center rounded-lg mt-6 bg-blue-900 text-white font-semibold text-lg px-4 py-2">
+                                    <svg class="w-5 h-5 text-white fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 52 52"><g fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"><path d="M29.808 2H10.086c-.885 0-1.603.718-1.603 1.603v44.794c0 .885.718 1.603 1.603 1.603h31.828c.885 0 1.603-.718 1.603-1.603V15.094"></path><path d="M29.808 2v11.49c0 .886.718 1.604 1.603 1.604h12.106L29.808 2z"></path><path d="M13.985 7.936h9.776v7.594h-9.776z"></path><g><path d="M26 21.444H37.96"></path><path d="M14.041 28.783H37.96"></path><path d="M14.041 36.123H37.96"></path><path d="M14.041 43.462H37.96"></path></g></g></svg>
+                                    <span class="mr-2">عرض ملف السيرة الذاتية</span>
                                 </a>
                             </div>
 
