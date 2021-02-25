@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
-//
+    //
     public function __construct()
     {
         $this->middleware(['permission:create_admins,guard:admin'])->only(['create', 'store']);

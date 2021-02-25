@@ -8,9 +8,18 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:create_roles,guard:admin'])->only(['create', 'store']);
+        $this->middleware(['permission:read_roles,guard:admin'])->only('index');
+        $this->middleware(['permission:update_roles,guard:admin'])->only(['edit', 'update']);
+        $this->middleware(['permission:delete_roles,guard:admin'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)

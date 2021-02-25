@@ -70,24 +70,24 @@
                         </li>
                     @endif
 
-                    {{--@if(auth()->guard('admin')->user()->isAbleTo('*_roles'))--}}
-                        <li class="open {{ (request()->is('dashboard/roles*')) ? 'active' : '' }}">
+                    @if(auth()->guard('admin')->user()->isAbleTo('*_roles'))
+                        <li class="open {{ (request()->is('dashboard/categories*')) ? 'active' : '' }}">
                             <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-collection-text"></i><span>المجالات</span>
                             </a>
                             <ul class="ml-menu">
-{{--                                @if(auth()->guard('admin')->user()->hasPermission('read_roles'))--}}
-                                    <li class="open {{ (request()->is('dashboard/roles')) ? 'active' : '' }}">
-                                        <a href="{{route('dashboard.roles.index')}}">كل المجالات</a>
+                                @if(auth()->guard('admin')->user()->hasPermission('read_roles'))
+                                    <li class="open {{ (request()->is('dashboard/categories')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.categories.index')}}">كل المجالات</a>
                                     </li>
-                                {{--@endif--}}
-{{--                                @if(auth()->guard('admin')->user()->hasPermission('create_roles'))--}}
-                                    <li class="open {{ (request()->is('dashboard/roles/create')) ? 'active' : '' }}">
-                                        <a href="{{route('dashboard.roles.create')}}">إضافة مجال</a>
+                                @endif
+                                @if(auth()->guard('admin')->user()->hasPermission('create_roles'))
+                                    <li class="open {{ (request()->is('dashboard/categories/create')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.categories.create')}}">إضافة مجال</a>
                                     </li>
-                                {{--@endif--}}
+                                @endif
                             </ul>
                         </li>
-                    {{--@endif--}}
+                    @endif
 
                     <br>
                 </ul>

@@ -8,14 +8,30 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:create_categories,guard:admin'])->only(['create', 'store']);
+        $this->middleware(['permission:read_categories,guard:admin'])->only('index');
+        $this->middleware(['permission:update_categories,guard:admin'])->only(['edit', 'update']);
+        $this->middleware(['permission:delete_categories,guard:admin'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $categories = Category::where(function ($query) use ($request) {
+            $query->when($request->search, function ($q) use ($request) {
+                return $q->where('name', 'like', '%' . $request->search . '%');
+            });
+        })->latest()->paginate(10);
+
+        return view('dashboard.categories.index', compact('categories'));
     }
 
     /**
@@ -26,6 +42,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        return view('dashboard.categories.create');
     }
 
     /**
@@ -37,6 +54,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $attributes = $request->validate([
+           'name' => 'required|unique:categories'
+        ]);
+
+        Category::create($attributes);
+
+        session()->flash('success', 'تم اضافة المجال بنجاح');
+        return redirect()->route('dashboard.categories.index');
     }
 
     /**
@@ -59,6 +84,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         //
+        return view('dashboard.categories.edit', compact('category'));
     }
 
     /**
@@ -71,16 +97,29 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //
+        $attributes = $request->validate([
+            'name' => 'required|unique:categories,name,' . $category->id
+        ]);
+
+        $category->update($attributes);
+
+        session()->flash('success', 'تم تعديل المجال بنجاح');
+        return redirect()->route('dashboard.categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Category $category
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Category $category)
     {
         //
+        $category->delete();
+
+        session()->flash('success', 'تم حذف المجال بنجاح');
+        return redirect()->route('dashboard.categories.index');
     }
 }

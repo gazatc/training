@@ -16,6 +16,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
 
         Route::resource('admins', 'AdminController')->except(['show']);
         Route::resource('roles', 'RoleController')->except(['show']);
+        Route::resource('categories', 'CategoryController')->except(['show']);
 //        Route::resource('clients', 'ClientController')->except(['show']);
 //        Route::resource('films', 'FilmController');
 //        Route::resource('actors', 'ActorController');

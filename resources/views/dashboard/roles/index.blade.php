@@ -150,6 +150,7 @@
                         showCancelButton: true,
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: "نعم, قم بالحذف!",
+                        cancelButtonText: "الغاء",
                         closeOnConfirm: false
                     }, function () {
                         that.closest('form').submit();
