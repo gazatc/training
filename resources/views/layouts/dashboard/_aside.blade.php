@@ -89,6 +89,25 @@
                         </li>
                     @endif
 
+                    @if(auth()->guard('admin')->user()->isAbleTo('*_regions'))
+                        <li class="open {{ (request()->is('dashboard/regions*')) ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-pin"></i><span>المحافظات</span>
+                            </a>
+                            <ul class="ml-menu">
+                                @if(auth()->guard('admin')->user()->hasPermission('read_regions'))
+                                    <li class="open {{ (request()->is('dashboard/regions')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.regions.index')}}">كل المحافظات</a>
+                                    </li>
+                                @endif
+                                @if(auth()->guard('admin')->user()->hasPermission('create_regions'))
+                                    <li class="open {{ (request()->is('dashboard/regions/create')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.regions.create')}}">إضافة محافظة</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
+
                     <br>
                 </ul>
             </div>
