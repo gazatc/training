@@ -19,6 +19,15 @@
     <link rel="stylesheet" href="{{asset('dashboard_files/rtl/assets/css/rtl.css')}}">
     <link rel="stylesheet" href="{{asset('dashboard_files/rtl/assets/css/color_skins.css')}}">
 
+    <!-- Fonts -->
+    {{--<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"--}}
+          {{--rel="stylesheet">--}}
+    {{--<style>--}}
+        {{--* {--}}
+            {{--font-family: cairo;--}}
+        {{--}--}}
+    {{--</style>--}}
+
 
 </head>
 <body class="theme-cyan rtl">
@@ -39,11 +48,16 @@
         <li>
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href=""><img src="{{asset('suitcase.svg')}}" width="30"
-                                                     alt="Oreo"><span class="m-l-10">وظائف غزة</span></a>
+                <a class="navbar-brand" href="">
+                    <img src="{{asset('suitcase.svg')}}" width="30" alt="Oreo">
+                    <span class="m-l-10">وظائف غزة</span>
+                </a>
             </div>
         </li>
-        <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a>
+        <li>
+            <a href="javascript:void(0);" class="ls-toggle-btn" data-close="true">
+                <i class="zmdi zmdi-swap"></i>
+            </a>
         </li>
 
         <li class="float-right">
@@ -95,7 +109,7 @@
                     timer: 1000,
                     placement: {
                         from: "bottom",
-                        align: "right"
+                        align: "left"
                     },
                     animate: {
                         enter: "animated fadeIn",

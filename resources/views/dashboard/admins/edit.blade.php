@@ -3,23 +3,25 @@
 @section('content')
 
     @push('styles')
-        <link rel="stylesheet" href="{{asset('web_files/css/bootstrap-fileinput.css')}}">
+        <link rel="stylesheet" href="{{asset('dashboard_files/rtl/assets/css/bootstrap-fileinput.css')}}">
+        <link href="{{asset('dashboard_files/assets/plugins/bootstrap-select/css/bootstrap-select.css')}}"
+              rel="stylesheet"/>
     @endpush
 
     <section class="content">
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-5 col-sm-12">
-                    <h2>Edit Admins
-                        <small>Welcome to Films</small>
+                    <h2>تعديل المشرفين
+                        <small>مرحبا بك في وظائف غزة</small>
                     </h2>
                 </div>
                 <div class="col-lg-5 col-md-7 col-sm-12">
                     <ul class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="zmdi zmdi-home"></i>
-                                Films</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">Admins</a></li>
-                        <li class="breadcrumb-item active">Edit</li>
+                                لوحة التحكم</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">المشرفين</a></li>
+                        <li class="breadcrumb-item active">تعديل</li>
                     </ul>
                 </div>
             </div>
@@ -29,7 +31,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="header">
-                            <h2><strong>Edit</strong> Admins</h2>
+                            <h2><strong>تعديل</strong> المشرفين</h2>
                         </div>
 
                         <div class="body">
@@ -39,7 +41,7 @@
                                 @method('PUT')
 
                                 <div class="header col-lg-12 col-md-12 col-sm-12">
-                                    <h2>Main Information</h2>
+                                    <h2>البيانات الرئيسية</h2>
                                 </div>
 
                                 <div class="row clearfix">
@@ -47,14 +49,18 @@
                                         <div class="form-group">
                                             <input type="text" name="name" class="form-control"
                                                    placeholder="Name" value="{{ $admin->name }}">
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('name') }}</span>
+                                            @error('name')
+                                                <span style="color: red; margin-left: 10px">{{ $errors->first('name') }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control"
                                                    placeholder="Email" value="{{ $admin->email }}">
-                                            <span style="color: red;margin-left: 10px">{{ $errors->first('email') }}</span>
+                                            @error('email')
+                                                <span style="color: red;margin-left: 10px">{{ $errors->first('email') }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -70,22 +76,24 @@
                                         </div>
                                         <div>
                                                 <span class="btn btn-dark btn-file">
-                                                    <span class="fileinput-new"> Select Admin Avatar </span>
-                                                    <span class="fileinput-exists"> Change </span>
+                                                    <span class="fileinput-new"> اختيار صورة </span>
+                                                    <span class="fileinput-exists"> تغيير </span>
                                                     <input type="file" name="avatar"
                                                            value="{{ $admin->avatar }}">
                                                 </span>
                                             <a href="" class="btn btn-danger fileinput-exists"
                                                data-dismiss="fileinput">
-                                                Remove </a>
+                                                حذف </a>
                                         </div>
-                                        <span style="color: red; margin-left: 10px">{{ $errors->first('avatar') }}</span>
+                                        @error('avatar')
+                                            <span style="color: red; margin-left: 10px">{{ $errors->first('avatar') }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <hr>
                                 <div class="header col-lg-12 col-md-12 col-sm-12">
-                                    <h2>Login Information</h2>
+                                    <h2>بيانات تسجيل الدخول</h2>
                                 </div>
 
                                 <div class="row clearfix">
@@ -93,7 +101,9 @@
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control"
                                                    placeholder="Password">
-                                            <span style="color: red; margin-left: 10px">{{ $errors->first('password') }}</span>
+                                            @error('password')
+                                                <span style="color: red; margin-left: 10px">{{ $errors->first('password') }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -106,71 +116,25 @@
 
                                 <hr>
                                 <div class="header col-lg-12 col-md-12 col-sm-12">
-                                    <h2>Permission Information</h2>
+                                    <h2>الصلاحيات</h2>
                                 </div>
 
-                                @php
-                                    $models = ['admins', 'clients', 'categories', 'films', 'actors'];
-                                    $models2 = ['ratings', 'reviews', 'messages'];
-                                    $cruds = ['create', 'read', 'update', 'delete'];
-                                    $cruds2 = ['read', 'delete'];
-                                @endphp
-
-                                <div class="row clearfix">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        @foreach($models as $index=>$model)
-                                            <li class="nav-item">
-                                                <a class="nav-link {{$index==0 ? 'active' : ''}}" data-toggle="tab"
-                                                   href="#{{$model}}"
-                                                   role="tab" aria-controls="home" aria-selected="true">{{$model}}</a>
-                                            </li>
+                                <div class="col-sm-6" style="padding-right: 0px">
+                                    <select class="form-control z-index show-tick nominate_beneficiary"
+                                            name="role" required>
+                                        <option selected disabled>- اختيار صلاحية -</option>
+                                        @foreach($roles as $role)
+                                            <option {{ $admin->roles->last()->id === $role->id ? 'selected' : '' }} value="{{ $role->id }}">
+                                                {{ $role->name }}
+                                            </option>
                                         @endforeach
-                                        @foreach($models2 as $index=>$model2)
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab"
-                                                   href="#{{$model2}}"
-                                                   role="tab" aria-controls="home" aria-selected="true">{{$model2}}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                <div class="row clearfix" style="margin-left: 10px">
-                                    <div class="tab-content">
-                                        @foreach($models as $index=>$model)
-                                            <div class="tab-pane fade show {{ $index==0 ? 'active' : '' }}"
-                                                 id="{{ $model }}">
-                                                <div class="checkbox">
-                                                    @foreach($cruds as $crud)
-                                                        <input {{$admin->hasPermission($crud . '_' . $model) ? 'checked' : ''}} id="{{$crud . '_' . $model }}"
-                                                               type="checkbox" name="permissions[]"
-                                                               value="{{$crud . '_' . $model }}">
-                                                        <label style="margin-left: 10px"
-                                                               for="{{$crud . '_' . $model }}">
-                                                            {{$crud}}
-                                                        </label>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        @foreach($models2 as $index=>$model2)
-                                            <div class="tab-pane fade show"
-                                                 id="{{ $model2 }}">
-                                                <div class="checkbox">
-                                                    @foreach($cruds2 as $crud2)
-                                                        <input {{$admin->hasPermission($crud2 . '_' . $model2) ? 'checked' : ''}} id="{{$crud2 . '_' . $model2 }}"
-                                                               type="checkbox" name="permissions[]"
-                                                               value="{{$crud2 . '_' . $model2 }}">
-                                                        <label style="margin-left: 10px"
-                                                               for="{{$crud2 . '_' . $model2 }}">
-                                                            {{$crud2}}
-                                                        </label>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
+                                    </select>
+                                    @error('role')
+                                    <span style="color: red; margin-right: 10px">{{ $errors->first('role') }}</span>
+                                    @enderror
                                 </div>
 
+                                <br>
                                 <br>
 
                                 <div class="row clearfix">
@@ -189,7 +153,8 @@
     </section>
 
     @push('scripts')
-        <script src="{{asset('web_files/js/bootstrap-fileinput.js')}}"></script>
+        <script src="{{asset('dashboard_files/rtl/assets/js/bootstrap-fileinput.js')}}"></script>
+        <script src="{{asset('dashboard_files/assets/plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
     @endpush
 
 @endsection

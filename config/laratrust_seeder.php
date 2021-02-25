@@ -14,9 +14,9 @@ return [
     'roles_structure' => [
         'super_admin' => [
             'admins' => 'c,r,u,d',
+            'roles' => 'c,r,u,d',
         ],
         'admin' => [],
-        'user' => []
     ],
 
     'permissions_map' => [

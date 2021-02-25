@@ -38,17 +38,6 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-//    protected static function booted()
-//    {
-//        // When the admin is being deleted, delete the image as well.
-//        static::deleting(function (Admin $admin) {
-//            $attributes = $admin->getAttributes();
-//            if (isset($attributes['avatar']) && $attributes['avatar']) {
-//                Storage::delete($attributes['avatar']);
-//            }
-//        });
-//    }
-
     public function getAvatarAttribute($value)
     {
         return asset($value ? 'storage/' . $value : '/images/default.png');

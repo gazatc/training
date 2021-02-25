@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Admin;
 use App\Http\Controllers\Controller;
+use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -33,9 +34,15 @@ class AdminController extends Controller
                 return $q->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('email', 'like', '%' . $request->search . '%');
             });
+            $query->when($request->role, function ($q) use ($request) {
+                return $q->whereHas('roles', function ($q2) use ($request) {
+                   return $q2->where('id', $request->role);
+                });
+            });
         })->latest()->paginate(10);
+        $roles = Role::whereNotIn('name', ['admin', 'super_admin'])->get();
 
-        return view('dashboard.admins.index', compact('admins'));
+        return view('dashboard.admins.index', compact('admins', 'roles'));
     }
 
     /**
@@ -46,7 +53,8 @@ class AdminController extends Controller
     public function create()
     {
         //
-        return view('dashboard.admins.create');
+        $roles = Role::whereNotIn('name', ['super_admin', 'admin'])->get();
+        return view('dashboard.admins.create', compact('roles'));
     }
 
     /**
@@ -63,7 +71,7 @@ class AdminController extends Controller
             'email' => 'required|email|string|unique:admins',
             'avatar' => 'image',
             'password' => 'required|string|confirmed|min:6',
-            'permissions' => 'required|min:1'
+            'role' => 'required|exists:roles,id|min:1'
         ]);
 
         if ($request->avatar) {
@@ -76,10 +84,9 @@ class AdminController extends Controller
             'password' => bcrypt($attributes['password']),
             'avatar' => $attributes['avatar'] ?? NULL
         ]);
-        $admin->attachRole('admin');
-        $admin->syncPermissions($attributes['permissions']);
+        $admin->attachRoles(['admin', $attributes['role']]);
 
-        session()->flash('success', 'Admin Added Successfully');
+        session()->flash('success', 'تم اضافة المشرف بنجاح');
         return redirect()->route('dashboard.admins.index');
     }
 
@@ -106,7 +113,9 @@ class AdminController extends Controller
         if (!auth()->guard('admin')->user()->hasRole('super_admin') && $admin->hasRole('super_admin')) {
             abort('403');
         }
-        return view('dashboard.admins.edit', compact('admin'));
+
+        $roles = Role::whereNotIn('name', ['super_admin', 'admin'])->get();
+        return view('dashboard.admins.edit', compact('admin', 'roles'));
     }
 
     /**
@@ -128,16 +137,17 @@ class AdminController extends Controller
             'email' => ['required', 'email', 'string', Rule::unique('admins')->ignore($admin)],
             'avatar' => 'image',
             'password' => 'nullable|string|confirmed|min:6',
-            'permissions' => 'required|min:1'
+            'role' => 'required|exists:roles,id|min:1'
         ]);
 
         if ($request->avatar) {
-            $adminAvatar = $admin->getAttributes()['avatar'];
-            if (isset($adminAvatar) && $adminAvatar) {
-                Storage::delete($adminAvatar);
-            }
-
+            //When store a new avatar successfully delete the old avatar
             $attributes['avatar'] = $request->avatar->store('admin_avatars');
+
+            $previousAvatar = $admin->getAttributes()['avatar'];
+            if (isset($previousAvatar) && $previousAvatar) {
+                Storage::delete($previousAvatar);
+            }
         }
         if ($request->password) {
             $attributes['password'] = bcrypt($attributes['password']);
@@ -146,9 +156,9 @@ class AdminController extends Controller
         }
 
         $admin->update($attributes);
-        $admin->syncPermissions($attributes['permissions']);
+        $admin->syncRoles(['admin', $attributes['role']]);
 
-        session()->flash('success', 'Admin Updated Successfully');
+        session()->flash('success', 'تم تعديل المشرف بنجاح');
         return redirect()->route('dashboard.admins.index');
     }
 
@@ -162,9 +172,19 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         //
-        $admin->delete();
+        $avatar = $admin->getAttributes()['avatar'];
 
-        session()->flash('success', 'Admin Deleted Successfully');
+        $result = $admin->delete();
+
+        if ($result) {
+            if (isset($avatar) && $avatar) {
+                Storage::delete($avatar);
+            }
+            session()->flash('success', 'تم حذف المشرف بنجاح');
+        } else {
+            session()->flash('fail', 'خطأ في عملية حذف المشرف, الرجاء المحاولة مرة أخرى!');
+        }
+
         return redirect()->route('dashboard.admins.index');
     }
 }
