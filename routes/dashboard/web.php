@@ -18,12 +18,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::resource('roles', 'RoleController')->except(['show']);
         Route::resource('categories', 'CategoryController')->except(['show']);
         Route::resource('regions', 'RegionController')->except(['show']);
-//        Route::resource('clients', 'ClientController')->except(['show']);
-//        Route::resource('films', 'FilmController');
-//        Route::resource('actors', 'ActorController');
-//        Route::resource('categories', 'CategoryController')->except(['show']);
-//        Route::resource('ratings', 'RatingController')->only(['index', 'destroy']);
-//        Route::resource('reviews', 'ReviewController')->only(['index', 'destroy']);
-//        Route::resource('messages', 'MessageController')->only(['index', 'destroy']);
+        Route::resource('employers', 'EmployerController')->except(['show']);
+        Route::post('employers/verifyTrigger/{employer}', 'EmployerController@verifyTrigger')->name('employers.verifyTrigger');
     });
 });

@@ -67,7 +67,7 @@ class AdminController extends Controller
     {
         //
         $attributes = $request->validate([
-            'name' => 'required|string|max:20|min:5',
+            'name' => 'required|string|max:50',
             'email' => 'required|email|string|unique:admins',
             'avatar' => 'image',
             'password' => 'required|string|confirmed|min:6',
@@ -133,7 +133,7 @@ class AdminController extends Controller
         }
 
         $attributes = $request->validate([
-            'name' => 'required|string|max:20|min:5',
+            'name' => 'required|string|max:50',
             'email' => ['required', 'email', 'string', Rule::unique('admins')->ignore($admin)],
             'avatar' => 'image',
             'password' => 'nullable|string|confirmed|min:6',

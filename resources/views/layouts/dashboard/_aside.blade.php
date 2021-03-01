@@ -108,6 +108,25 @@
                         </li>
                     @endif
 
+{{--                    @if(auth()->guard('admin')->user()->isAbleTo('*_regions'))--}}
+                        <li class="open {{ (request()->is('dashboard/employers*')) ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-city-alt"></i><span>أصحاب العمل</span>
+                            </a>
+                            <ul class="ml-menu">
+{{--                                @if(auth()->guard('admin')->user()->hasPermission('read_regions'))--}}
+                                    <li class="open {{ (request()->is('dashboard/employers')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.employers.index')}}">كل أصحاب العمل</a>
+                                    </li>
+                                {{--@endif--}}
+{{--                                @if(auth()->guard('admin')->user()->hasPermission('create_regions'))--}}
+                                    <li class="open {{ (request()->is('dashboard/employers/create')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.employers.create')}}">إضافة صاحب عمل</a>
+                                    </li>
+                                {{--@endif--}}
+                            </ul>
+                        </li>
+                    {{--@endif--}}
+
                     <br>
                 </ul>
             </div>

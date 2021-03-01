@@ -46,7 +46,7 @@
                         <div class="body">
                             <div class="icon xl-slategray"><i class="zmdi zmdi-city-alt"></i> </div>
                             <div class="content">
-                                <div class="text font-20">الشركات / المؤسسات</div>
+                                <div class="text font-20">أصحاب العمل</div>
                                 <h5 class="number">{{ $admins }}</h5>
                             </div>
                         </div>

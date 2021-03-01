@@ -17,6 +17,7 @@ return [
             'roles' => 'c,r,u,d',
             'categories' => 'c,r,u,d',
             'regions' => 'c,r,u,d',
+            'employers' => 'c,r,u,d',
         ],
         'admin' => [],
     ],
