@@ -13,4 +13,12 @@ class EmployerInformation extends Model
     {
         return asset($value ? 'storage/' . $value : '/images/default.png');
     }
+
+
+    public function region() {
+        return $this->belongsTo(Region::class);
+    }
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
 }

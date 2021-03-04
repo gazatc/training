@@ -15,10 +15,17 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::get('/', 'HomeController@index')->name('home');
 
         Route::resource('admins', 'AdminController')->except(['show']);
+
         Route::resource('roles', 'RoleController')->except(['show']);
+
         Route::resource('categories', 'CategoryController')->except(['show']);
+
         Route::resource('regions', 'RegionController')->except(['show']);
+
         Route::resource('employers', 'EmployerController')->except(['show']);
-        Route::post('employers/verifyTrigger/{employer}', 'EmployerController@verifyTrigger')->name('employers.verifyTrigger');
+        Route::post('employers/verifyTrigger/{employer}', 'EmployerController2@verifyTrigger')->name('employers.verifyTrigger');
+        Route::get('employers/{employer}/verify', 'EmployerController2@showVerifyForm')->name('employers.showVerifyForm');
+        Route::post('employers/{employer}/verify', 'EmployerController2@verifyAccount')->name('employers.verifyAccount');
+
     });
 });

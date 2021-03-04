@@ -47,6 +47,7 @@
                         <div class="header">
                             <h2><strong>المشرفين </strong><span>({{$admins->total()}})</span></h2>
                         </div>
+                        @include('layouts.dashboard._message')
                         <div class="body">
                             <div class="col-12" style="padding-right: 0px">
                                 <form action="{{ route('dashboard.admins.index') }}" method="GET">

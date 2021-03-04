@@ -18,6 +18,7 @@ class CreateEmployerVerifiesTable extends Migration
             $table->unsignedBigInteger('employer_id');
             $table->string('PID');
             $table->text('PID_image');
+            $table->text('PID_user_image');
             $table->text('document');
             $table->timestamps();
 

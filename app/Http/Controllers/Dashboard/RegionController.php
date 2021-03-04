@@ -54,13 +54,17 @@ class RegionController extends Controller
     public function store(Request $request)
     {
         //
-        $attributes = $request->validate([
-            'name' => 'required|unique:regions'
-        ]);
+        try {
+            $attributes = $request->validate([
+                'name' => 'required|unique:regions'
+            ]);
 
-        Region::create($attributes);
+            Region::create($attributes);
 
-        session()->flash('success', 'تم اضافة المحافظة بنجاح');
+            session()->flash('success', 'تم اضافة المحافظة بنجاح');
+        } catch (\Exception $e) {
+            session()->flash('fail', $e->getMessage());
+        }
         return redirect()->route('dashboard.regions.index');
     }
 
@@ -97,13 +101,17 @@ class RegionController extends Controller
     public function update(Request $request, Region $region)
     {
         //
-        $attributes = $request->validate([
-            'name' => 'required|unique:regions,name,' . $region->id
-        ]);
+        try {
+            $attributes = $request->validate([
+                'name' => 'required|unique:regions,name,' . $region->id
+            ]);
 
-        $region->update($attributes);
+            $region->update($attributes);
 
-        session()->flash('success', 'تم تعديل المحافظة بنجاح');
+            session()->flash('success', 'تم تعديل المحافظة بنجاح');
+        } catch (\Exception $e) {
+            session()->flash('fail', $e->getMessage());
+        }
         return redirect()->route('dashboard.regions.index');
     }
 
@@ -117,9 +125,13 @@ class RegionController extends Controller
     public function destroy(Region $region)
     {
         //
-        $region->delete();
+        try {
+            $region->delete();
 
-        session()->flash('success', 'تم حذف المحافظة بنجاح');
+            session()->flash('success', 'تم حذف المحافظة بنجاح');
+        } catch (\Exception $e) {
+            session()->flash('fail', $e->getMessage());
+        }
         return redirect()->route('dashboard.regions.index');
     }
 }

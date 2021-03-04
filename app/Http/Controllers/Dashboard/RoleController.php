@@ -68,15 +68,19 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //
-        $attributes = $request->validate([
-            'name' => 'required|unique:roles,name',
-            'permissions' => 'required|array|min:1'
-        ]);
+        try {
+            $attributes = $request->validate([
+                'name' => 'required|unique:roles,name',
+                'permissions' => 'required|array|min:1'
+            ]);
 
-        $role = Role::create($attributes);
-        $role->attachPermissions($attributes['permissions']);
+            $role = Role::create($attributes);
+            $role->attachPermissions($attributes['permissions']);
 
-        session()->flash('success', 'تم اضافية الصلاحية بنجاح');
+            session()->flash('success', 'تم اضافية الصلاحية بنجاح');
+        } catch (\Exception $e) {
+            session()->flash('fail', $e->getMessage());
+        }
         return redirect()->route('dashboard.roles.index');
     }
 
@@ -130,19 +134,23 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         //
-        if($role->name == 'super_admin' || $role->name == 'admin'){
-            abort(403);
+        try {
+            if ($role->name == 'super_admin' || $role->name == 'admin') {
+                abort(403);
+            }
+
+            $attributes = $request->validate([
+                'name' => 'required|unique:roles,name,' . $role->id,
+                'permissions' => 'required|array|min:1'
+            ]);
+
+            $role->update($attributes);
+            $role->syncPermissions($attributes['permissions']);
+
+            session()->flash('success', 'تم تعديل الصلاحية بنجاح');
+        } catch (\Exception $e) {
+            session()->flash('fail', $e->getMessage());
         }
-
-        $attributes = $request->validate([
-            'name' => 'required|unique:roles,name,' . $role->id,
-            'permissions' => 'required|array|min:1'
-        ]);
-
-        $role->update($attributes);
-        $role->syncPermissions($attributes['permissions']);
-
-        session()->flash('success', 'تم تعديل الصلاحية بنجاح');
         return redirect()->route('dashboard.roles.index');
     }
 
@@ -156,13 +164,17 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         //
-        if($role->name == 'super_admin' || $role->name == 'admin'){
-            abort(403);
+        try {
+            if ($role->name == 'super_admin' || $role->name == 'admin') {
+                abort(403);
+            }
+
+            $role->delete();
+
+            session()->flash('success', 'تم حذف الصلاحية بنجاح');
+        } catch (\Exception $e) {
+            session()->flash('fail', $e->getMessage());
         }
-
-        $role->delete();
-
-        session()->flash('success', 'تم حذف الصلاحية بنجاح');
         return redirect()->route('dashboard.roles.index');
     }
 }

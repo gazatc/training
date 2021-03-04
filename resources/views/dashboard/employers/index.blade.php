@@ -47,15 +47,46 @@
                         <div class="header">
                             <h2><strong>أصحاب العمل </strong><span>({{$employers->total()}})</span></h2>
                         </div>
+                        @include('layouts.dashboard._message')
                         <div class="body">
                             <div class="col-12" style="padding-right: 0px">
                                 <form action="{{ route('dashboard.employers.index') }}" method="GET">
                                     <div class="row clearfix">
-                                        <div class="col-md-4 col-sm-12">
+                                        <div class="col-md-3 col-sm-12">
                                             <div class="form-group">
                                                 <input type="text" name="search" class="form-control"
                                                        placeholder="بحث..." value="{{ request()->search }}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-12">
+                                            <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    name="region">
+                                                <option value="">- كل المحافظات -</option>
+                                                @foreach($regions as $region)
+                                                    <option {{ request()->region == $region->id ? 'selected' : '' }} value="{{ $region->id }}">
+                                                        {{ $region->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 col-sm-12">
+                                            <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    name="category">
+                                                <option value="">- كل المجالات -</option>
+                                                @foreach($categories as $category)
+                                                    <option {{ request()->category == $category->id ? 'selected' : '' }} value="{{ $category->id }}">
+                                                        {{ $category->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 col-sm-12">
+                                            <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    name="verified">
+                                                <option value="">- التوثيق -</option>
+                                                <option value="1">موثق</option>
+                                                <option value="0">غير موثق</option>
+                                            </select>
                                         </div>
                                         <div class="col-md-2 col-sm-12 button-custom">
                                             <div class="form-group">
@@ -75,6 +106,8 @@
                                             <th>الصورة</th>
                                             <th>الاسم</th>
                                             <th>الايميل</th>
+                                            <th>المحافظة</th>
+                                            <th>المجال</th>
                                             <th>التوثيق</th>
                                             <th>العمليات</th>
                                         </tr>
@@ -93,6 +126,8 @@
                                                 </td>
                                                 <td><span class="list-name">{{ $employer->name }}</span></td>
                                                 <td>{{ $employer->email }}</td>
+                                                <td>{{ $employer->information->region->name }}</td>
+                                                <td>{{ $employer->information->category->name }}</td>
                                                 <td>
                                                     <form action="{{ route('dashboard.employers.verifyTrigger', $employer) }}"
                                                           method="POST" style="display: inline-block">
@@ -104,6 +139,21 @@
                                                     </form>
                                                 </td>
                                                 <td>
+                                                    @if(auth()->guard('admin')->user()->hasPermission('update_employers'))
+                                                        <a href="{{route('dashboard.employers.showVerifyForm', $employer)}}">
+                                                            <button class="btn btn-icon btn-neutral btn-icon-mini"
+                                                                    title="Verify">
+                                                                <i class="zmdi zmdi-badge-check"></i>
+                                                            </button>
+                                                        </a>
+                                                    @else
+                                                        <button class="btn btn-icon btn-neutral btn-icon-mini disabled"
+                                                                style="cursor: no-drop"
+                                                                title="Edit">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </button>
+                                                    @endif
+
                                                     @if(auth()->guard('admin')->user()->hasPermission('update_employers'))
                                                         <a href="{{route('dashboard.employers.edit', $employer)}}">
                                                             <button class="btn btn-icon btn-neutral btn-icon-mini"

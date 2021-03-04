@@ -54,13 +54,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
-        $attributes = $request->validate([
-           'name' => 'required|unique:categories'
-        ]);
+        try {
+            $attributes = $request->validate([
+                'name' => 'required|unique:categories'
+            ]);
 
-        Category::create($attributes);
+            Category::create($attributes);
 
-        session()->flash('success', 'تم اضافة المجال بنجاح');
+            session()->flash('success', 'تم اضافة المجال بنجاح');
+        } catch (\Exception $e) {
+            session()->flash('fail', $e->getMessage());
+        }
         return redirect()->route('dashboard.categories.index');
     }
 
@@ -97,13 +101,17 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //
-        $attributes = $request->validate([
-            'name' => 'required|unique:categories,name,' . $category->id
-        ]);
+        try {
+            $attributes = $request->validate([
+                'name' => 'required|unique:categories,name,' . $category->id
+            ]);
 
-        $category->update($attributes);
+            $category->update($attributes);
 
-        session()->flash('success', 'تم تعديل المجال بنجاح');
+            session()->flash('success', 'تم تعديل المجال بنجاح');
+        } catch (\Exception $e) {
+            session()->flash('fail', $e->getMessage());
+        }
         return redirect()->route('dashboard.categories.index');
     }
 
@@ -117,9 +125,13 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
-        $category->delete();
+        try {
+            $category->delete();
 
-        session()->flash('success', 'تم حذف المجال بنجاح');
+            session()->flash('success', 'تم حذف المجال بنجاح');
+        } catch (\Exception $e) {
+            session()->flash('fail', $e->getMessage());
+        }
         return redirect()->route('dashboard.categories.index');
     }
 }

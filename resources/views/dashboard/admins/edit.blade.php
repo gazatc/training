@@ -139,8 +139,8 @@
 
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-primary btn-round">Edit</button>
-                                        <button type="reset" class="btn btn-default btn-round btn-simple">Cancel
+                                        <button type="submit" class="btn btn-primary btn-round">تعديل</button>
+                                        <button type="reset" class="btn btn-default btn-round btn-simple">الغاء
                                         </button>
                                     </div>
                                 </div>

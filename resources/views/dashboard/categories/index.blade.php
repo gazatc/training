@@ -47,6 +47,7 @@
                         <div class="header">
                             <h2><strong>المجالات </strong><span>({{$categories->total()}})</span></h2>
                         </div>
+                        @include('layouts.dashboard._message')
                         <div class="body">
                             <div class="col-5" style="padding-right: 0px">
                                 <form action="{{ route('dashboard.categories.index') }}" method="GET">

@@ -66,27 +66,31 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //
-        $attributes = $request->validate([
-            'name' => 'required|string|max:50',
-            'email' => 'required|email|string|unique:admins',
-            'avatar' => 'image',
-            'password' => 'required|string|confirmed|min:6',
-            'role' => 'required|exists:roles,id|min:1'
-        ]);
+        try {
+            $attributes = $request->validate([
+                'name' => 'required|string|max:50',
+                'email' => 'required|email|string|unique:admins',
+                'avatar' => 'image',
+                'password' => 'required|string|confirmed|min:6',
+                'role' => 'required|exists:roles,id|min:1'
+            ]);
+            if ($request->avatar) {
+                $attributes['avatar'] = $request->avatar->store('admin_avatars');
+            }
 
-        if ($request->avatar) {
-            $attributes['avatar'] = $request->avatar->store('admin_avatars');
+            $admin = Admin::create([
+                'name' => $attributes['name'],
+                'email' => $attributes['email'],
+                'password' => bcrypt($attributes['password']),
+                'avatar' => $attributes['avatar'] ?? NULL
+            ]);
+            $admin->attachRoles(['admin', $attributes['role']]);
+
+            session()->flash('success', 'تم اضافة المشرف بنجاح');
+        } catch (\Exception $e) {
+            session()->flash('fail', $e->getMessage());
         }
 
-        $admin = Admin::create([
-            'name' => $attributes['name'],
-            'email' => $attributes['email'],
-            'password' => bcrypt($attributes['password']),
-            'avatar' => $attributes['avatar'] ?? NULL
-        ]);
-        $admin->attachRoles(['admin', $attributes['role']]);
-
-        session()->flash('success', 'تم اضافة المشرف بنجاح');
         return redirect()->route('dashboard.admins.index');
     }
 
@@ -132,33 +136,38 @@ class AdminController extends Controller
             abort('403');
         }
 
-        $attributes = $request->validate([
-            'name' => 'required|string|max:50',
-            'email' => ['required', 'email', 'string', Rule::unique('admins')->ignore($admin)],
-            'avatar' => 'image',
-            'password' => 'nullable|string|confirmed|min:6',
-            'role' => 'required|exists:roles,id|min:1'
-        ]);
+        try {
+            $attributes = $request->validate([
+                'name' => 'required|string|max:50',
+                'email' => ['required', 'email', 'string', Rule::unique('admins')->ignore($admin)],
+                'avatar' => 'image',
+                'password' => 'nullable|string|confirmed|min:6',
+                'role' => 'required|exists:roles,id|min:1'
+            ]);
 
-        if ($request->avatar) {
-            //When store a new avatar successfully delete the old avatar
-            $attributes['avatar'] = $request->avatar->store('admin_avatars');
+            if ($request->avatar) {
+                //When store a new avatar successfully delete the old avatar
+                $attributes['avatar'] = $request->avatar->store('admin_avatars');
 
-            $previousAvatar = $admin->getAttributes()['avatar'];
-            if (isset($previousAvatar) && $previousAvatar) {
-                Storage::delete($previousAvatar);
+                $previousAvatar = $admin->getAttributes()['avatar'];
+                if (isset($previousAvatar) && $previousAvatar) {
+                    Storage::delete($previousAvatar);
+                }
             }
-        }
-        if ($request->password) {
-            $attributes['password'] = bcrypt($attributes['password']);
-        } else {
-            unset($attributes['password']);
+            if ($request->password) {
+                $attributes['password'] = bcrypt($attributes['password']);
+            } else {
+                unset($attributes['password']);
+            }
+
+            $admin->update($attributes);
+            $admin->syncRoles(['admin', $attributes['role']]);
+
+            session()->flash('success', 'تم تعديل المشرف بنجاح');
+        } catch (\Exception $e) {
+            session()->flash('fail', $e->getMessage());
         }
 
-        $admin->update($attributes);
-        $admin->syncRoles(['admin', $attributes['role']]);
-
-        session()->flash('success', 'تم تعديل المشرف بنجاح');
         return redirect()->route('dashboard.admins.index');
     }
 
@@ -174,17 +183,20 @@ class AdminController extends Controller
         //
         $avatar = $admin->getAttributes()['avatar'];
 
-        $result = $admin->delete();
+        try {
+            $result = $admin->delete();
 
-        if ($result) {
-            if (isset($avatar) && $avatar) {
-                Storage::delete($avatar);
+            if ($result) {
+                if (isset($avatar) && $avatar) {
+                    Storage::delete($avatar);
+                }
+                session()->flash('success', 'تم حذف المشرف بنجاح');
+            } else {
+                session()->flash('fail', 'خطأ في عملية حذف المشرف, الرجاء المحاولة مرة أخرى!');
             }
-            session()->flash('success', 'تم حذف المشرف بنجاح');
-        } else {
-            session()->flash('fail', 'خطأ في عملية حذف المشرف, الرجاء المحاولة مرة أخرى!');
+        } catch (\Exception $e) {
+            session()->flash('fail', $e->getMessage());
         }
-
         return redirect()->route('dashboard.admins.index');
     }
 }
