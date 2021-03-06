@@ -129,17 +129,24 @@
                                                 <td>{{ $employer->information->region->name }}</td>
                                                 <td>{{ $employer->information->category->name }}</td>
                                                 <td>
-                                                    <form action="{{ route('dashboard.employers.verifyTrigger', $employer) }}"
-                                                          method="POST" style="display: inline-block">
-                                                        @csrf
+                                                    @if(auth()->guard('admin')->user()->hasPermission('verify_employers'))
+                                                        <form action="{{ route('dashboard.employers.verifyTrigger', $employer) }}"
+                                                              method="POST" style="display: inline-block">
+                                                            @csrf
+                                                            <div class="checkbox">
+                                                                <input id="checkbox_{{ $employer->id }}" class="verify_checkbox" type="checkbox" {{ $employer->verified ? 'checked' : '' }}>
+                                                                <label for="checkbox_{{ $employer->id }}">{{ $employer->verified ? 'موثق' : 'غير موثق' }}</label>
+                                                            </div>
+                                                        </form>
+                                                    @else
                                                         <div class="checkbox">
-                                                            <input id="checkbox_{{ $employer->id }}" class="verify_checkbox" type="checkbox" {{ $employer->verified ? 'checked' : '' }}>
+                                                            <input id="checkbox_{{ $employer->id }}" type="checkbox" disabled {{ $employer->verified ? 'checked' : '' }}>
                                                             <label for="checkbox_{{ $employer->id }}">{{ $employer->verified ? 'موثق' : 'غير موثق' }}</label>
                                                         </div>
-                                                    </form>
+                                                    @endif
                                                 </td>
                                                 <td>
-                                                    @if(auth()->guard('admin')->user()->hasPermission('update_employers'))
+                                                    @if(auth()->guard('admin')->user()->hasPermission('verify_employers'))
                                                         <a href="{{route('dashboard.employers.showVerifyForm', $employer)}}">
                                                             <button class="btn btn-icon btn-neutral btn-icon-mini"
                                                                     title="Verify">
@@ -150,7 +157,7 @@
                                                         <button class="btn btn-icon btn-neutral btn-icon-mini disabled"
                                                                 style="cursor: no-drop"
                                                                 title="Edit">
-                                                            <i class="zmdi zmdi-edit"></i>
+                                                            <i class="zmdi zmdi-badge-check"></i>
                                                         </button>
                                                     @endif
 
@@ -192,7 +199,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="6" class="text-center">لا يوجد بيانات لعرضها...</td>
+                                                <td colspan="8" class="text-center">لا يوجد بيانات لعرضها...</td>
                                             </tr>
                                         @endforelse
                                         </tbody>

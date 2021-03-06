@@ -120,7 +120,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="4" class="text-center">لا يوجد بيانات لعرضها...</td>
+                                                <td colspan="5" class="text-center">لا يوجد بيانات لعرضها...</td>
                                             </tr>
                                         @endforelse
                                         </tbody>

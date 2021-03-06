@@ -64,9 +64,9 @@
                                         <div class="form-group">
                                             <label for="PID_image">
                                                 <b>صورة الهوية الشخصية</b>
-                                                @if($employer->verify->PID_image)
+                                                @isset($employer->verify->PID_image)
                                                     <a target="_blank" href="{{ $employer->verify->PID_image }}">عرض</a>
-                                                @endif
+                                                @endisset
                                             </label>
                                             <input type="file" name="PID_image" class="form-control-file" id="PID_image">
                                             @error('PID_image')
@@ -78,9 +78,9 @@
                                         <div class="form-group">
                                             <label for="PID_user_image">
                                                 <b>صورة للشخص مع الهوية الشخصية</b>
-                                                @if($employer->verify->PID_user_image)
+                                                @isset($employer->verify->PID_user_image)
                                                     <a target="_blank" href="{{ $employer->verify->PID_user_image }}">عرض</a>
-                                                @endif
+                                                @endisset
                                             </label>
                                             <input type="file" name="PID_user_image" class="form-control-file" id="PID_user_image">
                                             @error('PID_user_image')
@@ -92,9 +92,9 @@
                                         <div class="form-group">
                                             <label for="document">
                                                 <b>صورة وثيقة للشركة او المؤسسة</b>
-                                                @if($employer->verify->document)
+                                                @isset($employer->verify->document)
                                                     <a target="_blank" href="{{ $employer->verify->document }}">عرض</a>
-                                                @endif
+                                                @endisset
                                             </label>
                                             <input type="file" name="document" class="form-control-file" id="document">
                                             @error('document')

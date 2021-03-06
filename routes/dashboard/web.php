@@ -23,9 +23,9 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::resource('regions', 'RegionController')->except(['show']);
 
         Route::resource('employers', 'EmployerController')->except(['show']);
-        Route::post('employers/verifyTrigger/{employer}', 'EmployerController2@verifyTrigger')->name('employers.verifyTrigger');
-        Route::get('employers/{employer}/verify', 'EmployerController2@showVerifyForm')->name('employers.showVerifyForm');
-        Route::post('employers/{employer}/verify', 'EmployerController2@verifyAccount')->name('employers.verifyAccount');
+        Route::post('employers/verifyTrigger/{employer}', 'EmployerVerifyController@verifyTrigger')->name('employers.verifyTrigger');
+        Route::get('employers/{employer}/verify', 'EmployerVerifyController@showVerifyForm')->name('employers.showVerifyForm');
+        Route::post('employers/{employer}/verify', 'EmployerVerifyController@verifyAccount')->name('employers.verifyAccount');
 
     });
 });

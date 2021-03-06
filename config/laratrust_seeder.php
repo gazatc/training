@@ -17,7 +17,7 @@ return [
             'roles' => 'c,r,u,d',
             'categories' => 'c,r,u,d',
             'regions' => 'c,r,u,d',
-            'employers' => 'c,r,u,d',
+            'employers' => 'c,r,u,d,v',
         ],
         'admin' => [],
     ],
@@ -26,6 +26,7 @@ return [
         'c' => 'create',
         'r' => 'read',
         'u' => 'update',
-        'd' => 'delete'
+        'd' => 'delete',
+        'v' => 'verify'
     ]
 ];

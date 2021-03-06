@@ -6,9 +6,14 @@ use App\Employer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EmployerController2 extends Controller
+class EmployerVerifyController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware(['permission:verify_employers,guard:admin']);
+    }
+
     public function verifyTrigger(Employer $employer)
     {
         try {

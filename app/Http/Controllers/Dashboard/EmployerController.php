@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Storage;
 
 class EmployerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:create_employers,guard:admin'])->only(['create', 'store']);
+        $this->middleware(['permission:read_employers,guard:admin'])->only('index');
+        $this->middleware(['permission:update_employers,guard:admin'])->only(['edit', 'update']);
+        $this->middleware(['permission:delete_employers,guard:admin'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
