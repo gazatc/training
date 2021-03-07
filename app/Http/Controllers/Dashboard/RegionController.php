@@ -48,17 +48,16 @@ class RegionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
+        $attributes = $request->validate([
+            'name' => 'required|unique:regions'
+        ]);
         try {
-            $attributes = $request->validate([
-                'name' => 'required|unique:regions'
-            ]);
-
             Region::create($attributes);
 
             session()->flash('success', 'تم اضافة المحافظة بنجاح');
@@ -101,11 +100,10 @@ class RegionController extends Controller
     public function update(Request $request, Region $region)
     {
         //
+        $attributes = $request->validate([
+            'name' => 'required|unique:regions,name,' . $region->id
+        ]);
         try {
-            $attributes = $request->validate([
-                'name' => 'required|unique:regions,name,' . $region->id
-            ]);
-
             $region->update($attributes);
 
             session()->flash('success', 'تم تعديل المحافظة بنجاح');

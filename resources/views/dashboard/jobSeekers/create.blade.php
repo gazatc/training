@@ -12,7 +12,7 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-5 col-sm-12">
-                    <h2>إضافة صاحب عمل
+                    <h2>إضافة باحث عن عمل
                         <small>مرحبا بك في وظائف غزة</small>
                     </h2>
                 </div>
@@ -20,7 +20,7 @@
                     <ul class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="zmdi zmdi-home"></i>
                                 لوحة التحكم</a></li>
-                        <li class="breadcrumb-item"><a href="{{ url('dashboard/employers') }}">أصحاب العمل</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard/jobSeekers') }}">الباحثين عن عمل</a></li>
                         <li class="breadcrumb-item active">إضافة</li>
                     </ul>
                 </div>
@@ -31,11 +31,11 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h2><strong>إضافة</strong> صاحب عمل</h2>
+                            <h2><strong>إضافة</strong> باحث عن عمل</h2>
                         </div>
 
                         <div class="body">
-                            <form action="{{route('dashboard.employers.store')}}" method="POST"
+                            <form action="{{route('dashboard.jobSeekers.store')}}" method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
 
@@ -44,7 +44,7 @@
                                 </div>
 
                                 <div class="row clearfix">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="username" class="form-control"
                                                    placeholder="اسم المستخدم" value="{{ old('username', '') }}">
@@ -55,19 +55,28 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control"
-                                                   placeholder="الإسم" value="{{ old('name', '') }}">
-                                            @error('name')
-                                                <span style="color: red; margin-right: 10px">{{ $errors->first('name') }}</span>
+                                            <input type="email" name="email" class="form-control"
+                                                   placeholder="الإيميل" value="{{ old('email', '') }}">
+                                            @error('email')
+                                            <span style="color: red;margin-right: 10px">{{ $errors->first('email') }}</span>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control"
-                                                   placeholder="الإيميل" value="{{ old('email', '') }}">
-                                            @error('email')
-                                                <span style="color: red;margin-right: 10px">{{ $errors->first('email') }}</span>
+                                            <input type="text" name="firstName" class="form-control"
+                                                   placeholder=" الاسم الاول" value="{{ old('firstName', '') }}">
+                                            @error('firstName')
+                                                <span style="color: red; margin-right: 10px">{{ $errors->first('firstName') }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="lastName" class="form-control"
+                                                   placeholder=" الاسم الاخير" value="{{ old('lastName', '') }}">
+                                            @error('lastName')
+                                                <span style="color: red; margin-right: 10px">{{ $errors->first('lastName') }}</span>
                                             @enderror
                                         </div>
                                     </div>
@@ -153,41 +162,30 @@
                                     </div>
                                 </div>
                                 <div class="row clearfix">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <input type="text" name="phone" class="form-control"
-                                                   placeholder="الهاتف / الجوال" value="{{ old('phone', '') }}">
+                                                   placeholder="الجوال" value="{{ old('phone', '') }}">
                                             @error('phone')
                                                 <span style="color: red; margin-right: 10px">{{ $errors->first('phone') }}</span>
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input type="text" name="type" class="form-control"
-                                                   placeholder="نوع الشركة / المؤسسة" value="{{ old('type', '') }}">
-                                            @error('type')
-                                                <span style="color: red;margin-right: 10px">{{ $errors->first('type') }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <input type="number" name="year" class="form-control"
-                                                   placeholder="تأسست عام" value="{{ old('year', '') }}">
-                                            @error('phone')
-                                                <span style="color: red; margin-right: 10px">{{ $errors->first('year') }}</span>
+                                            <input type="number" name="age" class="form-control"
+                                                   placeholder="العمر" value="{{ old('age', '') }}">
+                                            @error('age')
+                                                <span style="color: red;margin-right: 10px">{{ $errors->first('age') }}</span>
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
-                                            <input type="text" name="address" class="form-control"
-                                                   placeholder="العنوان" value="{{ old('address', '') }}">
-                                            @error('address')
-                                                <span style="color: red;margin-right: 10px">{{ $errors->first('address') }}</span>
+                                            <input type="text" name="degree" class="form-control"
+                                                   placeholder="المستوى الدراسي" value="{{ old('degree', '') }}">
+                                            @error('degree')
+                                                <span style="color: red; margin-right: 10px">{{ $errors->first('degree') }}</span>
                                             @enderror
                                         </div>
                                     </div>
@@ -196,9 +194,20 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <textarea name="bio" rows="4" class="form-control no-resize"
-                                                      placeholder="من نحن...">{{ old('bio', '') }}</textarea>
+                                                      placeholder="نبذة...">{{ old('bio', '') }}</textarea>
                                             @error('bio')
-                                            <span style="color: red;margin-right: 10px">{{ $errors->first('bio') }}</span>
+                                                <span style="color: red;margin-right: 10px">{{ $errors->first('bio') }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <textarea name="skills" rows="4" class="form-control no-resize"
+                                                      placeholder="المهارات...">{{ old('skills', '') }}</textarea>
+                                            @error('skills')
+                                                <span style="color: red;margin-right: 10px">{{ $errors->first('skills') }}</span>
                                             @enderror
                                         </div>
                                     </div>
@@ -264,6 +273,26 @@
                                                    placeholder="whatsapp" value="{{ old('whatsapp', '') }}">
                                             @error('whatsapp')
                                                 <span style="color: red;margin-right: 10px">{{ $errors->first('whatsapp') }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="behance" class="form-control"
+                                                   placeholder="behance" value="{{ old('behance', '') }}">
+                                            @error('behance')
+                                                <span style="color: red; margin-right: 10px">{{ $errors->first('behance') }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="github" class="form-control"
+                                                   placeholder="github" value="{{ old('github', '') }}">
+                                            @error('github')
+                                                <span style="color: red;margin-right: 10px">{{ $errors->first('github') }}</span>
                                             @enderror
                                         </div>
                                     </div>

@@ -12,7 +12,7 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-5 col-sm-12">
-                    <h2>تعديل الصلاحيات
+                    <h2>تعديل الصلاحية
                         <small>مرحبا بك في وظائف غزة</small>
                     </h2>
                 </div>
@@ -20,7 +20,7 @@
                     <ul class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="zmdi zmdi-home"></i>
                                 لوحة التحكم</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">الصلاحيات</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard/roles') }}">الصلاحيات</a></li>
                         <li class="breadcrumb-item active">تعديل</li>
                     </ul>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h2><strong>تعديل</strong> الصلاحيات</h2>
+                            <h2><strong>تعديل</strong> الصلاحية</h2>
                         </div>
 
                         <div class="body">

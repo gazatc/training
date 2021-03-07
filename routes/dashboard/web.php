@@ -27,5 +27,9 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::get('employers/{employer}/verify', 'EmployerVerifyController@showVerifyForm')->name('employers.showVerifyForm');
         Route::post('employers/{employer}/verify', 'EmployerVerifyController@verifyAccount')->name('employers.verifyAccount');
 
+        Route::resource('jobSeekers', 'JobSeekerController')->except(['show']);
+        Route::post('jobSeekers/verifyTrigger/{jobSeeker}', 'JobSeekerVerifyController@verifyTrigger')->name('jobSeekers.verifyTrigger');
+        Route::get('jobSeekers/{jobSeeker}/verify', 'JobSeekerVerifyController@showVerifyForm')->name('jobSeekers.showVerifyForm');
+        Route::post('jobSeekers/{jobSeeker}/verify', 'JobSeekerVerifyController@verifyAccount')->name('jobSeekers.verifyAccount');
     });
 });

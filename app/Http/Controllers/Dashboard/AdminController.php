@@ -36,7 +36,7 @@ class AdminController extends Controller
             });
             $query->when($request->role, function ($q) use ($request) {
                 return $q->whereHas('roles', function ($q2) use ($request) {
-                   return $q2->where('id', $request->role);
+                    return $q2->where('id', $request->role);
                 });
             });
         })->latest()->paginate(10);
@@ -66,14 +66,14 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //
+        $attributes = $request->validate([
+            'name' => 'required|string|max:50',
+            'email' => 'required|email|string|unique:admins',
+            'avatar' => 'image',
+            'password' => 'required|string|confirmed|min:6',
+            'role' => 'required|exists:roles,id|min:1'
+        ]);
         try {
-            $attributes = $request->validate([
-                'name' => 'required|string|max:50',
-                'email' => 'required|email|string|unique:admins',
-                'avatar' => 'image',
-                'password' => 'required|string|confirmed|min:6',
-                'role' => 'required|exists:roles,id|min:1'
-            ]);
             if ($request->avatar) {
                 $attributes['avatar'] = $request->avatar->store('admin_avatars');
             }
@@ -136,15 +136,15 @@ class AdminController extends Controller
             abort('403');
         }
 
-        try {
-            $attributes = $request->validate([
-                'name' => 'required|string|max:50',
-                'email' => ['required', 'email', 'string', Rule::unique('admins')->ignore($admin)],
-                'avatar' => 'image',
-                'password' => 'nullable|string|confirmed|min:6',
-                'role' => 'required|exists:roles,id|min:1'
-            ]);
 
+        $attributes = $request->validate([
+            'name' => 'required|string|max:50',
+            'email' => ['required', 'email', 'string', Rule::unique('admins')->ignore($admin)],
+            'avatar' => 'image',
+            'password' => 'nullable|string|confirmed|min:6',
+            'role' => 'required|exists:roles,id|min:1'
+        ]);
+        try {
             if ($request->avatar) {
                 //When store a new avatar successfully delete the old avatar
                 $attributes['avatar'] = $request->avatar->store('admin_avatars');
@@ -181,9 +181,9 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         //
-        $avatar = $admin->getAttributes()['avatar'];
-
         try {
+            $avatar = $admin->getAttributes()['avatar'];
+
             $result = $admin->delete();
 
             if ($result) {

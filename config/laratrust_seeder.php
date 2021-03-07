@@ -18,6 +18,7 @@ return [
             'categories' => 'c,r,u,d',
             'regions' => 'c,r,u,d',
             'employers' => 'c,r,u,d,v',
+            'jobSeekers' => 'c,r,u,d,v',
         ],
         'admin' => [],
     ],

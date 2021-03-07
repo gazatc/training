@@ -4,20 +4,21 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laratrust\Traits\LaratrustUserTrait;
 
-class Employer extends Authenticatable
+class JobSeeker extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = 'employers';
+    protected $table = 'job_seekers';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'verified'
+        'username', 'firstName', 'lastName', 'email', 'password', 'verified'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -36,13 +37,26 @@ class Employer extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function gitNameAttribute() {
+        return "$this->firstName  $this->lastName";
+    }
+
     public function information() {
-        return $this->hasOne(EmployerInformation::class);
+        return $this->hasOne(JobSeekerInformation::class);
     }
     public function socials() {
-        return $this->hasOne(EmployerSocial::class);
+        return $this->hasOne(JobSeekerSocial::class);
     }
     public function verify() {
-        return $this->hasOne(EmployerVerify::class);
+        return $this->hasOne(JobSeekerVerify::class);
+    }
+    public function education() {
+        return $this->hasMany(JobSeekerEducation::class);
+    }
+    public function experience() {
+        return $this->hasMany(JobSeekerExperience::class);
+    }
+    public function training() {
+        return $this->hasMany(JobSeekerTraining::class);
     }
 }

@@ -34,7 +34,7 @@
                     <ul class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><a href="{{url('dashboard')}}"><i class="zmdi zmdi-home"></i>لوحة
                                 التحكم</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">المشرفين</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard/admins') }}">المشرفين</a></li>
                         <li class="breadcrumb-item active">الكل</li>
                     </ul>
                 </div>

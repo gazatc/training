@@ -12,7 +12,7 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-5 col-sm-12">
-                    <h2>تعديل أصحاب العمل
+                    <h2>تعديل صاحب العمل
                         <small>مرحبا بك في وظائف غزة</small>
                     </h2>
                 </div>
@@ -20,7 +20,7 @@
                     <ul class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="zmdi zmdi-home"></i>
                                 لوحة التحكم</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">أصحاب العمل</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard/employers') }}">أصحاب العمل</a></li>
                         <li class="breadcrumb-item active">تعديل</li>
                     </ul>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="header">
-                            <h2><strong>تعديل</strong> أصحاب العمل</h2>
+                            <h2><strong>تعديل</strong> صاحب العمل</h2>
                         </div>
 
                         <div class="body">
@@ -45,6 +45,15 @@
                                 </div>
 
                                 <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" name="username" class="form-control"
+                                                   placeholder="اسم المستخدم" value="{{ $employer->username }}">
+                                            @error('username')
+                                                <span style="color: red; margin-right: 10px">{{ $errors->first('username') }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="name" class="form-control"

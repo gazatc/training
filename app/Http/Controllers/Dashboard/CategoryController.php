@@ -48,17 +48,16 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
+        $attributes = $request->validate([
+            'name' => 'required|unique:categories'
+        ]);
         try {
-            $attributes = $request->validate([
-                'name' => 'required|unique:categories'
-            ]);
-
             Category::create($attributes);
 
             session()->flash('success', 'تم اضافة المجال بنجاح');
@@ -71,7 +70,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Category $category
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
@@ -82,7 +81,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
@@ -94,18 +93,17 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Category $category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
     {
         //
+        $attributes = $request->validate([
+            'name' => 'required|unique:categories,name,' . $category->id
+        ]);
         try {
-            $attributes = $request->validate([
-                'name' => 'required|unique:categories,name,' . $category->id
-            ]);
-
             $category->update($attributes);
 
             session()->flash('success', 'تم تعديل المجال بنجاح');

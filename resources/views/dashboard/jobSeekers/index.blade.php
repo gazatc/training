@@ -12,13 +12,13 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-5 col-sm-12">
-                    <h2>كل أصحاب العمل
+                    <h2>كل الباحثين عن عمل
                         <small class="text-muted">مرحبا بك في وظائف غزة</small>
                     </h2>
                 </div>
                 <div class="col-lg-5 col-md-7 col-sm-12">
-                    @if(auth()->guard('admin')->user()->hasPermission('create_employers'))
-                        <a href="{{route('dashboard.employers.create')}}">
+                    @if(auth()->guard('admin')->user()->hasPermission('create_jobSeekers'))
+                        <a href="{{route('dashboard.jobSeekers.create')}}">
                             <button class="btn btn-primary btn-icon btn-round d-none d-md-inline-block float-right m-l-10"
                                     type="button">
                                 <i class="zmdi zmdi-plus"></i>
@@ -34,7 +34,7 @@
                     <ul class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><a href="{{url('dashboard')}}"><i class="zmdi zmdi-home"></i>لوحة
                                 التحكم</a></li>
-                        <li class="breadcrumb-item"><a href="{{ url('dashboard/employers') }}">أصحاب العمل</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard/jobSeekers') }}">الباحثين عن عمل</a></li>
                         <li class="breadcrumb-item active">الكل</li>
                     </ul>
                 </div>
@@ -45,12 +45,12 @@
                 <div class="col-md-12">
                     <div class="card patients-list">
                         <div class="header">
-                            <h2><strong>أصحاب العمل </strong><span>({{$employers->total()}})</span></h2>
+                            <h2><strong>الباحثين عن عمل </strong><span>({{$jobSeekers->total()}})</span></h2>
                         </div>
                         @include('layouts.dashboard._message')
                         <div class="body">
                             <div class="col-12" style="padding-right: 0px">
-                                <form action="{{ route('dashboard.employers.index') }}" method="GET">
+                                <form action="{{ route('dashboard.jobSeekers.index') }}" method="GET">
                                     <div class="row clearfix">
                                         <div class="col-md-3 col-sm-12">
                                             <div class="form-group">
@@ -58,7 +58,7 @@
                                                        placeholder="بحث..." value="{{ request()->search }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-2 col-sm-12">
+                                        <div class="col-md-3 col-sm-12">
                                             <select class="form-control z-index show-tick nominate_beneficiary"
                                                     name="region">
                                                 <option value="">- كل المحافظات -</option>
@@ -88,7 +88,7 @@
                                                 <option value="0">غير موثق</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-2 col-sm-12 button-custom">
+                                        <div class="col-md-1 col-sm-12 button-custom">
                                             <div class="form-group">
                                                 <button type="submit" class="form-control btn-primary" style="color: white; border:none ">بحث</button>
                                             </div>
@@ -114,42 +114,42 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @forelse($employers as $employer)
+                                        @forelse($jobSeekers as $jobSeeker)
                                             <tr>
-                                                <td>{{ ($employers->currentPage()-1) * $employers->perPage() + $loop->index + 1 }}</td>
+                                                <td>{{ ($jobSeekers->currentPage()-1) * $jobSeekers->perPage() + $loop->index + 1 }}</td>
                                                 <td>
                                                     <span class="list-icon">
                                                         <img class="patients-img"
-                                                             src="{{ $employer->information->avatar }}"
+                                                             src="{{ $jobSeeker->information->avatar }}"
                                                              alt=""
                                                              style="width: 50px; height: 50px">
                                                     </span>
                                                 </td>
-                                                <td><span class="list-name">{{ $employer->username }}</span></td>
-                                                <td><span class="list-name">{{ $employer->name }}</span></td>
-                                                <td>{{ $employer->email }}</td>
-                                                <td>{{ $employer->information->region->name }}</td>
-                                                <td>{{ $employer->information->category->name }}</td>
+                                                <td><span class="list-name">{{ $jobSeeker->username }}</span></td>
+                                                <td><span class="list-name">{{ $jobSeeker->name }}</span></td>
+                                                <td>{{ $jobSeeker->email }}</td>
+                                                <td>{{ $jobSeeker->information->region->name }}</td>
+                                                <td>{{ $jobSeeker->information->category->name }}</td>
                                                 <td>
-                                                    @if(auth()->guard('admin')->user()->hasPermission('verify_employers'))
-                                                        <form action="{{ route('dashboard.employers.verifyTrigger', $employer) }}"
+                                                    @if(auth()->guard('admin')->user()->hasPermission('verify_jobSeekers'))
+                                                        <form action="{{ route('dashboard.jobSeekers.verifyTrigger', $jobSeeker) }}"
                                                               method="POST" style="display: inline-block">
                                                             @csrf
                                                             <div class="checkbox">
-                                                                <input id="checkbox_{{ $employer->id }}" class="verify_checkbox" type="checkbox" {{ $employer->verified ? 'checked' : '' }}>
-                                                                <label for="checkbox_{{ $employer->id }}">{{ $employer->verified ? 'موثق' : 'غير موثق' }}</label>
+                                                                <input id="checkbox_{{ $jobSeeker->id }}" class="verify_checkbox" type="checkbox" {{ $jobSeeker->verified ? 'checked' : '' }}>
+                                                                <label for="checkbox_{{ $jobSeeker->id }}">{{ $jobSeeker->verified ? 'موثق' : 'غير موثق' }}</label>
                                                             </div>
                                                         </form>
                                                     @else
                                                         <div class="checkbox">
-                                                            <input id="checkbox" type="checkbox" disabled {{ $employer->verified ? 'checked' : '' }}>
-                                                            <label for="checkbox">{{ $employer->verified ? 'موثق' : 'غير موثق' }}</label>
+                                                            <input id="checkbox" type="checkbox" disabled {{ $jobSeeker->verified ? 'checked' : '' }}>
+                                                            <label for="checkbox">{{ $jobSeeker->verified ? 'موثق' : 'غير موثق' }}</label>
                                                         </div>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if(auth()->guard('admin')->user()->hasPermission('verify_employers'))
-                                                        <a href="{{route('dashboard.employers.showVerifyForm', $employer)}}">
+                                                    @if(auth()->guard('admin')->user()->hasPermission('verify_jobSeekers'))
+                                                        <a href="{{route('dashboard.jobSeekers.showVerifyForm', $jobSeeker)}}">
                                                             <button class="btn btn-icon btn-neutral btn-icon-mini"
                                                                     title="Verify">
                                                                 <i class="zmdi zmdi-badge-check"></i>
@@ -163,8 +163,8 @@
                                                         </button>
                                                     @endif
 
-                                                    @if(auth()->guard('admin')->user()->hasPermission('update_employers'))
-                                                        <a href="{{route('dashboard.employers.edit', $employer)}}">
+                                                    @if(auth()->guard('admin')->user()->hasPermission('update_jobSeekers'))
+                                                        <a href="{{route('dashboard.jobSeekers.edit', $jobSeeker)}}">
                                                             <button class="btn btn-icon btn-neutral btn-icon-mini"
                                                                     title="Edit">
                                                                 <i class="zmdi zmdi-edit"></i>
@@ -178,15 +178,15 @@
                                                         </button>
                                                     @endif
 
-                                                    @if(auth()->guard('admin')->user()->hasPermission('delete_employers'))
-                                                        <form action="{{ route('dashboard.employers.destroy', $employer) }}"
+                                                    @if(auth()->guard('admin')->user()->hasPermission('delete_jobSeekers'))
+                                                        <form action="{{ route('dashboard.jobSeekers.destroy', $jobSeeker) }}"
                                                               method="POST" style="display: inline-block">
                                                             @csrf
                                                             @method('DELETE')
 
                                                             <button type="submit"
-                                                                    class="btn btn-icon btn-neutral btn-icon-mini remove_employer"
-                                                                    title="Delete" value="{{$employer->id}}">
+                                                                    class="btn btn-icon btn-neutral btn-icon-mini remove_jobSeeker"
+                                                                    title="Delete" value="{{$jobSeeker->id}}">
                                                                 <i class="zmdi zmdi-delete"></i>
                                                             </button>
                                                         </form>
@@ -211,7 +211,7 @@
                         </div>
                     </div>
                 </div>
-                {{$employers->appends(request()->query())->links()}}
+                {{$jobSeekers->appends(request()->query())->links()}}
             </div>
         </div>
     </section>
@@ -223,7 +223,7 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
-                $(".remove_employer").click(function (e) {
+                $(".remove_jobSeeker").click(function (e) {
                     var that = $(this);
                     e.preventDefault();
 

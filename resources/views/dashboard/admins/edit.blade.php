@@ -12,7 +12,7 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-5 col-sm-12">
-                    <h2>تعديل المشرفين
+                    <h2>تعديل المشرف
                         <small>مرحبا بك في وظائف غزة</small>
                     </h2>
                 </div>
@@ -20,7 +20,7 @@
                     <ul class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="zmdi zmdi-home"></i>
                                 لوحة التحكم</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">المشرفين</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard/admins') }}">المشرفين</a></li>
                         <li class="breadcrumb-item active">تعديل</li>
                     </ul>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="header">
-                            <h2><strong>تعديل</strong> المشرفين</h2>
+                            <h2><strong>تعديل</strong> المشرف</h2>
                         </div>
 
                         <div class="body">

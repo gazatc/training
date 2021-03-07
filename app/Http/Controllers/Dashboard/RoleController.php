@@ -68,12 +68,11 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //
+        $attributes = $request->validate([
+            'name' => 'required|unique:roles,name',
+            'permissions' => 'required|array|min:1'
+        ]);
         try {
-            $attributes = $request->validate([
-                'name' => 'required|unique:roles,name',
-                'permissions' => 'required|array|min:1'
-            ]);
-
             $role = Role::create($attributes);
             $role->attachPermissions($attributes['permissions']);
 
@@ -104,7 +103,7 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         //
-        if($role->name == 'super_admin' || $role->name == 'admin'){
+        if ($role->name == 'super_admin' || $role->name == 'admin') {
             abort(403);
         }
 
@@ -134,16 +133,15 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         //
+        if ($role->name == 'super_admin' || $role->name == 'admin') {
+            abort(403);
+        }
+
+        $attributes = $request->validate([
+            'name' => 'required|unique:roles,name,' . $role->id,
+            'permissions' => 'required|array|min:1'
+        ]);
         try {
-            if ($role->name == 'super_admin' || $role->name == 'admin') {
-                abort(403);
-            }
-
-            $attributes = $request->validate([
-                'name' => 'required|unique:roles,name,' . $role->id,
-                'permissions' => 'required|array|min:1'
-            ]);
-
             $role->update($attributes);
             $role->syncPermissions($attributes['permissions']);
 
@@ -164,11 +162,10 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         //
+        if ($role->name == 'super_admin' || $role->name == 'admin') {
+            abort(403);
+        }
         try {
-            if ($role->name == 'super_admin' || $role->name == 'admin') {
-                abort(403);
-            }
-
             $role->delete();
 
             session()->flash('success', 'تم حذف الصلاحية بنجاح');

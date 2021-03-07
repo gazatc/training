@@ -12,7 +12,7 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-5 col-sm-12">
-                    <h2>توثيق صاحب العمل
+                    <h2>توثيق الباحث عن عمل
                         <small>مرحبا بك في وظائف غزة</small>
                     </h2>
                 </div>
@@ -20,7 +20,7 @@
                     <ul class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="zmdi zmdi-home"></i>
                                 لوحة التحكم</a></li>
-                        <li class="breadcrumb-item"><a href="{{ url('dashboard/employers') }}">أصحاب العمل</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard/employers') }}">الباحثين عن عمل</a></li>
                         <li class="breadcrumb-item active">توثيق</li>
                     </ul>
                 </div>
@@ -31,11 +31,11 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h2><strong>توثيق</strong> صاحب العمل</h2>
+                            <h2><strong>توثيق</strong> الباحث عن عمل</h2>
                         </div>
 
                         <div class="body">
-                            <form action="{{route('dashboard.employers.verifyAccount', $employer)}}" method="POST"
+                            <form action="{{route('dashboard.jobSeekers.verifyAccount', $jobSeeker)}}" method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
 
@@ -47,7 +47,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <input type="text" name="PID" class="form-control"
-                                                   placeholder="رقم الهوية الشخصية" value="{{ @$employer->verify->PID }}">
+                                                   placeholder="رقم الهوية الشخصية" value="{{ @$jobSeeker->verify->PID }}">
                                             @error('PID')
                                                 <span style="color: red; margin-right: 10px">{{ $errors->first('PID') }}</span>
                                             @enderror
@@ -64,8 +64,8 @@
                                         <div class="form-group">
                                             <label for="PID_image">
                                                 <b>صورة الهوية الشخصية</b>
-                                                @isset($employer->verify->PID_image)
-                                                    <a target="_blank" href="{{ $employer->verify->PID_image }}">عرض</a>
+                                                @isset($jobSeeker->verify->PID_image)
+                                                    <a target="_blank" href="{{ $jobSeeker->verify->PID_image }}">عرض</a>
                                                 @endisset
                                             </label>
                                             <input type="file" name="PID_image" class="form-control-file" id="PID_image">
@@ -78,8 +78,8 @@
                                         <div class="form-group">
                                             <label for="PID_user_image">
                                                 <b>صورة للشخص مع الهوية الشخصية</b>
-                                                @isset($employer->verify->PID_user_image)
-                                                    <a target="_blank" href="{{ $employer->verify->PID_user_image }}">عرض</a>
+                                                @isset($jobSeeker->verify->PID_user_image)
+                                                    <a target="_blank" href="{{ $jobSeeker->verify->PID_user_image }}">عرض</a>
                                                 @endisset
                                             </label>
                                             <input type="file" name="PID_user_image" class="form-control-file" id="PID_user_image">
@@ -88,22 +88,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="document">
-                                                <b>صورة وثيقة للشركة او المؤسسة</b>
-                                                @isset($employer->verify->document)
-                                                    <a target="_blank" href="{{ $employer->verify->document }}">عرض</a>
-                                                @endisset
-                                            </label>
-                                            <input type="file" name="document" class="form-control-file" id="document">
-                                            @error('document')
-                                                <span style="color: red; margin-right: 10px">{{ $errors->first('document') }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
                                 </div>
-
 
                                 <br>
                                 <br>

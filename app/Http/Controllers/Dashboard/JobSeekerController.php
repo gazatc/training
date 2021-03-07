@@ -3,22 +3,14 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Category;
-use App\Employer;
 use App\Http\Controllers\Controller;
+use App\JobSeeker;
 use App\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class EmployerController extends Controller
+class JobSeekerController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['permission:create_employers,guard:admin'])->only(['create', 'store']);
-        $this->middleware(['permission:read_employers,guard:admin'])->only('index');
-        $this->middleware(['permission:update_employers,guard:admin'])->only(['edit', 'update']);
-        $this->middleware(['permission:delete_employers,guard:admin'])->only('destroy');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -27,14 +19,15 @@ class EmployerController extends Controller
     public function index(Request $request)
     {
         //
-        $employers = Employer::where(function ($query) use ($request) {
+        $jobSeekers = JobSeeker::where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
-                return $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('username', 'like', '%' . $request->search . '%')
+                return $q->where('username', 'like', '%' . $request->search . '%')
+                    ->orWhere('firstName', 'like', '%' . $request->search . '%')
+                    ->orWhere('lastName', 'like', '%' . $request->search . '%')
                     ->orWhere('email', 'like', '%' . $request->search . '%')
                     ->orWhereHas('information', function ($query) use ($request) {
                         $query->where('phone', 'like', '%' . $request->search . '%')
-                            ->orWhere('address', 'like', '%' . $request->search . '%');
+                            ->orWhere('age', 'like', '%' . $request->search . '%');
                     });
             })->when($request->region, function ($q2) use ($request) {
                 return $q2->whereHas('information', function ($q2) use ($request) {
@@ -51,7 +44,7 @@ class EmployerController extends Controller
         $regions = Region::all();
         $categories = Category::all();
 
-        return view('dashboard.employers.index', compact('employers', 'regions', 'categories'));
+        return view('dashboard.jobSeekers.index', compact('jobSeekers', 'regions', 'categories'));
     }
 
     /**
@@ -65,7 +58,7 @@ class EmployerController extends Controller
         $categories = Category::all();
         $regions = Region::all();
 
-        return view('dashboard.employers.create', compact('categories', 'regions'));
+        return view('dashboard.jobSeekers.create', compact('categories', 'regions'));
     }
 
     /**
@@ -79,68 +72,74 @@ class EmployerController extends Controller
         //
         $attributes = $request->validate([
             'username' => 'required|string|max:50|unique:employers',
-            'name' => 'required|string|max:50',
+            'firstName' => 'required|string|max:25',
+            'lastName' => 'required|string|max:25',
             'email' => 'required|email|unique:employers',
             'password' => 'required|string|confirmed|min:6',
             'avatar' => 'nullable|image',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
             'phone' => 'required|string|max:20',
-            'type' => 'required|string|max:30',
-            'year' => 'required|max:4',
-            'address' => 'required|string|max:50',
+            'age' => 'required|max:3',
+            'degree' => 'required|string|max:50',
             'bio' => 'required|string|max:150',
+            'skills' => 'required|string|max:150',
             'web' => 'nullable|url|max:50',
             'linkedin' => 'nullable|url|max:50',
             'facebook' => 'nullable|url|max:50',
             'twitter' => 'nullable|url|max:50',
             'instagram' => 'nullable|url|max:50',
             'whatsapp' => 'nullable|string|max:50',
+            'behance' => 'nullable|string|max:50',
+            'github' => 'nullable|string|max:50',
         ]);
         try {
             if ($request->avatar) {
-                $attributes['avatar'] = $request->avatar->store('employer_avatars');
+                $attributes['avatar'] = $request->avatar->store('jobSeeker_avatars');
             }
 
-            $employer = Employer::create([
+            $jobSeeker = JobSeeker::create([
                 'username' => $attributes['username'],
-                'name' => $attributes['name'],
+                'firstName' => $attributes['firstName'],
+                'lastName' => $attributes['lastName'],
                 'email' => $attributes['email'],
                 'password' => bcrypt($attributes['password'])
             ]);
-            $employer->information()->create([
+            $jobSeeker->information()->create([
                 'region_id' => $attributes['region'],
                 'category_id' => $attributes['category'],
                 'avatar' => $attributes['avatar'] ?? NULL,
                 'bio' => $attributes['bio'],
+                'skills' => $attributes['skills'],
+                'degree' => $attributes['degree'],
+                'age' => $attributes['age'],
                 'phone' => $attributes['phone'],
-                'type' => $attributes['type'],
-                'year' => $attributes['year'],
-                'address' => $attributes['address'],
             ]);
-            $employer->socials()->create([
+            $jobSeeker->socials()->create([
                 'web' => $attributes['web'] ?? NULL,
                 'linkedin' => $attributes['linkedin'] ?? NULL,
                 'facebook' => $attributes['facebook'] ?? NULL,
                 'twitter' => $attributes['twitter'] ?? NULL,
                 'instagram' => $attributes['instagram'] ?? NULL,
                 'whatsapp' => $attributes['whatsapp'] ?? NULL,
+                'behance' => $attributes['behance'] ?? NULL,
+                'github' => $attributes['github'] ?? NULL,
             ]);
 
-            session()->flash('success', 'تم اضافة صاحب العمل بنجاح');
+            session()->flash('success', 'تم اضافة باحث عن عمل بنجاح');
         } catch (\Exception $e) {
             session()->flash('fail', $e->getMessage());
         }
-        return redirect()->route('dashboard.employers.index');
+        return redirect()->route('dashboard.jobSeekers.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Employer $employer
+     * @param  \App\JobSeeker $jobSeeker
      * @return \Illuminate\Http\Response
      */
-    public function show(Employer $employer)
+    public function show(JobSeeker $jobSeeker)
     {
         //
     }
@@ -148,115 +147,120 @@ class EmployerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Employer $employer
+     * @param  \App\JobSeeker $jobSeeker
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employer $employer)
+    public function edit(JobSeeker $jobSeeker)
     {
         //
         $categories = Category::all();
         $regions = Region::all();
 
-        return view('dashboard.employers.edit', compact('employer', 'categories', 'regions'));
+        return view('dashboard.jobSeekers.edit', compact('jobSeeker', 'categories', 'regions'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Employer $employer
+     * @param  \App\JobSeeker $jobSeeker
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employer $employer)
+    public function update(Request $request, JobSeeker $jobSeeker)
     {
         //
         $attributes = $request->validate([
-            'username' => 'required|string|unique:employers,email,' . $employer->id,
-            'name' => 'required|string|max:50',
-            'email' => 'required|email|unique:employers,email,' . $employer->id,
+            'username' => 'required|string|max:50|unique:employers,username,' . $jobSeeker->id,
+            'firstName' => 'required|string|max:25',
+            'lastName' => 'required|string|max:25',
+            'email' => 'required|email|unique:employers,email,' . $jobSeeker->id,
             'password' => 'nullable|string|confirmed|min:6',
             'avatar' => 'nullable|image',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
             'phone' => 'required|string|max:20',
-            'type' => 'required|string|max:30',
-            'year' => 'required|max:4',
-            'address' => 'required|string|max:50',
+            'age' => 'required|max:3',
+            'degree' => 'required|string|max:50',
             'bio' => 'required|string|max:150',
+            'skills' => 'required|string|max:150',
             'web' => 'nullable|url|max:50',
             'linkedin' => 'nullable|url|max:50',
             'facebook' => 'nullable|url|max:50',
             'twitter' => 'nullable|url|max:50',
             'instagram' => 'nullable|url|max:50',
             'whatsapp' => 'nullable|string|max:50',
+            'behance' => 'nullable|string|max:50',
+            'github' => 'nullable|string|max:50',
         ]);
         try {
             if ($request->avatar) {
-                $attributes['avatar'] = $request->avatar->store('employer_avatars');
+                $attributes['avatar'] = $request->avatar->store('jobSeeker_avatars');
             }
 
-            $employer->update([
+            $jobSeeker->update([
                 'username' => $attributes['username'],
-                'name' => $attributes['name'],
-                'email' => $attributes['email'],
+                'firstName' => $attributes['firstName'],
+                'lastName' => $attributes['lastName'],
+                'email' => $attributes['email']
             ]);
             if ($request->password) {
-                $employer->update([
+                $jobSeeker->update([
                     'password' => bcrypt($attributes['password'])
                 ]);
             }
-            $employer->information()->update([
+            $jobSeeker->information()->update([
                 'region_id' => $attributes['region'],
                 'category_id' => $attributes['category'],
                 'avatar' => $attributes['avatar'] ?? NULL,
                 'bio' => $attributes['bio'],
+                'skills' => $attributes['skills'],
+                'degree' => $attributes['degree'],
+                'age' => $attributes['age'],
                 'phone' => $attributes['phone'],
-                'type' => $attributes['type'],
-                'year' => $attributes['year'],
-                'address' => $attributes['address'],
             ]);
-            $employer->socials()->update([
+            $jobSeeker->socials()->update([
                 'web' => $attributes['web'] ?? NULL,
                 'linkedin' => $attributes['linkedin'] ?? NULL,
                 'facebook' => $attributes['facebook'] ?? NULL,
                 'twitter' => $attributes['twitter'] ?? NULL,
                 'instagram' => $attributes['instagram'] ?? NULL,
                 'whatsapp' => $attributes['whatsapp'] ?? NULL,
+                'behance' => $attributes['behance'] ?? NULL,
+                'github' => $attributes['github'] ?? NULL,
             ]);
 
-            session()->flash('success', 'تم تعديل بيانات صاحب العمل بنجاح');
+            session()->flash('success', 'تم تعديل باحث عن عمل بنجاح');
         } catch (\Exception $e) {
             session()->flash('fail', $e->getMessage());
         }
-        return redirect()->route('dashboard.employers.index');
+        return redirect()->route('dashboard.jobSeekers.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Employer $employer
+     * @param  \App\JobSeeker $jobSeeker
      * @return \Illuminate\Http\Response
-     * @throws \Exception
      */
-    public function destroy(Employer $employer)
+    public function destroy(JobSeeker $jobSeeker)
     {
         //
         try {
-            $avatar = $employer->information->getAttributes()['avatar'];
+            $avatar = $jobSeeker->information->getAttributes()['avatar'];
 
-            $result = $employer->delete();
+            $result = $jobSeeker->delete();
 
             if ($result) {
                 if (isset($avatar) && $avatar) {
                     Storage::delete($avatar);
                 }
-                session()->flash('success', 'تم حذف صاحب العمل بنجاح');
+                session()->flash('success', 'تم حذف الباحث عن عمل بنجاح');
             } else {
-                session()->flash('fail', 'خطأ في عملية حذف صاحب العمل, الرجاء المحاولة مرة أخرى!');
+                session()->flash('fail', 'خطأ في عملية حذف الباحث عن عمل, الرجاء المحاولة مرة أخرى!');
             }
         } catch (\Exception $e) {
             session()->flash('fail', $e->getMessage());
         }
-        return redirect()->route('dashboard.employers.index');
+        return redirect()->route('dashboard.jobSeekers.index');
     }
 }

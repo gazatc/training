@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmployersTable extends Migration
+class CreateJobSeekerTrainingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateEmployersTable extends Migration
      */
     public function up()
     {
-        Schema::create('employers', function (Blueprint $table) {
+        Schema::create('job_seeker_trainings', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique();
+            $table->unsignedBigInteger('job_seeker_id');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->boolean('verified')->default(0);
-            $table->rememberToken();
+            $table->string('institution');
+            $table->date('from');
+            $table->date('to');
             $table->timestamps();
+
+            $table->foreign('job_seeker_id')->references('id')->on('job_seekers')->onDelete('cascade');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateEmployersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employers');
+        Schema::dropIfExists('job_seeker_trainings');
     }
 }

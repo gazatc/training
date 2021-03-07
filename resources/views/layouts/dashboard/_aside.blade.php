@@ -15,7 +15,7 @@
     <div class="tab-content">
         <div class="tab-pane stretchRight active">
             <div class="menu">
-                <ul class="list">
+                <ul class="list" style="padding-bottom: 100px">
                     <li>
                         <div class="user-info">
                             <div class="image"><a href="#"><img
@@ -127,7 +127,24 @@
                         </li>
                     @endif
 
-                    <br>
+                    @if(auth()->guard('admin')->user()->isAbleTo('*_jobSeekers'))
+                        <li class="open {{ (request()->is('dashboard/jobSeekers*')) ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-box"></i><span>الباحثين عن عمل</span>
+                            </a>
+                            <ul class="ml-menu">
+                                @if(auth()->guard('admin')->user()->hasPermission('read_jobSeekers'))
+                                    <li class="open {{ (request()->is('dashboard/jobSeekers')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.jobSeekers.index')}}">كل الباحثين عن عمل</a>
+                                    </li>
+                                @endif
+                                @if(auth()->guard('admin')->user()->hasPermission('create_jobSeekers'))
+                                    <li class="open {{ (request()->is('dashboard/jobSeekers/create')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.jobSeekers.create')}}">إضافة باحث عن عمل</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
