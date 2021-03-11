@@ -19,7 +19,7 @@ class JobSeekerController extends Controller
     public function index(Request $request)
     {
         //
-        $jobSeekers = JobSeeker::where(function ($query) use ($request) {
+        $jobSeekers = JobSeeker::with(['information', 'verify'])->where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
                 return $q->where('username', 'like', '%' . $request->search . '%')
                     ->orWhere('firstName', 'like', '%' . $request->search . '%')
@@ -82,8 +82,8 @@ class JobSeekerController extends Controller
             'phone' => 'required|string|max:20',
             'age' => 'required|max:3',
             'degree' => 'required|string|max:50',
-            'bio' => 'required|string|max:150',
-            'skills' => 'required|string|max:150',
+            'bio' => 'required|string|max:350',
+            'skills' => 'required|string|max:350',
             'web' => 'nullable|url|max:50',
             'linkedin' => 'nullable|url|max:50',
             'facebook' => 'nullable|url|max:50',
@@ -181,8 +181,8 @@ class JobSeekerController extends Controller
             'phone' => 'required|string|max:20',
             'age' => 'required|max:3',
             'degree' => 'required|string|max:50',
-            'bio' => 'required|string|max:150',
-            'skills' => 'required|string|max:150',
+            'bio' => 'required|string|max:350',
+            'skills' => 'required|string|max:350',
             'web' => 'nullable|url|max:50',
             'linkedin' => 'nullable|url|max:50',
             'facebook' => 'nullable|url|max:50',

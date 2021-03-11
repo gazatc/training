@@ -27,7 +27,7 @@ class EmployerController extends Controller
     public function index(Request $request)
     {
         //
-        $employers = Employer::where(function ($query) use ($request) {
+        $employers = Employer::with(['information', 'verify'])->where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
                 return $q->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('username', 'like', '%' . $request->search . '%')

@@ -90,7 +90,9 @@
                                         </div>
                                         <div class="col-md-1 col-sm-12 button-custom">
                                             <div class="form-group">
-                                                <button type="submit" class="form-control btn-primary" style="color: white; border:none ">بحث</button>
+                                                <button type="submit" class="form-control btn-primary"
+                                                        style="color: white; border:none ">بحث
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -136,13 +138,16 @@
                                                               method="POST" style="display: inline-block">
                                                             @csrf
                                                             <div class="checkbox">
-                                                                <input id="checkbox_{{ $jobSeeker->id }}" class="verify_checkbox" type="checkbox" {{ $jobSeeker->verified ? 'checked' : '' }}>
+                                                                <input id="checkbox_{{ $jobSeeker->id }}"
+                                                                       class="verify_checkbox"
+                                                                       type="checkbox" {{ $jobSeeker->verified ? 'checked' : '' }}>
                                                                 <label for="checkbox_{{ $jobSeeker->id }}">{{ $jobSeeker->verified ? 'موثق' : 'غير موثق' }}</label>
                                                             </div>
                                                         </form>
                                                     @else
                                                         <div class="checkbox">
-                                                            <input id="checkbox" type="checkbox" disabled {{ $jobSeeker->verified ? 'checked' : '' }}>
+                                                            <input id="checkbox" type="checkbox"
+                                                                   disabled {{ $jobSeeker->verified ? 'checked' : '' }}>
                                                             <label for="checkbox">{{ $jobSeeker->verified ? 'موثق' : 'غير موثق' }}</label>
                                                         </div>
                                                     @endif
@@ -160,6 +165,21 @@
                                                                 style="cursor: no-drop"
                                                                 title="Edit">
                                                             <i class="zmdi zmdi-badge-check"></i>
+                                                        </button>
+                                                    @endif
+
+                                                    @if(auth()->guard('admin')->user()->hasPermission('update_jobSeekers'))
+                                                        <a href="{{route('dashboard.jobSeekers.showCVForm', $jobSeeker)}}">
+                                                            <button class="btn btn-icon btn-neutral btn-icon-mini"
+                                                                    title="CV">
+                                                                <i class="zmdi zmdi-file-text"></i>
+                                                            </button>
+                                                        </a>
+                                                    @else
+                                                        <button class="btn btn-icon btn-neutral btn-icon-mini disabled"
+                                                                style="cursor: no-drop"
+                                                                title="CV">
+                                                            <i class="zmdi zmdi-file-text"></i>
                                                         </button>
                                                     @endif
 
@@ -241,10 +261,10 @@
                     });
                 });
 
-                $('body').on('change', '.verify_checkbox', function(e) {
+                $('body').on('change', '.verify_checkbox', function (e) {
                     e.preventDefault();
 
-                    $.blockUI({ message: `<b style="padding:10px 0px"><img src='{{asset('dashboard_files/busy.gif')}}' /> Just a moment...</b>` });
+                    $.blockUI({message: `<b style="padding:10px 0px"><img src='{{asset('dashboard_files/busy.gif')}}' /> Just a moment...</b>`});
 
                     var that = $(this);
                     that.closest('form').submit();

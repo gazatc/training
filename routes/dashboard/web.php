@@ -31,5 +31,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::post('jobSeekers/verifyTrigger/{jobSeeker}', 'JobSeekerVerifyController@verifyTrigger')->name('jobSeekers.verifyTrigger');
         Route::get('jobSeekers/{jobSeeker}/verify', 'JobSeekerVerifyController@showVerifyForm')->name('jobSeekers.showVerifyForm');
         Route::post('jobSeekers/{jobSeeker}/verify', 'JobSeekerVerifyController@verifyAccount')->name('jobSeekers.verifyAccount');
+        Route::get('jobSeekers/{jobSeeker}/cv', 'JobSeekerCVController@showCVForm')->name('jobSeekers.showCVForm');
+        Route::post('jobSeekers/{jobSeeker}/cv', 'JobSeekerCVController@saveCV')->name('jobSeekers.saveCV');
     });
 });

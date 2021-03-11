@@ -24,6 +24,7 @@ class CreateJobSeekerInformationTable extends Migration
             $table->string('degree');
             $table->integer('age');
             $table->string('phone');
+            $table->text('CVFile')->nullable();
             $table->timestamps();
 
             $table->foreign('job_seeker_id')->references('id')->on('job_seekers')->onDelete('cascade');

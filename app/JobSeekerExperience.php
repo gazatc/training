@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class JobSeekerExperience extends Model
 {
     //
+    protected $fillable = ['job_seeker_id', 'name', 'company', 'from', 'to'];
 }
