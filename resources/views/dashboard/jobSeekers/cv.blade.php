@@ -303,6 +303,26 @@
                                     </div>
                                 </div>
 
+                                <div class="header col-lg-12 col-md-12 col-sm-12">
+                                    <h2>ملف السيرة الذاتية <span style="color: red">*</span></h2>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="PID_image">
+                                                <b>ملف السيرة الذاتية (PDF)</b>
+                                                @isset($jobSeeker->information->CVFile)
+                                                    <a target="_blank" href="{{ $jobSeeker->information->CVFile }}">عرض</a>
+                                                @endisset
+                                            </label>
+                                            <input type="file" name="CVFile" class="form-control-file" id="CVFile">
+                                            @error('CVFile')
+                                            <span style="color: red; margin-right: 10px">{{ $errors->first('CVFile') }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <br>
                                 <br>
 

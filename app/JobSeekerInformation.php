@@ -15,6 +15,10 @@ class JobSeekerInformation extends Model
     {
         return asset($value ? 'storage/' . $value : '/images/default.png');
     }
+    public function getCVFileAttribute($value)
+    {
+        return asset($value ? 'storage/' . $value : NULL);
+    }
 
 
     public function region() {

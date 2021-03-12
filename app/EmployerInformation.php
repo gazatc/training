@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class EmployerInformation extends Model
 {
     //
-    protected $fillable = ['employer_id', 'region_id', 'category_id', 'avatar', 'bio', 'phone', 'type', 'year', 'address'];
+    protected $fillable = ['employer_id', 'region_id', 'category_id', 'avatar', 'bio', 'phone', 'type', 'year', 'address', 'CVFile'];
 
     public function getAvatarAttribute($value)
     {

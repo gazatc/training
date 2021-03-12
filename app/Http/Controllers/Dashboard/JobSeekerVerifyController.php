@@ -41,8 +41,8 @@ class JobSeekerVerifyController extends Controller
             'PID_user_image' => 'required|file',
         ]);
         try {
-            $attributes['PID_image'] = $request->PID_image->store('employer_verify');
-            $attributes['PID_user_image'] = $request->PID_user_image->store('employer_verify');
+            $attributes['PID_image'] = $request->PID_image->store('jobseeker_verify');
+            $attributes['PID_user_image'] = $request->PID_user_image->store('jobseeker_verify');
             $jobSeeker->verify()->updateOrCreate($attributes);
 
             session()->flash('success', 'تم اضافة الوثائق الخاصة بتوثيق الباحث عن عمل بنجاح');

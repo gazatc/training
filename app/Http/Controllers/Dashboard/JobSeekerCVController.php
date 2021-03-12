@@ -35,6 +35,7 @@ class JobSeekerCVController extends Controller
             'training.*.institution' => 'required|string|max:50',
             'training.*.from' => 'required|date',
             'training.*.to' => 'required|date',
+            'CVFile' => 'required|file|mimes:pdf|max:10000'
         ]);
 
         try {
@@ -50,6 +51,10 @@ class JobSeekerCVController extends Controller
             foreach ($request->training as $training) {
                 $jobSeeker->training()->create($training);
             }
+            $attributes['CVFile'] = $request->CVFile->store('jobseeker_cv');
+            $jobSeeker->information()->update([
+                'CVFile' => $attributes['CVFile']
+            ]);
 
             session()->flash('success', 'تم حفظ بيانات السيرة الذاتية للباحث عن عمل بنجاح');
 
