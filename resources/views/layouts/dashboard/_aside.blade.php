@@ -145,6 +145,25 @@
                             </ul>
                         </li>
                     @endif
+
+                    @if(auth()->guard('admin')->user()->isAbleTo('*_jobs'))
+                        <li class="open {{ (request()->is('dashboard/jobs*')) ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-case"></i><span>الوظائف</span>
+                            </a>
+                            <ul class="ml-menu">
+                                @if(auth()->guard('admin')->user()->hasPermission('read_jobs'))
+                                    <li class="open {{ (request()->is('dashboard/jobs')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.jobs.index')}}">كل الوظائف</a>
+                                    </li>
+                                @endif
+                                @if(auth()->guard('admin')->user()->hasPermission('create_jobs'))
+                                    <li class="open {{ (request()->is('dashboard/jobs/create')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.jobs.create')}}">إضافة وظيفة</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>

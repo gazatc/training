@@ -33,5 +33,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::post('jobSeekers/{jobSeeker}/verify', 'JobSeekerVerifyController@verifyAccount')->name('jobSeekers.verifyAccount');
         Route::get('jobSeekers/{jobSeeker}/cv', 'JobSeekerCVController@showCVForm')->name('jobSeekers.showCVForm');
         Route::post('jobSeekers/{jobSeeker}/cv', 'JobSeekerCVController@saveCV')->name('jobSeekers.saveCV');
+
+        Route::resource('jobs', 'JobController')->except(['show']);
     });
 });

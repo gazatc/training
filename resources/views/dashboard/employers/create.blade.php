@@ -127,7 +127,7 @@
                                                 name="region" required>
                                             <option selected disabled>- اختيار محافطة -</option>
                                             @foreach($regions as $region)
-                                                <option {{ old('region', '' ) === $region->id ? 'selected' : '' }} value="{{ $region->id }}">
+                                                <option {{ old('region', '' ) == $region->id ? 'selected' : '' }} value="{{ $region->id }}">
                                                     {{ $region->name }}
                                                 </option>
                                             @endforeach
@@ -142,7 +142,7 @@
                                                 name="category" required>
                                             <option selected disabled>- اختيار مجال -</option>
                                             @foreach($categories as $category)
-                                                <option {{ old('category', '' ) === $category->id ? 'selected' : '' }} value="{{ $category->id }}">
+                                                <option {{ old('category', '' ) == $category->id ? 'selected' : '' }} value="{{ $category->id }}">
                                                     {{ $category->name }}
                                                 </option>
                                             @endforeach

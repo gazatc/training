@@ -19,6 +19,7 @@ return [
             'regions' => 'c,r,u,d',
             'employers' => 'c,r,u,d,v',
             'jobSeekers' => 'c,r,u,d,v',
+            'jobs' => 'c,r,u,d',
         ],
         'admin' => [],
     ],
