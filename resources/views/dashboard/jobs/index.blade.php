@@ -94,10 +94,18 @@
                                         <div class="col-md-3 col-sm-12">
                                             <select class="form-control z-index show-tick nominate_beneficiary"
                                                     name="type">
-                                                <option value="">- النوع -</option>
+                                                <option value="">- نوع الدوام -</option>
                                                 <option value="1" {{ request()->type == 1 ? 'selected' : '' }}>دوام كامل</option>
                                                 <option value="2" {{ request()->type == 2 ? 'selected' : '' }}>دوام جزئي</option>
                                                 <option value="3" {{ request()->type == 3 ? 'selected' : '' }}>عن بعد</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 col-sm-12">
+                                            <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    name="salary_type">
+                                                <option value="">- نوع الراتب -</option>
+                                                <option value="1" {{ request()->salary_type == 1 ? 'selected' : '' }}>ثابت</option>
+                                                <option value="2" {{ request()->salary_type == 2 ? 'selected' : '' }}>في الساعة</option>
                                             </select>
                                         </div>
                                         <div class="col-md-1 col-sm-12 button-custom">
@@ -129,6 +137,7 @@
                                             <th>المحافظة</th>
                                             <th>العنوان</th>
                                             <th>النوع</th>
+                                            <th>الراتب</th>
                                             <th>نهاية التقديم</th>
                                             <th>العمليات</th>
                                         </tr>
@@ -142,6 +151,10 @@
                                                 <td>{{ $job->region->name }}</td>
                                                 <td>{{ $job->title }}</td>
                                                 <td>{{ $job->jobTypeText }}</td>
+                                                <td>
+                                                    {{ $job->salary_amount}}
+                                                    {{ $job->salary_type == 2 ? ' $ / في الساعة' : ' $' }}
+                                                </td>
                                                 <td>{{ $job->last_date }}</td>
                                                 <td>
                                                     @if(auth()->guard('admin')->user()->hasPermission('update_jobs'))
@@ -182,7 +195,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="8" class="text-center">لا يوجد بيانات لعرضها...</td>
+                                                <td colspan="9" class="text-center">لا يوجد بيانات لعرضها...</td>
                                             </tr>
                                         @endforelse
                                         </tbody>

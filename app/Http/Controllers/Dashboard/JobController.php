@@ -27,6 +27,8 @@ class JobController extends Controller
                     ->orWhere('requirement', 'like', '%' . $request->search . '%');
             })->when($request->type, function ($q2) use ($request) {
                 $q2->where('jobType', $request->type);
+            })->when($request->salary_type, function ($q2) use ($request) {
+                $q2->where('salary_type', $request->salary_type);
             })->when($request->region, function ($q2) use ($request) {
                 return $q2->whereHas('region', function ($q2) use ($request) {
                     $q2->where('region_id', $request->region);

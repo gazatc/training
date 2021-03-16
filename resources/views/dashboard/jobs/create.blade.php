@@ -154,7 +154,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <textarea name="description" rows="4" class="form-control no-resize"
+                                            <textarea name="description" rows="7" class="form-control no-resize"
                                                       placeholder="الوصف الوظيفي...">{{ old('description', '') }}</textarea>
                                             @error('description')
                                             <span style="color: red;margin-right: 10px">{{ $errors->first('description') }}</span>
@@ -165,7 +165,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <textarea name="requirement" rows="4" class="form-control no-resize"
+                                            <textarea name="requirement" rows="7" class="form-control no-resize"
                                                       placeholder="المتطلبات...">{{ old('requirement', '') }}</textarea>
                                             @error('requirement')
                                             <span style="color: red;margin-right: 10px">{{ $errors->first('requirement') }}</span>
