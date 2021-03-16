@@ -164,6 +164,25 @@
                             </ul>
                         </li>
                     @endif
+
+                    @if(auth()->guard('admin')->user()->isAbleTo('*_trainings'))
+                        <li class="open {{ (request()->is('dashboard/trainings*')) ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-chart-donut"></i><span>التدريبات</span>
+                            </a>
+                            <ul class="ml-menu">
+                                @if(auth()->guard('admin')->user()->hasPermission('read_trainings'))
+                                    <li class="open {{ (request()->is('dashboard/trainings')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.trainings.index')}}">كل التدريبات</a>
+                                    </li>
+                                @endif
+                                @if(auth()->guard('admin')->user()->hasPermission('create_trainings'))
+                                    <li class="open {{ (request()->is('dashboard/trainings/create')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.trainings.create')}}">إضافة تدريب</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>

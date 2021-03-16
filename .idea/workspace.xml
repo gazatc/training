@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f0a8161c-5ec9-43e9-9c39-65bb33c371a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/jobs/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/jobs/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/jobs/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/jobs/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/jobs/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/jobs/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/laratrust_seeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/laratrust_seeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/dashboard/_aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/dashboard/_aside.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,26 +35,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/dashboard/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="805">
-              <caret line="36" column="29" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Job.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41">
-              <caret line="10" column="65" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="65" />
+            <state relative-caret-position="409">
+              <caret line="38" column="34" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dashboard/JobController.php">
+        <entry file="file://$PROJECT_DIR$/app/Training.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3887">
-              <caret line="174" column="49" selection-start-line="174" selection-start-column="49" selection-end-line="174" selection-end-column="49" />
+            <state relative-caret-position="460">
+              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dashboard/TrainingController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="446">
+              <caret line="96" column="53" selection-start-line="96" selection-start-column="53" selection-end-line="96" selection-end-column="53" />
               <folding>
                 <element signature="e#50#67#0#PHP" expanded="true" />
               </folding>
@@ -63,28 +63,44 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/dashboard/jobs/index.blade.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/dashboard/trainings/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="146" column="111" selection-start-line="146" selection-start-column="111" selection-end-line="146" selection-end-column="111" />
+            <state relative-caret-position="346">
+              <caret line="136" column="93" selection-start-line="136" selection-start-column="93" selection-end-line="136" selection-end-column="93" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/dashboard/jobs/create.blade.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/dashboard/trainings/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="156" column="80" selection-start-line="156" selection-start-column="80" selection-end-line="156" selection-end-column="80" />
+            <state relative-caret-position="-212">
+              <caret line="102" column="57" selection-start-line="102" selection-start-column="57" selection-end-line="102" selection-end-column="57" />
+              <folding>
+                <element signature="e#1873#2595#0#HTML" />
+                <element signature="e#2628#6157#0#HTML" />
+                <element signature="e#2719#3835#0#HTML" />
+                <element signature="e#3872#4985#0#HTML" />
+                <element signature="e#5022#6118#0#HTML" />
+                <element signature="e#9923#10692#0#HTML" />
+                <element signature="e#10050#10610#0#HTML" />
+                <element signature="e#10725#11490#0#HTML" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/dashboard/jobs/edit.blade.php">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/dashboard/trainings/edit.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="168" column="80" selection-start-line="168" selection-start-column="80" selection-end-line="168" selection-end-column="80" />
+            <state relative-caret-position="54">
+              <caret line="103" column="57" selection-start-line="103" selection-start-column="57" selection-end-line="103" selection-end-column="57" />
+              <folding>
+                <element signature="e#1931#2648#0#HTML" />
+                <element signature="e#2681#6201#0#HTML" />
+                <element signature="e#10263#11027#0#HTML" />
+                <element signature="e#11060#11820#0#HTML" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,8 +116,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>light</find>
-      <find>svg</find>
       <find>col-lg-3 col-md-3</find>
       <find>graph</find>
       <find>config</find>
@@ -130,6 +144,8 @@
       <find>requirements</find>
       <find>job_type</find>
       <find>jobs</find>
+      <find>training</find>
+      <find>job</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -138,12 +154,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/JobSeekerVerify.php" />
-        <option value="$PROJECT_DIR$/resources/views/dashboard/admins/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/dashboard/admins/create.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/dashboard/admins/edit.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/dashboard/roles/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/dashboard/roles/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/dashboard/roles/edit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/dashboard/categories/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/dashboard/categories/create.blade.php" />
@@ -175,20 +185,26 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Dashboard/JobSeekerVerifyController.php" />
         <option value="$PROJECT_DIR$/app/JobSeekerInformation.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Dashboard/JobSeekerCVController.php" />
-        <option value="$PROJECT_DIR$/config/laratrust_seeder.php" />
         <option value="$PROJECT_DIR$/database/migrations/2021_03_13_063010_create_jobs_table.php" />
-        <option value="$PROJECT_DIR$/routes/dashboard/web.php" />
         <option value="$PROJECT_DIR$/resources/views/dashboard/employers/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Dashboard/EmployerController.php" />
         <option value="$PROJECT_DIR$/app/JobSeekerSocial.php" />
         <option value="$PROJECT_DIR$/app/EmployerSocial.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Dashboard/JobSeekerController.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/dashboard/_aside.blade.php" />
         <option value="$PROJECT_DIR$/app/Job.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Dashboard/JobController.php" />
         <option value="$PROJECT_DIR$/resources/views/dashboard/jobs/edit.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/dashboard/jobs/create.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Dashboard/JobController.php" />
         <option value="$PROJECT_DIR$/resources/views/dashboard/jobs/index.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2021_03_16_193952_create_trainings_table.php" />
+        <option value="$PROJECT_DIR$/app/Training.php" />
+        <option value="$PROJECT_DIR$/routes/dashboard/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/dashboard/_aside.blade.php" />
+        <option value="$PROJECT_DIR$/config/laratrust_seeder.php" />
+        <option value="$PROJECT_DIR$/resources/views/dashboard/trainings/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/dashboard/trainings/create.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Dashboard/TrainingController.php" />
+        <option value="$PROJECT_DIR$/resources/views/dashboard/trainings/edit.blade.php" />
       </list>
     </option>
   </component>
@@ -341,15 +357,7 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="jobs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GraduateProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GraduateProject" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="jobSeekers" type="462c0819:PsiDirectoryNode" />
+              <item name="trainings" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -365,17 +373,17 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\app\Http\Controllers\Dashboard" />
+      <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\storage\app\public" />
+      <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\public\images" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\resources\views\dashboard" />
       <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\resources\views\dashboard\jobSeekers" />
       <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\app\Http\Controllers\Dashboard" />
       <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\resources\views\dashboard\employers" />
       <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\resources\views\layouts\dashboard" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\app\Http\Controllers\Dashboard" />
-      <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\storage\app\public" />
-      <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\public\images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -424,18 +432,18 @@
       <workItem from="1615497074648" duration="5092000" />
       <workItem from="1615570709856" duration="4938000" />
       <workItem from="1615616305573" duration="9596000" />
-      <workItem from="1615922721111" duration="514000" />
+      <workItem from="1615922721111" duration="2460000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="162202000" />
+    <option name="totallyTimeSpent" value="164148000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32753405" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32753405" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -447,9 +455,9 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49924356" weight="0.6062015" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49848714" weight="0.6062015" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50075644" side_tool="true" weight="0.6062015" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5015129" side_tool="true" weight="0.6062015" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.95348835" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.32868218" />
@@ -503,53 +511,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dashboard/CategoryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="125" column="13" lean-forward="true" selection-start-line="125" selection-start-column="13" selection-end-line="125" selection-end-column="13" />
-          <folding>
-            <element signature="e#50#67#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dashboard/RoleController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="167" column="13" selection-start-line="167" selection-start-column="13" selection-end-line="167" selection-end-column="13" />
-          <folding>
-            <element signature="e#50#86#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dashboard/AdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="162" column="33" lean-forward="true" selection-start-line="162" selection-start-column="33" selection-end-line="162" selection-end-column="33" />
-          <folding>
-            <element signature="e#50#64#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/dashboard/home.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dashboard/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="19" column="33" lean-forward="true" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2021_03_06_153052_create_job_seeker_verifies_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="21" column="33" lean-forward="true" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2021_03_06_153111_create_job_seeker_education_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
@@ -694,13 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/laratrust_seeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -736,13 +690,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2021_03_13_063010_create_jobs_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="32" column="71" selection-start-line="32" selection-start-column="71" selection-end-line="32" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/JobSeekerInformation.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
@@ -761,13 +708,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
           <caret line="9" column="109" lean-forward="true" selection-start-line="9" selection-start-column="109" selection-end-line="9" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/dashboard/_aside.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="5" column="52" lean-forward="true" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -822,20 +762,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/dashboard/web.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/dashboard/jobs/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="805">
-          <caret line="36" column="29" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="29" />
+        <state relative-caret-position="153">
+          <caret line="156" column="80" selection-start-line="156" selection-start-column="80" selection-end-line="156" selection-end-column="80" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dashboard/JobController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/dashboard/jobs/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3887">
-          <caret line="174" column="49" selection-start-line="174" selection-start-column="49" selection-end-line="174" selection-end-column="49" />
-          <folding>
-            <element signature="e#50#67#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="160">
+          <caret line="197" column="62" selection-start-line="197" selection-start-column="62" selection-end-line="197" selection-end-column="62" />
         </state>
       </provider>
     </entry>
@@ -846,24 +783,109 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/dashboard/jobs/create.blade.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_03_13_063010_create_jobs_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="156" column="80" selection-start-line="156" selection-start-column="80" selection-end-line="156" selection-end-column="80" />
+        <state relative-caret-position="513">
+          <caret line="32" column="95" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="32" selection-end-column="95" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/dashboard/jobs/index.blade.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2021_03_16_193952_create_trainings_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="146" column="111" selection-start-line="146" selection-start-column="111" selection-end-line="146" selection-end-column="111" />
+        <state relative-caret-position="571">
+          <caret line="34" column="6" lean-forward="true" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Job.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="10" column="65" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="65" />
+        <state relative-caret-position="391">
+          <caret line="20" column="5" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="20" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/laratrust_seeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/dashboard/_aside.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="179" column="77" selection-start-line="179" selection-start-column="68" selection-end-line="179" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/dashboard/trainings/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="136" column="93" selection-start-line="136" selection-start-column="93" selection-end-line="136" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/dashboard/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="38" column="34" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/dashboard/trainings/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-212">
+          <caret line="102" column="57" selection-start-line="102" selection-start-column="57" selection-end-line="102" selection-end-column="57" />
+          <folding>
+            <element signature="e#1873#2595#0#HTML" />
+            <element signature="e#2628#6157#0#HTML" />
+            <element signature="e#2719#3835#0#HTML" />
+            <element signature="e#3872#4985#0#HTML" />
+            <element signature="e#5022#6118#0#HTML" />
+            <element signature="e#9923#10692#0#HTML" />
+            <element signature="e#10050#10610#0#HTML" />
+            <element signature="e#10725#11490#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dashboard/JobController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="108" column="57" lean-forward="true" selection-start-line="76" selection-start-column="8" selection-end-line="108" selection-end-column="57" />
+          <folding>
+            <element signature="e#50#67#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Training.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Dashboard/TrainingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="96" column="53" selection-start-line="96" selection-start-column="53" selection-end-line="96" selection-end-column="53" />
+          <folding>
+            <element signature="e#50#67#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/dashboard/trainings/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="103" column="57" selection-start-line="103" selection-start-column="57" selection-end-line="103" selection-end-column="57" />
+          <folding>
+            <element signature="e#1931#2648#0#HTML" />
+            <element signature="e#2681#6201#0#HTML" />
+            <element signature="e#10263#11027#0#HTML" />
+            <element signature="e#11060#11820#0#HTML" />
+          </folding>
         </state>
       </provider>
     </entry>

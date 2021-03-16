@@ -35,5 +35,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::post('jobSeekers/{jobSeeker}/cv', 'JobSeekerCVController@saveCV')->name('jobSeekers.saveCV');
 
         Route::resource('jobs', 'JobController')->except(['show']);
+
+        Route::resource('trainings', 'TrainingController')->except(['show']);
     });
 });

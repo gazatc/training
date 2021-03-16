@@ -5,30 +5,25 @@ namespace App\Http\Controllers\Dashboard;
 use App\Category;
 use App\Employer;
 use App\Http\Controllers\Controller;
-use App\Job;
 use App\Region;
+use App\Training;
 use Illuminate\Http\Request;
 
-class JobController extends Controller
+class TrainingController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
         //
-        $jobs = Job::where(function ($query) use ($request) {
+        $trainings = Training::where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
                 return $q->where('title', 'like', '%' . $request->search . '%')
                     ->orWhere('description', 'like', '%' . $request->search . '%')
                     ->orWhere('requirement', 'like', '%' . $request->search . '%');
-            })->when($request->type, function ($q2) use ($request) {
-                $q2->where('jobType', $request->type);
-            })->when($request->salary_type, function ($q2) use ($request) {
-                $q2->where('salary_type', $request->salary_type);
             })->when($request->region, function ($q2) use ($request) {
                 return $q2->whereHas('region', function ($q2) use ($request) {
                     $q2->where('region_id', $request->region);
@@ -47,7 +42,8 @@ class JobController extends Controller
         $regions = Region::all();
         $categories = Category::all();
 
-        return view('dashboard.jobs.index', compact('jobs', 'employers', 'regions', 'categories'));
+        return view('dashboard.trainings.index', compact('trainings', 'employers', 'regions', 'categories'));
+
     }
 
     /**
@@ -58,17 +54,17 @@ class JobController extends Controller
     public function create()
     {
         //
-        $employers = $employers = Employer::where('verified', 1)->get();
+        $employers = Employer::where('verified', 1)->get();
         $regions = Region::all();
         $categories = Category::all();
 
-        return view('dashboard.jobs.create', compact('employers', 'regions', 'categories'));
+        return view('dashboard.trainings.create', compact( 'employers', 'regions', 'categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -79,43 +75,35 @@ class JobController extends Controller
             'employer' => 'required|exists:employers,id',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'jobType' => 'required|in:1,2,3',
-            'for' => 'required|in:1,2',
-            'salary_type' => 'required|in:1,2',
-            'salary_amount' => 'required|numeric|min:2',
             'description' => 'required|string|max:350',
             'requirement' => 'required|string|max:350',
             'last_date' => 'required|date',
         ]);
         try {
-            Job::create([
+            Training::create([
                 'employer_id' => $attributes['employer'],
                 'category_id' => $attributes['category'],
                 'region_id' => $attributes['region'],
                 'title' => $attributes['title'],
-                'jobType' => $attributes['jobType'],
                 'description' => $attributes['description'],
                 'requirement' => $attributes['requirement'],
                 'last_date' => $attributes['last_date'],
-                'salary_type' => $attributes['salary_type'],
-                'salary_amount' => $attributes['salary_amount'],
-                'for' => $attributes['for'],
             ]);
 
-            session()->flash('success', 'تم اضافة الوظيفة بنجاح');
+            session()->flash('success', 'تم اضافة التدريب بنجاح');
         } catch (\Exception $e) {
             session()->flash('fail', $e->getMessage());
         }
-        return redirect()->route('dashboard.jobs.index');
+        return redirect()->route('dashboard.trainings.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Job $job
+     * @param  \App\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function show(Job $job)
+    public function show(Training $training)
     {
         //
     }
@@ -123,27 +111,27 @@ class JobController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Job $job
+     * @param  \App\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function edit(Job $job)
+    public function edit(Training $training)
     {
         //
-        $employers = $employers = Employer::where('verified', 1)->get();
+        $employers = Employer::where('verified', 1)->get();
         $regions = Region::all();
         $categories = Category::all();
 
-        return view('dashboard.jobs.edit', compact('job', 'employers', 'regions', 'categories'));
+        return view('dashboard.trainings.edit', compact( 'training', 'employers', 'regions', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Job $job
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Job $job)
+    public function update(Request $request, Training $training)
     {
         //
         $attributes = $request->validate([
@@ -151,52 +139,44 @@ class JobController extends Controller
             'employer' => 'required|exists:employers,id',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'jobType' => 'required|in:1,2,3',
-            'for' => 'required|in:1,2',
-            'salary_type' => 'required|in:1,2',
-            'salary_amount' => 'required|numeric|min:2',
             'description' => 'required|string|max:350',
             'requirement' => 'required|string|max:350',
             'last_date' => 'required|date',
         ]);
         try {
-            $job->update([
+            $training->update([
                 'employer_id' => $attributes['employer'],
                 'category_id' => $attributes['category'],
                 'region_id' => $attributes['region'],
                 'title' => $attributes['title'],
-                'jobType' => $attributes['jobType'],
                 'description' => $attributes['description'],
                 'requirement' => $attributes['requirement'],
                 'last_date' => $attributes['last_date'],
-                'salary_type' => $attributes['salary_type'],
-                'salary_amount' => $attributes['salary_amount'],
-                'for' => $attributes['for'],
             ]);
 
-            session()->flash('success', 'تم تعديل الوظيفة بنجاح');
+            session()->flash('success', 'تم تعديل التدريب بنجاح');
         } catch (\Exception $e) {
             session()->flash('fail', $e->getMessage());
         }
-        return redirect()->route('dashboard.jobs.index');
+        return redirect()->route('dashboard.trainings.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Job $job
+     * @param  \App\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+    public function destroy(Training $training)
     {
         //
         try {
-            $job->delete();
+            $training->delete();
 
-            session()->flash('success', 'تم حذف الوظيفة بنجاح');
+            session()->flash('success', 'تم حذف التدريب بنجاح');
         } catch (\Exception $e) {
             session()->flash('fail', $e->getMessage());
         }
-        return redirect()->route('dashboard.jobs.index');
+        return redirect()->route('dashboard.trainings.index');
     }
 }
