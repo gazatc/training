@@ -12,13 +12,13 @@
         <div class="block-header">
             <div class="row">
                 <div class="col-lg-7 col-md-5 col-sm-12">
-                    <h2>كل الوظائف
+                    <h2>كل الفرق
                         <small class="text-muted">مرحبا بك في وظائف غزة</small>
                     </h2>
                 </div>
                 <div class="col-lg-5 col-md-7 col-sm-12">
-                    @if(auth()->guard('admin')->user()->hasPermission('create_jobs'))
-                        <a href="{{route('dashboard.jobs.create')}}">
+                    @if(auth()->guard('admin')->user()->hasPermission('create_teams'))
+                        <a href="{{route('dashboard.teams.create')}}">
                             <button class="btn btn-primary btn-icon btn-round d-none d-md-inline-block float-right m-l-10"
                                     type="button">
                                 <i class="zmdi zmdi-plus"></i>
@@ -34,7 +34,7 @@
                     <ul class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><a href="{{url('dashboard')}}"><i class="zmdi zmdi-home"></i>لوحة
                                 التحكم</a></li>
-                        <li class="breadcrumb-item"><a href="{{ url('dashboard/jobs') }}">الوظائف</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard/teams') }}">الفرق</a></li>
                         <li class="breadcrumb-item active">الكل</li>
                     </ul>
                 </div>
@@ -45,81 +45,36 @@
                 <div class="col-md-12">
                     <div class="card patients-list">
                         <div class="header">
-                            <h2><strong>الوظائف </strong><span>({{$jobs->total()}})</span></h2>
+                            <h2><strong>الفرق </strong><span>({{$teams->total()}})</span></h2>
                         </div>
                         @include('layouts.dashboard._message')
                         <div class="body">
                             <div class="col-12" style="padding-right: 0px">
-                                <form action="{{ route('dashboard.jobs.index') }}" method="GET">
+                                <form action="{{ route('dashboard.teams.index') }}" method="GET">
                                     <div class="row clearfix">
-                                        <div class="col-md-3 col-sm-12">
+                                        <div class="col-md-4 col-sm-12">
                                             <div class="form-group">
                                                 <input type="text" name="search" class="form-control"
                                                        placeholder="بحث..." value="{{ request()->search }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-sm-12">
-                                            <select class="form-control z-index show-tick nominate_beneficiary" data-live-search="true"
-                                                    name="employer">
-                                                <option value="">- كل أصحاب العمل -</option>
-                                                @foreach($employers as $employer)
-                                                    <option {{ request()->employer == $employer->id ? 'selected' : '' }} value="{{ $employer->id }}">
-                                                        {{ $employer->name }}
+                                        <div class="col-md-4 col-sm-12">
+                                            <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    data-live-search="true"
+                                                    name="jobSeeker">
+                                                <option value="">- كل الباحثين عن العمل -</option>
+                                                @foreach($jobSeekers as $jobSeeker)
+                                                    <option {{ request()->jobSeeker == $jobSeeker->id ? 'selected' : '' }} value="{{ $jobSeeker->id }}">
+                                                        {{ $jobSeeker->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-3 col-sm-12">
-                                            <select class="form-control z-index show-tick nominate_beneficiary"
-                                                    name="category">
-                                                <option value="">- كل المجالات -</option>
-                                                @foreach($categories as $category)
-                                                    <option {{ request()->category == $category->id ? 'selected' : '' }} value="{{ $category->id }}">
-                                                        {{ $category->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3 col-sm-12">
-                                            <select class="form-control z-index show-tick nominate_beneficiary"
-                                                    name="region">
-                                                <option value="">- كل المحافظات -</option>
-                                                @foreach($regions as $region)
-                                                    <option {{ request()->region == $region->id ? 'selected' : '' }} value="{{ $region->id }}">
-                                                        {{ $region->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3 col-sm-12">
-                                            <select class="form-control z-index show-tick nominate_beneficiary"
-                                                    name="type">
-                                                <option value="">- نوع الدوام -</option>
-                                                <option value="1" {{ request()->type == 1 ? 'selected' : '' }}>دوام كامل</option>
-                                                <option value="2" {{ request()->type == 2 ? 'selected' : '' }}>دوام جزئي</option>
-                                                <option value="3" {{ request()->type == 3 ? 'selected' : '' }}>عن بعد</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3 col-sm-12">
-                                            <select class="form-control z-index show-tick nominate_beneficiary"
-                                                    name="salary_type">
-                                                <option value="">- نوع الراتب -</option>
-                                                <option value="1" {{ request()->salary_type == 1 ? 'selected' : '' }}>ثابت</option>
-                                                <option value="2" {{ request()->salary_type == 2 ? 'selected' : '' }}>في الساعة</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-1 col-sm-12 button-custom">
+                                        <div class="col-md-2 col-sm-12 button-custom">
                                             <div class="form-group">
                                                 <button type="submit" class="form-control btn-primary"
                                                         style="color: white; border:none ">بحث
                                                 </button>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1 col-sm-12 button-custom">
-                                            <div class="form-group">
-                                                <a href="{{ route('dashboard.jobs.index') }}" class="form-control btn-primary"
-                                                        style="color: white; border:none ">الغاء
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -132,33 +87,26 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>صاحب العمل</th>
-                                            <th>المجال</th>
-                                            <th>المحافظة</th>
-                                            <th>العنوان</th>
-                                            <th>النوع</th>
-                                            <th>الراتب</th>
-                                            <th>نهاية التقديم</th>
+                                            <th>الاسم</th>
+                                            <th>قائد الفريق</th>
+                                            <th>الأعضاء</th>
                                             <th>العمليات</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @forelse($jobs as $job)
+                                        @forelse($teams as $team)
                                             <tr>
-                                                <td>{{ ($jobs->currentPage()-1) * $jobs->perPage() + $loop->index + 1 }}</td>
-                                                <td>{{ $job->employer->name }}</td>
-                                                <td>{{ $job->category->name }}</td>
-                                                <td>{{ $job->region->name }}</td>
-                                                <td>{{ $job->title }}</td>
-                                                <td>{{ $job->jobTypeText }}</td>
+                                                <td>{{ ($teams->currentPage()-1) * $teams->perPage() + $loop->index + 1 }}</td>
+                                                <td><span class="list-name">{{ $team->name }}</span></td>
+                                                <td>{{ $team->leader->name }}</td>
                                                 <td>
-                                                    {{ $job->salary_amount}}
-                                                    {{ $job->salary_type == 2 ? ' $ / في الساعة' : ' $' }}
+                                                    @foreach($team->members as $member)
+                                                        <li>{{ $member->name }}</li>
+                                                    @endforeach
                                                 </td>
-                                                <td>{{ $job->last_date }}</td>
                                                 <td>
-                                                    @if(auth()->guard('admin')->user()->hasPermission('update_jobs'))
-                                                        <a href="{{route('dashboard.jobs.edit', $job)}}">
+                                                    @if(auth()->guard('admin')->user()->hasPermission('update_teams'))
+                                                        <a href="{{route('dashboard.teams.edit', $team)}}">
                                                             <button class="btn btn-icon btn-neutral btn-icon-mini"
                                                                     title="Edit">
                                                                 <i class="zmdi zmdi-edit"></i>
@@ -172,15 +120,15 @@
                                                         </button>
                                                     @endif
 
-                                                    @if(auth()->guard('admin')->user()->hasPermission('delete_jobs'))
-                                                        <form action="{{ route('dashboard.jobs.destroy', $job) }}"
+                                                    @if(auth()->guard('admin')->user()->hasPermission('delete_teams'))
+                                                        <form action="{{ route('dashboard.teams.destroy', $team) }}"
                                                               method="POST" style="display: inline-block">
                                                             @csrf
                                                             @method('DELETE')
 
                                                             <button type="submit"
-                                                                    class="btn btn-icon btn-neutral btn-icon-mini remove_job"
-                                                                    title="Delete" value="{{$job->id}}">
+                                                                    class="btn btn-icon btn-neutral btn-icon-mini remove_team"
+                                                                    title="Delete" value="{{$team->id}}">
                                                                 <i class="zmdi zmdi-delete"></i>
                                                             </button>
                                                         </form>
@@ -195,7 +143,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="9" class="text-center">لا يوجد بيانات لعرضها...</td>
+                                                <td colspan="6" class="text-center">لا يوجد بيانات لعرضها...</td>
                                             </tr>
                                         @endforelse
                                         </tbody>
@@ -205,7 +153,7 @@
                         </div>
                     </div>
                 </div>
-                {{$jobs->appends(request()->query())->links()}}
+                {{$teams->appends(request()->query())->links()}}
             </div>
         </div>
     </section>
@@ -216,7 +164,7 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
-                $(".remove_job").click(function (e) {
+                $(".remove_team").click(function (e) {
                     var that = $(this);
                     e.preventDefault();
 

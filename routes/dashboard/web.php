@@ -37,5 +37,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::resource('jobs', 'JobController')->except(['show']);
 
         Route::resource('trainings', 'TrainingController')->except(['show']);
+
+        Route::resource('teams', 'TeamController')->except(['show']);
     });
 });

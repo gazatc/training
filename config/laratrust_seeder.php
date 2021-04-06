@@ -21,6 +21,7 @@ return [
             'jobSeekers' => 'c,r,u,d,v',
             'jobs' => 'c,r,u,d',
             'trainings' => 'c,r,u,d',
+            'teams' => 'c,r,u,d',
         ],
         'admin' => [],
     ],

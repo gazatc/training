@@ -59,4 +59,10 @@ class JobSeeker extends Authenticatable
     public function training() {
         return $this->hasMany(JobSeekerTraining::class);
     }
+    public function teamLeader() {
+        return $this->belongsTo(Team::class, 'id', 'leader_id');
+    }
+    public function team() {
+        return $this->belongsToMany(Team::class, 'team_members');
+    }
 }

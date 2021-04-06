@@ -183,6 +183,25 @@
                             </ul>
                         </li>
                     @endif
+
+                    @if(auth()->guard('admin')->user()->isAbleTo('*_teams'))
+                        <li class="open {{ (request()->is('dashboard/teams*')) ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts"></i><span>الفرق</span>
+                            </a>
+                            <ul class="ml-menu">
+                                @if(auth()->guard('admin')->user()->hasPermission('read_teams'))
+                                    <li class="open {{ (request()->is('dashboard/teams')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.teams.index')}}">كل الفرق</a>
+                                    </li>
+                                @endif
+                                @if(auth()->guard('admin')->user()->hasPermission('create_teams'))
+                                    <li class="open {{ (request()->is('dashboard/teams/create')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.teams.create')}}">إضافة فريق</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
