@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\JobSeeker;
 use App\Team;
+use App\TeamMember;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -51,7 +52,7 @@ class TeamController extends Controller
     public function create()
     {
         //
-        $jobSeekers = JobSeeker::where('verified', 1)->doesntHave('team')->orDoesntHave('teamLeader', 'or')->get();
+        $jobSeekers = JobSeeker::where('verified', 1)->doesntHave('team')->doesntHave('teamLeader')->get();
         return view('dashboard.teams.create', compact('jobSeekers'));
     }
 
@@ -67,9 +68,20 @@ class TeamController extends Controller
         $attributes = $request->validate([
             'name' => 'required|string|min:2|max:50|unique:teams',
             'bio' => 'required|string|max:350',
-            'team_leader' => 'required|exists:job_seekers,id',
-            'members' => 'required|array',
-            'members.*.id' => ['required', 'exists:job_seekers,id', Rule::notIn($request->team_leader),]
+            'team_leader' => [
+                'required',
+                'exists:job_seekers,id',
+                Rule::unique('teams', 'leader_id'),
+                Rule::unique('team_members', 'job_seeker_id')
+            ],
+            'members' => 'required|array|distinct|min:1',
+            'members.*.id' => [
+                'required',
+                'exists:job_seekers,id',
+                Rule::unique('teams', 'leader_id'),
+                Rule::unique('team_members', 'job_seeker_id'),
+                Rule::notIn($request->team_leader)
+            ]
         ]);
 
         try {
@@ -110,7 +122,9 @@ class TeamController extends Controller
     public function edit(Team $team)
     {
         //
-        $jobSeekers = JobSeeker::where('verified', 1)->doesntHave('team')->orDoesntHave('teamLeader', 'or')->get();
+        $jobSeekers = JobSeeker::where('verified', 1)->doesntHave('team')->doesntHave('teamLeader')->get();
+        $jobSeekers = $jobSeekers->merge($team->members()->get());
+        $jobSeekers = $jobSeekers->merge($team->leader()->get());
         return view('dashboard.teams.edit', compact('team', 'jobSeekers'));
     }
 
@@ -127,9 +141,25 @@ class TeamController extends Controller
         $attributes = $request->validate([
             'name' => 'required|string|min:2|max:50|unique:teams,name,' . $team->id,
             'bio' => 'required|string|max:350',
-            'team_leader' => 'required|exists:job_seekers,id',
-            'members' => 'required|array',
-            'members.*.id' => ['required', 'exists:job_seekers,id', Rule::notIn($request->team_leader),]
+            'team_leader' => [
+                'required',
+                'exists:job_seekers,id',
+                Rule::unique('teams', 'leader_id')->ignore($team->id),
+                Rule::unique('team_members', 'job_seeker_id')
+            ],
+            'members' => 'required|array|distinct|min:1',
+            'members.*.id' => [
+                'required',
+                'exists:job_seekers,id',
+                Rule::unique('teams', 'leader_id'),
+                Rule::notIn(
+                    array_diff(
+                        TeamMember::pluck('job_seeker_id')->toArray(),
+                        $team->members()->pluck('job_seeker_id')->toArray()
+                    )
+                ),
+                Rule::notIn($request->team_leader)
+            ]
         ]);
 
         try {

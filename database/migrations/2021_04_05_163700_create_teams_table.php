@@ -15,7 +15,7 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('leader_id');
+            $table->unsignedBigInteger('leader_id')->unique();
             $table->string('name')->unique();
             $table->text('bio');
             $table->timestamps();
