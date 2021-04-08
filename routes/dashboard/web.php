@@ -22,12 +22,12 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
 
         Route::resource('regions', 'RegionController')->except(['show']);
 
-        Route::resource('employers', 'EmployerController')->except(['show']);
+        Route::resource('employers', 'EmployerController');
         Route::post('employers/verifyTrigger/{employer}', 'EmployerVerifyController@verifyTrigger')->name('employers.verifyTrigger');
         Route::get('employers/{employer}/verify', 'EmployerVerifyController@showVerifyForm')->name('employers.showVerifyForm');
         Route::post('employers/{employer}/verify', 'EmployerVerifyController@verifyAccount')->name('employers.verifyAccount');
 
-        Route::resource('jobSeekers', 'JobSeekerController')->except(['show']);
+        Route::resource('jobSeekers', 'JobSeekerController');
         Route::post('jobSeekers/verifyTrigger/{jobSeeker}', 'JobSeekerVerifyController@verifyTrigger')->name('jobSeekers.verifyTrigger');
         Route::get('jobSeekers/{jobSeeker}/verify', 'JobSeekerVerifyController@showVerifyForm')->name('jobSeekers.showVerifyForm');
         Route::post('jobSeekers/{jobSeeker}/verify', 'JobSeekerVerifyController@verifyAccount')->name('jobSeekers.verifyAccount');
@@ -39,5 +39,12 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::resource('trainings', 'TrainingController')->except(['show']);
 
         Route::resource('teams', 'TeamController')->except(['show']);
+
+        Route::get('verifyAccounts/employers', 'VerifyAccountController@employersApplication')->name('verifyAccounts.employersApplication');
+        Route::post('verifyAccounts/{employer}/employers', 'VerifyAccountController@verifyEmployer')->name('verifyAccounts.verifyEmployer');
+        Route::delete('verifyAccounts/{employer}/deleteEmployerVerify', 'VerifyAccountController@deleteEmployerVerify')->name('verifyAccounts.deleteEmployerVerify');
+        Route::get('verifyAccounts/jobSeekers', 'VerifyAccountController@jobSeekersApplication')->name('verifyAccounts.jobSeekersApplication');
+        Route::post('verifyAccounts/{jobSeeker}/jobSeekers', 'VerifyAccountController@verifyJobSeeker')->name('verifyAccounts.verifyJobSeeker');
+        Route::delete('verifyAccounts/{jobSeeker}/deleteJobSeekerVerify', 'VerifyAccountController@deleteJobSeekerVerify')->name('verifyAccounts.deleteJobSeekerVerify');
     });
 });

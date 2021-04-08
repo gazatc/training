@@ -16,7 +16,7 @@ class CreateEmployerVerifiesTable extends Migration
         Schema::create('employer_verifies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employer_id');
-            $table->string('PID');
+            $table->string('PID')->unique();
             $table->text('PID_image');
             $table->text('PID_user_image');
             $table->text('document');

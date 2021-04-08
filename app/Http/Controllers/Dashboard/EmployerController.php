@@ -15,6 +15,7 @@ class EmployerController extends Controller
     {
         $this->middleware(['permission:create_employers,guard:admin'])->only(['create', 'store']);
         $this->middleware(['permission:read_employers,guard:admin'])->only('index');
+        $this->middleware(['permission:show_employers,guard:admin'])->only('show');
         $this->middleware(['permission:update_employers,guard:admin'])->only(['edit', 'update']);
         $this->middleware(['permission:delete_employers,guard:admin'])->only('destroy');
     }
@@ -143,6 +144,7 @@ class EmployerController extends Controller
     public function show(Employer $employer)
     {
         //
+        return view('dashboard.employers.show', compact('employer'));
     }
 
     /**

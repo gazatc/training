@@ -1,4 +1,4 @@
-@extends('layouts.dashboard.app')
+ @extends('layouts.dashboard.app')
 
 @section('content')
 
@@ -160,6 +160,21 @@
                                                                 style="cursor: no-drop"
                                                                 title="Edit">
                                                             <i class="zmdi zmdi-badge-check"></i>
+                                                        </button>
+                                                    @endif
+
+                                                    @if(auth()->guard('admin')->user()->hasPermission('show_employers'))
+                                                        <a href="{{route('dashboard.employers.show', $employer)}}">
+                                                            <button class="btn btn-icon btn-neutral btn-icon-mini"
+                                                                    title="Show">
+                                                                <i class="zmdi zmdi-eye"></i>
+                                                            </button>
+                                                        </a>
+                                                    @else
+                                                        <button class="btn btn-icon btn-neutral btn-icon-mini disabled"
+                                                                style="cursor: no-drop"
+                                                                title="Edit">
+                                                            <i class="zmdi zmdi-eye"></i>
                                                         </button>
                                                     @endif
 

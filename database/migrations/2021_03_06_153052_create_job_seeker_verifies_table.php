@@ -16,7 +16,7 @@ class CreateJobSeekerVerifiesTable extends Migration
         Schema::create('job_seeker_verifies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('job_seeker_id');
-            $table->string('PID');
+            $table->string('PID')->unique();
             $table->text('PID_image');
             $table->text('PID_user_image');
             $table->timestamps();

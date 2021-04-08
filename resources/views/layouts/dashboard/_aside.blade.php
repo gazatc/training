@@ -72,7 +72,8 @@
 
                     @if(auth()->guard('admin')->user()->isAbleTo('*_roles'))
                         <li class="open {{ (request()->is('dashboard/categories*')) ? 'active' : '' }}">
-                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-collection-text"></i><span>المجالات</span>
+                            <a href="javascript:void(0);" class="menu-toggle"><i
+                                        class="zmdi zmdi-collection-text"></i><span>المجالات</span>
                             </a>
                             <ul class="ml-menu">
                                 @if(auth()->guard('admin')->user()->hasPermission('read_roles'))
@@ -129,7 +130,8 @@
 
                     @if(auth()->guard('admin')->user()->isAbleTo('*_jobSeekers'))
                         <li class="open {{ (request()->is('dashboard/jobSeekers*')) ? 'active' : '' }}">
-                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-box"></i><span>الباحثين عن عمل</span>
+                            <a href="javascript:void(0);" class="menu-toggle"><i
+                                        class="zmdi zmdi-account-box"></i><span>الباحثين عن عمل</span>
                             </a>
                             <ul class="ml-menu">
                                 @if(auth()->guard('admin')->user()->hasPermission('read_jobSeekers'))
@@ -167,7 +169,8 @@
 
                     @if(auth()->guard('admin')->user()->isAbleTo('*_trainings'))
                         <li class="open {{ (request()->is('dashboard/trainings*')) ? 'active' : '' }}">
-                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-chart-donut"></i><span>التدريبات</span>
+                            <a href="javascript:void(0);" class="menu-toggle"><i
+                                        class="zmdi zmdi-chart-donut"></i><span>التدريبات</span>
                             </a>
                             <ul class="ml-menu">
                                 @if(auth()->guard('admin')->user()->hasPermission('read_trainings'))
@@ -197,6 +200,26 @@
                                 @if(auth()->guard('admin')->user()->hasPermission('create_teams'))
                                     <li class="open {{ (request()->is('dashboard/teams/create')) ? 'active' : '' }}">
                                         <a href="{{route('dashboard.teams.create')}}">إضافة فريق</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
+
+                    @if(auth()->guard('admin')->user()->isAbleTo('*_verifyAccounts'))
+                        <li class="open {{ (request()->is('dashboard/verifyAccounts*')) ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="menu-toggle"><i
+                                        class="zmdi zmdi-badge-check"></i><span>طلبات توثيق الحسابات</span>
+                            </a>
+                            <ul class="ml-menu">
+                                @if(auth()->guard('admin')->user()->hasPermission('read_verifyAccounts'))
+                                    <li class="open {{ (request()->is('dashboard/verifyAccounts/employers')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.verifyAccounts.employersApplication')}}">طلبات توثيق اصحاب العمل</a>
+                                    </li>
+                                @endif
+                                @if(auth()->guard('admin')->user()->hasPermission('read_verifyAccounts'))
+                                    <li class="open {{ (request()->is('dashboard/verifyAccounts/jobSeekers')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.verifyAccounts.jobSeekersApplication')}}">طلبات توثيق الباحثين عن عمل</a>
                                     </li>
                                 @endif
                             </ul>

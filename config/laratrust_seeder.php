@@ -17,11 +17,12 @@ return [
             'roles' => 'c,r,u,d',
             'categories' => 'c,r,u,d',
             'regions' => 'c,r,u,d',
-            'employers' => 'c,r,u,d,v',
-            'jobSeekers' => 'c,r,u,d,v',
+            'employers' => 'c,r,u,d,s,v',
+            'jobSeekers' => 'c,r,u,d,s,v',
             'jobs' => 'c,r,u,d',
             'trainings' => 'c,r,u,d',
             'teams' => 'c,r,u,d',
+            'verifyAccounts' => 'r,v,d'
         ],
         'admin' => [],
     ],
@@ -31,6 +32,7 @@ return [
         'r' => 'read',
         'u' => 'update',
         'd' => 'delete',
+        's' => 'show',
         'v' => 'verify'
     ]
 ];

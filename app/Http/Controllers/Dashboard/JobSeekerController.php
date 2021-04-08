@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Storage;
 
 class JobSeekerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:create_jobSeekers,guard:admin'])->only(['create', 'store']);
+        $this->middleware(['permission:read_jobSeekers,guard:admin'])->only('index');
+        $this->middleware(['permission:show_jobSeekers,guard:admin'])->only('show');
+        $this->middleware(['permission:update_jobSeekers,guard:admin'])->only(['edit', 'update']);
+        $this->middleware(['permission:delete_jobSeekers,guard:admin'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -143,6 +152,7 @@ class JobSeekerController extends Controller
     public function show(JobSeeker $jobSeeker)
     {
         //
+        return view('dashboard.jobSeekers.show', compact('jobSeeker'));
     }
 
     /**
