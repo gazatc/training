@@ -11,6 +11,15 @@ use Illuminate\Http\Request;
 
 class TrainingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:create_trainings,guard:admin'])->only(['create', 'store']);
+        $this->middleware(['permission:read_trainings,guard:admin'])->only('index');
+        $this->middleware(['permission:show_trainings,guard:admin'])->only('show');
+        $this->middleware(['permission:update_trainings,guard:admin'])->only(['edit', 'update']);
+        $this->middleware(['permission:delete_trainings,guard:admin'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +48,7 @@ class TrainingController extends Controller
                 });
             });
         })->latest()->paginate(10);
-        $employers = Employer::where('verified', 1)->get();
+        $employers = Employer::verified()->get();
         $regions = Region::all();
         $categories = Category::all();
 
@@ -55,7 +64,7 @@ class TrainingController extends Controller
     public function create()
     {
         //
-        $employers = Employer::where('verified', 1)->get();
+        $employers = Employer::verified()->get();
         $regions = Region::all();
         $categories = Category::all();
 
@@ -119,7 +128,7 @@ class TrainingController extends Controller
     public function edit(Training $training)
     {
         //
-        $employers = Employer::where('verified', 1)->get();
+        $employers = Employer::verified()->get();
         $regions = Region::all();
         $categories = Category::all();
 
@@ -143,7 +152,7 @@ class TrainingController extends Controller
             'category' => 'required|exists:categories,id',
             'description' => 'required|string|max:350',
             'requirement' => 'required|string|max:350',
-            'last_date' => 'required|date',
+            'last_date' => 'required|date|after:' . $training->created_at,
         ]);
         try {
             $training->update([

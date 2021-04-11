@@ -39,7 +39,7 @@ class TeamController extends Controller
                     });
             });
         })->latest()->paginate(10);
-        $jobSeekers = JobSeeker::where('verified', 1)->has('team')->orHas('teamLeader')->get();
+        $jobSeekers = JobSeeker::verified()->has('team')->orHas('teamLeader')->get();
 
         return view('dashboard.teams.index', compact('teams', 'jobSeekers'));
     }
@@ -52,7 +52,7 @@ class TeamController extends Controller
     public function create()
     {
         //
-        $jobSeekers = JobSeeker::where('verified', 1)->doesntHave('team')->doesntHave('teamLeader')->get();
+        $jobSeekers = JobSeeker::verified()->doesntHave('team')->doesntHave('teamLeader')->get();
         return view('dashboard.teams.create', compact('jobSeekers'));
     }
 
@@ -122,7 +122,7 @@ class TeamController extends Controller
     public function edit(Team $team)
     {
         //
-        $jobSeekers = JobSeeker::where('verified', 1)->doesntHave('team')->doesntHave('teamLeader')->get();
+        $jobSeekers = JobSeeker::verified()->doesntHave('team')->doesntHave('teamLeader')->get();
         $jobSeekers = $jobSeekers->merge($team->members()->get());
         $jobSeekers = $jobSeekers->merge($team->leader()->get());
         return view('dashboard.teams.edit', compact('team', 'jobSeekers'));

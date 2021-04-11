@@ -17,12 +17,12 @@ class Application extends Model
         return $this->belongsTo(JobSeeker::class);
     }
 
-    public function ScopeJobs()
+    public function scopeJobs($query)
     {
-        return $this->where('applicationable_type', 'App\Job');
+        return $query->where('applicationable_type', 'App\Job');
     }
-    public function ScopeTrainings()
+    public function scopeTrainings($query)
     {
-        return $this->where('applicationable_type', 'App\Training');
+        return $query->where('applicationable_type', 'App\Training');
     }
 }

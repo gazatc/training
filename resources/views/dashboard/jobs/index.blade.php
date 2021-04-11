@@ -59,7 +59,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3 col-sm-12">
-                                            <select class="form-control z-index show-tick nominate_beneficiary" data-live-search="true"
+                                            <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    data-live-search="true"
                                                     name="employer">
                                                 <option value="">- كل أصحاب العمل -</option>
                                                 @foreach($employers as $employer)
@@ -71,6 +72,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-12">
                                             <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    data-live-search="true"
                                                     name="category">
                                                 <option value="">- كل المجالات -</option>
                                                 @foreach($categories as $category)
@@ -82,6 +84,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-12">
                                             <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    data-live-search="true"
                                                     name="region">
                                                 <option value="">- كل المحافظات -</option>
                                                 @foreach($regions as $region)
@@ -93,6 +96,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-12">
                                             <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    data-live-search="true"
                                                     name="type">
                                                 <option value="">- نوع الدوام -</option>
                                                 <option value="1" {{ request()->type == 1 ? 'selected' : '' }}>دوام كامل</option>
@@ -102,6 +106,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-12">
                                             <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    data-live-search="true"
                                                     name="salary_type">
                                                 <option value="">- نوع الراتب -</option>
                                                 <option value="1" {{ request()->salary_type == 1 ? 'selected' : '' }}>ثابت</option>

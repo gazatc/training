@@ -71,6 +71,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-12">
                                             <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    data-live-search="true"
                                                     name="category">
                                                 <option value="">- كل المجالات -</option>
                                                 @foreach($categories as $category)
@@ -82,6 +83,7 @@
                                         </div>
                                         <div class="col-md-2 col-sm-12">
                                             <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    data-live-search="true"
                                                     name="verified">
                                                 <option value="">- التوثيق -</option>
                                                 <option value="1">موثق</option>

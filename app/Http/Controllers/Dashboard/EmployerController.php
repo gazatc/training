@@ -96,7 +96,7 @@ class EmployerController extends Controller
             'facebook' => 'nullable|url|max:50',
             'twitter' => 'nullable|url|max:50',
             'instagram' => 'nullable|url|max:50',
-            'whatsapp' => 'nullable|string|max:50',
+            'whatsapp' => 'nullable|url|max:50',
         ]);
         try {
             if ($request->avatar) {
@@ -190,7 +190,7 @@ class EmployerController extends Controller
             'facebook' => 'nullable|url|max:50',
             'twitter' => 'nullable|url|max:50',
             'instagram' => 'nullable|url|max:50',
-            'whatsapp' => 'nullable|string|max:50',
+            'whatsapp' => 'nullable|url|max:50',
         ]);
         try {
             if ($request->avatar) {

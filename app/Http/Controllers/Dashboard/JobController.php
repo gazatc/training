@@ -11,6 +11,15 @@ use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:create_jobs,guard:admin'])->only(['create', 'store']);
+        $this->middleware(['permission:read_jobs,guard:admin'])->only('index');
+        $this->middleware(['permission:show_jobs,guard:admin'])->only('show');
+        $this->middleware(['permission:update_jobs,guard:admin'])->only(['edit', 'update']);
+        $this->middleware(['permission:delete_jobs,guard:admin'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +52,7 @@ class JobController extends Controller
                 });
             });
         })->latest()->paginate(10);
-        $employers = Employer::where('verified', 1)->get();
+        $employers = Employer::verified()->get();
         $regions = Region::all();
         $categories = Category::all();
 
@@ -58,7 +67,7 @@ class JobController extends Controller
     public function create()
     {
         //
-        $employers = $employers = Employer::where('verified', 1)->get();
+        $employers = $employers = Employer::verified()->get();
         $regions = Region::all();
         $categories = Category::all();
 
@@ -130,7 +139,7 @@ class JobController extends Controller
     public function edit(Job $job)
     {
         //
-        $employers = $employers = Employer::where('verified', 1)->get();
+        $employers = $employers = Employer::verified()->get();
         $regions = Region::all();
         $categories = Category::all();
 
@@ -158,7 +167,7 @@ class JobController extends Controller
             'salary_amount' => 'required|numeric|min:2',
             'description' => 'required|string|max:350',
             'requirement' => 'required|string|max:350',
-            'last_date' => 'required|date',
+            'last_date' => 'required|date|after:' . $job->created_at,
         ]);
         try {
             $job->update([

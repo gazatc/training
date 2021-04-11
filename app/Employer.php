@@ -45,4 +45,13 @@ class Employer extends Authenticatable
     public function verify() {
         return $this->hasOne(EmployerVerify::class);
     }
+
+    public function scopeVerified($query)
+    {
+        return $query->where('verified', 1);
+    }
+    public function scopeNotVerified($query)
+    {
+        return $query->where('verified', 0);
+    }
 }

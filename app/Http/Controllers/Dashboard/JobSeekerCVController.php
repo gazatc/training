@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class JobSeekerCVController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:update_jobSeekers,guard:admin']);
+    }
+
     //
     public function showCVForm(JobSeeker $jobSeeker)
     {

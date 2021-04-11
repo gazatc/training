@@ -60,6 +60,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-12">
                                             <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    data-live-search="true"
                                                     name="employer">
                                                 <option value="">- كل أصحاب العمل -</option>
                                                 @foreach($employers as $employer)
@@ -71,6 +72,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-12">
                                             <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    data-live-search="true"
                                                     name="category">
                                                 <option value="">- كل المجالات -</option>
                                                 @foreach($categories as $category)
@@ -82,6 +84,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-12">
                                             <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    data-live-search="true"
                                                     name="region">
                                                 <option value="">- كل المحافظات -</option>
                                                 @foreach($regions as $region)

@@ -60,6 +60,7 @@
                                         </div>
                                         <div class="col-md-4 col-sm-12">
                                             <select class="form-control z-index show-tick nominate_beneficiary"
+                                                    data-live-search="true"
                                                     name="role">
                                                 <option value="">- كل الصلاحيات -</option>
                                                 @foreach($roles as $role)

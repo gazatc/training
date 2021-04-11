@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class JobApplicationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:create_applications,guard:admin'])->only(['create', 'store']);
+        $this->middleware(['permission:read_applications,guard:admin'])->only('index');
+        $this->middleware(['permission:delete_applications,guard:admin'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +37,7 @@ class JobApplicationController extends Controller
         })->latest()->paginate(10);
 
         $jobs = Job::all();
-        $jobSeekers = JobSeeker::where('verified', 1)->get();
+        $jobSeekers = JobSeeker::verified()->get();
 
         return view('dashboard.jobApplications.index', compact('applications', 'jobs', 'jobSeekers'));
     }
@@ -44,7 +51,7 @@ class JobApplicationController extends Controller
     {
         //
         $jobs = Job::all();
-        $jobSeekers = JobSeeker::where('verified', 1)->get();
+        $jobSeekers = JobSeeker::verified()->get();
 
         return view('dashboard.jobApplications.create', compact('jobs', 'jobSeekers'));
     }

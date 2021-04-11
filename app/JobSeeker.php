@@ -65,4 +65,13 @@ class JobSeeker extends Authenticatable
     public function team() {
         return $this->belongsToMany(Team::class, 'team_members');
     }
+
+    public function ScopeVerified()
+    {
+        return $this->where('verified', 1);
+    }
+    public function ScopeNotVerified()
+    {
+        return $this->where('verified', 0);
+    }
 }

@@ -99,9 +99,9 @@ class JobSeekerController extends Controller
             'facebook' => 'nullable|url|max:50',
             'twitter' => 'nullable|url|max:50',
             'instagram' => 'nullable|url|max:50',
-            'whatsapp' => 'nullable|string|max:50',
-            'behance' => 'nullable|string|max:50',
-            'github' => 'nullable|string|max:50',
+            'whatsapp' => 'nullable|url|max:50',
+            'behance' => 'nullable|url|max:50',
+            'github' => 'nullable|url|max:50',
         ]);
         try {
             if ($request->avatar) {
@@ -199,9 +199,9 @@ class JobSeekerController extends Controller
             'facebook' => 'nullable|url|max:50',
             'twitter' => 'nullable|url|max:50',
             'instagram' => 'nullable|url|max:50',
-            'whatsapp' => 'nullable|string|max:50',
-            'behance' => 'nullable|string|max:50',
-            'github' => 'nullable|string|max:50',
+            'whatsapp' => 'nullable|url|max:50',
+            'behance' => 'nullable|url|max:50',
+            'github' => 'nullable|url|max:50',
         ]);
         try {
             if ($request->avatar) {

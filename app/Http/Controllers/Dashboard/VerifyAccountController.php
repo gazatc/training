@@ -20,7 +20,7 @@ class VerifyAccountController extends Controller
     }
 
     public function employersApplication(Request $request) {
-        $employers = Employer::where('verified', 0)->whereHas('verify')
+        $employers = Employer::notVerified()->whereHas('verify')
             ->where(function ($query) use ($request) {
                 $query->when($request->search, function ($q) use ($request) {
                     return $q->where('name', 'like', '%' . $request->search . '%')
@@ -59,7 +59,7 @@ class VerifyAccountController extends Controller
     }
 
     public function jobSeekersApplication(Request $request) {
-        $jobSeekers = JobSeeker::where('verified', 0)->whereHas('verify')
+        $jobSeekers = JobSeeker::notVerified()->whereHas('verify')
             ->where(function ($query) use ($request) {
                 $query->when($request->search, function ($q) use ($request) {
                     return $q->where('firstName', 'like', '%' . $request->search . '%')

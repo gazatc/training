@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class TrainingApplicationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:create_applications,guard:admin'])->only(['create', 'store']);
+        $this->middleware(['permission:read_applications,guard:admin'])->only('index');
+        $this->middleware(['permission:update_applications,guard:admin'])->only(['edit', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +37,7 @@ class TrainingApplicationController extends Controller
         })->latest()->paginate(10);
 
         $trainings = Training::all();
-        $jobSeekers = JobSeeker::where('verified', 1)->get();
+        $jobSeekers = JobSeeker::verified()->get();
 
         return view('dashboard.trainingApplications.index', compact('applications', 'trainings', 'jobSeekers'));
     }
@@ -44,7 +51,7 @@ class TrainingApplicationController extends Controller
     {
         //
         $trainings = Training::all();
-        $jobSeekers = JobSeeker::where('verified', 1)->get();
+        $jobSeekers = JobSeeker::verified()->get();
 
         return view('dashboard.trainingApplications.create', compact('trainings', 'jobSeekers'));
     }
