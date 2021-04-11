@@ -19,10 +19,11 @@ return [
             'regions' => 'c,r,u,d',
             'employers' => 'c,r,u,d,s,v',
             'jobSeekers' => 'c,r,u,d,s,v',
-            'jobs' => 'c,r,u,d',
-            'trainings' => 'c,r,u,d',
+            'jobs' => 'c,r,u,d,s',
+            'trainings' => 'c,r,u,d,s',
             'teams' => 'c,r,u,d',
-            'verifyAccounts' => 'r,v,d'
+            'verifyAccounts' => 'r,v,d',
+            'applications' => 'c,r,d'
         ],
         'admin' => [],
     ],

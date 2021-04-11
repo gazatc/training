@@ -14,6 +14,7 @@ class TrainingController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -77,7 +78,7 @@ class TrainingController extends Controller
             'category' => 'required|exists:categories,id',
             'description' => 'required|string|max:350',
             'requirement' => 'required|string|max:350',
-            'last_date' => 'required|date',
+            'last_date' => 'required|date||after_or_equal:today',
         ]);
         try {
             Training::create([
@@ -106,6 +107,7 @@ class TrainingController extends Controller
     public function show(Training $training)
     {
         //
+        return view('dashboard.trainings.show', compact('training'));
     }
 
     /**

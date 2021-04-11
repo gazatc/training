@@ -19,4 +19,9 @@ class Training extends Model
     public function region() {
         return $this->belongsTo(Region::class);
     }
+    public function applications()
+    {
+        return $this->morphMany(Application::class, 'applicationable');
+    }
+
 }

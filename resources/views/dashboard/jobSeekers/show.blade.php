@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="{{asset('dashboard_files/rtl/assets/css/bootstrap-fileinput.css')}}">
         <style>
             input, textarea {
-                cursor: default !important;
+                cursor: text!important;
             }
         </style>
     @endpush

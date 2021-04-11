@@ -21,13 +21,12 @@
 
     <!-- Fonts -->
     {{--<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"--}}
-          {{--rel="stylesheet">--}}
+    {{--rel="stylesheet">--}}
     {{--<style>--}}
-        {{--* {--}}
-            {{--font-family: cairo;--}}
-        {{--}--}}
+    {{--* {--}}
+    {{--font-family: cairo;--}}
+    {{--}--}}
     {{--</style>--}}
-
 
 </head>
 <body class="theme-cyan rtl">
@@ -57,6 +56,17 @@
         <li>
             <a href="javascript:void(0);" class="ls-toggle-btn" data-close="true">
                 <i class="zmdi zmdi-swap"></i>
+            </a>
+        </li>
+
+        <li class="d-none d-lg-inline-block">
+            <a href="/" title="Website">
+                <i class="zmdi zmdi-globe-alt"></i>
+            </a>
+        </li>
+        <li class="d-none d-lg-inline-block">
+            <a href="{{route('dashboard.admins.edit', auth()->guard('admin')->user())}}" title="Profile">
+                <i class="zmdi zmdi-account-box"></i>
             </a>
         </li>
 

@@ -127,12 +127,30 @@
                                         @forelse($trainings as $training)
                                             <tr>
                                                 <td>{{ ($trainings->currentPage()-1) * $trainings->perPage() + $loop->index + 1 }}</td>
-                                                <td>{{ $training->employer->name }}</td>
+                                                <td>
+                                                    <a target="_blank"
+                                                       href="{{ route('dashboard.employers.show', $training->employer->id) }}">{{ $training->employer->username }}</a>
+                                                </td>
                                                 <td>{{ $training->category->name }}</td>
                                                 <td>{{ $training->region->name }}</td>
                                                 <td>{{ $training->title }}</td>
                                                 <td>{{ $training->last_date }}</td>
                                                 <td>
+                                                    @if(auth()->guard('admin')->user()->hasPermission('show_trainings'))
+                                                        <a href="{{route('dashboard.trainings.show', $training)}}">
+                                                            <button class="btn btn-icon btn-neutral btn-icon-mini"
+                                                                    title="Show">
+                                                                <i class="zmdi zmdi-eye"></i>
+                                                            </button>
+                                                        </a>
+                                                    @else
+                                                        <button class="btn btn-icon btn-neutral btn-icon-mini disabled"
+                                                                style="cursor: no-drop"
+                                                                title="Edit">
+                                                            <i class="zmdi zmdi-eye"></i>
+                                                        </button>
+                                                    @endif
+
                                                     @if(auth()->guard('admin')->user()->hasPermission('update_trainings'))
                                                         <a href="{{route('dashboard.trainings.edit', $training)}}">
                                                             <button class="btn btn-icon btn-neutral btn-icon-mini"

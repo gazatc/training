@@ -85,7 +85,7 @@ class JobController extends Controller
             'salary_amount' => 'required|numeric|min:2',
             'description' => 'required|string|max:350',
             'requirement' => 'required|string|max:350',
-            'last_date' => 'required|date',
+            'last_date' => 'required|date|after_or_equal:today',
         ]);
         try {
             Job::create([
@@ -118,6 +118,7 @@ class JobController extends Controller
     public function show(Job $job)
     {
         //
+        return view('dashboard.jobs.show', compact('job'));
     }
 
     /**

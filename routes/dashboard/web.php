@@ -34,9 +34,9 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::get('jobSeekers/{jobSeeker}/cv', 'JobSeekerCVController@showCVForm')->name('jobSeekers.showCVForm');
         Route::post('jobSeekers/{jobSeeker}/cv', 'JobSeekerCVController@saveCV')->name('jobSeekers.saveCV');
 
-        Route::resource('jobs', 'JobController')->except(['show']);
+        Route::resource('jobs', 'JobController');
 
-        Route::resource('trainings', 'TrainingController')->except(['show']);
+        Route::resource('trainings', 'TrainingController');
 
         Route::resource('teams', 'TeamController')->except(['show']);
 
@@ -46,5 +46,16 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
         Route::get('verifyAccounts/jobSeekers', 'VerifyAccountController@jobSeekersApplication')->name('verifyAccounts.jobSeekersApplication');
         Route::post('verifyAccounts/{jobSeeker}/jobSeekers', 'VerifyAccountController@verifyJobSeeker')->name('verifyAccounts.verifyJobSeeker');
         Route::delete('verifyAccounts/{jobSeeker}/deleteJobSeekerVerify', 'VerifyAccountController@deleteJobSeekerVerify')->name('verifyAccounts.deleteJobSeekerVerify');
+
+        Route::resource('jobApplications', 'JobApplicationController',
+            ['parameters' => [
+                'jobApplications' => 'application'
+            ]])
+            ->except(['show', 'edit', 'update']);
+        Route::resource('trainingApplications', 'TrainingApplicationController',
+            ['parameters' => [
+                'trainingApplications' => 'application'
+            ]])
+            ->except(['show', 'edit', 'update']);
     });
 });

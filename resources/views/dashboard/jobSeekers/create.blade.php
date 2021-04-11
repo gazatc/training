@@ -220,7 +220,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="web" class="form-control"
+                                            <input type="url" name="web" class="form-control"
                                                    placeholder="website" value="{{ old('web', '') }}">
                                             @error('web')
                                                 <span style="color: red;margin-right: 10px">{{ $errors->first('web') }}</span>
@@ -229,7 +229,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="linkedin" class="form-control"
+                                            <input type="url" name="linkedin" class="form-control"
                                                    placeholder="linkedin" value="{{ old('linkedin', '') }}">
                                             @error('linkedin')
                                                 <span style="color: red;margin-right: 10px">{{ $errors->first('linkedin') }}</span>
@@ -240,7 +240,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="facebook" class="form-control"
+                                            <input type="url" name="facebook" class="form-control"
                                                    placeholder="facebook" value="{{ old('facebook', '') }}">
                                             @error('facebook')
                                                 <span style="color: red; margin-right: 10px">{{ $errors->first('facebook') }}</span>
@@ -249,7 +249,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="twitter" class="form-control"
+                                            <input type="url" name="twitter" class="form-control"
                                                    placeholder="twitter" value="{{ old('twitter', '') }}">
                                             @error('twitter')
                                                 <span style="color: red;margin-right: 10px">{{ $errors->first('twitter') }}</span>
@@ -260,7 +260,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="instagram" class="form-control"
+                                            <input type="url" name="instagram" class="form-control"
                                                    placeholder="instagram" value="{{ old('instagram', '') }}">
                                             @error('instagram')
                                                 <span style="color: red; margin-right: 10px">{{ $errors->first('instagram') }}</span>
@@ -269,7 +269,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="whatsapp" class="form-control"
+                                            <input type="url" name="whatsapp" class="form-control"
                                                    placeholder="whatsapp" value="{{ old('whatsapp', '') }}">
                                             @error('whatsapp')
                                                 <span style="color: red;margin-right: 10px">{{ $errors->first('whatsapp') }}</span>
@@ -280,7 +280,7 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="behance" class="form-control"
+                                            <input type="url" name="behance" class="form-control"
                                                    placeholder="behance" value="{{ old('behance', '') }}">
                                             @error('behance')
                                                 <span style="color: red; margin-right: 10px">{{ $errors->first('behance') }}</span>
@@ -289,7 +289,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input type="text" name="github" class="form-control"
+                                            <input type="url" name="github" class="form-control"
                                                    placeholder="github" value="{{ old('github', '') }}">
                                             @error('github')
                                                 <span style="color: red;margin-right: 10px">{{ $errors->first('github') }}</span>

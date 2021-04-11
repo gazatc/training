@@ -1,21 +1,9 @@
 <!-- Left Sidebar -->
 <aside id="leftsidebar" class="sidebar">
-    <ul class="nav nav-tabs">
-        <li class="nav-item" style="width: 100%; text-align: center; margin: auto;">
-            <a class="nav-link active" href="/" target="_blank">
-                <i class="zmdi zmdi-home m-r-5"></i>وظائف غزة
-            </a>
-        </li>
-        <li class="nav-item" style="width: 100%; text-align: center; margin: auto;">
-            <a class="nav-link active" href="{{route('dashboard.admins.edit', auth()->guard('admin')->user())}}">
-                <i class="zmdi zmdi-account-box m-r-5"></i>الملف الشخصي
-            </a>
-        </li>
-    </ul>
     <div class="tab-content">
-        <div class="tab-pane stretchRight active">
-            <div class="menu">
-                <ul class="list" style="padding-bottom: 100px">
+        <div class="tab-pane stretchRight active" id="dashboard">
+            <div class="menu" style="padding-top: 25px">
+                <ul class="list" style="padding: 0px">
                     <li>
                         <div class="user-info">
                             <div class="image"><a href="#"><img
@@ -220,6 +208,26 @@
                                 @if(auth()->guard('admin')->user()->hasPermission('read_verifyAccounts'))
                                     <li class="open {{ (request()->is('dashboard/verifyAccounts/jobSeekers')) ? 'active' : '' }}">
                                         <a href="{{route('dashboard.verifyAccounts.jobSeekersApplication')}}">طلبات توثيق الباحثين عن عمل</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
+
+                    @if(auth()->guard('admin')->user()->isAbleTo('*_applications'))
+                        <li class="open {{ (request()->is('dashboard/*Applications')) ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="menu-toggle"><i
+                                        class="zmdi zmdi-collection-plus"></i><span>طلبات التقديم</span>
+                            </a>
+                            <ul class="ml-menu">
+                                @if(auth()->guard('admin')->user()->hasPermission('read_applications'))
+                                    <li class="open {{ (request()->is('dashboard/jobApplications')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.jobApplications.index')}}">المتقدمين للوظائف</a>
+                                    </li>
+                                @endif
+                                @if(auth()->guard('admin')->user()->hasPermission('read_applications'))
+                                    <li class="open {{ (request()->is('dashboard/trainingApplications')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.trainingApplications.index')}}">المتقدمين للتدريب</a>
                                     </li>
                                 @endif
                             </ul>

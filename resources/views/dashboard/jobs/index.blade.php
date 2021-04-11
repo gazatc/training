@@ -146,17 +146,35 @@
                                         @forelse($jobs as $job)
                                             <tr>
                                                 <td>{{ ($jobs->currentPage()-1) * $jobs->perPage() + $loop->index + 1 }}</td>
-                                                <td>{{ $job->employer->name }}</td>
+                                                <td>
+                                                    <a target="_blank"
+                                                       href="{{ route('dashboard.employers.show', $job->employer->id) }}">{{ $job->employer->username }}</a>
+                                                </td>
                                                 <td>{{ $job->category->name }}</td>
                                                 <td>{{ $job->region->name }}</td>
                                                 <td>{{ $job->title }}</td>
                                                 <td>{{ $job->jobTypeText }}</td>
                                                 <td>
                                                     {{ $job->salary_amount}}
-                                                    {{ $job->salary_type == 2 ? ' $ / في الساعة' : ' $' }}
+                                                    {{ $job->salary_type == 2 ? ' $ / الساعة' : ' $' }}
                                                 </td>
                                                 <td>{{ $job->last_date }}</td>
                                                 <td>
+                                                    @if(auth()->guard('admin')->user()->hasPermission('show_jobs'))
+                                                        <a href="{{route('dashboard.jobs.show', $job)}}">
+                                                            <button class="btn btn-icon btn-neutral btn-icon-mini"
+                                                                    title="Show">
+                                                                <i class="zmdi zmdi-eye"></i>
+                                                            </button>
+                                                        </a>
+                                                    @else
+                                                        <button class="btn btn-icon btn-neutral btn-icon-mini disabled"
+                                                                style="cursor: no-drop"
+                                                                title="Edit">
+                                                            <i class="zmdi zmdi-eye"></i>
+                                                        </button>
+                                                    @endif
+
                                                     @if(auth()->guard('admin')->user()->hasPermission('update_jobs'))
                                                         <a href="{{route('dashboard.jobs.edit', $job)}}">
                                                             <button class="btn btn-icon btn-neutral btn-icon-mini"
