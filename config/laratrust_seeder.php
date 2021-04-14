@@ -23,7 +23,8 @@ return [
             'trainings' => 'c,r,u,d,s',
             'teams' => 'c,r,u,d',
             'verifyAccounts' => 'r,v,d',
-            'applications' => 'c,r,d'
+            'applications' => 'c,r,d',
+            'inquires' => 'r,d'
         ],
         'admin' => [],
     ],

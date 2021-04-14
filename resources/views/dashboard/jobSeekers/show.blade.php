@@ -208,13 +208,13 @@
                                                placeholder="behance" value="{{ @$jobSeeker->socials->behance }}"
                                                disabled>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <small style="margin-right: 15px;"><b>github</b></small>
-                                            <input type="text" name="github" class="form-control"
-                                                   placeholder="github" value="{{ @$jobSeeker->socials->github }}"
-                                                   disabled>
-                                        </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <small style="margin-right: 15px;"><b>github</b></small>
+                                        <input type="text" name="github" class="form-control"
+                                               placeholder="github" value="{{ @$jobSeeker->socials->github }}"
+                                               disabled>
                                     </div>
                                 </div>
                             </div>

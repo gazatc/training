@@ -158,7 +158,7 @@
                     @if(auth()->guard('admin')->user()->isAbleTo('*_trainings'))
                         <li class="open {{ (request()->is('dashboard/trainings*')) ? 'active' : '' }}">
                             <a href="javascript:void(0);" class="menu-toggle"><i
-                                        class="zmdi zmdi-chart-donut"></i><span>التدريبات</span>
+                                            class="zmdi zmdi-chart-donut"></i><span>التدريبات</span>
                             </a>
                             <ul class="ml-menu">
                                 @if(auth()->guard('admin')->user()->hasPermission('read_trainings'))
@@ -227,7 +227,27 @@
                                 @endif
                                 @if(auth()->guard('admin')->user()->hasPermission('read_applications'))
                                     <li class="open {{ (request()->is('dashboard/trainingApplications')) ? 'active' : '' }}">
-                                        <a href="{{route('dashboard.trainingApplications.index')}}">المتقدمين للتدريب</a>
+                                        <a href="{{route('dashboard.trainingApplications.index')}}">المتقدمين للتدريبات</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
+
+                    @if(auth()->guard('admin')->user()->isAbleTo('*_inquires'))
+                        <li class="open {{ (request()->is('dashboard/*Inquires')) ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="menu-toggle"><i
+                                        class="zmdi zmdi-comment-text-alt"></i><span>الاستفسارات</span>
+                            </a>
+                            <ul class="ml-menu">
+                                @if(auth()->guard('admin')->user()->hasPermission('read_inquires'))
+                                    <li class="open {{ (request()->is('dashboard/jobInquires')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.jobInquires.index')}}">استفسارات الوظائف</a>
+                                    </li>
+                                @endif
+                                @if(auth()->guard('admin')->user()->hasPermission('read_inquires'))
+                                    <li class="open {{ (request()->is('dashboard/trainingInquires')) ? 'active' : '' }}">
+                                        <a href="{{route('dashboard.trainingInquires.index')}}">استفسارات التدريبات</a>
                                     </li>
                                 @endif
                             </ul>

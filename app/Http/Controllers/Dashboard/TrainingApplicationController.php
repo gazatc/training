@@ -29,7 +29,7 @@ class TrainingApplicationController extends Controller
         $applications = Application::trainings()->where(function ($query) use ($request) {
             $query->when($request->training, function ($q) use ($request) {
                 return $q->where('applicationable_id', $request->job)
-                    ->where('applicationable_type', 'App/Training');
+                    ->where('applicationable_type', 'App\Training');
             });
             $query->when($request->jobSeeker, function ($q) use ($request) {
                 return $q->where('job_seeker_id', $request->jobSeeker);

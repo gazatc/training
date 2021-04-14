@@ -29,7 +29,7 @@ class JobApplicationController extends Controller
         $applications = Application::jobs()->where(function ($query) use ($request) {
             $query->when($request->job, function ($q) use ($request) {
                 return $q->where('applicationable_id', $request->job)
-                    ->where('applicationable_type', 'App/Job');
+                    ->where('applicationable_type', 'App\Job');
             });
             $query->when($request->jobSeeker, function ($q) use ($request) {
                 return $q->where('job_seeker_id', $request->jobSeeker);

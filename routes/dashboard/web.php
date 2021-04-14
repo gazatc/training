@@ -57,5 +57,16 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
                 'trainingApplications' => 'application'
             ]])
             ->except(['show', 'edit', 'update']);
+
+        Route::resource('jobInquires', 'JobInquireController',
+            ['parameters' => [
+                'jobInquires' => 'inquire'
+            ]])
+            ->only(['index', 'destroy']);
+        Route::resource('trainingInquires', 'TrainingInquireController',
+            ['parameters' => [
+                'trainingInquires' => 'inquire'
+            ]])
+            ->only(['index', 'destroy']);
     });
 });
