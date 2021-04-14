@@ -253,6 +253,19 @@
                             </ul>
                         </li>
                     @endif
+
+                    @if(auth()->guard('admin')->user()->hasPermission('read_messages'))
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-email"></i><span>الرسائل</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li><a href="{{route('dashboard.messages.index')}}">كل الرسائل</a></li>
+                            </ul>
+                        </li>
+                    @endif
+
+                    <br>
+
                 </ul>
             </div>
         </div>

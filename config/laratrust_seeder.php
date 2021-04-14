@@ -24,7 +24,8 @@ return [
             'teams' => 'c,r,u,d',
             'verifyAccounts' => 'r,v,d',
             'applications' => 'c,r,d',
-            'inquires' => 'r,d'
+            'inquires' => 'r,d',
+            'messages' => 'r,d'
         ],
         'admin' => [],
     ],

@@ -68,5 +68,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
                 'trainingInquires' => 'inquire'
             ]])
             ->only(['index', 'destroy']);
+
+        Route::resource('messages', 'MessageController')->only(['index', 'destroy']);
     });
 });
