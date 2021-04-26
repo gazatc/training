@@ -28,10 +28,10 @@ class HomeController extends Controller
         $trainings = Training::orderBy('created_at','desc')->paginate(15);
         return view('front.train',compact('trainings'));
     }
-    public function freelancers()
+    public function jobSeekers()
     {
-        $freelancers = JobSeeker::inRandomOrder()->get();
-        return view('front.freelancers' ,compact('freelancers'));
+        $jobSeekers = JobSeeker::inRandomOrder()->get();
+        return view('front.jobSeekers' ,compact('jobSeekers'));
     }
 
 

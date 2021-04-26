@@ -41,7 +41,7 @@
                        class="ml-8 hover:text-yellow-300 text-yellow-300 font-semibold">الوظائف</a></li>
                 <li><a href="{{route('trains')}}" class="ml-8 hover:text-yellow-300">التدريب</a></li>
                 <li><a href="{{route('employers')}}" class="ml-8 hover:text-yellow-300">الشركات</a></li>
-                <li><a href="{{route('freelancers')}}" class="hover:text-yellow-300">العاملين</a></li>
+                <li><a href="{{route('jobSeekers')}}" class="hover:text-yellow-300">العاملين</a></li>
             </ul>
         </div>
 

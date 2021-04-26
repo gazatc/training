@@ -27,6 +27,7 @@ Route::group(['prefix' => 'jobSeeker'], function () {
 });
 
 Route::group(['prefix' => 'employer'], function () {
+
     Route::get('/login', 'Auth\EmployerLoginController@login_form')->name('employer.login_form');
     Route::post('/submit-login', 'Auth\EmployerLoginController@login')->name('employer.login');
     Route::get('/register', 'Auth\EmployerLoginController@register_form')->name('employer.register_form');
@@ -35,46 +36,42 @@ Route::group(['prefix' => 'employer'], function () {
 
 
 //employer stuff
-    Route::group(['prefix' => 'jobs'], function () {
+    Route::group(['prefix' => 'jobs','namespace' => 'FrontController'], function () {
 
-        Route::get('/create', 'FrontController\JobController@create')->name('jobs.create');
-        Route::post('/store/{employer}', 'FrontController\JobController@store')->name('job.store');
-        Route::get('/edit/{job}', 'FrontController\JobController@edit')->name('job.edit');
-        Route::get('/update/{job}', 'FrontController\JobController@update')->name('job.update');
-        Route::get('/destroy/{job}', 'FrontController\JobController@destroy')->name('job.destroy');
+        Route::get('/create', 'JobController@create')->name('jobs.create');
+        Route::post('/store/{employer}', 'JobController@store')->name('job.store');
+        Route::get('/edit/{job}', 'JobController@edit')->name('job.edit');
+        Route::get('/update/{job}', 'JobController@update')->name('job.update');
+        Route::get('/destroy/{job}', 'JobController@destroy')->name('job.destroy');
     });
-    Route::group(['prefix' => 'training'], function () {
-        Route::get('/create', 'FrontController\TrainingController@create')->name('training.create');
-        Route::post('/store/{employer}', 'FrontController\TrainingController@store')->name('training.store');
-        Route::get('/edit/{training}', 'FrontController\TrainingController@edit')->name('training.edit');
-        Route::get('/update/{training}', 'FrontController\TrainingController@update')->name('training.update');
-        Route::get('/destroy/{training}', 'FrontController\TrainingController@destroy')->name('training.destroy');
+    Route::group(['prefix' => 'training','namespace' => 'FrontController'], function () {
+        Route::get('/create', 'TrainingController@create')->name('training.create');
+        Route::post('/store/{employer}', 'TrainingController@store')->name('training.store');
+        Route::get('/edit/{training}', 'TrainingController@edit')->name('training.edit');
+        Route::get('/update/{training}', 'TrainingController@update')->name('training.update');
+        Route::get('/destroy/{training}', 'TrainingController@destroy')->name('training.destroy');
 
     });
 });
 
+Route::group(['namespace' => 'FrontController'], function () {
 
-Route::get('/', 'FrontController\HomeController@jobs')->name('jobs');
-Route::get('/employers', 'FrontController\HomeController@employers')->name('employers');
-Route::get('/trainings', 'FrontController\HomeController@trains')->name('trains');
-Route::get('/freelancers', 'FrontController\HomeController@freelancers')->name('freelancers');
+    Route::get('/', 'HomeController@jobs')->name('jobs');
+    Route::get('/employers', 'HomeController@employers')->name('employers');
+    Route::get('/trainings', 'HomeController@trains')->name('trains');
+    Route::get('/jobSeekers', 'HomeController@jobSeekers')->name('jobSeekers');
 
 
-Route::get('/job-seeker/{jobSeeker}', 'FrontController\JobSeekerController@show')->name('jobseeker.show');
-Route::get('/employer/{employer}', 'FrontController\EmployerController@show')->name('employer.show');
-Route::get('/job/{job}', 'FrontController\JobController@show')->name('job.show');
-Route::get('/training/{training}', 'FrontController\TrainingController@show')->name('training.show');
-
+    Route::get('/job-seeker/{jobSeeker}', 'JobSeekerController@show')->name('jobseeker.show');
+    Route::get('/employer/{employer}', 'EmployerController@show')->name('employer.show');
+    Route::get('/job/{job}', 'JobController@show')->name('job.show');
+    Route::get('/training/{training}', 'TrainingController@show')->name('training.show');
 
 
 //attempt to train
-Route::post('/training/{training}','FrontController\TrainingApplicationController@store')->name('training.apply');
-Route::post('/job/{job}/apply','FrontController\JobApplicationController@store')->name('job.apply');
+    Route::post('/training/{training}', 'TrainingApplicationController@store')->name('training.apply');
+    Route::post('/job/{job}/apply', 'JobApplicationController@store')->name('job.apply');
 
+});
 
-
-//Route::get('/job-single', function () {
-//    return view('front.single-job');
-//});
-//
 
