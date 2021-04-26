@@ -44,6 +44,14 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+       'employer' => [
+            'driver' => 'session',
+            'provider' => 'employers',
+        ],
+        'jobSeeker' => [
+            'driver' => 'session',
+            'provider' => 'jobSeekers',
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -77,6 +85,14 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
+        ],
+        'employers' => [
+            'driver' => 'eloquent',
+            'model' => App\Employer::class,
+        ],
+        'jobSeekers' => [
+            'driver' => 'eloquent',
+            'model' => App\JobSeeker::class,
         ],
 
         // 'users' => [

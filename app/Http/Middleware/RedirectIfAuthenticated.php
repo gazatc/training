@@ -21,7 +21,12 @@ class RedirectIfAuthenticated
         if($guard == 'admin' && Auth::guard($guard)->check()){
             return redirect(RouteServiceProvider::DASHBOARD);
         }
-
+        if($guard == 'employers' && Auth::guard($guard)->check()){
+            return redirect(RouteServiceProvider::HOME);
+        }
+        if($guard == 'jobSeekers' && Auth::guard($guard)->check()){
+            return redirect(RouteServiceProvider::HOME);
+        }
         if (Auth::guard($guard)->check()) {
             return redirect(RouteServiceProvider::HOME);
         }

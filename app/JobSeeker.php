@@ -74,4 +74,6 @@ class JobSeeker extends Authenticatable
     {
         return $this->where('verified', 0);
     }
+
+
 }

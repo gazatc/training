@@ -68,4 +68,10 @@ class Job extends Model
                 break;
         }
     }
+
+    public function hasAttemptToThisJob(JobSeeker $jobSeeker)
+    {
+        $result = $this->applications()->where('job_seeker_id', $jobSeeker->id)->exists();
+        return $result;
+    }
 }
