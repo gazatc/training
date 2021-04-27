@@ -55,6 +55,13 @@
 
                 {{--Start Job-seeker Description --}}
                 <div class="w-full lg:w-3/4">
+                    @if(Session::has('success'))
+                        <div
+                            class="bg-blue-100 border-t border-b mt-6 lg:mt-0 lg:mr-8  border-blue-500 text-blue-700 px-4 py-3"
+                            role="alert">
+                            <p class="font-bold">{{Session::get('success')}}</p>
+                        </div>
+                    @endif
                     {{--Start Job Description--}}
                     <div class="shadow-lg bg-white rounded-lg border border-gray-300 mt-6 lg:mt-0 lg:mr-8">
                         {{--Start Job Description--}}
@@ -112,9 +119,9 @@
 
                                 <hr class="my-4">
                                 <div>
-                                    <h2 class="text-base font-semibold border-r-4 border-blue-900 pr-2">إبقَ على تواصل
-                                        دائم
-                                        من خلال : </h2>
+                                    <h2 class="text-base font-semibold border-r-4 border-blue-900 pr-2">
+                                        إبقَ على تواصل دائم من خلال :
+                                    </h2>
                                     <div class="flex mt-4 gap-x-3">
                                         @if(empty($jobSeeker->socials->linkedin) &&
                                             empty($jobSeeker->socials->facebook)&&
@@ -123,7 +130,7 @@
                                             <span class="">  لا يوجد</span>
                                         @endif
                                         @if(!empty($jobSeeker->socials->linkedin))
-                                            <a href="" target="_blank"
+                                            <a href="{{$jobSeeker->socials->linkedin}}" target="_blank"
                                                class="flex p-3 justify-center bg-blue-900 rounded-xl">
                                                 <svg class="w-5 h-5 text-white fill-current"
                                                      xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +144,7 @@
 
                                         @if(!empty($jobSeeker->socials->facebook))
 
-                                            <a href="" target="_blank"
+                                            <a href="{{$jobSeeker->socials->facebook}}" target="_blank"
                                                class="flex p-3 justify-center bg-blue-600 rounded-xl">
                                                 <svg class="w-5 h-5 text-white fill-current"
                                                      xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +155,7 @@
                                         @endif
                                         @if(!empty($jobSeeker->socials->twitter))
 
-                                            <a href="" target="_blank"
+                                            <a href="{{$jobSeeker->socials->twitter}}" target="_blank"
                                                class="flex p-3 justify-center bg-blue-400 rounded-xl">
                                                 <svg class="w-5 h-5 text-white fill-current"
                                                      xmlns="http://www.w3.org/2000/svg"
@@ -174,12 +181,46 @@
                             </h2>
                             <div class="py-2 px-6 mb-2">
                                 <div>
-                                    <h2 class="text-lg font-semibold border-r-4 border-blue-900 pr-2">التعليم :</h2>
+                                    <div class="flex justify-between">
+                                        <h2 class="text-lg font-semibold border-r-4 border-blue-900 pr-2">التعليم :</h2>
+                                        <a href="{{route('jobSeeker.profile.education.create')}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 hover:text-blue-500"
+                                                 fill="none"
+                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </a>
+
+                                    </div>
                                     <ul class="list-disc mr-10">
                                         @foreach($jobSeeker->education as $edu)
                                             <li class="mt-2">
-                                                <p class="text-base font-semibold">{{$edu->institution}}</p>
-                                                <p class="text-base">{{$edu->institution}}</p>
+                                                <p class="text-base font-semibold flex justify-between">
+                                                    <span>{{$edu->institution}}</span>
+                                                    <span class="flex gap-5">
+                                                  <a href="{{route('jobSeeker.profile.education.edit',$edu->id)}}">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 opacity-50 hover:opacity-100"
+                                                           fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                              stroke-width="2"
+                                                              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                                            </svg>
+                                                  </a>
+                                                  <a href="{{route('jobSeeker.profile.education.destroy',$edu->id)}}">
+                                                      <svg xmlns="http://www.w3.org/2000/svg"
+                                                           class="h-6 w-6 text-red-500 opacity-50 hover:opacity-100"
+                                                           fill="none" viewBox="0 0 24 24"
+                                                           stroke="currentColor">
+                                                          <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                        </svg>
+                                                  </a>
+
+                                                    </span>
+                                                </p>
+                                                <p class="text-base">{{$edu->degree}}</p>
                                                 <p class="text-sm"> {{ date('Y', strtotime($edu->from))}}
                                                     - {{ date('Y', strtotime($edu->to))}}</p>
                                             </li>
@@ -189,27 +230,99 @@
 
                                 <hr class="my-4">
                                 <div>
-                                    <h2 class="text-lg font-semibold border-r-4 border-blue-900 pr-2">الخبرة :</h2>
+                                    <div class="flex justify-between">
+                                        <h2 class="text-lg font-semibold border-r-4 border-blue-900 pr-2">الخبرة :</h2>
+                                        <a href="{{route('jobSeeker.profile.experience.create')}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 hover:text-blue-500"
+                                                 fill="none"
+                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </a>
+
+                                    </div>
                                     <ul class="list-disc mr-10">
                                         @foreach($jobSeeker->experience as $exper)
-                                            <li class="mt-2">
-                                                <p class="text-base font-semibold">{{$exper->name}}</p>
-                                                <p class="text-base">{{$exper->company}}</p>
-                                                <p class="text-sm">{{ date('Y', strtotime($exper->from))}}
-                                                    - {{ date('Y', strtotime($exper->to))}}</p>
-                                            </li>
+                                            <div>
+                                                <li class="mt-2">
+                                                    <p class="text-base font-semibold flex justify-between">
+                                                        <span>{{$exper->name}}</span>
+                                                        <span class="flex gap-5">
+                                                  <a href="{{route('jobSeeker.profile.experience.edit',$exper->id)}}">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 opacity-50 hover:opacity-100"
+                                                           fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                              stroke-width="2"
+                                                              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                                            </svg>
+                                                  </a>
+                                                  <a href="{{route('jobSeeker.profile.experience.destroy',$exper->id)}}">
+                                                      <svg xmlns="http://www.w3.org/2000/svg"
+                                                           class="h-6 w-6 text-red-500 opacity-50 hover:opacity-100"
+                                                           fill="none" viewBox="0 0 24 24"
+                                                           stroke="currentColor">
+                                                          <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                        </svg>
+                                                  </a>
+
+                                                    </span>
+                                                    </p>
+                                                    <p class="text-base">{{$exper->company}}</p>
+                                                    <p class="text-sm">{{ date('Y', strtotime($exper->from))}}
+                                                        - {{ date('Y', strtotime($exper->to))}}</p>
+                                                </li>
+
                                         @endforeach
                                     </ul>
                                 </div>
 
                                 <hr class="my-4">
                                 <div>
-                                    <h2 class="text-lg font-semibold border-r-4 border-blue-900 pr-2">الدورات التدريبية
-                                        :</h2>
+                                    <div class="flex justify-between">
+                                        <h2 class="text-lg font-semibold border-r-4 border-blue-900 pr-2">الدورات
+                                            التدريبية
+                                            :</h2>
+                                        <a href="{{route('jobSeeker.profile.training.create')}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 hover:text-blue-500"
+                                                 fill="none"
+                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </a>
+
+                                    </div>
+
                                     <ul class="list-disc mr-10">
                                         @foreach($jobSeeker->training as $train)
                                             <li class="mt-2">
-                                                <p class="text-base font-semibold">{{$train->name}}</p>
+                                                <p class="text-base font-semibold flex justify-between">
+                                                    <span>{{$train->name}}</span>
+                                                    <span class="flex gap-5">
+                                                  <a href="{{route('jobSeeker.profile.training.edit',$train->id)}}">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 opacity-50 hover:opacity-100"
+                                                           fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                              stroke-width="2"
+                                                              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                                            </svg>
+                                                  </a>
+                                                  <a href="{{route('jobSeeker.profile.training.destroy',$train->id)}}">
+                                                      <svg xmlns="http://www.w3.org/2000/svg"
+                                                           class="h-6 w-6 text-red-500 opacity-50 hover:opacity-100"
+                                                           fill="none" viewBox="0 0 24 24"
+                                                           stroke="currentColor">
+                                                          <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                        </svg>
+                                                  </a>
+
+                                                    </span>
+                                                </p>
                                                 <p class="text-base">{{$train->institution}}</p>
                                                 <p class="text-sm">{{ date('Y', strtotime($train->from))}}
                                                     - {{ date('Y', strtotime($train->to))}}</p>

@@ -6,14 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f0a8161c-5ec9-43e9-9c39-65bb33c371a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FrontController/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FrontController/JobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FrontController/TrainingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FrontController/TrainingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/employer/job/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/employer/job/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/employer/job/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/employer/job/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/employer/job/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/employer/job/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/JobSeekerLoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/JobSeekerLoginController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/front/employer/train/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/employer/train/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/employer/train/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/employer/train/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/employer/train/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/employer/train/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front/jobseeker-single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/jobseeker-single.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front/jobseeker/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/jobseeker/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front/jobseeker/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/jobseeker/auth/register.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -300,7 +297,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/resources/views/front/jobseeker/auth" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers/FrontController" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/front/jobseeker/profile/training" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -313,11 +310,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\Desktop\final_project\new\resources\views\front\jobseeker\profile\training" />
+      <recent name="C:\Users\hp\Desktop\final_project\new\resources\views\front\jobseeker\profile\experience" />
+      <recent name="C:\Users\hp\Desktop\final_project\new\resources\views\front\employer\profile" />
       <recent name="C:\Users\hp\Desktop\final_project\new\app\Http\Controllers\FrontController" />
       <recent name="C:\Users\hp\Desktop\final_project\new\resources\views\front\employer\train" />
-      <recent name="C:\Users\hp\Desktop\final_project\new\resources\views\front\employer\auth" />
-      <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\resources\views\dashboard\messages" />
-      <recent name="E:\IUG\سنة 4\فصل 2\مشروع تخرج\GraduateProject\app\Http\Controllers\Dashboard" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hp\Desktop\final_project\new\resources\views\front" />
@@ -375,7 +372,8 @@
       <workItem from="1619420651108" duration="13300000" />
       <workItem from="1619435912156" duration="706000" />
       <workItem from="1619446499662" duration="6286000" />
-      <workItem from="1619502352851" duration="7803000" />
+      <workItem from="1619502352851" duration="10929000" />
+      <workItem from="1619515322535" duration="15069000" />
     </task>
     <servers />
   </component>

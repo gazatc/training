@@ -6,7 +6,7 @@
                 text-xl font-semibold mb-2 py-1 bg-gray-100">تسجيل كباحث عن عمل / متدرب</h2>
         </header>
 
-        <form action="{{route('job-sekeer.register')}}" method="post" class="px-4 py-2" enctype="multipart/form-data">
+        <form action="{{route('jobSeeker.register')}}" method="post" class="px-4 py-2" enctype="multipart/form-data">
             @csrf
             @if ($errors->any())
                 @foreach ($errors->all() as $error)

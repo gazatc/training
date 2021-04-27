@@ -17,11 +17,6 @@
         @endif
         <form action="{{route('training.store',auth()->guard('employer')->user())}}" method="post" class="px-4 py-2" enctype="multipart/form-data">
             @csrf
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div>{{$error}}</div>
-                @endforeach
-            @endif
             <div>
 
                 <div class="py-1">

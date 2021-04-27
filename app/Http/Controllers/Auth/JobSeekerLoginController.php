@@ -86,6 +86,6 @@ class JobSeekerLoginController extends DefaultLoginController
     public function logout_jobSeeker()
     {
         Auth::guard('jobSeeker')->logout();
-        return redirect(route('job-sekeer.login_form'));
+        return redirect(route('jobSeeker.login_form'));
     }
 }

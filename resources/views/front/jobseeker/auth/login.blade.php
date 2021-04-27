@@ -7,7 +7,7 @@
                 text-xl font-semibold mb-2 py-1 bg-gray-100">تسجيل الدخول</h2>
             </header>
 
-            <form action="{{route('job-sekeer.login')}}" class="px-4 py-2" method="post">
+            <form action="{{route('jobSeeker.login')}}" class="px-4 py-2" method="post">
             @csrf
                 <div class="py-2">
                     <label for="email">البريد الالكتروني</label>
@@ -42,7 +42,7 @@
                 <div class="h-32 py-5">
                     <p>ليس لديك حساب؟ </p>
                     <div class="mt-5">
-                    <a href="{{route('job-sekeer.register_form')}}" class="bg-green-900 text-sm text-white font-semibold rounded py-2 px-10  hover:bg-white
+                    <a href="{{route('jobSeeker.register_form')}}" class="bg-green-900 text-sm text-white font-semibold rounded py-2 px-10  hover:bg-white
                      hover:text-green-900 border hover:border-white">إنشاء حساب</a>
                     </div>
                 </div>
