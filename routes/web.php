@@ -38,17 +38,19 @@ Route::group(['prefix' => 'employer'], function () {
 //employer stuff
     Route::group(['prefix' => 'jobs','namespace' => 'FrontController'], function () {
 
-        Route::get('/create', 'JobController@create')->name('jobs.create');
+        Route::get('/', 'JobController@index')->name('job.index');
+        Route::get('/create', 'JobController@create')->name('job.create');
         Route::post('/store/{employer}', 'JobController@store')->name('job.store');
         Route::get('/edit/{job}', 'JobController@edit')->name('job.edit');
-        Route::get('/update/{job}', 'JobController@update')->name('job.update');
+        Route::post('/update/{job}', 'JobController@update')->name('job.update');
         Route::get('/destroy/{job}', 'JobController@destroy')->name('job.destroy');
     });
     Route::group(['prefix' => 'training','namespace' => 'FrontController'], function () {
+        Route::get('/', 'TrainingController@index')->name('training.index');
         Route::get('/create', 'TrainingController@create')->name('training.create');
         Route::post('/store/{employer}', 'TrainingController@store')->name('training.store');
         Route::get('/edit/{training}', 'TrainingController@edit')->name('training.edit');
-        Route::get('/update/{training}', 'TrainingController@update')->name('training.update');
+        Route::post('/update/{training}', 'TrainingController@update')->name('training.update');
         Route::get('/destroy/{training}', 'TrainingController@destroy')->name('training.destroy');
 
     });

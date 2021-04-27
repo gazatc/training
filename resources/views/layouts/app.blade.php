@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <title>Laravel</title>
+    <title>وظائف غزة</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -59,10 +59,9 @@
                 {{--Start Profile dropdown --}}
                 <div class="ml-3 relative">
                     <div>
-                        <button
-                            class="items-center flex text-sm rounded-full focus:outline-none focus:ring-2
+                        <button class="items-center flex text-sm rounded-full focus:outline-none focus:ring-2
                             focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                            id="user-menu" aria-haspopup="true" aria-expanded="true" aria-haspopup="true">
+                                id="user-menu" aria-haspopup="true" aria-expanded="true" aria-haspopup="true">
                             <span class="sr-only">Open user menu</span>
                             <span class="ml-2 font-semibold text-sm">{{auth()->guard('employer')->user()->name}}</span>
                             <img class="h-8 w-8 rounded-full"
@@ -84,18 +83,18 @@
                         From: "transform opacity-100 scale-100"
                         To: "transform opacity-0 scale-95"
                     -->
-
                     <div
                         class=" origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف
                             الشخصي</a>
-                        <a href="{{route('jobs.create')}}"
+
+                        <a href="{{route('job.index')}}"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                            إضافة وظيفة                       </a>
-                        <a href="{{route('training.create')}}"
+                            الوظائف </a>
+                        <a href="{{route('training.index')}}"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                            إضافة تدريب                       </a>
+                            التدريبات </a>
                         <a href="{{route('employer.logout')}}"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">تسجيل
                             الخروج</a>

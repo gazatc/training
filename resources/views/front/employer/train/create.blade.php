@@ -3,7 +3,7 @@
     <div class="text-center bg-white rounded-lg md:w-1/2 m-auto ">
         <header>
             <h2 class="rounded-t-lg text-gray-800 uppercase text-center tracking-wide
-                text-xl font-semibold mb-2 py-1 bg-gray-100">إضافة عمل </h2>
+                text-xl font-semibold mb-2 py-1 bg-gray-100">إضافة تدريب </h2>
         </header>
         @if(Session::has('success'))
         <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
@@ -94,7 +94,7 @@
                 <div class="py-1">
                     <label for="title">اخر موعد للتقديم</label>
                     <div class="pt-3">
-                        <input type="date" name="last_date" required  step="0.01" min="0.01"
+                        <input type="date" name="last_date" required
                                class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
                     </div>
                     @error('last_date')

@@ -5,11 +5,7 @@
             <h2 class="rounded-t-lg text-gray-800 uppercase text-center tracking-wide
                 text-xl font-semibold mb-2 py-1 bg-gray-100">إضافة عمل </h2>
         </header>
-        @if(Session::has('success'))
-        <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
-            <p class="font-bold">{{Session::get('success')}}</p>
-        </div>
-        @endif
+
         @if(Session::has('failed'))
             <div class="bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3" role="alert">
                 <p class="font-bold">{{Session::get('failed')}}</p>
