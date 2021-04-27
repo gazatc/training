@@ -28,7 +28,10 @@ Route::group(['prefix' => 'jobSeeker'], function () {
     Route::group(['prefix' => 'profile', 'namespace' => 'FrontController'], function () {
         Route::get('/', 'JobSeekerProfileController@index')->name('jobSeeker.profile.index');
         Route::get('/edit', 'JobSeekerProfileController@edit')->name('jobSeeker.profile.edit');
-        Route::post('/update/{jobseeker}', 'JobSeekerProfileController@update')->name('jobSeeker.profile.update');
+        Route::post('/update/', 'JobSeekerProfileController@update')->name('jobSeeker.profile.update');
+
+        //upload CV
+        Route::post('/upload_cv', 'JobSeekerProfileController@upload_cv')->name('jobSeeker.profile.upload_cv');
 
         Route::group(['prefix' => 'education'], function () {
             Route::get('/create', 'JobSeekerEductaionController@create')->name('jobSeeker.profile.education.create');

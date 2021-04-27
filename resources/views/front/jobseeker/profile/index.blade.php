@@ -71,7 +71,12 @@
                                 <h2 class="">
                                     المعلومات الشخصية
                                 </h2>
-
+                                <a href="{{route('jobSeeker.profile.edit')}}" class=" py-2  hover:test-blue-500 ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                        <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
                             </div>
                             <div class="py-2 px-6 mb-2">
                                 <div>
@@ -331,27 +336,50 @@
                                     </ul>
                                 </div>
 
-                                <a href=""
-                                   class="flex items-center justify-center text-center rounded-lg mt-6 bg-blue-900 text-white font-semibold text-lg px-4 py-2">
-                                    <svg class="w-5 h-5 text-white fill-current" xmlns="http://www.w3.org/2000/svg"
-                                         xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 52 52">
-                                        <g fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round"
-                                           stroke-linejoin="round" stroke-miterlimit="10">
-                                            <path
-                                                d="M29.808 2H10.086c-.885 0-1.603.718-1.603 1.603v44.794c0 .885.718 1.603 1.603 1.603h31.828c.885 0 1.603-.718 1.603-1.603V15.094"></path>
-                                            <path
-                                                d="M29.808 2v11.49c0 .886.718 1.604 1.603 1.604h12.106L29.808 2z"></path>
-                                            <path d="M13.985 7.936h9.776v7.594h-9.776z"></path>
-                                            <g>
-                                                <path d="M26 21.444H37.96"></path>
-                                                <path d="M14.041 28.783H37.96"></path>
-                                                <path d="M14.041 36.123H37.96"></path>
-                                                <path d="M14.041 43.462H37.96"></path>
+
+                                <hr class="my-2">
+                                <h2 class="text-lg font-semibold border-r-4 mt-6 border-blue-900 pr-2">
+                                    ملف السيرة الذاتية
+                                    :</h2>
+                                @if(!empty($jobSeeker->information->CVFile))
+                                    <a href="{{$jobSeeker->information->CVFile}}" target="_blank"
+                                       class="flex items-center justify-center text-center rounded-lg my-5 bg-blue-900 text-white font-semibold text-lg px-4 py-2">
+                                        <svg class="w-5 h-5 text-white fill-current" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 52 52">
+                                            <g fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round"
+                                               stroke-linejoin="round" stroke-miterlimit="10">
+                                                <path
+                                                    d="M29.808 2H10.086c-.885 0-1.603.718-1.603 1.603v44.794c0 .885.718 1.603 1.603 1.603h31.828c.885 0 1.603-.718 1.603-1.603V15.094"></path>
+                                                <path
+                                                    d="M29.808 2v11.49c0 .886.718 1.604 1.603 1.604h12.106L29.808 2z"></path>
+                                                <path d="M13.985 7.936h9.776v7.594h-9.776z"></path>
+                                                <g>
+                                                    <path d="M26 21.444H37.96"></path>
+                                                    <path d="M14.041 28.783H37.96"></path>
+                                                    <path d="M14.041 36.123H37.96"></path>
+                                                    <path d="M14.041 43.462H37.96"></path>
+                                                </g>
                                             </g>
-                                        </g>
-                                    </svg>
-                                    <span class="mr-2">عرض ملف السيرة الذاتية</span>
-                                </a>
+                                        </svg>
+
+                                        <span class="mr-2 b">عرض ملف السيرة الذاتية</span>
+                                    </a>
+                                @endif
+
+
+                                <form action="{{route('jobSeeker.profile.upload_cv',$jobSeeker)}}" class="text-center flex items-center justify-center gap-20" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="my-5">
+                                        <input type="file"  name="CVFile"
+                                               class="border border-gray-300   text-sm rounded-sm px-3 py-2 focus:outline-none focus:border-blue-900">
+                                    </div>
+                                    <div>
+                                    <button type="submit" class="bg-blue-900 text-sm text-white font-semibold rounded py-2 px-10 ml-2 hover:bg-white
+                                        hover:text-blue-900 border hover:border-white">
+                                        حفظ
+                                    </button>
+                                    </div>
+                                </form>
                             </div>
 
                         </div>
