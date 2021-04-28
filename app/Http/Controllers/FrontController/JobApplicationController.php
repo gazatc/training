@@ -23,10 +23,10 @@ class JobApplicationController extends Controller
 
 //        $query = DB::table('applications')->where('job_seeker_id','=',$jobSeeker->id)->get();
 
-        $applications = Application::jobs()->where('job_seeker_id',$jobSeeker->id)->latest()->paginate(10);
+        $applications = Application::jobs()->where('job_seeker_id', $jobSeeker->id)->latest()->paginate(10);
 
 //        dd($applications);
-        return view('front.jobseeker.job.index',compact('applications','jobSeeker'));
+        return view('front.jobseeker.job.index', compact('applications', 'jobSeeker'));
 
 //        return view('')
 //        $applications = Application::jobs()->where(function ($query) use ($request) {
@@ -72,7 +72,7 @@ class JobApplicationController extends Controller
 //            'job' => 'required|exists:jobs,id',
 //            'jobseeker' => 'required|exists:job_seekers,id'
 //        ]);
-        if(auth()->guard('jobSeeker')->id() == null){
+        if (auth()->guard('jobSeeker')->id() == null) {
             return back();
         }
 
@@ -123,20 +123,14 @@ class JobApplicationController extends Controller
      * @param Application $application
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Application $application)
+    public function destroy($id = null)
     {
-        //
-        try {
-            $result = $application->delete();
-
-            if ($result) {
-                session()->flash('success', 'تم حذف الطلب بنجاح');
-            } else {
-                session()->flash('fail', 'خطأ في عملية حذف الطلب, الرجاء المحاولة مرة أخرى!');
-            }
-        } catch (\Exception $e) {
-            session()->flash('fail', $e->getMessage());
+        $application = Application::find($id);
+        if($application->job_seeker_id == auth()->guard('jobSeeker')->id()){
+            $application->delete();
+        }else{
+            return back()->with('fail', 'حذث خطا ما');
         }
-        return redirect()->route('dashboard.jobApplications.index');
+        return back()->with('success', 'تم الحذف بنجاح');
     }
 }

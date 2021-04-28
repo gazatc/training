@@ -29,6 +29,7 @@ Route::group(['prefix' => 'jobSeeker'], function () {
     Route::group(['prefix' => 'my-application', 'namespace' => 'FrontController'], function () {
         //job application
         Route::get('/jobs','JobApplicationController@index')->name('jobSeeker.application.job.index');
+        Route::get('/jobs/destroy/{id}','JobApplicationController@destroy')->name('jobSeeker.application.job.destroy');
 
         //train application
         Route::get('/trainings','TrainingApplicationController@index')->name('jobSeeker.application.training.index');
