@@ -25,6 +25,17 @@ Route::group(['prefix' => 'jobSeeker'], function () {
 
     Route::get('logout', 'Auth\JobSeekerLoginController@logout_jobSeeker')->name('jobSeeker.logout');
 
+
+    Route::group(['prefix' => 'my-application', 'namespace' => 'FrontController'], function () {
+        //job application
+        Route::get('/jobs','JobApplicationController@index')->name('jobSeeker.application.job.index');
+
+        //train application
+        Route::get('/trainings','TrainingApplicationController@index')->name('jobSeeker.application.training.index');
+
+    });
+
+
     Route::group(['prefix' => 'profile', 'namespace' => 'FrontController'], function () {
         Route::get('/', 'JobSeekerProfileController@index')->name('jobSeeker.profile.index');
         Route::get('/edit', 'JobSeekerProfileController@edit')->name('jobSeeker.profile.edit');
@@ -33,6 +44,7 @@ Route::group(['prefix' => 'jobSeeker'], function () {
         //upload CV
         Route::post('/upload_cv', 'JobSeekerProfileController@upload_cv')->name('jobSeeker.profile.upload_cv');
 
+        //jobSeeker education stuff
         Route::group(['prefix' => 'education'], function () {
             Route::get('/create', 'JobSeekerEductaionController@create')->name('jobSeeker.profile.education.create');
             Route::post('/store', 'JobSeekerEductaionController@store')->name('jobSeeker.profile.education.store');
@@ -41,6 +53,7 @@ Route::group(['prefix' => 'jobSeeker'], function () {
             Route::get('/destroy/{id}', 'JobSeekerEductaionController@destroy')->name('jobSeeker.profile.education.destroy');
         });
 
+        //jobSeeker experience stuff
         Route::group(['prefix' => 'experience'], function () {
             Route::get('/create', 'JobSeekerExperienceController@create')->name('jobSeeker.profile.experience.create');
             Route::post('/store', 'JobSeekerExperienceController@store')->name('jobSeeker.profile.experience.store');
@@ -49,6 +62,7 @@ Route::group(['prefix' => 'jobSeeker'], function () {
             Route::get('/destroy/{id}', 'JobSeekerExperienceController@destroy')->name('jobSeeker.profile.experience.destroy');
         });
 
+        //jobSeeker training stuff
         Route::group(['prefix' => 'training'], function () {
             Route::get('/create', 'JobSeekerTrainingController@create')->name('jobSeeker.profile.training.create');
             Route::post('/store', 'JobSeekerTrainingController@store')->name('jobSeeker.profile.training.store');
@@ -60,8 +74,10 @@ Route::group(['prefix' => 'jobSeeker'], function () {
     });
 });
 
+//employer
 Route::group(['prefix' => 'employer'], function () {
 
+//  employer auth
     Route::get('/login', 'Auth\EmployerLoginController@login_form')->name('employer.login_form');
     Route::post('/submit-login', 'Auth\EmployerLoginController@login')->name('employer.login');
     Route::get('/register', 'Auth\EmployerLoginController@register_form')->name('employer.register_form');
@@ -69,7 +85,7 @@ Route::group(['prefix' => 'employer'], function () {
     Route::get('/logout', 'Auth\EmployerLoginController@logout_employer')->name('employer.logout');
 
 
-//employer stuff
+//employer job
     Route::group(['prefix' => 'jobs', 'namespace' => 'FrontController'], function () {
 
         Route::get('/', 'JobController@index')->name('job.index');
@@ -79,6 +95,8 @@ Route::group(['prefix' => 'employer'], function () {
         Route::post('/update/{job}', 'JobController@update')->name('job.update');
         Route::get('/destroy/{job}', 'JobController@destroy')->name('job.destroy');
     });
+
+//employer training
     Route::group(['prefix' => 'training', 'namespace' => 'FrontController'], function () {
         Route::get('/', 'TrainingController@index')->name('training.index');
         Route::get('/create', 'TrainingController@create')->name('training.create');
@@ -89,13 +107,16 @@ Route::group(['prefix' => 'employer'], function () {
 
     });
 
+//employer profile
     Route::group(['prefix' => 'profile', 'namespace' => 'FrontController'], function () {
         Route::get('/', 'EmployerProfileController@index')->name('employer.profile.index');
         Route::get('/edit', 'EmployerProfileController@edit')->name('employer.profile.edit');
         Route::post('/update/{employer}', 'EmployerProfileController@update')->name('employer.profile.update');
     });
+
 });
 
+//home and other stuff
 Route::group(['namespace' => 'FrontController'], function () {
 
     Route::get('/', 'HomeController@jobs')->name('jobs');

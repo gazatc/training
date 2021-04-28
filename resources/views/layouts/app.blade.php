@@ -136,6 +136,13 @@
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                         <a href="{{route('jobSeeker.profile.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف
                             الشخصي</a>
+                        <a href="{{route('jobSeeker.application.job.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                           role="menuitem">
+                            طلبات الوظائف
+                        </a>
+                        <a href="{{route('jobSeeker.profile.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                           role="menuitem">
+                            طلبات التدريب  </a>
                         <a href="{{route('jobSeeker.logout')}}"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">تسجيل
                             الخروج</a>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Job;
 use App\JobSeeker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class JobApplicationController extends Controller
 {
@@ -16,23 +17,32 @@ class JobApplicationController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        //
-        $applications = Application::jobs()->where(function ($query) use ($request) {
-            $query->when($request->job, function ($q) use ($request) {
-                return $q->where('applicationable_id', $request->job)
-                    ->where('applicationable_type', 'App\Job');
-            });
-            $query->when($request->jobSeeker, function ($q) use ($request) {
-                return $q->where('job_seeker_id', $request->jobSeeker);
-            });
-        })->latest()->paginate(10);
+        $jobSeeker = auth()->guard('jobSeeker')->user();
 
-        $jobs = Job::all();
-        $jobSeekers = JobSeeker::verified()->get();
+//        $query = DB::table('applications')->where('job_seeker_id','=',$jobSeeker->id)->get();
 
-        return view('dashboard.jobApplications.index', compact('applications', 'jobs', 'jobSeekers'));
+        $applications = Application::jobs()->where('job_seeker_id',$jobSeeker->id)->latest()->paginate(10);
+
+//        dd($applications);
+        return view('front.jobseeker.job.index',compact('applications','jobSeeker'));
+
+//        return view('')
+//        $applications = Application::jobs()->where(function ($query) use ($request) {
+//            $query->when($request->job, function ($q) use ($request) {
+//                return $q->where('applicationable_id', $request->job)
+//                    ->where('applicationable_type', 'App\Job');
+//            });
+//            $query->when($request->jobSeeker, function ($q) use ($request) {
+//                return $q->where('job_seeker_id', $request->jobSeeker);
+//            });
+//        })->latest()->paginate(10);
+//
+//        $jobs = Job::all();
+//        $jobSeekers = JobSeeker::verified()->get();
+//
+//        return view('dashboard.jobApplications.index', compact('applications', 'jobs', 'jobSeekers'));
     }
 
     /**
