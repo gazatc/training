@@ -33,6 +33,7 @@ Route::group(['prefix' => 'jobSeeker'], function () {
 
         //train application
         Route::get('/trainings','TrainingApplicationController@index')->name('jobSeeker.application.training.index');
+        Route::get('/trainings/destroy/{id}','TrainingApplicationController@destroy')->name('jobSeeker.application.training.destroy');
 
     });
 
@@ -70,6 +71,12 @@ Route::group(['prefix' => 'jobSeeker'], function () {
             Route::get('/edit/{id}', 'JobSeekerTrainingController@edit')->name('jobSeeker.profile.training.edit');
             Route::post('/update/{id}', 'JobSeekerTrainingController@update')->name('jobSeeker.profile.training.update');
             Route::get('/destroy/{id}', 'JobSeekerTrainingController@destroy')->name('jobSeeker.profile.training.destroy');
+        });
+
+        //jobSeeker Verify
+        Route::group(['prefix' => 'verify'], function () {
+            Route::get('/create','JobSeekerProfileController@formVerify')->name('jobSeeker.verify.create');
+            Route::post('/store/{jobSeeker}','JobSeekerProfileController@storeVerify')->name('jobSeeker.verify.store');
         });
 
     });
@@ -115,6 +122,11 @@ Route::group(['prefix' => 'employer'], function () {
         Route::post('/update/{employer}', 'EmployerProfileController@update')->name('employer.profile.update');
     });
 
+    //employer Verify
+    Route::group(['prefix' => 'verify', 'namespace' => 'FrontController'], function () {
+        Route::get('/create','EmployerProfileController@formVerify')->name('employer.verify.create');
+        Route::post('/store/{employer}','EmployerProfileController@storeVerify')->name('employer.verify.store');
+    });
 });
 
 //home and other stuff
@@ -136,6 +148,9 @@ Route::group(['namespace' => 'FrontController'], function () {
     Route::post('/training/{training}', 'TrainingApplicationController@store')->name('training.apply');
     Route::post('/job/{job}/apply', 'JobApplicationController@store')->name('job.apply');
 
+    //inquire Job
+    Route::post('/job/inquire/store/{job}','JobInquireController@store')->name('job.inquire.store');
+    //inquire training
 });
 
 

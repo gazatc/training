@@ -86,7 +86,8 @@
                     <div
                         class=" origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                        <a href="{{route('employer.profile.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف
+                        <a href="{{route('employer.profile.index')}}"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف
                             الشخصي</a>
 
                         <a href="{{route('job.index')}}"
@@ -134,15 +135,18 @@
                     <div
                         class="origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                        <a href="{{route('jobSeeker.profile.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف
+                        <a href="{{route('jobSeeker.profile.index')}}"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف
                             الشخصي</a>
-                        <a href="{{route('jobSeeker.application.job.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        <a href="{{route('jobSeeker.application.job.index')}}"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                            role="menuitem">
                             طلبات الوظائف
                         </a>
-                        <a href="{{route('jobSeeker.profile.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        <a href="{{route('jobSeeker.application.training.index')}}"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                            role="menuitem">
-                            طلبات التدريب  </a>
+                            طلبات التدريب </a>
                         <a href="{{route('jobSeeker.logout')}}"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">تسجيل
                             الخروج</a>

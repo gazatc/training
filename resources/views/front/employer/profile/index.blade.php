@@ -60,6 +60,9 @@
                                 <hr>
                                 <a href="{{route('training.index')}}" class="flex rounded py-2 hover:bg-gray-200">
                                     <span class="mr-1 w-full text-right px-4">التدريب</span>
+                                </a> <hr>
+                                <a href="{{route('employer.verify.create')}}" class="flex rounded py-2 hover:bg-gray-200">
+                                    <span class="mr-1 w-full text-right px-4">طلبات توثيق الحساب</span>
                                 </a>
                             </div>
                         </div>

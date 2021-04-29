@@ -21,7 +21,6 @@
                                          @endif
                                          alt="">
                                     @if($jobSeeker->verified == 1)
-
                                         <svg
                                             class="text-green-500 fill-current w-6 h-6 absolute bottom-0 left-0 -ml-2 -mb-2"
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -40,15 +39,19 @@
 
                             <hr class="my-2">
                             <div class="text-base rounded-lg font-semibold bg-gray-100">
-                                <a href=""
-                                   class="flex rounded py-2 hover:bg-gray-200 border-r-4 border-blue-900 text-blue-900">
+                                <a href="{{route('jobSeeker.profile.index',$jobSeeker)}}"
+                                   class="flex rounded py-2 hover:bg-gray-200 ">
                                     <span class="mr-1 w-full text-right px-4">المعلومات الشخصية</span>
 
                                 </a>
                                 <hr>
-                                <a href="" class="flex rounded py-2 hover:bg-gray-200">
+                                <a href="#cv_file" class="flex rounded py-2 hover:bg-gray-200">
                                     <span class="mr-1 w-full text-right px-4">السيرة الذاتية</span>
-
+                                </a>
+                                <hr>
+                                <a href="{{route('jobSeeker.verify.create')}}"
+                                   class="flex rounded border-r-4 text-blue-900 border-blue-900 py-2 hover:bg-gray-200">
+                                    <span class="mr-1 w-full text-right px-4">طلبات توثيق الحساب</span>
                                 </a>
                             </div>
                         </div>
@@ -58,6 +61,13 @@
 
                 {{--Start Job-seeker Description --}}
                 <div class="w-full lg:w-3/4">
+                    @if(Session::has('success'))
+                        <div
+                            class="bg-blue-100 border-t border-b mt-6 lg:mt-0 lg:mr-8  border-blue-500 text-blue-700 px-4 py-3"
+                            role="alert">
+                            <p class="font-bold">{{Session::get('success')}}</p>
+                        </div>
+                    @endif
                     {{--Start Job Description--}}
                     <div class="shadow-lg bg-white rounded-lg border border-gray-300 mt-6 lg:mt-0 lg:mr-8">
                         {{--Start Job Description--}}
@@ -65,87 +75,98 @@
                             <div class="rounded-t-lg text-gray-800 font-bold uppercase tracking-wide
                         text-lg font-semibold mb-2 py-2 px-6 bg-gray-100 flex justify-between items-center">
                                 <h2 class="">
-                                    إضافة سلسلة خبرة
+                                    المعلومات الشخصية
                                 </h2>
-
                             </div>
-                            <form action="{{route('jobSeeker.profile.experience.store')}}" method="post">
-                                @csrf
+                        </div>
 
-                                <div class="grid md:grid-cols-2 gap-5 ">
-                                    <div class="py-2 px-6 ">
-                                        <div class="mt-2 text-justify">
-                                            <div class="block my-2">
-                                                <label for="">عنوان </label>
-                                            </div>
-                                            <input name="name"
-                                                   class="border border-gray-300 w-full  text-sm rounded-sm px-3 py-2 focus:outline-none focus:border-blue-900"
-                                                   placeholder="عنوان" value=""
-                                                   type="text">
-                                            @error('name')
-                                            <span
-                                                style="color: red; margin-right: 10px">{{ $errors->first('name') }}</span>
-                                            @enderror
+                        <div class="py-2 px-6 mb-2">
+                            <form action="{{route('jobSeeker.verify.store',$jobSeeker)}}" method="post"
+                                  enctype="multipart/form-data">
+                                @csrf
+                                <div>
+
+                                    <div class="mt-2 text-justify">
+                                        <h2 class="text-base font-semibold border-r-4 border-blue-900 pr-2">البيانات
+                                            الرئيسية:</h2>
+
+                                        <div class="block my-2">
+                                            <label for="">رقم الهوية</label>
                                         </div>
+                                        <input name="PID"
+                                               class="border border-gray-300 w-full  text-sm rounded-sm px-3 py-2 focus:outline-none focus:border-blue-900"
+                                               placeholder="رقم الهوية" required value="{{@$jobSeeker->verify->PID}}"
+                                               type="number">
+                                        @error('username')
+                                        <span
+                                            style="color: red; margin-right: 10px">{{ $errors->first('username') }}</span>
+                                        @enderror
                                     </div>
-                                    <div class="py-2 px-6 ">
+                                </div>
+
+                                <hr class="my-4">
+                                <div class="">
+                                    <div>
                                         <div class="mt-2 text-justify">
+                                            <h2 class="text-base font-semibold border-r-4 border-blue-900 pr-2">الوثائق
+                                                المطلوية:</h2>
+
                                             <div class="block my-2">
-                                                <label for="">اسم الشركة/المؤسسة</label>
+                                                <label for="">صورة الهوية الشخصية</label>
                                             </div>
-                                            <input name="company"
+                                            <input name="PID_image"
                                                    class="border border-gray-300 w-full  text-sm rounded-sm px-3 py-2 focus:outline-none focus:border-blue-900"
-                                                   placeholder="اسم الشركة/المؤسسة" value=""
-                                                   type="text">
-                                            @error('company')
+                                                   placeholder="رقم الهوية" required value=""
+                                                   type="file">
+                                            @error('PID_image')
                                             <span
-                                                style="color: red; margin-right: 10px">{{ $errors->first('company') }}</span>
+                                                style="color: red; margin-right: 10px">{{ $errors->first('PID_image') }}</span>
                                             @enderror
+                                            @if(!empty($jobSeeker->verify->PID_image))
+                                                <div class="py-2">
+                                                    <span>الهوية السابقة: </span>
+                                                    <a href="{{$jobSeeker->verify->PID_image}}"
+                                                       target="_blank" class="text-blue-500 hover:text-blue-900">اضغط
+                                                        هنا</a>
+                                                </div>
+                                            @endif
                                         </div>
-                                    </div>
-                                    <div class="py-2 px-6">
                                         <div class="mt-2 text-justify">
+
                                             <div class="block my-2">
-                                                <label for="">من</label>
+                                                <label for="">صورة للشخص مع الهوية الشخصية</label>
                                             </div>
-                                            <input name="from"
+                                            <input name="PID_user_image"
                                                    class="border border-gray-300 w-full  text-sm rounded-sm px-3 py-2 focus:outline-none focus:border-blue-900"
-                                                   placeholder="من" value=""
-                                                   type="date">
-                                            @error('from')
+                                                   placeholder="صورة للشخص مع الهوية الشخصية" required value=""
+                                                   type="file">
+                                            @error('PID_user_image')
                                             <span
-                                                style="color: red; margin-right: 10px">{{ $errors->first('from') }}</span>
+                                                style="color: red; margin-right: 10px">{{ $errors->first('PID_user_image') }}</span>
                                             @enderror
-                                        </div>
-                                    </div>
-                                    <div class="py-2 px-6 ">
-                                        <div class="mt-2 text-justify">
-                                            <div class="block my-2">
-                                                <label for="">إلى</label>
-                                            </div>
-                                            <input name="to"
-                                                   class="border border-gray-300 w-full   text-sm rounded-sm px-3 py-2 focus:outline-none focus:border-blue-900"
-                                                   placeholder="الى" value=""
-                                                   type="date">
-                                            @error('to')
-                                            <span
-                                                style="color: red; margin-right: 10px">{{ $errors->first('to') }}</span>
-                                            @enderror
+                                            @if(!empty($jobSeeker->verify->PID_user_image))
+                                                <div class="py-2">
+                                                    <span>صورة للشخص مع الهوية الشخصية السابقة: </span>
+                                                    <a href="{{$jobSeeker->verify->PID_user_image}}"
+                                                       target="_blank" class="text-blue-500 hover:text-blue-900">اضغط
+                                                        هنا</a>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                                <div class="text-center my-5">
+                                <div class="text-center mt-5">
                                     <button type="submit" class="bg-blue-900 text-sm text-white font-semibold rounded py-2 w-1/2 ml-2 hover:bg-white
                      hover:text-blue-900 border hover:border-white">
                                         حفظ
                                     </button>
                                 </div>
+
                             </form>
 
                         </div>
-                        {{--End Single Description--}}
                     </div>
-                    {{--End Single Description--}}
+
 
                 </div>
                 {{--End Job-seeker Description --}}

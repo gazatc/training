@@ -12,29 +12,11 @@ class TrainingApplicationController extends Controller
 {
 
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index(Request $request)
+    public function index()
     {
-        //
-        $applications = Application::trainings()->where(function ($query) use ($request) {
-            $query->when($request->training, function ($q) use ($request) {
-                return $q->where('applicationable_id', $request->job)
-                    ->where('applicationable_type', 'App\Training');
-            });
-            $query->when($request->jobSeeker, function ($q) use ($request) {
-                return $q->where('job_seeker_id', $request->jobSeeker);
-            });
-        })->latest()->paginate(10);
-
-        $trainings = Training::all();
-        $jobSeekers = JobSeeker::verified()->get();
-
-        return view('dashboard.trainingApplications.index', compact('applications', 'trainings', 'jobSeekers'));
+        $jobSeeker = auth()->guard('jobSeeker')->user();
+        $applications = Application::trainings()->where('job_seeker_id', $jobSeeker->id)->latest()->get();
+        return view('front.jobseeker.training.index', compact('applications', 'jobSeeker'));
     }
 
     /**
@@ -60,7 +42,7 @@ class TrainingApplicationController extends Controller
     public function store(Request $request, Training $training)
     {
 
-        if(auth()->guard('jobSeeker')->id() == null){
+        if (auth()->guard('jobSeeker')->id() == null) {
             return back();
         }
         $application = new Application;
@@ -104,26 +86,14 @@ class TrainingApplicationController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Application $application
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Application $application)
+    public function destroy($id = null)
     {
-        //
-        try {
-            $result = $application->delete();
-
-            if ($result) {
-                session()->flash('success', 'تم حذف الطلب بنجاح');
-            } else {
-                session()->flash('fail', 'خطأ في عملية حذف الطلب, الرجاء المحاولة مرة أخرى!');
-            }
-        } catch (\Exception $e) {
-            session()->flash('fail', $e->getMessage());
+        $application = Application::find($id);
+        if ($application->job_seeker_id == auth()->guard('jobSeeker')->id()) {
+            $application->delete();
+        } else {
+            return back()->with('fail', 'حذث خطا ما');
         }
-        return redirect()->route('dashboard.trainingApplications.index');
+        return back()->with('success', 'تم الحذف بنجاح');
     }
 }

@@ -22,6 +22,8 @@
                                          @endif
                                          alt=""
                                     >
+                                    @if($employer->verified == 1)
+
                                     <svg
                                         class="text-green-500 fill-current w-6 h-6 absolute bottom-0 left-0 -ml-2 -mb-2"
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -30,6 +32,7 @@
                                               clip-rule="evenodd"></path>
                                         <title>حساب موثق</title>
                                     </svg>
+                                        @endif
                                 </div>
                                 <div class="text-xl mt-2">
                                     <div class="flex items-center justify-center">

@@ -20,14 +20,16 @@
                                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAMFBMVEXp7vG6vsG3u77s8fTCxsnn7O/f5OfFyczP09bM0dO8wMPk6ezY3eDd4uXR1tnJzdBvAX/cAAACVElEQVR4nO3b23KDIBRA0ShGU0n0//+2KmO94gWZ8Zxmr7fmwWEHJsJUHw8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwO1MHHdn+L3rIoK6eshsNJ8kTaJI07fERPOO1Nc1vgQm2oiBTWJ+d8+CqV1heplLzMRNonED+4mg7L6p591FC+133/xCRNCtd3nL9BlxWP++MOaXFdEXFjZ7r8D9l45C8y6aG0cWtP/SUGhs2d8dA/ZfGgrzYX+TVqcTNRRO9l+fS5eSYzQs85psUcuzk6igcLoHPz2J8gvzWaH/JLS+95RfOD8o1p5CU5R7l5LkfKEp0mQ1UX7hsVXqDpRrifILD/3S9CfmlUQFhQfuFu0STTyJ8gsP3PH7GVxN1FC4t2sbBy4TNRTu7LyHJbqaqKFw+/Q0ncFloo7CjRPwMnCWqKXQZ75El4nKC9dmcJaou9AXOE5UXbi+RGeJygrz8Uf+GewSn9uXuplnWDZJ7d8f24F/s6iq0LYf9olbS3Q8i5oKrRu4S9ybwaQ/aCkqtP3I28QDgeoK7TBya/aXqL5COx67PTCD2grtdOwH+pQV2r0a7YVBgZoKwwIVFQYG6ikMDVRTGByopjD8ATcKb0UhhRTe77sKs2DV7FKSjId18TUEBYVyLhUThWfILHTDqmI85/2RWWjcE/bhP6OD7maT3h20MHsA47JC3PsW0wcwLhv9t0OOPOIkCn21y2bXXwlyylxiYMPk1SuCSmpfK8bNQvIrpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwNX4BCbAju9/X67UAAAAASUVORK5CYII="
                                          @endif
                                          alt="">
-                                    <svg
-                                        class="text-green-500 fill-current w-6 h-6 absolute bottom-0 left-0 -ml-2 -mb-2"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                              d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                              clip-rule="evenodd"></path>
-                                        <title>حساب موثق</title>
-                                    </svg>
+                                    @if($jobSeeker->verified == 1)
+                                        <svg
+                                            class="text-green-500 fill-current w-6 h-6 absolute bottom-0 left-0 -ml-2 -mb-2"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                  d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                  clip-rule="evenodd"></path>
+                                            <title>حساب موثق</title>
+                                        </svg>
+                                    @endif
                                 </div>
                                 <span
                                     class="flex justify-center text-blue-500 mt-2 text-xl mr-1">{{$jobSeeker->name}}</span>
@@ -43,9 +45,13 @@
 
                                 </a>
                                 <hr>
-                                <a href="" class="flex rounded py-2 hover:bg-gray-200">
+                                <a href="#cv_file" class="flex rounded py-2 hover:bg-gray-200">
                                     <span class="mr-1 w-full text-right px-4">السيرة الذاتية</span>
-
+                                </a>
+                                <hr>
+                                <a href="{{route('jobSeeker.verify.create')}}"
+                                   class="flex rounded  py-2 hover:bg-gray-200">
+                                    <span class="mr-1 w-full text-right px-4">طلبات توثيق الحساب</span>
                                 </a>
                             </div>
                         </div>
@@ -72,9 +78,13 @@
                                     المعلومات الشخصية
                                 </h2>
                                 <a href="{{route('jobSeeker.profile.edit')}}" class=" py-2  hover:test-blue-500 ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-blue-500" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                        <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-blue-500"
+                                         viewBox="0 0 20 20" fill="currentColor">
+                                        <path
+                                            d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                              clip-rule="evenodd"/>
                                     </svg>
                                 </a>
                             </div>
@@ -205,7 +215,8 @@
                                                     <span>{{$edu->institution}}</span>
                                                     <span class="flex gap-5">
                                                   <a href="{{route('jobSeeker.profile.education.edit',$edu->id)}}">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 opacity-50 hover:opacity-100"
+                                                      <svg xmlns="http://www.w3.org/2000/svg"
+                                                           class="h-6 w-6 text-blue-500 opacity-50 hover:opacity-100"
                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                               stroke-width="2"
@@ -255,7 +266,8 @@
                                                         <span>{{$exper->name}}</span>
                                                         <span class="flex gap-5">
                                                   <a href="{{route('jobSeeker.profile.experience.edit',$exper->id)}}">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 opacity-50 hover:opacity-100"
+                                                      <svg xmlns="http://www.w3.org/2000/svg"
+                                                           class="h-6 w-6 text-blue-500 opacity-50 hover:opacity-100"
                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                               stroke-width="2"
@@ -308,7 +320,8 @@
                                                     <span>{{$train->name}}</span>
                                                     <span class="flex gap-5">
                                                   <a href="{{route('jobSeeker.profile.training.edit',$train->id)}}">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 opacity-50 hover:opacity-100"
+                                                      <svg xmlns="http://www.w3.org/2000/svg"
+                                                           class="h-6 w-6 text-blue-500 opacity-50 hover:opacity-100"
                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                               stroke-width="2"
@@ -338,7 +351,7 @@
 
 
                                 <hr class="my-2">
-                                <h2 class="text-lg font-semibold border-r-4 mt-6 border-blue-900 pr-2">
+                                <h2 class="text-lg font-semibold border-r-4 mt-6 border-blue-900 pr-2" id="cv_file">
                                     ملف السيرة الذاتية
                                     :</h2>
                                 @if(!empty($jobSeeker->information->CVFile))
@@ -367,17 +380,19 @@
                                 @endif
 
 
-                                <form action="{{route('jobSeeker.profile.upload_cv',$jobSeeker)}}" class="text-center flex items-center justify-center gap-20" method="post" enctype="multipart/form-data">
+                                <form action="{{route('jobSeeker.profile.upload_cv',$jobSeeker)}}"
+                                      class="text-center flex items-center justify-center gap-20" method="post"
+                                      enctype="multipart/form-data">
                                     @csrf
                                     <div class="my-5">
-                                        <input type="file"  name="CVFile"
+                                        <input type="file" name="CVFile"
                                                class="border border-gray-300   text-sm rounded-sm px-3 py-2 focus:outline-none focus:border-blue-900">
                                     </div>
                                     <div>
-                                    <button type="submit" class="bg-blue-900 text-sm text-white font-semibold rounded py-2 px-10 ml-2 hover:bg-white
+                                        <button type="submit" class="bg-blue-900 text-sm text-white font-semibold rounded py-2 px-10 ml-2 hover:bg-white
                                         hover:text-blue-900 border hover:border-white">
-                                        حفظ
-                                    </button>
+                                            حفظ
+                                        </button>
                                     </div>
                                 </form>
                             </div>

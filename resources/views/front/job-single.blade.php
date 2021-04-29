@@ -176,7 +176,7 @@
                                     استفسار عن الوظيفة
                                 </h2>
                                 <div class="py-2 px-6 text-justify">
-                                    <form action="" class="text-center">
+                                    <form action="{{route('job.inquire.store',$job)}}" method="post" class="text-center">
                                         @csrf
                                         <label for="text">
                                     <textarea name="message" id="" cols="50"

@@ -127,4 +127,25 @@ class JobSeekerProfileController extends Controller
         return back()->with('success','تم رفع ملف السيرة الذاتية بنجاح');
     }
 
+    public function formVerify ()
+    {
+        $jobSeeker = auth()->guard('jobSeeker')->user();
+        return view('front.jobseeker.verify.create',compact('jobSeeker'));
+    }
+
+    public function storeVerify(Request $request,JobSeeker $jobSeeker)
+    {
+        $attributes = $request->validate([
+            'PID' => 'required|unique:job_seeker_verifies',
+            'PID_image' => 'required|file',
+            'PID_user_image' => 'required|file',
+        ]);
+            $attributes['PID_image'] = $request->PID_image->store('jobseeker_verify');
+            $attributes['PID_user_image'] = $request->PID_user_image->store('jobseeker_verify');
+            $jobSeeker->verify()->updateOrCreate($attributes);
+
+            $jobSeeker->update(['verified' => 0]);
+        return redirect()->route('jobSeeker.profile.index')->with('success','تم اضافة الوثائق الخاصة بتوثيق الباحث عن عمل بنجاح');
+    }
+
 }

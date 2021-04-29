@@ -20,29 +20,8 @@ class JobApplicationController extends Controller
     public function index()
     {
         $jobSeeker = auth()->guard('jobSeeker')->user();
-
-//        $query = DB::table('applications')->where('job_seeker_id','=',$jobSeeker->id)->get();
-
-        $applications = Application::jobs()->where('job_seeker_id', $jobSeeker->id)->latest()->paginate(10);
-
-//        dd($applications);
+        $applications = Application::jobs()->where('job_seeker_id', $jobSeeker->id)->latest()->get();
         return view('front.jobseeker.job.index', compact('applications', 'jobSeeker'));
-
-//        return view('')
-//        $applications = Application::jobs()->where(function ($query) use ($request) {
-//            $query->when($request->job, function ($q) use ($request) {
-//                return $q->where('applicationable_id', $request->job)
-//                    ->where('applicationable_type', 'App\Job');
-//            });
-//            $query->when($request->jobSeeker, function ($q) use ($request) {
-//                return $q->where('job_seeker_id', $request->jobSeeker);
-//            });
-//        })->latest()->paginate(10);
-//
-//        $jobs = Job::all();
-//        $jobSeekers = JobSeeker::verified()->get();
-//
-//        return view('dashboard.jobApplications.index', compact('applications', 'jobs', 'jobSeekers'));
     }
 
     /**
@@ -126,9 +105,9 @@ class JobApplicationController extends Controller
     public function destroy($id = null)
     {
         $application = Application::find($id);
-        if($application->job_seeker_id == auth()->guard('jobSeeker')->id()){
+        if ($application->job_seeker_id == auth()->guard('jobSeeker')->id()) {
             $application->delete();
-        }else{
+        } else {
             return back()->with('fail', 'حذث خطا ما');
         }
         return back()->with('success', 'تم الحذف بنجاح');

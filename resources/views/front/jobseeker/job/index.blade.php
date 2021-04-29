@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div>
-        <header class="text-center font-semibold">
+        <header class="text-center font-semibold mb-5">
             <h2>جميع طلبات الوظائف</h2>
         </header>
         @if(Session::has('success'))
@@ -56,14 +56,17 @@
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 text-center">
-                        @foreach($applications as $application)
+                        @forelse($applications as $application)
 
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{$loop->index + 1 }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$application->applicationable->title}}
+                                    <a href="{{route('job.show',$application->applicationable->id)}}"
+                                       class="text-blue-500 font-semibold hover:text-blue-900">
+                                        {{$application->applicationable->title}}
+                                    </a>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{$application->applicationable->getJobTypeTextAttribute()}}
@@ -75,22 +78,32 @@
                                     {{ $application->applicationable->salary_type == 2 ? ' $ / الساعة' : ' $' }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap
-    @if($application->applicationable->last_date >= today()->toDateString())text-green-500 @else text-red-500 @endif
+                                  @if($application->applicationable->last_date >= today()->toDateString())
+                                    text-green-500 @else text-red-500 @endif
                                     ">
                                     {{ $application->applicationable->last_date }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap
                                     ">
-                                    {{ $application->applicationable->created_at }}
+                                    {{ date('Y/m/d H:m a', strtotime($application->applicationable->created_at))}}
                                 </td>
                                 <td class=" py-4 whitespace-nowrap  flex justify-center gap-3 text-sm font-medium">
-                                    <a href="{{route('jobSeeker.application.job.destroy',$application->id)}}" class="text-indigo-600 hover:text-indigo-900">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                        </svg></a>
+                                    <a href="{{route('jobSeeker.application.job.destroy',$application->id)}}"
+                                       class="text-indigo-600 hover:text-indigo-900">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </a>
                                 </td>
                             </tr>
-                        @endforeach
+
+                        @empty
+                            <tr>
+                                <td colspan="7">لا يوجد</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>

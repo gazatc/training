@@ -60,9 +60,10 @@
                                 <h3 class="inline font-semibold">آخر موعد للتقديم : </h3><span
                                     class="text-sm">{{$training->last_date}}</span>
                                 @if(Session::has('success'))
-                                <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
-                                    <p class="font-bold">{{Session::get('success')}}</p>
-                                </div>
+                                    <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3"
+                                         role="alert">
+                                        <p class="font-bold">{{Session::get('success')}}</p>
+                                    </div>
                                 @endif
                                 @if($training->last_date >= today()->toDateString())
                                     <form action="{{route('training.apply',$training)}}" method="post">

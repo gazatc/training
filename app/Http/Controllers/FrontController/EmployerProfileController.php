@@ -99,4 +99,27 @@ class EmployerProfileController extends Controller
             }
         return redirect()->route('employer.profile.index')->with('success','تم تعديل البيانات بنجاح');
     }
+
+    public function formVerify()
+    {
+        $employer = auth()->guard('employer')->user();
+        return view('front.employer.verify.create',compact('employer'));
+    }
+
+    public function storeVerify(Request $request ,Employer $employer)
+    {
+        $attributes = $request->validate([
+            'PID' => 'required|unique:employer_verifies',
+            'PID_image' => 'required|file',
+            'PID_user_image' => 'required|file',
+            'document' => 'required|file',
+        ]);
+            $attributes['PID_image'] = $request->PID_image->store('employer_verify');
+            $attributes['PID_user_image'] = $request->PID_user_image->store('employer_verify');
+            $attributes['document'] = $request->document->store('employer_verify');
+            $employer->verify()->updateOrCreate($attributes);
+
+        $employer->update(['verified' => 0]);
+        return redirect()->route('employer.profile.index')->with('success', 'تم رفع البيانات بنجاح');
+    }
 }
