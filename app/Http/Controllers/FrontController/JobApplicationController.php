@@ -52,7 +52,7 @@ class JobApplicationController extends Controller
 //            'jobseeker' => 'required|exists:job_seekers,id'
 //        ]);
         if (auth()->guard('jobSeeker')->id() == null) {
-            return back();
+            return redirect()->route('jobSeeker.login_form');
         }
 
         $application = new Application;

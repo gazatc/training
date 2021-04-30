@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontController;
 
+use App\Application;
 use App\Category;
 use App\Employer;
 use App\Http\Controllers\Controller;
@@ -112,6 +113,14 @@ class JobController extends Controller
     {
         $job->delete();
         return back()->with('delete', 'تم الحذف بنجاح');
+    }
+
+
+
+    public function attempts (Job $job)
+    {
+        $applications  = Application::where('applicationable_id',$job->id)->where('applicationable_type',$job->getMorphClass())->get();
+      return view('front.employer.job.attempt',compact('applications'));
     }
 }
 

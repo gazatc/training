@@ -15,45 +15,8 @@
                         <form action="" class="px-2 py-2">
                             <input
                                 class="border border-gray-300 w-full text-sm rounded-sm px-3 py-1.5 focus:outline-none focus:border-blue-900"
-                                placeholder="إبحث عن وظيفة..."
+                                placeholder="إبحث عن تدريب..."
                                 type="text">
-
-                            <hr class="my-2">
-
-                            <h2 class="text-blue-900 border-r-4 pr-1 border-blue-900 uppercase text-right text-base tracking-wide font-semibold my-2">
-                                الفئة المستهدفة:
-                            </h2>
-                            <div class="flex flex-col">
-
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span
-                                        class="mr-2 text-sm text-gray-700">اشخاص</span>
-                                </label>
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span
-                                        class="mr-2 text-sm text-gray-700">فرق</span>
-                                </label>
-                            </div>
-                            <hr class="my-2">
-
-                            <h2 class="text-blue-900 border-r-4 pr-1 border-blue-900 uppercase text-right text-base tracking-wide font-semibold my-2">
-                                النوع:
-                            </h2>
-                            <div class="flex flex-col">
-                                <label class="inline-flex items-center ml-4">
-                                    <input type="checkbox" class="form-checkbox h-3.5 w-3.5 bg-red-500" checked><span
-                                        class="mr-2 text-sm text-gray-700">دوام كامل</span>
-                                </label>
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span
-                                        class="mr-2 text-sm text-gray-700">دوام جزئي</span>
-                                </label>
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span
-                                        class="mr-2 text-sm text-gray-700">عن بعد</span>
-                                </label>
-                            </div>
-
                             <hr class="my-2">
 
                             <h2 class="text-blue-900 border-r-4 pr-1 border-blue-900 uppercase text-right text-base tracking-wide font-semibold my-2">
@@ -181,6 +144,7 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-center mt-4 lg:mt-0">
+                                    @if($train->hasAttemptToThisTraining(auth()->guard('jobSeeker')->user()))
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-900 fill-current"
                                          viewBox="0 0 60 60">
                                         <path
@@ -189,6 +153,7 @@
                                             points="25.608 36.577 19.116 30.086 17.702 31.5 25.608 39.405 42.298 22.715 40.884 21.301"></polygon>
                                     </svg>
                                     <span class="text-sm text-green-900 font-semibold">تم التقدم للتدريب</span>
+                                    @endif
                                 </div>
                                 <form action="{{route('training.show',$train)}}">
                                     @csrf

@@ -69,9 +69,28 @@ class Job extends Model
         }
     }
 
-    public function hasAttemptToThisJob(JobSeeker $jobSeeker)
+    public function hasAttemptToThisJob(JobSeeker $jobSeeker = null)
     {
-        $result = $this->applications()->where('job_seeker_id', $jobSeeker->id)->exists();
+        $result = $this->applications()->where('job_seeker_id', @$jobSeeker->id)->exists();
         return $result;
     }
+
+    public function numberOFInquire(JobSeeker $jobSeeker)
+    {
+        $count = Inquire::where('job_seeker_id',$jobSeeker->id)->where('inquirable_id',$this->id)->where('inquirable_type',$this->getMorphClass())->count();
+        return $count ;
+    }
+
+    public function numberOfAttemptsToThisJob()
+    {
+        $count = Application::where('applicationable_id',$this->id)->where('applicationable_type',$this->getMorphClass())->count();
+        return $count;
+    }
+
+    public function numberOFInquireToThisJob()
+    {
+        $count = Inquire::where('inquirable_id',$this->id)->where('inquirable_type',$this->getMorphClass())->count();
+        return $count;
+    }
+
 }

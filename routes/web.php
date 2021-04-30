@@ -28,12 +28,12 @@ Route::group(['prefix' => 'jobSeeker'], function () {
 
     Route::group(['prefix' => 'my-application', 'namespace' => 'FrontController'], function () {
         //job application
-        Route::get('/jobs','JobApplicationController@index')->name('jobSeeker.application.job.index');
-        Route::get('/jobs/destroy/{id}','JobApplicationController@destroy')->name('jobSeeker.application.job.destroy');
+        Route::get('/jobs', 'JobApplicationController@index')->name('jobSeeker.application.job.index');
+        Route::get('/jobs/destroy/{id}', 'JobApplicationController@destroy')->name('jobSeeker.application.job.destroy');
 
         //train application
-        Route::get('/trainings','TrainingApplicationController@index')->name('jobSeeker.application.training.index');
-        Route::get('/trainings/destroy/{id}','TrainingApplicationController@destroy')->name('jobSeeker.application.training.destroy');
+        Route::get('/trainings', 'TrainingApplicationController@index')->name('jobSeeker.application.training.index');
+        Route::get('/trainings/destroy/{id}', 'TrainingApplicationController@destroy')->name('jobSeeker.application.training.destroy');
 
     });
 
@@ -75,10 +75,16 @@ Route::group(['prefix' => 'jobSeeker'], function () {
 
         //jobSeeker Verify
         Route::group(['prefix' => 'verify'], function () {
-            Route::get('/create','JobSeekerProfileController@formVerify')->name('jobSeeker.verify.create');
-            Route::post('/store/{jobSeeker}','JobSeekerProfileController@storeVerify')->name('jobSeeker.verify.store');
+            Route::get('/create', 'JobSeekerProfileController@formVerify')->name('jobSeeker.verify.create');
+            Route::post('/store/{jobSeeker}', 'JobSeekerProfileController@storeVerify')->name('jobSeeker.verify.store');
         });
 
+        //inquire application
+        Route::group(['prefix' => 'inquire'], function () {
+            Route::get('/training/{training}','TrainingInquireController@show')->name('jobSeeker.inquire.training.show');
+            Route::get('/job/{job}','JobInquireController@show')->name('jobSeeker.inquire.job.show');
+
+        });
     });
 });
 
@@ -102,6 +108,14 @@ Route::group(['prefix' => 'employer'], function () {
         Route::get('/edit/{job}', 'JobController@edit')->name('job.edit');
         Route::post('/update/{job}', 'JobController@update')->name('job.update');
         Route::get('/destroy/{job}', 'JobController@destroy')->name('job.destroy');
+
+        //attempt people
+        Route::get('/attempts/{job}','JobController@attempts')->name('job.attempts');
+
+        //inquire job
+        Route::get('inquires/{job}','JobInquireController@inquire_to_this_job')->name('job.inquire_to_this_job');
+        Route::get('inquires/{inquire}/reply','JobInquireController@reply_to_this_inquire')->name('job.reply_to_this_inquire');
+        Route::post('inquires/{inquire}/submit-reply','JobInquireController@submit_reply_to_this_inquire')->name('job.submit_reply_to_this_inquire');
     });
 
 //employer training
@@ -112,6 +126,14 @@ Route::group(['prefix' => 'employer'], function () {
         Route::get('/edit/{training}', 'TrainingController@edit')->name('training.edit');
         Route::post('/update/{training}', 'TrainingController@update')->name('training.update');
         Route::get('/destroy/{training}', 'TrainingController@destroy')->name('training.destroy');
+
+        //attempt people
+        Route::get('/attempts/{training}','TrainingController@attempts')->name('training.attempts');
+
+        //inquire job
+        Route::get('inquires/{training}','TrainingInquireController@inquire_to_this_training')->name('training.inquire_to_this_training');
+        Route::get('inquires/{inquire}/reply','TrainingInquireController@reply_to_this_inquire')->name('training.reply_to_this_inquire');
+        Route::post('inquires/{inquire}/submit-reply','TrainingInquireController@submit_reply_to_this_inquire')->name('training.submit_reply_to_this_inquire');
 
     });
 
@@ -124,8 +146,8 @@ Route::group(['prefix' => 'employer'], function () {
 
     //employer Verify
     Route::group(['prefix' => 'verify', 'namespace' => 'FrontController'], function () {
-        Route::get('/create','EmployerProfileController@formVerify')->name('employer.verify.create');
-        Route::post('/store/{employer}','EmployerProfileController@storeVerify')->name('employer.verify.store');
+        Route::get('/create', 'EmployerProfileController@formVerify')->name('employer.verify.create');
+        Route::post('/store/{employer}', 'EmployerProfileController@storeVerify')->name('employer.verify.store');
     });
 });
 
@@ -144,13 +166,20 @@ Route::group(['namespace' => 'FrontController'], function () {
     Route::get('/training/{training}', 'TrainingController@show')->name('training.show');
 
 
-//attempt to train
+    //attempt to train
     Route::post('/training/{training}', 'TrainingApplicationController@store')->name('training.apply');
+
+    //attempt to job
     Route::post('/job/{job}/apply', 'JobApplicationController@store')->name('job.apply');
 
+
     //inquire Job
-    Route::post('/job/inquire/store/{job}','JobInquireController@store')->name('job.inquire.store');
+    Route::post('/job/inquire/store/{job}', 'JobInquireController@store')->name('job.inquire.store');
+
     //inquire training
+    Route::post('/training/inquire/store/{training}', 'TrainingInquireController@store')->name('training.inquire.store');
+
+
 });
 
 

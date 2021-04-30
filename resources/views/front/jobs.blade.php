@@ -81,57 +81,6 @@
                                     <option value="">الإدارة والأعمال</option>
                                     <option value="">مجالات متنوع</option>
                                 </select>
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5" checked><span class="mr-2 text-sm text-gray-700">العلوم الانسانية</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">التسويق والمبيعات</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">العلاقات العامة والاتصال</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">الصحافة والاعلام</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">العمليات والدعم اللوجستي</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">القانون والمحاماة</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">تكنولوجيا المعلومات</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">الفندقة والسياحة</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">الطب والتمريض والصحة العامة</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">تصميم وجرافيك</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">اللغات والترجمة</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">المحاسبة والعلوم المالية</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">الهندسة</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">التعليم والتدريب</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">الثقافة والفنون</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">الإدارة والأعمال</span>--}}
-                                {{--</label>--}}
-                                {{--<label class="inline-flex items-center">--}}
-                                {{--<input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span class="mr-2 text-sm text-gray-700">مجالات متنوعة</span>--}}
-                                {{--</label>--}}
                             </div>
 
                             <hr class="my-2">
@@ -241,18 +190,19 @@
                                     </div>
                                 </div>
 
-                                {{--                            @if($job->hasAttemptToThisJob(@auth()->guard('jobSeeker')->user()))--}}
-                                <div class="flex items-center justify-center mt-4 lg:mt-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-900 fill-current"
-                                         viewBox="0 0 60 60">
-                                        <path
-                                            d="M30,6C16.7666016,6,6,16.7666016,6,30s10.7666016,24,24,24s24-10.7666016,24-24S43.2333984,6,30,6z M30,52 C17.8691406,52,8,42.1308594,8,30S17.8691406,8,30,8s22,9.8691406,22,22S42.1308594,52,30,52z"></path>
-                                        <polygon
-                                            points="25.608 36.577 19.116 30.086 17.702 31.5 25.608 39.405 42.298 22.715 40.884 21.301"></polygon>
-                                    </svg>
-                                    <span class="text-sm text-green-900 font-semibold">تم التقدم للوظيفة</span>
-                                </div>
-                                {{--                            @endif--}}
+                                @if($job->hasAttemptToThisJob(@auth()->guard('jobSeeker')->user()))
+                                    <div class="flex items-center justify-center mt-4 lg:mt-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             class="w-4 h-4 text-green-900 fill-current"
+                                             viewBox="0 0 60 60">
+                                            <path
+                                                d="M30,6C16.7666016,6,6,16.7666016,6,30s10.7666016,24,24,24s24-10.7666016,24-24S43.2333984,6,30,6z M30,52 C17.8691406,52,8,42.1308594,8,30S17.8691406,8,30,8s22,9.8691406,22,22S42.1308594,52,30,52z"></path>
+                                            <polygon
+                                                points="25.608 36.577 19.116 30.086 17.702 31.5 25.608 39.405 42.298 22.715 40.884 21.301"></polygon>
+                                        </svg>
+                                        <span class="text-sm text-green-900 font-semibold">تم التقدم للوظيفة</span>
+                                    </div>
+                                @endif
                                 <form action="{{route('job.show',$job)}}" method="get">
                                     @csrf
 

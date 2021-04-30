@@ -147,6 +147,10 @@
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                            role="menuitem">
                             طلبات التدريب </a>
+{{--                        <a href="{{route('jobSeeker.application.training.index')}}"--}}
+{{--                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"--}}
+{{--                           role="menuitem">--}}
+{{--                            جميع استفساراتي</a>--}}
                         <a href="{{route('jobSeeker.logout')}}"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">تسجيل
                             الخروج</a>

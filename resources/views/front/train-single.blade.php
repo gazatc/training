@@ -65,19 +65,26 @@
                                         <p class="font-bold">{{Session::get('success')}}</p>
                                     </div>
                                 @endif
-                                @if($training->last_date >= today()->toDateString())
-                                    <form action="{{route('training.apply',$training)}}" method="post">
-                                        @csrf
-                                        <button
-                                            class="mt-2 flex items-center justify-center bg-green-700 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-50">
-                                            <span>التقدم للتدريب</span>
-                                        </button>
-                                    </form>
-                                @else
-                                    <button disabled
-                                            class="mt-2 flex items-center justify-center bg-red-700 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-opacity-50">
-                                        <span>انتهى التقديم</span>
+                                @if($training->hasAttemptToThisTraining(auth()->guard('jobSeeker')->user()))
+                                    <button
+                                        class="mt-2 flex items-center justify-center bg-green-700 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-50">
+                                        <span>تم ارسال طلب مسبقا </span>
                                     </button>
+                                @else
+                                    @if($training->last_date >= today()->toDateString())
+                                        <form action="{{route('training.apply',$training)}}" method="post">
+                                            @csrf
+                                            <button
+                                                class="mt-2 flex items-center justify-center bg-green-700 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-50">
+                                                <span>التقدم للتدريب</span>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <button disabled
+                                                class="mt-2 flex items-center justify-center bg-red-700 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-opacity-50">
+                                            <span>انتهى التقديم</span>
+                                        </button>
+                                    @endif
                                 @endif
                             </div>
                         </div>
@@ -87,6 +94,20 @@
 
                 {{--Start Job Description & Requirement--}}
                 <div class="w-full lg:w-3/4">
+                    @if(Session::has('success-message'))
+                        <div
+                            class="bg-blue-100 border-t border-b mt-6 lg:mt-0 lg:mr-8  border-blue-500 text-blue-700 px-4 py-3"
+                            role="alert">
+                            <p class="font-bold">{{Session::get('success-message')}}</p>
+                        </div>
+                    @endif
+                        @if(Session::has('field'))
+                            <div
+                                class="bg-red-100 border-t border-b mt-6 lg:mt-0 lg:mr-8  border-red-500 text-red-700 px-4 py-3"
+                                role="alert">
+                                <p class="font-bold">{{Session::get('field')}}</p>
+                            </div>
+                        @endif
                     <div class="shadow-lg bg-white rounded-lg border border-gray-300 mt-6 lg:mt-0 lg:mr-8">
                         {{--Start Job Description--}}
                         <div class="justify-between">
@@ -132,7 +153,8 @@
                                 استفسار عن التدريب
                             </h2>
                             <div class="py-2 px-6 text-justify">
-                                <form action="" class="text-center">
+                                <form action="{{route('training.inquire.store',$training)}}" method="post"
+                                      class="text-center">
                                     @csrf
                                     <label for="text">
                                     <textarea name="message" id="" cols="50"
@@ -140,6 +162,10 @@
                                               class="border border-gray-300 w-1/2 text-sm rounded-sm
                                               bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900"></textarea>
                                     </label>
+                                    @error('message')
+                                    <span class="block"
+                                          style="color: red; margin-right: 10px">{{ $errors->first('message') }}</span>
+                                    @enderror
                                     <div class="py-2">
                                         <button class=" text-sm text-white font-semibold rounded py-2 px-16 ml-2 bg-blue-900
                      hover:text-white border hover:border-gray-400">

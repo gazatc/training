@@ -14,4 +14,6 @@ class JobSeekerController extends Controller
     {
         return view('front.jobseeker-single',compact('jobSeeker'));
     }
+
+
 }

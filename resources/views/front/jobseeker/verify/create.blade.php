@@ -97,9 +97,9 @@
                                                class="border border-gray-300 w-full  text-sm rounded-sm px-3 py-2 focus:outline-none focus:border-blue-900"
                                                placeholder="رقم الهوية" required value="{{@$jobSeeker->verify->PID}}"
                                                type="number">
-                                        @error('username')
+                                        @error('PID')
                                         <span
-                                            style="color: red; margin-right: 10px">{{ $errors->first('username') }}</span>
+                                            style="color: red; margin-right: 10px">{{ $errors->first('PID') }}</span>
                                         @enderror
                                     </div>
                                 </div>

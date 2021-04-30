@@ -2,7 +2,7 @@
 @section('content')
     <div>
         <header class="text-center font-semibold mb-5">
-            <h2>جميع طلبات التدريبات</h2>
+            <h2>جميع طلبات الاستفسار</h2>
         </header>
         @if(Session::has('success'))
             <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
@@ -29,68 +29,40 @@
                             </th>
                             <th scope="col"
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                العنوان
+                                الرسالة
                             </th>
                             <th scope="col"
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                طلبات الاستفسارات
+                                الرد
                             </th>
                             <th scope="col"
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                نهاية التقديم
+                                تاريخ الإرسال
                             </th>
                             <th scope="col"
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                تاريخ تقديم الطلب
+                                تاريخ الرد
                             </th>
-                            <th scope="col"
-                                class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                العمليات
-                            </th>
-
-
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 text-center">
-                        @forelse($applications as $application)
+                        @forelse($inquires as $inquire)
 
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{$loop->index + 1 }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{route('training.show',$application->applicationable->id)}}"
-                                       class="text-blue-500 font-semibold hover:text-blue-900">
-                                        {{$application->applicationable->title}}
-                                    </a>
+                                    {{$inquire->message}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{route('jobSeeker.inquire.training.show',$application->applicationable)}}">
-                                    {{$application->applicationable->numberOFInquire($jobSeeker) }}
-                                    </a>
+                                    {{$inquire->reply ?? 'لم يتم الرد بعد'}}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap
-                                    @if($application->applicationable->last_date >= today()->toDateString())
-                                    text-green-500
-                                    @else
-                                    text-red-500
-                                    @endif
-                                    ">
-                                    {{ $application->applicationable->last_date }}
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{$inquire->created_at}}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap
-                                    ">
-                                    {{ date('Y/m/d H:m a', strtotime($application->applicationable->created_at))}}
-                                </td>
-                                <td class=" py-4 whitespace-nowrap  flex justify-center gap-3 text-sm font-medium">
-                                    <a href="{{route('jobSeeker.application.training.destroy',$application->id)}}"
-                                       class="text-indigo-600 hover:text-indigo-900">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none"
-                                             viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                        </svg>
-                                    </a>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{$inquire->updated_at}}
                                 </td>
                             </tr>
                         @empty

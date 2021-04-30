@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontController;
 
+use App\Application;
 use App\Category;
 use App\Employer;
 use App\Http\Controllers\Controller;
@@ -138,5 +139,11 @@ class TrainingController extends Controller
     {
         $training->delete();
         return back()->with('delete', 'تم الحذف بنجاح');
+    }
+
+    public function attempts (Training $training)
+    {
+        $applications  = Application::where('applicationable_id',$training->id)->where('applicationable_type',$training->getMorphClass())->get();
+        return view('front.employer.train.attempt',compact('applications'));
     }
 }

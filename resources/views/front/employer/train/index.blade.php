@@ -34,7 +34,14 @@
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 العنوان
                             </th>
-
+                            <th scope="col"
+                                class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                طلبات التقديم
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                طلبات الاستفسار
+                            </th>
 
                             <th scope="col"
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -59,6 +66,18 @@
                                     {{ $training->title }}
                                 </td>
 
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="{{route('training.attempts',$training)}}" class="text-blue-500 hover:text-blue-900">
+                                        {{$training->numberOfAttemptsToThisTraining()}}
+                                    </a>
+                                </td>
+
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="{{route('training.inquire_to_this_training',$training)}}" class="text-blue-500 hover:text-blue-900">
+
+                                    {{$training->numberOFInquireToThisTraining()}}
+                                    </a>
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap
     @if($training->last_date >= today()->toDateString())text-green-500 @else text-red-500 @endif
                                     "

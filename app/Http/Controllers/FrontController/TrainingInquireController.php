@@ -48,29 +48,72 @@ class TrainingInquireController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Training $training)
     {
-        //
+//        dd($training->getMorphClass());
+        $request->validate([
+            'message' => 'required'
+        ]);
+        if (auth()->guard('jobSeeker')->check()) {
+            $jobSeeker = auth()->guard('jobSeeker')->user();
+        } else {
+            return back()->with('field', 'الاستفسار مسموح لاصحاب الباحثين عن عمل او تدريب');
+        }
+        Inquire::create([
+            'job_seeker_id' => $jobSeeker->id,
+            'message' => $request->message,
+            'reply' => NULL,
+            'inquirable_id' => $training->id,
+            'inquirable_type' => $training->getMorphClass(),
+            'created_at' => now(),
+            'updated_at' => NULL,
+        ]);
+        return back()->with('success-message', 'تم ارسال رسالة الاستفسار بنجاح');
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Inquire  $inquire
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Inquire $inquire)
+    //show inquire for this train
+    public function show(Training $training)
     {
-        //
+        $inquires = Inquire::where('job_seeker_id', auth()->guard('jobSeeker')->id())
+            ->where('inquirable_id', $training->id)
+            ->where('inquirable_type', $training->getMorphClass())->get();
+        return view('front.jobseeker.training.my-inquire', compact('inquires'));
     }
+
+    public function inquire_to_this_training(Training $training)
+    {
+        $inquires = Inquire::where('inquirable_id', $training->id)
+            ->where('inquirable_type', $training->getMorphClass())->get();
+        return view('front.employer.train.inquire', compact('inquires'));
+    }
+
+    public function reply_to_this_inquire(Inquire $inquire)
+    {
+        return view('front.employer.train.reply_to_inquire', compact('inquire'));
+
+    }
+
+    public function submit_reply_to_this_inquire(Request $request, Inquire $inquire)
+    {
+        $request->validate([
+            'reply'=>'required'
+        ]);
+        $inquire->update([
+            'reply'=>$request->reply,
+            'updated_at'=>now()
+        ]);
+        return back()->with('success','تم الرد بنجاح');
+    }
+
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Inquire  $inquire
+     * @param \App\Inquire $inquire
      * @return \Illuminate\Http\Response
      */
     public function edit(Inquire $inquire)
@@ -81,8 +124,8 @@ class TrainingInquireController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Inquire  $inquire
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Inquire $inquire
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Inquire $inquire)
@@ -93,7 +136,7 @@ class TrainingInquireController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Inquire  $inquire
+     * @param \App\Inquire $inquire
      * @return \Illuminate\Http\Response
      */
     public function destroy(Inquire $inquire)

@@ -50,30 +50,74 @@ class JobInquireController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Job $job)
+    public function store(Request $request, Job $job)
     {
-        dd($job);
-
+//        dd($job->getMorphClass());
+//        id	job_seeker_id	message	reply	inquirable_id	inquirable_type	created_at	updated_at
+//        dd($request->all());
+        $request->validate([
+            'message' => 'required'
+        ]);
+        if(auth()->guard('jobSeeker')->check()){
+        $jobSeeker = auth()->guard('jobSeeker')->user();
+        }else{
+            return back()->with('field','الاستفسار مسموح لاصحاب الباحثين عن عمل او تدريب');
+        }
+        Inquire::create([
+            'job_seeker_id' => $jobSeeker->id,
+            'message' => $request->message,
+            'reply' => NULL,
+            'inquirable_id' => $job->id,
+            'inquirable_type' => $job->getMorphClass(),
+            'created_at' => now(),
+            'updated_at' => NULL,
+        ]);
+        return back()->with('success-message', 'تم ارسال رسالة الاستفسار بنجاح');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Inquire  $inquire
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Inquire $inquire)
+    //show inquire for this job
+    public function show(Job $job)
     {
-        //
+        $inquires = Inquire::where('job_seeker_id',auth()->guard('jobSeeker')->id())
+            ->where('inquirable_id',$job->id)
+            ->where('inquirable_type',$job->getMorphClass())->get();
+        return view('front.jobseeker.job.my-inquire',compact('inquires'));
+    }
+
+
+    //show all inquire for this job from employer interface
+    public function inquire_to_this_job(Job $job)
+    {
+        $inquires = Inquire::where('inquirable_id',$job->id)
+            ->where('inquirable_type',$job->getMorphClass())->get();
+        return view('front.employer.job.inquire',compact('inquires'));
+    }
+
+    public function reply_to_this_inquire(Inquire $inquire)
+    {
+
+        return view('front.employer.job.reply_to_inquire',compact('inquire'));
+    }
+
+    public function submit_reply_to_this_inquire(Request $request,Inquire $inquire)
+    {
+            $request->validate([
+                'reply'=>'required'
+            ]);
+        $inquire->update([
+            'reply'=>$request->reply,
+            'updated_at'=>now()
+        ]);
+        return back()->with('success','تم الرد بنجاح');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Inquire  $inquire
+     * @param \App\Inquire $inquire
      * @return \Illuminate\Http\Response
      */
     public function edit(Inquire $inquire)
@@ -84,8 +128,8 @@ class JobInquireController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Inquire  $inquire
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Inquire $inquire
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Inquire $inquire)
@@ -96,7 +140,7 @@ class JobInquireController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Inquire  $inquire
+     * @param \App\Inquire $inquire
      * @return \Illuminate\Http\Response
      */
     public function destroy(Inquire $inquire)
@@ -115,4 +159,6 @@ class JobInquireController extends Controller
         }
         return redirect()->route('dashboard.jobInquires.index');
     }
+
+
 }
