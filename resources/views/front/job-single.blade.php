@@ -122,26 +122,50 @@
                                         <p class="font-bold">{{Session::get('success')}}</p>
                                     </div>
                                 @endif
-                                @if($job->hasAttemptToThisJob(@auth()->guard('jobSeeker')->user()))
-                                    <button
-                                        class="mt-2 flex items-center justify-center bg-green-700 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-50">
-                                        <span>تم ارسال طلب مسبقا </span>
-                                    </button>
-                                @else
-                                    @if($job->last_date >= today()->toDateString())
-                                        <form action="{{route('job.apply',$job)}}" method="post">
-                                            @csrf
-                                            <button
-                                                class="mt-2 flex items-center justify-center bg-green-700 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-50">
-                                                <span>التقدم للوظيفة</span>
-                                            </button>
-                                        </form>
-                                    @else
-                                        <button disabled
-                                                class="mt-2 flex items-center justify-center bg-red-700 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-opacity-50">
-                                            <span>انتهى التقديم</span>
+                                @if(auth()->guard('jobSeeker')->check())
+
+                                    @if($job->hasAttemptToThisJob(@auth()->guard('jobSeeker')->user()))
+                                        <button
+                                            class="mt-2 flex items-center justify-center bg-green-700 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-50">
+                                            <span>تم ارسال طلب مسبقا </span>
                                         </button>
+                                    @else
+                                        @if($job->last_date >= today()->toDateString())
+                                            {{--                                        @if(@auth()->guard('jobSeeker')->user()->verified()->has('team')->orHas('teamLeader')->first() != null && $job->getForTextAttribute() == "")--}}
+                                            @if($job->getForTextAttribute() == "فرق" && @auth()->guard('jobSeeker')->user()->verified()->has('team')->orHas('teamLeader')->first() != null)
+                                                @if(@auth()->guard('jobSeeker')->user()->teamLeader)
+
+                                                    <form action="{{route('job.apply',$job)}}" method="post">
+                                                        @csrf
+
+                                                        <button
+                                                            class="mt-2 flex items-center justify-center bg-green-700 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-50">
+                                                            <span>التقدم للوظيفة</span>
+                                                        </button>
+
+                                                    </form>
+                                                @else
+
+                                                    <span class="block text-center mt-2 w-full text-sm text-red-600 font-semibold
+                                             rounded py-2 px-4 focus:outline-none focus:ring-2 ">فقط مدير الفرقة يمكن التقديم</span>
+                                                @endif
+                                            @else
+
+                                                <span class="block text-center mt-2 w-full text-sm text-red-600 font-semibold
+                                             rounded py-2 px-4 focus:outline-none focus:ring-2 ">يرجى الانضمام لفرقة للتقديم</span>
+
+                                            @endif
+
+                                        @else
+                                            <button disabled
+                                                    class="mt-2 flex items-center justify-center bg-red-700 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-opacity-50">
+                                                <span>انتهى التقديم</span>
+                                            </button>
+                                        @endif
                                     @endif
+
+                                @else
+                                    <span class="block text-red-600 pt-3">يرجى تسجيل الدخول للتقديم</span>
                                 @endif
                             </div>
                         </div>

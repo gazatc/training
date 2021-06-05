@@ -86,6 +86,22 @@ Route::group(['prefix' => 'jobSeeker'], function () {
 
         });
     });
+
+    //teams
+    Route::group(['prefix' => 'teams', 'namespace' => 'FrontController'], function () {
+        Route::get('/', 'TeamController@index')->name('teams.index');
+        Route::get('/create', 'TeamController@create')->name('teams.create');
+        Route::post('/store', 'TeamController@store')->name('teams.store');
+        Route::get('/edit/{team}', 'TeamController@edit')->name('teams.edit');
+        Route::post('/update/{team}', 'TeamController@update')->name('teams.update');
+        Route::get('/destroy/{team}', 'TeamController@destroy')->name('teams.destroy');
+
+        // add member
+        Route::get('/add-member/create', 'TeamMemberController@create')->name('teams.member.create');
+        Route::post('/add-member/store', 'TeamMemberController@store')->name('teams.member.store');
+        Route::get('/add-member/destroy/{username}', 'TeamMemberController@destroy')->name('teams.member.destroy');
+    });
+
 });
 
 //employer

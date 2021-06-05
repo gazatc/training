@@ -65,6 +65,7 @@
                                         <p class="font-bold">{{Session::get('success')}}</p>
                                     </div>
                                 @endif
+                                @if(auth()->guard('jobSeeker')->check())
                                 @if($training->hasAttemptToThisTraining(auth()->guard('jobSeeker')->user()))
                                     <button
                                         class="mt-2 flex items-center justify-center bg-green-700 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-50">
@@ -86,6 +87,10 @@
                                         </button>
                                     @endif
                                 @endif
+
+                                @else
+                                    <span class="block text-red-600 pt-3">يرجى تسجيل الدخول للتقديم</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -101,13 +106,13 @@
                             <p class="font-bold">{{Session::get('success-message')}}</p>
                         </div>
                     @endif
-                        @if(Session::has('field'))
-                            <div
-                                class="bg-red-100 border-t border-b mt-6 lg:mt-0 lg:mr-8  border-red-500 text-red-700 px-4 py-3"
-                                role="alert">
-                                <p class="font-bold">{{Session::get('field')}}</p>
-                            </div>
-                        @endif
+                    @if(Session::has('field'))
+                        <div
+                            class="bg-red-100 border-t border-b mt-6 lg:mt-0 lg:mr-8  border-red-500 text-red-700 px-4 py-3"
+                            role="alert">
+                            <p class="font-bold">{{Session::get('field')}}</p>
+                        </div>
+                    @endif
                     <div class="shadow-lg bg-white rounded-lg border border-gray-300 mt-6 lg:mt-0 lg:mr-8">
                         {{--Start Job Description--}}
                         <div class="justify-between">

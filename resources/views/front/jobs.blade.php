@@ -165,8 +165,7 @@
                                                     <path fill="#222"
                                                           d="M49.24,24.26V39.74a9.51,9.51,0,0,1-9.5,9.5H24.26a9.51,9.51,0,0,1-9.5-9.5V24.26a9.51,9.51,0,0,1,9.5-9.5H39.74A9.51,9.51,0,0,1,49.24,24.26Z"></path>
                                                 </svg>
-                                                <span
-                                                    class="mr-1">{{$job->employer->information->category->name}}</span>
+                                                <span class="mr-1">{{$job->employer->information->category->name}}</span>
                                             </div>
                                             <div class="flex mr-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"

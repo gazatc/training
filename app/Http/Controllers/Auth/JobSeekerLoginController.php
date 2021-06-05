@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\JobSeeker;
 use App\Region;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController as DefaultLoginController;
@@ -54,7 +55,6 @@ class JobSeekerLoginController extends DefaultLoginController
             'bio' => 'required|string|max:350',
             'skills' => 'required|string|max:350',
         ]);
-        try {
             if ($request->avatar) {
                 $attributes['avatar'] = $request->avatar->store('jobSeeker_avatars');
             }
@@ -76,10 +76,7 @@ class JobSeekerLoginController extends DefaultLoginController
                 'age' => $attributes['age'],
                 'phone' => $attributes['phone'],
             ]);
-            session()->flash('success', 'تم اضافة باحث عن عمل بنجاح');
-        } catch (\Exception $e) {
-            session()->flash('fail', $e->getMessage());
-        }
+        Auth::guard('jobSeeker')->login($jobSeeker);
         return redirect('/');
     }
 

@@ -53,7 +53,7 @@ class EmployerLoginController extends DefaultLoginController
             'bio' => 'required|string|max:150',
         ]);
 
-        try {
+
             if ($request->avatar) {
                 $attributes['avatar'] = $request->avatar->store('employer_avatars');
             }
@@ -75,10 +75,8 @@ class EmployerLoginController extends DefaultLoginController
                 'address' => $attributes['address'],
             ]);
 
-            session()->flash('success', 'تم اضافة صاحب العمل بنجاح');
-        } catch (\Exception $e) {
-            session()->flash('fail', $e->getMessage());
-        }
+        Auth::guard('employer')->login($employer);
+
         return redirect('/');
     }
     public function logout_employer()
