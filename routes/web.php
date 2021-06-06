@@ -12,10 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/authtest', function () {
 
-    dd(auth()->guard('jobSeeker')->check());
-});
 
 Route::group(['prefix' => 'jobSeeker'], function () {
     Route::get('/login', 'Auth\JobSeekerLoginController@login_form')->name('jobSeeker.login_form');

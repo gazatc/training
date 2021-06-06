@@ -3,7 +3,7 @@
     <main class="py-6">
         <div class="container mx-auto px-4">
             <div class="flex justify-center border border-blue-900 py-6 bg-blue-900 rounded-lg">
-                <span class="text-yellow-300 text-2xl font-semibold">» الوظائف «</span>
+                <span class="text-yellow-300 text-2xl font-semibold">» التدريب «</span>
             </div>
 
             <div class="flex flex-wrap mt-6">
@@ -12,39 +12,25 @@
                     <div class="bg-white rounded-lg border border-gray-300 shadow-lg">
                         <h2 class="rounded-t-lg text-gray-800 uppercase text-center tracking-wide text-xl font-semibold mb-2 py-1 bg-gray-100">
                             البحث</h2>
-                        <form action="" class="px-2 py-2">
+                        <form action="{{route('trains')}}" method="get" class="px-2 py-2">
+                            @csrf
                             <input
                                 class="border border-gray-300 w-full text-sm rounded-sm px-3 py-1.5 focus:outline-none focus:border-blue-900"
                                 placeholder="إبحث عن تدريب..."
-                                type="text">
+                                type="text" name="search">
                             <hr class="my-2">
 
                             <h2 class="text-blue-900 border-r-4 pr-1 border-blue-900 uppercase text-right text-base tracking-wide font-semibold my-2">
                                 المجال:
                             </h2>
                             <div class="flex flex-col">
-                                <select
-                                    class="border border-gray-300 w-full text-sm rounded-sm px-2 focus:outline-none focus:border-blue-900">
-                                    <option class="text-gray-500" value="" selected>كل المجالات</option>
-                                    <option value="">العلوم الانسانية</option>
-                                    <option value="">التسويق والمبيعات</option>
-                                    <option value="">العلاقات العامة والاتصال</option>
-                                    <option value="">الصحافة والاعلام</option>
-                                    <option value="">العمليات والدعم اللوجستي</option>
-                                    <option value="">القانون والمحاماة</option>
-                                    <option value="">تكنولوجيا المعلومات</option>
-                                    <option value="">الفندقة والسياحة</option>
-                                    <option value="">الطب والتمريض والصحة العامة</option>
-                                    <option value="">تصميم وجرافيك</option>
-                                    <option value="">اللغات والترجمة</option>
-                                    <option value="">المحاسبة والعلوم المالية</option>
-                                    <option value="">الهندسة</option>
-                                    <option value="">التعليم والتدريب</option>
-                                    <option value="">الثقافة والفنون</option>
-                                    <option value="">الإدارة والأعمال</option>
-                                    <option value="">مجالات متنوع</option>
+                                <select name="category"
+                                        class="border border-gray-300 w-full text-sm rounded-sm px-2 focus:outline-none focus:border-blue-900">
+                                    <option class="text-gray-500"  disabled selected>كل المجالات</option>
+                                    @foreach(\App\Category::all() as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
                                 </select>
-
                             </div>
 
                             <hr class="my-2">
@@ -53,29 +39,17 @@
                                 المحافظة:
                             </h2>
                             <div class="flex flex-col">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span
-                                        class="mr-2 text-sm text-gray-700">شمال غزة</span>
-                                </label>
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span
-                                        class="mr-2 text-sm text-gray-700">غزة</span>
-                                </label>
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span
-                                        class="mr-2 text-sm text-gray-700">دير البلح</span>
-                                </label>
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span
-                                        class="mr-2 text-sm text-gray-700">خانيونس</span>
-                                </label>
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-3.5 w-3.5"><span
-                                        class="mr-2 text-sm text-gray-700">رفح</span>
-                                </label>
+                                @foreach(\App\Region::all() as $region)
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="region[]" value="{{$region->id}}" class="form-checkbox h-3.5 w-3.5"><span
+                                            class="mr-2 text-sm text-gray-700">{{$region->name}}</span>
+                                    </label>
+                                @endforeach
+
                             </div>
 
                             <hr class="my-2">
+
 
                             <button
                                 class="flex items-center justify-center bg-blue-900 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-opacity-50">
@@ -98,7 +72,7 @@
                         {{--Start Single Job--}}
                         @foreach($trainings as $train)
                             <div
-                                class="lg:flex items-center justify-between border-b py-4 px-6 hover:bg-gray-100 rounded-t-lg">
+                                class="lg:flex items-center justify-between border-b py-4 px-6 hover:bg-gray-100 @if($loop->first)rounded-t-lg @elseif($loop->last) rounded-b-lg @endif">
                                 <div class="flex">
                                     <img class="rounded w-24 h-24"
                                          @if(!empty($train->employer->information->avatar))
@@ -128,7 +102,7 @@
                                                           d="M49.24,24.26V39.74a9.51,9.51,0,0,1-9.5,9.5H24.26a9.51,9.51,0,0,1-9.5-9.5V24.26a9.51,9.51,0,0,1,9.5-9.5H39.74A9.51,9.51,0,0,1,49.24,24.26Z"></path>
                                                 </svg>
                                                 <span
-                                                    class="mr-1">{{$train->employer->information->category->name}}</span>
+                                                    class="mr-1">{{$train->category->name}}</span>
                                             </div>
                                             <div class="flex mr-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"
@@ -137,7 +111,7 @@
                                                         d="M 32 10.328125 C 23.715733 10.328125 17 17.043817 17 25.328125 C 17 31.933454 26.537074 46.441396 30.402344 52.050781 C 31.274069 53.315902 32.72598 53.315827 33.597656 52.050781 C 37.462869 46.441509 47 31.933529 47 25.328125 C 47 17.043817 40.284274 10.328125 32 10.328125 z M 32 17.328125 A 7.9999992 7.9999992 0 0 1 40 25.328125 A 7.9999992 7.9999992 0 0 1 32 33.328125 A 7.9999992 7.9999992 0 0 1 24 25.328125 A 7.9999992 7.9999992 0 0 1 32 17.328125 z "></path>
                                                 </svg>
                                                 <span
-                                                    class="mr-1">{{$train->employer->information->region->name}}</span>
+                                                    class="mr-1">{{$train->region->name}}</span>
                                             </div>
 
                                         </div>

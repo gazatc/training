@@ -18,6 +18,7 @@
         * {
             font-family: cairo
         }
+
     </style>
 </head>
 <body dir="rtl" class="bg-gray-200">
@@ -56,106 +57,177 @@
         {{-- End Inbox --}}
         <div class="flex items-center mt-6 lg:mt-0">
             @if(auth()->guard('employer')->check())
+                <div class=" flex justify-center  ">
+                    <div>
+                        <details  x-data x-ref="dropdown" @click.away="$refs.dropdown.removeAttribute('open');" class="relative inline-block text-left">
+
+                            <summary class="bg-blue-900 flex justify-center items-center ">
+                                <span class="ml-2 font-semibold text-sm">{{auth()->guard('employer')->user()->name}}</span>
+                                <img class="h-8 w-8 rounded-full"
+                                     @if(!empty(auth()->guard('employer')->user()->information->avatar))
+                                     src="{{auth()->guard('employer')->user()->information->avatar}}"
+                                     @else
+                                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                     @endif
+                                     alt="">
+                            </summary>
+
+                            <div role="menu" class="z-40 origin-top-right text-center absolute  mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+
+                                <div class="py-1" role="none">
+                                    <a href="{{route('employer.profile.index')}}"
+                                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف
+                                        الشخصي</a>
+
+                                    <a href="{{route('job.index')}}"
+                                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                                        الوظائف </a>
+                                    <a href="{{route('training.index')}}"
+                                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                                        التدريبات </a>
+                                    <a href="{{route('employer.logout')}}"
+                                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">تسجيل
+                                        الخروج</a>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </div>
                 {{--Start Profile dropdown --}}
-                <div class="ml-3 relative">
-                    <div>
-                        <button class="items-center flex text-sm rounded-full focus:outline-none focus:ring-2
-                            focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                                id="user-menu" aria-haspopup="true" aria-expanded="true" aria-haspopup="true">
-                            <span class="sr-only">Open user menu</span>
-                            <span class="ml-2 font-semibold text-sm">{{auth()->guard('employer')->user()->name}}</span>
-                            <img class="h-8 w-8 rounded-full"
-                                 @if(!empty(auth()->guard('employer')->user()->information->avatar))
-                                 src="{{auth()->guard('employer')->user()->information->avatar}}"
-                                 @else
-                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                 @endif
-                                 alt="">
-                        </button>
-                    </div>
-                    <!--
-                      Profile dropdown panel, show/hide based on dropdown state.
+{{--                <div class="ml-3 relative">--}}
+{{--                    <div>--}}
+{{--                        <button class="items-center flex text-sm rounded-full focus:outline-none focus:ring-2--}}
+{{--                            focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"--}}
+{{--                                id="user-menu" aria-haspopup="true" aria-expanded="true" >--}}
+{{--                            <span class="sr-only">Open user menu</span>--}}
+{{--                            <span class="ml-2 font-semibold text-sm">{{auth()->guard('employer')->user()->name}}</span>--}}
+{{--                            <img class="h-8 w-8 rounded-full"--}}
+{{--                                 @if(!empty(auth()->guard('employer')->user()->information->avatar))--}}
+{{--                                 src="{{auth()->guard('employer')->user()->information->avatar}}"--}}
+{{--                                 @else--}}
+{{--                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"--}}
+{{--                                 @endif--}}
+{{--                                 alt="">--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
+{{--                    <!----}}
+{{--                      Profile dropdown panel, show/hide based on dropdown state.--}}
 
-                      Entering: "transition ease-out duration-100"
-                        From: "transform opacity-0 scale-95"
-                        To: "transform opacity-100 scale-100"
-                      Leaving: "transition ease-in duration-75"
-                        From: "transform opacity-100 scale-100"
-                        To: "transform opacity-0 scale-95"
-                    -->
-                    <div
-                        class=" origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
-                        role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                        <a href="{{route('employer.profile.index')}}"
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف
-                            الشخصي</a>
+{{--                      Entering: "transition ease-out duration-100"--}}
+{{--                        From: "transform opacity-0 scale-95"--}}
+{{--                        To: "transform opacity-100 scale-100"--}}
+{{--                      Leaving: "transition ease-in duration-75"--}}
+{{--                        From: "transform opacity-100 scale-100"--}}
+{{--                        To: "transform opacity-0 scale-95"--}}
+{{--                    -->--}}
+{{--                    <div--}}
+{{--                        class=" origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"--}}
+{{--                        role="menu" aria-orientation="vertical" aria-labelledby="user-menu">--}}
+{{--                        <a href="{{route('employer.profile.index')}}"--}}
+{{--                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف--}}
+{{--                            الشخصي</a>--}}
 
-                        <a href="{{route('job.index')}}"
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                            الوظائف </a>
-                        <a href="{{route('training.index')}}"
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                            التدريبات </a>
-                        <a href="{{route('employer.logout')}}"
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">تسجيل
-                            الخروج</a>
-                    </div>
+{{--                        <a href="{{route('job.index')}}"--}}
+{{--                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">--}}
+{{--                            الوظائف </a>--}}
+{{--                        <a href="{{route('training.index')}}"--}}
+{{--                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">--}}
+{{--                            التدريبات </a>--}}
+{{--                        <a href="{{route('employer.logout')}}"--}}
+{{--                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">تسجيل--}}
+{{--                            الخروج</a>--}}
+{{--                    </div>--}}
 
 
-                </div>
+{{--                </div>--}}
             @elseif(auth()->guard('jobSeeker')->check())
-                {{--            End Profile dropdown--}}
-                <div class="ml-3 relative">
+                <div class=" flex justify-center  ">
                     <div>
-                        {{--                        {{dd(auth()->guard('jobSeeker')->user()->information->avatar)}}--}}
-                        <button
-                            class="items-center flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                            id="user-menu" aria-haspopup="true">
-                            <span class="sr-only">Open user menu</span>
-                            <span class="ml-2 font-semibold text-sm">{{auth()->guard('jobSeeker')->user()->name}}</span>
-                            <img class="h-8 w-8 rounded-full"
-                                 @if(!empty(auth()->guard('jobSeeker')->user()->information->avatar))
-                                 src="{{auth()->guard('jobSeeker')->user()->information->avatar}}"
-                                 @else
-                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                 @endif
-                                 alt="">
-                        </button>
-                    </div>
-                    <!--
-                      Profile dropdown panel, show/hide based on dropdown state.
+                        <details  x-data x-ref="dropdown" @click.away="$refs.dropdown.removeAttribute('open');" class="relative inline-block text-left">
 
-                      Entering: "transition ease-out duration-100"
-                        From: "transform opacity-0 scale-95"
-                        To: "transform opacity-100 scale-100"
-                      Leaving: "transition ease-in duration-75"
-                        From: "transform opacity-100 scale-100"
-                        To: "transform opacity-0 scale-95"
-                    -->
-                    <div
-                        class="origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
-                        role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                        <a href="{{route('jobSeeker.profile.index')}}"
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف
-                            الشخصي</a>
-                        <a href="{{route('jobSeeker.application.job.index')}}"
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                           role="menuitem">
-                            طلبات الوظائف
-                        </a>
-                        <a href="{{route('jobSeeker.application.training.index')}}"
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                           role="menuitem">
-                            طلبات التدريب </a>
-                        <a href="{{route('teams.index')}}"
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                           role="menuitem">
-                            الفرق</a>
-                        <a href="{{route('jobSeeker.logout')}}"
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">تسجيل
-                            الخروج</a>
+                            <summary class="bg-blue-900 flex justify-center items-center ">
+                                <span class="ml-2 font-semibold text-sm">{{auth()->guard('jobSeeker')->user()->name}}</span>
+                                <img class="h-8 w-8 rounded-full"
+                                     @if(!empty(auth()->guard('jobSeeker')->user()->information->avatar))
+                                     src="{{auth()->guard('jobSeeker')->user()->information->avatar}}"
+                                     @else
+                                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                     @endif
+                                     alt="">
+                            </summary>
+
+                            <div role="menu" class="origin-top-right text-center absolute z-40 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+
+                                <div class="py-1" role="none">
+                                    <a href="{{route('jobSeeker.profile.index')}}" role="menuitem" tabindex="-1" id="menu-item-1"--}}
+                                                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف
+                                                                الشخصي</a>
+                                                            <a href="{{route('jobSeeker.application.job.index')}}" role="menuitem" tabindex="-1" id="menu-item-2"
+                                                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                               role="menuitem">
+                                                                طلبات الوظائف
+                                                            </a>
+                                                            <a href="{{route('jobSeeker.application.training.index')}}" role="menuitem" tabindex="-1" id="menu-item-3"
+                                                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                               role="menuitem">
+                                                                طلبات التدريب </a>
+                                                            <a href="{{route('teams.index')}}" role="menuitem" tabindex="-1" id="menu-item-4"
+                                                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                               role="menuitem">
+                                                                الفرق</a>
+                                                            <a href="{{route('jobSeeker.logout')}}" role="menuitem" tabindex="-1" id="menu-item-5"
+                                                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">تسجيل
+                                                                الخروج</a>
+                                </div>
+                            </div>
+                        </details>
                     </div>
                 </div>
+                {{--            End Profile dropdown--}}
+{{--                <div class="ml-3 relative">--}}
+{{--                    <div>--}}
+{{--                        <button open x-data x-ref="dropdown" @click.away="$refs.dropdown.removeAttribute('open');"--}}
+{{--                                class="items-center flex text-sm rounded-full focus:outline-none focus:ring-2--}}
+{{--                            focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"--}}
+{{--                            id="menu-button" aria-expanded="true" aria-haspopup="true"--}}
+{{--                        >--}}
+{{--                            <span class="sr-only">Open user menu</span>--}}
+{{--                            <span class="ml-2 font-semibold text-sm">{{auth()->guard('jobSeeker')->user()->name}}</span>--}}
+{{--                            <img class="h-8 w-8 rounded-full"--}}
+{{--                                 @if(!empty(auth()->guard('jobSeeker')->user()->information->avatar))--}}
+{{--                                 src="{{auth()->guard('jobSeeker')->user()->information->avatar}}"--}}
+{{--                                 @else--}}
+{{--                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"--}}
+{{--                                 @endif--}}
+{{--                                 alt="">--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
+{{--                    <div role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">--}}
+{{--                    <div role="none"--}}
+{{--                        class="dropdown-menu origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"--}}
+{{--                        role="menu" aria-orientation="vertical" aria-labelledby="user-menu">--}}
+{{--                        <a href="{{route('jobSeeker.profile.index')}}" role="menuitem" tabindex="-1" id="menu-item-1"--}}
+{{--                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف--}}
+{{--                            الشخصي</a>--}}
+{{--                        <a href="{{route('jobSeeker.application.job.index')}}" role="menuitem" tabindex="-1" id="menu-item-2"--}}
+{{--                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"--}}
+{{--                           role="menuitem">--}}
+{{--                            طلبات الوظائف--}}
+{{--                        </a>--}}
+{{--                        <a href="{{route('jobSeeker.application.training.index')}}" role="menuitem" tabindex="-1" id="menu-item-3"--}}
+{{--                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"--}}
+{{--                           role="menuitem">--}}
+{{--                            طلبات التدريب </a>--}}
+{{--                        <a href="{{route('teams.index')}}" role="menuitem" tabindex="-1" id="menu-item-4"--}}
+{{--                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"--}}
+{{--                           role="menuitem">--}}
+{{--                            الفرق</a>--}}
+{{--                        <a href="{{route('jobSeeker.logout')}}" role="menuitem" tabindex="-1" id="menu-item-5"--}}
+{{--                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">تسجيل--}}
+{{--                            الخروج</a>--}}
+{{--                    </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
             @else
 
@@ -181,7 +253,7 @@
 
     </div>
 </main>
-</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.1/alpine.js'></script><script type="module" src="./script.js"></script></body>
 </html>
 
 
