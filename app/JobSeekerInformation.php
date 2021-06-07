@@ -17,7 +17,7 @@ class JobSeekerInformation extends Model
     }
     public function getCVFileAttribute($value)
     {
-        return asset($value ? 'storage/' . $value : NULL);
+        return $value ? asset('storage/' . $value) : NULL;
     }
 
 

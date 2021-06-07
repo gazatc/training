@@ -7,7 +7,6 @@
         <link href="{{asset('dashboard_files/assets/plugins/bootstrap-select/css/bootstrap-select.css')}}"
               rel="stylesheet"/>
     @endpush
-
     <section class="content">
         <div class="block-header">
             <div class="row">
