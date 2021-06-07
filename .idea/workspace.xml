@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f0a8161c-5ec9-43e9-9c39-65bb33c371a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FrontController/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FrontController/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/employers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/employers.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/job-single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/job-single.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/jobSeekers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/jobSeekers.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/jobs.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/jobs.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/train.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/train.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FrontController/JobSeekerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FrontController/JobSeekerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/front/jobseeker-single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/jobseeker-single.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -401,7 +395,9 @@
       <workItem from="1622891505386" duration="4000" />
       <workItem from="1622900753106" duration="6679000" />
       <workItem from="1622996942910" duration="8836000" />
-      <workItem from="1623006250118" duration="1072000" />
+      <workItem from="1623006250118" duration="1232000" />
+      <workItem from="1623058646324" duration="854000" />
+      <workItem from="1623061587854" duration="1844000" />
     </task>
     <servers />
   </component>

@@ -12,6 +12,7 @@ class JobSeekerController extends Controller
 
     public function show(JobSeeker $jobSeeker)
     {
+//        dd($jobSeeker->team()->first()->members);
         return view('front.jobseeker-single',compact('jobSeeker'));
     }
 
