@@ -55,6 +55,10 @@ class JobApplicationController extends Controller
             return redirect()->route('jobSeeker.login_form');
         }
 
+        if(auth()->guard('jobSeeker')->user()->verified == 0){
+            return back()->with('field', 'الرجاء توثيق الحساب حتى تتمكن للتقدم الى الوظائف');
+        }
+
         $application = new Application;
         $application->job_seeker_id = auth()->guard('jobSeeker')->id();
         $job->applications()->save($application);

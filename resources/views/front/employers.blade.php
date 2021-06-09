@@ -14,10 +14,10 @@
                             البحث
                         </h2>
                         <form action="{{route('employers')}}" method="get" class="px-2 py-2">
-                            @csrf
                             <input
                                 class="border border-gray-300 w-full text-sm rounded-sm px-3 py-1.5 focus:outline-none focus:border-blue-900"
                                 placeholder="إبحث عن شركة/مؤسسة..."
+                                value="{{ request()->search }}"
                                 type="text" name="search">
 
                             <hr class="my-2">
@@ -30,7 +30,7 @@
                                         class="border border-gray-300 w-full text-sm rounded-sm px-2 focus:outline-none focus:border-blue-900">
                                     <option class="text-gray-500"  disabled selected>كل المجالات</option>
                                     @foreach(\App\Category::all() as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <option value="{{$category->id}}" {{ request()->category == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -43,7 +43,7 @@
                             <div class="flex flex-col">
                                 @foreach(\App\Region::all() as $region)
                                     <label class="inline-flex items-center">
-                                        <input type="checkbox" name="region[]" value="{{$region->id}}" class="form-checkbox h-3.5 w-3.5"><span
+                                        <input type="checkbox" name="region[]" value="{{$region->id}}" class="form-checkbox h-3.5 w-3.5" {{ in_array($region->id, request()->region ?? []) ? 'checked' : '' }}><span
                                             class="mr-2 text-sm text-gray-700">{{$region->name}}</span>
                                     </label>
                                 @endforeach

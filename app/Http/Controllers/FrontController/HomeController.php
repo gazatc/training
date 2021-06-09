@@ -6,6 +6,7 @@ use App\Employer;
 use App\Http\Controllers\Controller;
 use App\Job;
 use App\JobSeeker;
+use App\Message;
 use App\Training;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ class HomeController extends Controller
     public function jobs(Request $request)
     {
 //        dd($request->all());
+
         $jobs = Job::where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
                 return $q->where('title', 'like', '%' . $request->search . '%')
@@ -33,7 +35,9 @@ class HomeController extends Controller
             $query->when($request->region, function ($q4) use ($request) {
                 return $q4->whereIn('region_id', $request->region);
             });
-
+            $query->when($request->employer, function ($q4) use ($request) {
+                return $q4->where('employer_id', $request->employer);
+            });
         })->orderBy('created_at', 'desc')->paginate(15);
         return view('front.jobs', compact('jobs'));
     }
@@ -73,14 +77,15 @@ class HomeController extends Controller
                     ->orWhere('description', 'like', '%' . $request->search . '%')
                     ->orWhere('requirement', 'like', '%' . $request->search . '%');
             });
-
             $query->when($request->category, function ($q3) use ($request) {
                 return $q3->where('category_id', $request->category);
             });
             $query->when($request->region, function ($q4) use ($request) {
                 return $q4->whereIn('region_id', $request->region);
             });
-
+            $query->when($request->employer, function ($q4) use ($request) {
+                return $q4->where('employer_id', $request->employer);
+            });
         })->orderBy('created_at', 'desc')->paginate(15);
         return view('front.train', compact('trainings'));
     }
@@ -112,5 +117,24 @@ class HomeController extends Controller
         return view('front.jobSeekers', compact('jobSeekers'));
     }
 
+    function contactForm() {
+        return view('front.contact');
+    }
+    function contactSend(Request $request) {
+        $attributes = $request->validate([
+            'email' =>  'required|email',
+            'title'=>  'required|string',
+            'message'=>  'required|string|max:250'
+        ]);
+
+        Message::create([
+            'email' => $attributes['email'],
+            'title' => $attributes['title'],
+            'message' => $attributes['message'],
+        ]);
+
+        session()->flash('success', 'تم ارسال رسالتك, شكرا لك');
+        return redirect()->back();
+    }
 
 }

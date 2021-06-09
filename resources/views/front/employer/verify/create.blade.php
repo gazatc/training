@@ -110,7 +110,7 @@
                                         </div>
                                         <input name="PID"
                                                class="border border-gray-300 w-full  text-sm rounded-sm px-3 py-2 focus:outline-none focus:border-blue-900"
-                                               placeholder="رقم الهوية" required value="{{$employer->verify->PID}}"
+                                               placeholder="رقم الهوية" required value="{{@$employer->verify->PID}}"
                                                type="number">
 
 

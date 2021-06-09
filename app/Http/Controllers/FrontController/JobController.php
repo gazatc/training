@@ -29,6 +29,10 @@ class JobController extends Controller
 
     public function create()
     {
+//        if(auth()->guard('employer')->user()->verified == 0){
+//            return back()->with('field', 'الرجاء توثيق الحساب حتى تتمكن من اضافة الوظائف');
+//        }
+
         $regions = Region::all();
         $categories = Category::all();
         return view('front.employer.job.create', compact('regions', 'categories'));
@@ -36,6 +40,10 @@ class JobController extends Controller
 
     public function store(Request $request, Employer $employer)
     {
+        if(auth()->guard('employer')->user()->verified == 0){
+            return back()->with('failed', 'الرجاء توثيق الحساب حتى تتمكن من اضافة الوظائف');
+        }
+
         $attributes = $request->validate([
             'title' => 'required|string|max:50',
             'region' => 'required|exists:regions,id',

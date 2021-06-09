@@ -21,20 +21,10 @@ class JobInquireController extends Controller
     public function index(Request $request)
     {
         //
-        $inquires = Inquire::jobs()->where(function ($query) use ($request) {
-            $query->when($request->job, function ($q) use ($request) {
-                return $q->where('inquirable_id', $request->job)
-                    ->where('inquirable_type', 'App\Job');
-            });
-            $query->when($request->jobSeeker, function ($q) use ($request) {
-                return $q->where('job_seeker_id', $request->jobSeeker);
-            });
-        })->latest()->paginate(10);
+        $inquires = Inquire::jobs()->where('job_seeker_id',auth()->guard('jobSeeker')->id())
+            ->latest()->get();
 
-        $jobs = Job::all();
-        $jobSeekers = JobSeeker::verified()->get();
-
-        return view('dashboard.jobInquires.index', compact('inquires', 'jobs', 'jobSeekers'));
+        return view('front.jobseeker.job.my-inquire',compact('inquires'));
     }
 
     /**

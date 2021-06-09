@@ -13,10 +13,11 @@
                         <h2 class="rounded-t-lg text-gray-800 uppercase text-center tracking-wide text-xl font-semibold mb-2 py-1 bg-gray-100">
                             البحث</h2>
                         <form action="{{route('jobs')}}" method="get" class="px-2 py-2">
-                            @csrf
+                            <input type="text" name="employer" value="{{request()->employer}}" hidden>
                             <input
                                 class="border border-gray-300 w-full text-sm rounded-sm px-3 py-1.5 focus:outline-none focus:border-blue-900"
                                 placeholder="إبحث عن وظيفة..."
+                                value="{{ request()->search }}"
                                 type="text" name="search">
 
                             <hr class="my-2">
@@ -27,11 +28,11 @@
                             <div class="flex flex-col">
 
                                 <label class="inline-flex items-center">
-                                    <input type="checkbox" name="target[]" value="1" class="form-checkbox h-3.5 w-3.5"><span
+                                    <input type="checkbox" name="target[]" value="1" class="form-checkbox h-3.5 w-3.5" {{ in_array(1, request()->target ?? []) ? 'checked' : '' }}><span
                                         class="mr-2 text-sm text-gray-700">اشخاص</span>
                                 </label>
                                 <label class="inline-flex items-center">
-                                    <input type="checkbox" name="target[]" value="2" class="form-checkbox h-3.5 w-3.5"><span
+                                    <input type="checkbox" name="target[]" value="2" class="form-checkbox h-3.5 w-3.5" {{ in_array(2, request()->target ?? []) ? 'checked' : '' }}><span
                                         class="mr-2 text-sm text-gray-700">فرق</span>
                                 </label>
                             </div>
@@ -42,15 +43,15 @@
                             </h2>
                             <div class="flex flex-col">
                                 <label class="inline-flex items-center ml-4">
-                                    <input type="checkbox" name="type[]" value="1" class="form-checkbox h-3.5 w-3.5 bg-red-500" ><span
+                                    <input type="checkbox" name="type[]" value="1" class="form-checkbox h-3.5 w-3.5 bg-red-500" {{ in_array(1, request()->type ?? []) ? 'checked' : '' }}><span
                                         class="mr-2 text-sm text-gray-700">دوام كامل</span>
                                 </label>
                                 <label class="inline-flex items-center">
-                                    <input type="checkbox" name="type[]" value="2" class="form-checkbox h-3.5 w-3.5"><span
+                                    <input type="checkbox" name="type[]" value="2" class="form-checkbox h-3.5 w-3.5" {{ in_array(2, request()->type ?? []) ? 'checked' : '' }}><span
                                         class="mr-2 text-sm text-gray-700">دوام جزئي</span>
                                 </label>
                                 <label class="inline-flex items-center">
-                                    <input type="checkbox" name="type[]" value="3" class="form-checkbox h-3.5 w-3.5"><span
+                                    <input type="checkbox" name="type[]" value="3" class="form-checkbox h-3.5 w-3.5" {{ in_array(3, request()->type ?? []) ? 'checked' : '' }}><span
                                         class="mr-2 text-sm text-gray-700">عن بعد</span>
                                 </label>
                             </div>
@@ -65,7 +66,7 @@
                                     class="border border-gray-300 w-full text-sm rounded-sm px-2 focus:outline-none focus:border-blue-900">
                                     <option class="text-gray-500"  disabled selected>كل المجالات</option>
                                     @foreach(\App\Category::all() as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <option value="{{$category->id}}" {{ request()->category == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -78,7 +79,7 @@
                             <div class="flex flex-col">
                                 @foreach(\App\Region::all() as $region)
                                 <label class="inline-flex items-center">
-                                    <input type="checkbox" name="region[]" value="{{$region->id}}" class="form-checkbox h-3.5 w-3.5"><span
+                                    <input type="checkbox" name="region[]" value="{{$region->id}}" class="form-checkbox h-3.5 w-3.5" {{ in_array($region->id, request()->region ?? []) ? 'checked' : '' }}><span
                                         class="mr-2 text-sm text-gray-700">{{$region->name}}</span>
                                 </label>
                                 @endforeach
@@ -156,8 +157,16 @@
                                                         d="M14.5,12.071V8.5a.5.5,0,0,0-1,0v3.571A2,2,0,0,0,12,14a1.977,1.977,0,0,0,.284,1.01h0L8.646,18.646a.5.5,0,1,0,.707.707l3.637-3.636h0A1.978,1.978,0,0,0,14,16a2,2,0,0,0,.5-3.929ZM14,15a1,1,0,1,1,1-1A1,1,0,0,1,14,15Zm13.508,2.634A13.65,13.65,0,0,0,28,14,14,14,0,1,0,14,28a13.645,13.645,0,0,0,3.634-.492,7.5,7.5,0,1,0,9.874-9.874ZM14,27A13,13,0,1,1,27,14a12.681,12.681,0,0,1-.435,3.3A7.467,7.467,0,0,0,24.574,17,10.93,10.93,0,0,0,21.8,6.26a.454.454,0,0,0-.026-.038c-.011-.011-.026-.015-.038-.025a10.97,10.97,0,0,0-15.48,0c-.012.01-.027.014-.038.025A.454.454,0,0,0,6.2,6.26a10.97,10.97,0,0,0,0,15.48c.01.012.014.027.025.038s.026.015.038.025A10.933,10.933,0,0,0,17,24.575a7.466,7.466,0,0,0,.292,1.99A12.682,12.682,0,0,1,14,27Zm3.074-3.493a10,10,0,0,1-2.574.471V22.5a.5.5,0,0,0-1,0v1.476A9.9,9.9,0,0,1,7.3,21.4l.331-.331a.5.5,0,0,0-.707-.707L6.6,20.7a9.9,9.9,0,0,1-2.573-6.2H5.5a.5.5,0,0,0,0-1H4.024A9.9,9.9,0,0,1,6.6,7.3l.332.332a.5.5,0,0,0,.707-.707L7.3,6.6a9.9,9.9,0,0,1,6.2-2.573V5.5a.5.5,0,0,0,1,0V4.024A9.9,9.9,0,0,1,20.7,6.6l-.332.332a.5.5,0,1,0,.707.707L21.4,7.3a9.9,9.9,0,0,1,2.573,6.2H22.5a.5.5,0,0,0,0,1h1.479a10.014,10.014,0,0,1-.47,2.573A7.5,7.5,0,0,0,17.074,23.507ZM24.5,31A6.508,6.508,0,0,1,18,24.5c0-.2.012-.388.029-.58v0a6.507,6.507,0,0,1,5.88-5.888h.018c.189-.017.379-.029.573-.029a6.5,6.5,0,0,1,0,13ZM27,22.5a2.5,2.5,0,1,0-3.985,2,2.5,2.5,0,1,0,2.97,0A2.49,2.49,0,0,0,27,22.5Zm-1,4A1.5,1.5,0,1,1,24.5,25,1.5,1.5,0,0,1,26,26.5ZM24.5,24A1.5,1.5,0,1,1,26,22.5,1.5,1.5,0,0,1,24.5,24Z"></path>
                                                 </svg>
                                                 <span class="mr-1">
-                                               {{$job->getJobTypeTextAttribute()}}
-                                            </span>
+                                                    {{$job->getJobTypeTextAttribute()}}
+                                                </span>
+                                            </div>
+                                            <div class="flex mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24">
+                                                    <path d="M23,11H21.421A9.57,9.57,0,0,0,13,2.51V1a1,1,0,0,0-2,0V2.491A9.57,9.57,0,0,0,2.416,11H1a1,1,0,0,0,0,2H2.416A9.57,9.57,0,0,0,11,21.509V23a1,1,0,0,0,2,0V21.49A9.57,9.57,0,0,0,21.421,13H23a1,1,0,0,0,0-2ZM13,19.469V18a1,1,0,0,0-2,0v1.494A7.563,7.563,0,0,1,4.437,13H6a1,1,0,0,0,0-2H4.437A7.563,7.563,0,0,1,11,4.506V6a1,1,0,0,0,2,0V4.531A7.562,7.562,0,0,1,19.4,11H18a1,1,0,0,0,0,2h1.4A7.562,7.562,0,0,1,13,19.469Z"></path><path d="M12,9a3,3,0,1,0,3,3A3,3,0,0,0,12,9Zm0,4a1,1,0,1,1,1-1A1,1,0,0,1,12,13Z"></path>
+                                                </svg>
+                                                <span class="mr-1">
+                                                    {{$job->getForTextAttribute()}}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>

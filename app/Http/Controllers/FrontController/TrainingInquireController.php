@@ -19,20 +19,10 @@ class TrainingInquireController extends Controller
     public function index(Request $request)
     {
         //
-        $inquires = Inquire::trainings()->where(function ($query) use ($request) {
-            $query->when($request->training, function ($q) use ($request) {
-                return $q->where('inquirable_id', $request->training)
-                    ->where('inquirable_type', 'App\Training');
-            });
-            $query->when($request->jobSeeker, function ($q) use ($request) {
-                return $q->where('job_seeker_id', $request->jobSeeker);
-            });
-        })->latest()->paginate(10);
+        $inquires = Inquire::trainings()->where('job_seeker_id', auth()->guard('jobSeeker')->id())
+            ->latest()->get();
 
-        $trainings = Training::all();
-        $jobSeekers = JobSeeker::verified()->get();
-
-        return view('dashboard.trainingInquires.index', compact('inquires', 'trainings', 'jobSeekers'));
+        return view('front.jobseeker.training.my-inquire', compact('inquires'));
     }
 
     /**

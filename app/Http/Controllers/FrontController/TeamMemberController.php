@@ -19,7 +19,8 @@ class TeamMemberController extends Controller
 
     public function store(Request $request)
     {
-        $team = auth()->guard('jobSeeker')->user()->team->first();
+        $team = auth()->guard('jobSeeker')->user()->team()->first() !=NULL ? auth()->guard('jobSeeker')->user()->team()->first() : auth()->guard('jobSeeker')->user()->teamLeader()->first();
+//        $team = auth()->guard('jobSeeker')->user()->team->first();
 
         $jobSeeker = JobSeeker::where('username', $request->user)->orWhere('email', $request->user)->first();
         if (empty($jobSeeker)) {

@@ -2,7 +2,7 @@
 @section('content')
     <div>
         <header class="text-center font-semibold mb-5">
-            <h2>جميع طلبات الاستفسار</h2>
+            <h2>جميع طلبات استفسار الوظائف</h2>
         </header>
         @if(Session::has('success'))
             <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
@@ -29,6 +29,10 @@
                             </th>
                             <th scope="col"
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                الوظيفة
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 الرسالة
                             </th>
                             <th scope="col"
@@ -51,6 +55,12 @@
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{$loop->index + 1 }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="{{route('job.show',$inquire->inquirable->id)}}"
+                                       class="text-blue-500 font-semibold hover:text-blue-900">
+                                        {{$inquire->inquirable->title}}
+                                    </a>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{$inquire->message}}

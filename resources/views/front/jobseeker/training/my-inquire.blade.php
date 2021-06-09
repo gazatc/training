@@ -2,7 +2,7 @@
 @section('content')
     <div>
         <header class="text-center font-semibold mb-5">
-            <h2>جميع طلبات الاستفسار</h2>
+            <h2>جميع طلبات استفسار التدريب</h2>
         </header>
         @if(Session::has('success'))
             <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
@@ -26,6 +26,10 @@
                             <th scope="col"
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 #
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                التدريب
                             </th>
                             <th scope="col"
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -53,6 +57,12 @@
                                     {{$loop->index + 1 }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="{{route('training.show',$inquire->inquirable->id)}}"
+                                       class="text-blue-500 font-semibold hover:text-blue-900">
+                                        {{$inquire->inquirable->title}}
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
                                     {{$inquire->message}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -67,7 +77,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5">لا يوجد</td>
+                                <td colspan="6">لا يوجد</td>
                             </tr>
                         @endforelse
                         </tbody>

@@ -63,7 +63,7 @@ class JobSeeker extends Authenticatable
         return $this->belongsTo(Team::class, 'id', 'leader_id');
     }
     public function team() {
-        return $this->belongsToMany(Team::class, 'team_members');
+        return $this->belongsToMany(Team::class, 'team_members', 'job_seeker_id');
     }
 
     public function ScopeVerified()

@@ -31,10 +31,10 @@
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 العنوان
                             </th>
-                            <th scope="col"
-                                class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                طلبات الاستفسارات
-                            </th>
+                            {{--<th scope="col"--}}
+                                {{--class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">--}}
+                                {{--طلبات الاستفسارات--}}
+                            {{--</th>--}}
                             <th scope="col"
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 نهاية التقديم
@@ -64,11 +64,11 @@
                                         {{$application->applicationable->title}}
                                     </a>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{route('jobSeeker.inquire.training.show',$application->applicationable)}}">
-                                    {{$application->applicationable->numberOFInquire($jobSeeker) }}
-                                    </a>
-                                </td>
+                                {{--<td class="px-6 py-4 whitespace-nowrap">--}}
+                                    {{--<a href="{{route('jobSeeker.inquire.training.show',$application->applicationable)}}">--}}
+                                    {{--{{$application->applicationable->numberOFInquire($jobSeeker) }}--}}
+                                    {{--</a>--}}
+                                {{--</td>--}}
                                 <td class="px-6 py-4 whitespace-nowrap
                                     @if($application->applicationable->last_date >= today()->toDateString())
                                     text-green-500

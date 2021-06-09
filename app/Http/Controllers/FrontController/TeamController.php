@@ -64,10 +64,10 @@ class TeamController extends Controller
                 'leader_id' => auth()->guard('jobSeeker')->id(),
             ]);
 
-           TeamMember::create([
-                'team_id'=>$team->id,
-                'job_seeker_id'=>auth()->guard('jobSeeker')->id(),
-            ]);
+//           TeamMember::create([
+//                'team_id'=>$team->id,
+//                'job_seeker_id'=>auth()->guard('jobSeeker')->id(),
+//            ]);
 
             session()->flash('success', 'تم اضافة الفريق بنجاح');
 

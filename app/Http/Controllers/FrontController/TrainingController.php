@@ -45,6 +45,10 @@ class TrainingController extends Controller
     public function store(Request $request, Employer $employer)
     {
         //
+        if(auth()->guard('employer')->user()->verified == 0){
+            return back()->with('failed', 'الرجاء توثيق الحساب حتى تتمكن من اضافة التدريب');
+        }
+
         $attributes = $request->validate([
             'title' => 'required|string|max:50',
             'region' => 'required|exists:regions,id',

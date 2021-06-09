@@ -2,7 +2,7 @@
 @section('content')
     <div>
         <header class="text-center font-semibold mb-5">
-            <h2>الفرقة</h2>
+            <h2>الفريق</h2>
         </header>
         @if(Session::has('success'))
             <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
@@ -19,19 +19,23 @@
 
 {{--    {{dd( != null)}}--}}
 
-    @if($jobSeeker->team()->first() == null)
+    @if(!($jobSeeker->team()->exists() || $jobSeeker->teamLeader()->exists()))
         <div class="flex flex-col ">
-            <p>
-                <a href="{{route('teams.create')}}">
+            <p class="m-auto font-bold">
+                ليس لديك فريق؟
+                <a class="text-blue-500" href="{{route('teams.create')}}">
                     انشاء فريق
                 </a>
             </p>
         </div>
-    @elseif($jobSeeker->team()->first() != null)
+    @else
+        @php
+            $team = $jobSeeker->team()->first() !=NULL ? $jobSeeker->team()->first() : $jobSeeker->teamLeader()->first();
+        @endphp
         <div class="flex flex-col ">
             <header class="text-center">
-                <h2>{{$jobSeeker->team->first()->name}}</h2>
-                <h2>{{$jobSeeker->team->first()->bio}}</h2>
+                <h2>{{$team->first()->name}}</h2>
+                <h2 class="mt-4">{{$team->first()->bio}}</h2>
             </header>
             @if($jobSeeker->teamLeader)
                 <div class="p-5 flex gap-5">
@@ -39,10 +43,10 @@
                         <a href="{{route('teams.member.create')}}"> إضافة عضو</a>
                     </p>
                     <p class="hover:text-blue-300 hover:underline">
-                        <a href="{{route('teams.edit',$jobSeeker->team->first())}}">تعديل بيانات الفرقة</a>
+                        <a href="{{route('teams.edit',$team->first())}}">تعديل بيانات الفريق</a>
                     </p>
                     <p class="text-red-500 hover:underline">
-                        <a href="{{route('teams.destroy',$jobSeeker->team->first())}}"> حذف الفرقة </a>
+                        <a href="{{route('teams.destroy',$team->first())}}"> حذف الفريق </a>
                     </p>
                 </div>
             @endif
@@ -82,7 +86,7 @@
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200 text-center">
-                            @forelse($team->members as $member)
+                            @forelse(collect([$team->leader])->merge($team->members) as $member)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{$loop->index + 1 }}

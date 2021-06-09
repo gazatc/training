@@ -39,10 +39,10 @@
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 الراتب
                             </th>
-                            <th scope="col"
-                                class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                الاستفسارات
-                            </th>
+                            {{--<th scope="col"--}}
+                                {{--class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">--}}
+                                {{--الاستفسارات--}}
+                            {{--</th>--}}
                             <th scope="col"
                                 class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 نهاية التقديم
@@ -81,11 +81,11 @@
 
                                     {{ $application->applicationable->salary_type == 2 ? ' $ / الساعة' : ' $' }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap ">
-                                    <a href="{{route('jobSeeker.inquire.job.show',$application->applicationable)}}">
-                                        {{$application->applicationable->numberOFInquire($jobSeeker) }}
-                                    </a>
-                                </td>
+                                {{--<td class="px-6 py-4 whitespace-nowrap ">--}}
+                                    {{--<a href="{{route('jobSeeker.inquire.job.show',$application->applicationable)}}">--}}
+                                        {{--{{$application->applicationable->numberOFInquire($jobSeeker) }}--}}
+                                    {{--</a>--}}
+                                {{--</td>--}}
                                 <td class="px-6 py-4 whitespace-nowrap
                                   @if($application->applicationable->last_date >= today()->toDateString())
                                     text-green-500 @else text-red-500 @endif

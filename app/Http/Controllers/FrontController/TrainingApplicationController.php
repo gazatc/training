@@ -45,6 +45,11 @@ class TrainingApplicationController extends Controller
         if (auth()->guard('jobSeeker')->id() == null) {
             return back();
         }
+
+        if(auth()->guard('jobSeeker')->user()->verified == 0){
+            return back()->with('field', 'الرجاء توثيق الحساب حتى تتمكن للتقدم الى التدريب');
+        }
+
         $application = new Application;
         $application->job_seeker_id = auth()->guard('jobSeeker')->id();
         $training->applications()->save($application);

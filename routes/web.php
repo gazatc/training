@@ -78,8 +78,10 @@ Route::group(['prefix' => 'jobSeeker'], function () {
 
         //inquire application
         Route::group(['prefix' => 'inquire'], function () {
-            Route::get('/training/{training}','TrainingInquireController@show')->name('jobSeeker.inquire.training.show');
-            Route::get('/job/{job}','JobInquireController@show')->name('jobSeeker.inquire.job.show');
+//            Route::get('/training/{training}','TrainingInquireController@show')->name('jobSeeker.inquire.training.show');
+//            Route::get('/job/{job}','JobInquireController@show')->name('jobSeeker.inquire.job.show');
+            Route::get('/training','TrainingInquireController@index')->name('jobSeeker.inquire.training.index');
+            Route::get('/job','JobInquireController@index')->name('jobSeeker.inquire.job.index');
 
         });
     });
@@ -171,6 +173,8 @@ Route::group(['namespace' => 'FrontController'], function () {
     Route::get('/employers', 'HomeController@employers')->name('employers');
     Route::get('/trainings', 'HomeController@trains')->name('trains');
     Route::get('/jobSeekers', 'HomeController@jobSeekers')->name('jobSeekers');
+    Route::get('/contact-us', 'HomeController@contactForm')->name('contact-us');
+    Route::post('/contact-us', 'HomeController@contactSend')->name('contact-send');
 
 
     Route::get('/job-seeker/{jobSeeker}', 'JobSeekerController@show')->name('jobseeker.show');
