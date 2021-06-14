@@ -85,8 +85,8 @@ class TrainingController extends Controller
             'employer' => 'required|exists:employers,id',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'description' => 'required|string|max:10000|min:150',
-            'requirement' => 'required|string|max:10000|min:150',
+            'description' => 'required|string|max:10000|min:50',
+            'requirement' => 'required|string|max:10000|min:50',
             'last_date' => 'required|date||after_or_equal:today',
         ]);
         try {
@@ -150,8 +150,8 @@ class TrainingController extends Controller
             'employer' => 'required|exists:employers,id',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'description' => 'required|string|max:10000|min:150',
-            'requirement' => 'required|string|max:10000|min:150',
+            'description' => 'required|string|max:10000|min:50',
+            'requirement' => 'required|string|max:10000|min:50',
             'last_date' => 'required|date|after:' . $training->created_at,
         ]);
         try {

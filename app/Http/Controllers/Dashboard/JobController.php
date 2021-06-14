@@ -92,7 +92,7 @@ class JobController extends Controller
             'for' => 'required|in:1,2',
             'salary_type' => 'required|in:1,2',
             'salary_amount' => 'required|numeric|min:2',
-            'description' => 'required|string|max:10000|min:150',
+            'description' => 'required|string|max:10000|min:50',
             'requirement' => 'required|string|max:10000|min:50',
             'last_date' => 'required|date|after_or_equal:today',
         ]);
@@ -165,7 +165,7 @@ class JobController extends Controller
             'for' => 'required|in:1,2',
             'salary_type' => 'required|in:1,2',
             'salary_amount' => 'required|numeric|min:2',
-            'description' => 'required|string|max:10000|min:150',
+            'description' => 'required|string|max:10000|min:50',
             'requirement' => 'required|string|max:10000|min:50',
             'last_date' => 'required|date|after:' . $job->created_at,
         ]);

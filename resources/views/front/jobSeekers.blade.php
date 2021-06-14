@@ -16,7 +16,7 @@
                         <form action="{{route('jobSeekers')}}" method="get" class="px-2 py-2">
                             <input
                                     class="border border-gray-300 w-full text-sm rounded-sm px-3 py-1.5 focus:outline-none focus:border-blue-900"
-                                    placeholder="إبحث عن موظف/متدرب..."
+                                    placeholder="إبحث عن باحث عن عمل..."
                                     value="{{ request()->search }}"
                                     type="text" name="search">
 

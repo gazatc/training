@@ -21,7 +21,7 @@
                                      alt="">
                                 <div class="flex justify-center mt-2 font-semibold text-xl">{{$training->title}}</div>
                                 <div class="text-base mt-1">
-                                    <a href="{{route('employer.show', $training->employer->id)}}" target="_blank" class="flex items-center justify-center">
+                                    <a href="{{route('employer.show', $training->employer)}}" target="_blank" class="flex items-center justify-center">
 
                                         <span class="text-blue-500 mr-1">{{$training->employer->name}}</span>
                                         @if($training->employer->verified == 1)
@@ -123,9 +123,7 @@
                                 </h2>
                             </div>
                             <div class="py-2 px-6 text-justify">
-                                <p>
-                                    {{$training->description}}
-                                </p>
+                                <textarea x-data="autoheight('training_description')" id="training_description" class="mt-2 w-full h-full overflow-hidden text-justify resize-none bg-white" disabled>{{$training->description}}</textarea>
                             </div>
                         </div>
                         {{--End Single Description--}}
@@ -135,9 +133,7 @@
                                 متطلبات التدريب
                             </h2>
                             <div class="py-2 px-6 text-justify">
-                                <p>
-                                    {{$training->requirement}}
-                                </p>
+                                <textarea x-data="autoheight('training_requirement')" id="training_requirement" class="mt-2 w-full h-full overflow-hidden text-justify resize-none bg-white" disabled>{{$training->requirement}}</textarea>
                             </div>
                         </div>
                         {{--End Single Requirement--}}

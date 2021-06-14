@@ -177,10 +177,10 @@ Route::group(['namespace' => 'FrontController'], function () {
     Route::post('/contact-us', 'HomeController@contactSend')->name('contact-send');
 
 
-    Route::get('/job-seeker/{jobSeeker}', 'JobSeekerController@show')->name('jobseeker.show');
-    Route::get('/employer/{employer}', 'EmployerController@show')->name('employer.show');
-    Route::get('/job/{job}', 'JobController@show')->name('job.show');
-    Route::get('/training/{training}', 'TrainingController@show')->name('training.show');
+    Route::get('/job-seeker/{jobSeeker:username}', 'JobSeekerController@show')->name('jobseeker.show');
+    Route::get('/employer/{employer:username}', 'EmployerController@show')->name('employer.show');
+    Route::get('/job/{job:title}', 'JobController@show')->name('job.show');
+    Route::get('/training/{training:title}', 'TrainingController@show')->name('training.show');
 
 
     //attempt to train

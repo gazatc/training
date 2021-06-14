@@ -67,7 +67,7 @@
                                     {{$loop->index + 1 }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{route('job.show',$application->applicationable->id)}}"
+                                    <a href="{{route('job.show',$application->applicationable)}}"
                                        class="text-blue-500 font-semibold hover:text-blue-900">
                                         {{$application->applicationable->title}}
                                     </a>

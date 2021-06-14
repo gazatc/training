@@ -77,7 +77,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5">لا يوجد</td>
+                                <td colspan="6">لا يوجد</td>
                             </tr>
                         @endforelse
                         </tbody>

@@ -40,11 +40,20 @@
             </a>
             <ul class="flex mr-0 lg:mr-16 mt-6 lg:mt-0 font-light space-x-8">
                 <li><a href="{{route('jobs')}}"
-                       class="ml-8 hover:text-yellow-300 {{ (request()->is('/')) ? 'text-yellow-300 font-semibold' : '' }}">الوظائف</a></li>
-                <li><a href="{{route('trains')}}" class="hover:text-yellow-300 {{ (request()->is('trainings')) ? 'text-yellow-300 font-semibold' : '' }}">التدريب</a></li>
-                <li><a href="{{route('employers')}}" class="hover:text-yellow-300 {{ (request()->is('employers')) ? 'text-yellow-300 font-semibold' : '' }}">أصحاب العمل</a></li>
-                <li><a href="{{route('jobSeekers')}}" class="hover:text-yellow-300 {{ (request()->is('jobSeekers')) ? 'text-yellow-300 font-semibold' : '' }}">الباحثين عن عمل</a></li>
-                <li><a href="{{route('contact-us')}}" class="hover:text-yellow-300 {{ (request()->is('contact-us')) ? 'text-yellow-300 font-semibold' : '' }}">تواصل معنا</a></li>
+                       class="ml-8 hover:text-yellow-300 {{ (request()->is('/')) ? 'text-yellow-300 font-semibold' : '' }}">الوظائف</a>
+                </li>
+                <li><a href="{{route('trains')}}"
+                       class="hover:text-yellow-300 {{ (request()->is('trainings')) ? 'text-yellow-300 font-semibold' : '' }}">التدريب</a>
+                </li>
+                <li><a href="{{route('employers')}}"
+                       class="hover:text-yellow-300 {{ (request()->is('employers')) ? 'text-yellow-300 font-semibold' : '' }}">أصحاب
+                        العمل</a></li>
+                <li><a href="{{route('jobSeekers')}}"
+                       class="hover:text-yellow-300 {{ (request()->is('jobSeekers')) ? 'text-yellow-300 font-semibold' : '' }}">الباحثين
+                        عن عمل</a></li>
+                <li><a href="{{route('contact-us')}}"
+                       class="hover:text-yellow-300 {{ (request()->is('contact-us')) ? 'text-yellow-300 font-semibold' : '' }}">تواصل
+                        معنا</a></li>
             </ul>
         </div>
 
@@ -59,10 +68,11 @@
         {{-- End Inbox --}}
         <div class="flex items-center mt-6 lg:mt-0">
             @if(auth()->guard('employer')->check())
-                <div class=" flex justify-center  ">
+                <div class=" flex justify-center cursor-pointer">
                     <div>
-                        <details x-data x-ref="dropdown" @click.away="$refs.dropdown.removeAttribute('open');"
-                                 class="relative inline-block text-left">
+                        <details class="relative inline-block text-left cursor-pointer"
+                                 x-data="{ isVisible: true }" @click.away="isVisible = false"
+                        >
 
                             <summary class="bg-blue-900 flex justify-center items-center ">
                                 <span class="ml-2 font-semibold text-sm">{{auth()->guard('employer')->user()->name}}</span>
@@ -267,26 +277,49 @@
     </nav>
 </header>
 
-@if(auth()->guard('jobSeeker')->id() != NULL && auth()->guard('jobSeeker')->user()->verified == 0)
-    <div class="flex items-center pr-16 bg-yellow-100 border-t border-b border-yellow-500 text-red-700 px-4 py-3"
-         role="alert">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2  fill-current" viewBox="0 0 32 32">
-            <path d="M16,0.5C7.45001,0.5,0.5,7.45001,0.5,16S7.45001,31.5,16,31.5S31.5,24.54999,31.5,16S24.54999,0.5,16,0.5z M14.5,23.5v-1.09003c0-0.83002,0.66998-1.5,1.5-1.5s1.5,0.66998,1.5,1.5V23.5c0,0.82996-0.66998,1.5-1.5,1.5S14.5,24.32996,14.5,23.5z M17.5,18.03998c0,0.82001-0.66998,1.5-1.5,1.5s-1.5-0.67999-1.5-1.5V8.5C14.5,7.66998,15.16998,7,16,7s1.5,0.66998,1.5,1.5V18.03998z">
-            </path>
-        </svg>
-        <p class="text-sm font-bold">حتى تتمكن من التقدم للوظائف والتدريب الرجاء <a href="{{route('jobSeeker.verify.create')}}" class="underline"> توثيق حسابك</a></p>
-    </div>
+@if(auth()->guard('jobSeeker')->check() && auth()->guard('jobSeeker')->user()->verified == 0)
+    @if(auth()->guard('jobSeeker')->check() && auth()->guard('jobSeeker')->user()->verify()->exists())
+        <div class="flex items-center pr-16 bg-yellow-100 border-t border-b border-yellow-500 text-green-700 px-4 py-3"
+             role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2  fill-current" viewBox="0 0 32 32">
+                <path d="M16,0.5C7.45001,0.5,0.5,7.45001,0.5,16S7.45001,31.5,16,31.5S31.5,24.54999,31.5,16S24.54999,0.5,16,0.5z M14.5,23.5v-1.09003c0-0.83002,0.66998-1.5,1.5-1.5s1.5,0.66998,1.5,1.5V23.5c0,0.82996-0.66998,1.5-1.5,1.5S14.5,24.32996,14.5,23.5z M17.5,18.03998c0,0.82001-0.66998,1.5-1.5,1.5s-1.5-0.67999-1.5-1.5V8.5C14.5,7.66998,15.16998,7,16,7s1.5,0.66998,1.5,1.5V18.03998z">
+                </path>
+            </svg>
+            <p class="text-sm font-bold">لقد تم ارسال طلب التوثيق, سيتم مراجعته في غضون الايام المقبلة</p></div>
+    @else
+        <div class="flex items-center pr-16 bg-yellow-100 border-t border-b border-yellow-500 text-red-700 px-4 py-3"
+             role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2  fill-current" viewBox="0 0 32 32">
+                <path d="M16,0.5C7.45001,0.5,0.5,7.45001,0.5,16S7.45001,31.5,16,31.5S31.5,24.54999,31.5,16S24.54999,0.5,16,0.5z M14.5,23.5v-1.09003c0-0.83002,0.66998-1.5,1.5-1.5s1.5,0.66998,1.5,1.5V23.5c0,0.82996-0.66998,1.5-1.5,1.5S14.5,24.32996,14.5,23.5z M17.5,18.03998c0,0.82001-0.66998,1.5-1.5,1.5s-1.5-0.67999-1.5-1.5V8.5C14.5,7.66998,15.16998,7,16,7s1.5,0.66998,1.5,1.5V18.03998z">
+                </path>
+            </svg>
+            <p class="text-sm font-bold">حتى تتمكن من التقدم للوظائف والتدريب الرجاء <a
+                        href="{{route('jobSeeker.verify.create')}}" class="underline"> توثيق حسابك</a></p>
+        </div>
+    @endif
 @endif
 
-@if(auth()->guard('employer')->id() != NULL && auth()->guard('employer')->user()->verified == 0)
-    <div class="flex items-center pr-16 bg-yellow-100 border-t border-b border-yellow-500 text-red-700 px-4 py-3"
-         role="alert">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2  fill-current" viewBox="0 0 32 32">
-            <path d="M16,0.5C7.45001,0.5,0.5,7.45001,0.5,16S7.45001,31.5,16,31.5S31.5,24.54999,31.5,16S24.54999,0.5,16,0.5z M14.5,23.5v-1.09003c0-0.83002,0.66998-1.5,1.5-1.5s1.5,0.66998,1.5,1.5V23.5c0,0.82996-0.66998,1.5-1.5,1.5S14.5,24.32996,14.5,23.5z M17.5,18.03998c0,0.82001-0.66998,1.5-1.5,1.5s-1.5-0.67999-1.5-1.5V8.5C14.5,7.66998,15.16998,7,16,7s1.5,0.66998,1.5,1.5V18.03998z">
-            </path>
-        </svg>
-        <p class="text-sm font-bold">حتى تتمكن من نشر الوظائف والتدريب الرجاء توثيق حسابك</p>
-    </div>
+@if(auth()->guard('employer')->check() && auth()->guard('employer')->user()->verified == 0)
+    @if(auth()->guard('employer')->check() && auth()->guard('employer')->user()->verify()->exists())
+        <div class="flex items-center pr-16 bg-yellow-100 border-t border-b border-yellow-500 text-green-700 px-4 py-3"
+             role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2  fill-current" viewBox="0 0 32 32">
+                <path d="M16,0.5C7.45001,0.5,0.5,7.45001,0.5,16S7.45001,31.5,16,31.5S31.5,24.54999,31.5,16S24.54999,0.5,16,0.5z M14.5,23.5v-1.09003c0-0.83002,0.66998-1.5,1.5-1.5s1.5,0.66998,1.5,1.5V23.5c0,0.82996-0.66998,1.5-1.5,1.5S14.5,24.32996,14.5,23.5z M17.5,18.03998c0,0.82001-0.66998,1.5-1.5,1.5s-1.5-0.67999-1.5-1.5V8.5C14.5,7.66998,15.16998,7,16,7s1.5,0.66998,1.5,1.5V18.03998z">
+                </path>
+            </svg>
+            <p class="text-sm font-bold">لقد تم ارسال طلب التوثيق, سيتم مراجعته في غضون الايام المقبلة</p></div>
+        </div>
+    @else
+        <div class="flex items-center pr-16 bg-yellow-100 border-t border-b border-yellow-500 text-red-700 px-4 py-3"
+             role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2  fill-current" viewBox="0 0 32 32">
+                <path d="M16,0.5C7.45001,0.5,0.5,7.45001,0.5,16S7.45001,31.5,16,31.5S31.5,24.54999,31.5,16S24.54999,0.5,16,0.5z M14.5,23.5v-1.09003c0-0.83002,0.66998-1.5,1.5-1.5s1.5,0.66998,1.5,1.5V23.5c0,0.82996-0.66998,1.5-1.5,1.5S14.5,24.32996,14.5,23.5z M17.5,18.03998c0,0.82001-0.66998,1.5-1.5,1.5s-1.5-0.67999-1.5-1.5V8.5C14.5,7.66998,15.16998,7,16,7s1.5,0.66998,1.5,1.5V18.03998z">
+                </path>
+            </svg>
+            <p class="text-sm font-bold">حتى تتمكن من نشر الوظائف والتدريب الرجاء <a
+                        href="{{route('employer.verify.create')}}" class="underline"> توثيق حسابك</a></p>
+        </div>
+    @endif
 @endif
 
 <main class="py-6">

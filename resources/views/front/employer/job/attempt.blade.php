@@ -83,7 +83,7 @@
 
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$application->created_at}}
+                                    {{$application->created_at->toDateString()}}
                                 </td>
 
                             </tr>

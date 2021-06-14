@@ -24,6 +24,7 @@
                     <label for="title">العنوان</label>
                     <div class="pt-3">
                         <input type="text" required name="title"
+                               value="{{old('title')}}"
                                class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
                     </div>
                     @error('title')
@@ -39,7 +40,7 @@
                                 class="border border-gray-300 w-full text-sm rounded-sm px-2 py-1.5 focus:outline-none focus:border-blue-900">
                             <option class="text-gray-500" value="" disabled selected>اختر المحافظة</option>
                             @foreach($regions as $region)
-                                <option value="{{$region->id}}">{{$region->name}}</option>
+                                <option value="{{$region->id}}" {{old('region') == $region->id ? 'selected' : ''}}>{{$region->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -54,7 +55,7 @@
                                 class="border border-gray-300 w-full text-sm rounded-sm px-2 py-1.5 focus:outline-none focus:border-blue-900">
                             <option class="text-gray-500" value="" disabled selected>كل المجالات</option>
                             @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                <option value="{{$category->id}}" {{old('category') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -69,9 +70,9 @@
 
                                 class="border border-gray-300 w-full text-sm rounded-sm px-2 py-1.5 focus:outline-none focus:border-blue-900">
                             <option selected disabled>- نوع الوظيفة -</option>
-                            <option value="1">دوام كامل</option>
-                            <option value="2">دوام جزئي</option>
-                            <option value="3">عن بعد</option>
+                            <option value="1" {{old('jobType') == 1 ? 'selected' : ''}}>دوام كامل</option>
+                            <option value="2" {{old('jobType') == 2 ? 'selected' : ''}}>دوام جزئي</option>
+                            <option value="3" {{old('jobType') == 3 ? 'selected' : ''}}>عن بعد</option>
                         </select>
 
                     </div>
@@ -87,8 +88,8 @@
 
                                 class="border border-gray-300 w-full text-sm rounded-sm px-2 py-1.5 focus:outline-none focus:border-blue-900">
                             <option selected disabled>- الفئة المستهدفة -</option>
-                            <option value="1">أشخاص</option>
-                            <option value="2">فرق</option>
+                            <option value="1" {{old('for') == 1 ? 'selected' : ''}}>أشخاص</option>
+                            <option value="2" {{old('for') == 2 ? 'selected' : ''}}>فرق</option>
                         </select>
 
                     </div>
@@ -104,8 +105,8 @@
 
                                 class="border border-gray-300 w-full text-sm rounded-sm px-2 py-1.5 focus:outline-none focus:border-blue-900">
                             <option selected disabled>- نوع الراتب -</option>
-                            <option value="1">ثابت</option>
-                            <option value="2">بالساعة</option>
+                            <option value="1" {{old('salary_type') == 1 ? 'selected' : ''}}>ثابت</option>
+                            <option value="2" {{old('salary_type') == 2 ? 'selected' : ''}}>بالساعة</option>
                         </select>
 
                     </div>
@@ -117,6 +118,7 @@
                     <label for="title">الراتب</label>
                     <div class="pt-3">
                         <input type="number" name="salary_amount" required  step="0.01" min="0.01"
+                               value="{{old('salary_amount')}}"
                                class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
                     </div>
                     @error('salary_amount')
@@ -128,7 +130,7 @@
                     <label for="email">الوصف الوظيفي...</label>
                     <div class="pt-3">
                             <textarea  name="description" id="" cols="30" required rows="5"
-                                       class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900"></textarea>
+                                       class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">{{old('description')}}</textarea>
                     </div>
                     @error('description')
                     <span style="color: red;margin-right: 10px">{{ $errors->first('description') }}</span>
@@ -139,7 +141,7 @@
                     <label for="email">المتطلبات...</label>
                     <div class="pt-3">
                             <textarea  name="requirement" id="" cols="30" required rows="5"
-                                       class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900"></textarea>
+                                       class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">{{old('requirement')}}</textarea>
                     </div>
                     @error('requirement')
                     <span style="color: red;margin-right: 10px">{{ $errors->first('requirement') }}</span>
@@ -150,6 +152,7 @@
                     <label for="title">اخر موعد للتقديم</label>
                     <div class="pt-3">
                         <input type="date" name="last_date" required  step="0.01" min="0.01"
+                               value="{{old('last_date')}}"
                                class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
                     </div>
                     @error('last_date')

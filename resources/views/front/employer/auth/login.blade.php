@@ -8,6 +8,10 @@
             </header>
             <form action="{{route('employer.login')}}" class="px-4 py-2" method="post">
                 @csrf
+                @error('email')
+                <span style="color: red; margin-right: 10px">{{ $message }}</span>
+                @enderror
+
                 <div class="py-2">
                     <label for="email">البريد الالكتروني</label>
                     <div class="pt-3">

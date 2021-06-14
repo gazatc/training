@@ -50,7 +50,7 @@ class EmployerLoginController extends DefaultLoginController
             'type' => 'required|string|max:30',
             'year' => 'required|max:4',
             'address' => 'required|string|max:50',
-            'bio' => 'required|string|max:10000|min:150',
+            'bio' => 'required|string|max:10000|min:50',
         ]);
 
 

@@ -7,11 +7,11 @@
         </header>
         <form action="{{route('employer.register')}}" method="post" class="px-4 py-2" enctype="multipart/form-data">
             @csrf
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div>{{$error}}</div>
-                @endforeach
-            @endif
+            {{--@if ($errors->any())--}}
+                {{--@foreach ($errors->all() as $error)--}}
+                    {{--<div>{{$error}}</div>--}}
+                {{--@endforeach--}}
+            {{--@endif--}}
             <div>
                 <header class="text-right bg-blue-200 py-2 px-2 rounded">
                     <p class="text-xl font-semibold">البيانات الرئيسية</p>
@@ -20,29 +20,48 @@
                     <label for="email">اسم المستخدم</label>
                     <div class="pt-3">
                         <input type="text" required name="username"
-                               class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
+                               value="{{ old('username') }}"
+                               class="border @error('username') border-red-500 @enderror border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
                     </div>
+                    @error('username')
+                    <span class="block"
+                          style="color: red; margin-right: 10px">{{ $errors->first('username') }}</span>
+                    @enderror
                 </div>
                 <div class="py-1">
                     <label for="email">الاسم</label>
                     <div class="pt-3">
                         <input type="text" required name="name"
-                               class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
+                               value="{{ old('name') }}"
+                               class="border @error('name') border-red-500 @enderror border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
                     </div>
+                    @error('name')
+                    <span class="block"
+                          style="color: red; margin-right: 10px">{{ $errors->first('name') }}</span>
+                    @enderror
                 </div>
                 <div class="py-1">
                     <label for="email">البريد الالكتروني</label>
                     <div class="pt-3">
                         <input type="text" required name="email"
-                               class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
+                               value="{{ old('email') }}"
+                               class="border @error('email') border-red-500 @enderror border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
                     </div>
+                    @error('email')
+                    <span class="block"
+                          style="color: red; margin-right: 10px">{{ $errors->first('email') }}</span>
+                    @enderror
                 </div>
                 <div class="py-1">
                     <label for="email">كلمة المرور</label>
                     <div class="pt-3">
                         <input type="password" required name="password"
-                               class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
+                               class="border @error('password') border-red-500 @enderror border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
                     </div>
+                    @error('password')
+                    <span class="block"
+                          style="color: red; margin-right: 10px">{{ $errors->first('email') }}</span>
+                    @enderror
                 </div>
                 <div class="py-2">
                     <label for="email">تأكيد كلمة المرور</label>
@@ -76,65 +95,101 @@
                             <input type='file' name="avatar" class="hidden" accept="image/*" @change="fileChosen"/>
                         </label>
                     </div>
+                    @error('avatar')
+                    <span class="block"
+                          style="color: red; margin-right: 10px">{{ $errors->first('avatar') }}</span>
+                    @enderror
                 </div>
                 <div class="py-1">
                     <label for="email">المحافظة</label>
                     <div class="pt-3">
                         <select required name="region"
-                            class="border border-gray-300 w-full text-sm rounded-sm px-2 py-1.5 focus:outline-none focus:border-blue-900">
+                                class="border @error('region') border-red-500 @enderror border-gray-300 w-full text-sm rounded-sm px-2 py-1.5 focus:outline-none focus:border-blue-900">
                             <option class="text-gray-500" value="" disabled selected>اختر المحافظة</option>
-                         @foreach($regions as $region)
-                            <option value="{{$region->id}}">{{$region->name}}</option>
+                            @foreach($regions as $region)
+                                <option value="{{$region->id}}" {{old('region') == $region->id ? 'selected' : ''}}>{{$region->name}}</option>
                             @endforeach
                         </select>
+                        @error('region')
+                        <span class="block"
+                              style="color: red; margin-right: 10px">{{ $errors->first('region') }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="py-1">
                     <label for="email">المجال</label>
                     <div class="pt-3">
                         <select required name="category"
-                            class="border border-gray-300 w-full text-sm rounded-sm px-2 py-1.5 focus:outline-none focus:border-blue-900">
+                                class="border @error('category') border-red-500 @enderror border-gray-300 w-full text-sm rounded-sm px-2 py-1.5 focus:outline-none focus:border-blue-900">
                             <option class="text-gray-500" value="" disabled selected>كل المجالات</option>
                             @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                <option value="{{$category->id}}" {{old('category') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
                             @endforeach
                         </select>
+                        @error('category')
+                        <span class="block"
+                              style="color: red; margin-right: 10px">{{ $errors->first('category') }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="py-1">
                     <label for="email">رقم الهاتف</label>
                     <div class="pt-3">
                         <input type="text" required name="phone"
-                               class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
+                               value="{{ old('phone') }}"
+                               class="border @error('phone') border-red-500 @enderror border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
                     </div>
+                    @error('phone')
+                    <span class="block"
+                          style="color: red; margin-right: 10px">{{ $errors->first('phone') }}</span>
+                    @enderror
                 </div>
                 <div class="py-1">
                     <label for="email">نوع الشركة/المؤسسة</label>
                     <div class="pt-3">
                         <input type="text" required name="type"
-                               class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
+                               value="{{old('type')}}"
+                               class="border @error('phone') border-red-500 @enderror border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
                     </div>
+                    @error('type')
+                    <span class="block"
+                          style="color: red; margin-right: 10px">{{ $errors->first('type') }}</span>
+                    @enderror
                 </div>
                 <div class="py-2">
                     <label for="email">تأسست عام</label>
                     <div class="pt-3">
                         <input type="text" required name="year"
-                               class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
+                               value="{{ old('year') }}"
+                               class="border @error('year') border-red-500 @enderror border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
                     </div>
+                    @error('year')
+                    <span class="block"
+                          style="color: red; margin-right: 10px">{{ $errors->first('year') }}</span>
+                    @enderror
                 </div>
                 <div class="py-2">
                     <label for="email">العنوان</label>
                     <div class="pt-3">
                         <input type="text" required name="address"
-                               class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
+                               value="{{old('address')}}"
+                               class="border @error('address') border-red-500 @enderror border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
                     </div>
+                    @error('address')
+                    <span class="block"
+                          style="color: red; margin-right: 10px">{{ $errors->first('address') }}</span>
+                    @enderror
                 </div>
                 <div class="py-2">
                     <label for="email">من نحن</label>
                     <div class="pt-3">
                             <textarea  required name="bio" id="" cols="30" rows="5"
-                                      class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900"></textarea>
+                                      class="border @error('bio') border-red-500 @enderror border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">{{old('bio')}}</textarea>
                     </div>
+                    @error('bio')
+                    <span class="block"
+                          style="color: red; margin-right: 10px">{{ $errors->first('bio') }}</span>
+                    @enderror
                 </div>
             </div>
 

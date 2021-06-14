@@ -77,7 +77,7 @@
                                     {{$inquire->reply ?? 'لم يتم الرد بعد'}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$inquire->created_at}}
+                                    {{$inquire->created_at->toDateString()}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{ ($inquire->created_at != $inquire->updated_at) ? $inquire->updated_at->toDateString() : '-'}}

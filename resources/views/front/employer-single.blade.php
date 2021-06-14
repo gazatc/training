@@ -14,7 +14,7 @@
                         <div class="px-2 py-4">
                             <div>
                                 <div class="m-auto w-36 h-36 relative">
-                                    <img class="rounded w-36 h-36 border border-blue-900"
+                                    <img class="rounded w-36 h-36"
                                          @if(!empty($employer->information->avatar))
                                          src="{{$employer->information->avatar}}"
                                          @else
@@ -25,7 +25,7 @@
                                     @if($employer->verified == 1)
 
                                         <svg
-                                                class="text-green-500 fill-current w-6 h-6 absolute bottom-0 left-0 -ml-2 -mb-2 bg-white rounded rounded-xl"
+                                                class="text-green-500 fill-current w-6 h-6 absolute bottom-0 left-0 -ml-2 -mb-2 bg-white rounded rounded-xl rounded-xl bg-white"
                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                 fill="currentColor">
                                             <path fill-rule="evenodd"
@@ -80,9 +80,8 @@
                             <div class="py-2 px-6 mb-2">
                                 <div>
                                     <h2 class="text-base font-semibold border-r-4 border-blue-900 pr-2">من نحن:</h2>
-                                    <p class="mt-2 text-justify">
-                                        {{$employer->information->bio}}
-                                    </p>
+                                    <textarea x-data="autoheight('employer_bio')" id="employer_bio" class="mt-2 w-full h-full overflow-hidden text-justify resize-none bg-white" disabled>{{$employer->information->bio}}</textarea>
+
                                 </div>
 
                                 <hr class="my-4">

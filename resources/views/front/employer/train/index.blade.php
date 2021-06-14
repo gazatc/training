@@ -105,7 +105,7 @@
                     </table>
                 </div>
                 <div dir="ltr" class="mt-3 px-8">
-                    {{$jobs->appends(request()->query())->links('pagination::tailwind')}}
+                    {{$trainings->appends(request()->query())->links('pagination::tailwind')}}
                 </div>
             </div>
         </div>

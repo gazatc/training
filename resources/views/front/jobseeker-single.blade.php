@@ -23,7 +23,7 @@
                                     @if($jobSeeker->verified == 1)
 
                                         <svg
-                                                class="text-green-500 fill-current w-6 h-6 absolute bottom-0 left-0 -ml-2 -mb-2"
+                                                class="text-green-500 fill-current w-6 h-6 absolute bottom-0 left-0 -ml-2 -mb-2 rounded-xl bg-white"
                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                 fill="currentColor">
                                             <path fill-rule="evenodd"
@@ -73,17 +73,12 @@
                             <div class="py-2 px-6 mb-2">
                                 <div>
                                     <h2 class="text-base font-semibold border-r-4 border-blue-900 pr-2">نبذة عني :</h2>
-                                    <p class="mt-2 text-justify">
-                                        {{$jobSeeker->information->bio}}
-                                    </p>
+                                    <textarea x-data="autoheight('job_seeker_bio')" id="job_seeker_bio" class="mt-2 w-full h-full overflow-hidden text-justify resize-none bg-white" disabled>{{$jobSeeker->information->bio}}</textarea>
                                 </div>
                                 <div>
                                     <h2 class="text-base font-semibold border-r-4 border-blue-900 pr-2 mt-4">المهارات
                                         :</h2>
-                                    <p class="mt-2 text-justify">
-                                        {{$jobSeeker->information->skills}}
-
-                                    </p>
+                                    <textarea x-data="autoheight('job_seeker_skills')" id="job_seeker_skills" class="mt-2 w-full h-full overflow-hidden text-justify resize-none bg-white" disabled>{{$jobSeeker->information->skills}}</textarea>
                                 </div>
 
                                 <hr class="my-4">
@@ -230,9 +225,8 @@
                                     <div>
                                         <h2 class="text-base font-semibold border-r-4 border-blue-900 pr-2">الفريق<span
                                                     class="mr-2">({{$team->name}})</span></h2>
-                                        <p class="mt-2 text-justify">
-                                            {{$team->bio}}
-                                        </p>
+                                        <textarea x-data="autoheight('team_bio')" id="team_bio" class="mt-2 w-full h-full overflow-hidden text-justify resize-none bg-white" disabled>{{$team->bio}}</textarea>
+
                                         <div class="flex mt-4 gap-x-3">
                                             <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 mt-6 lg:mt-0">
                                                 {{--  Start Single Employer--}}

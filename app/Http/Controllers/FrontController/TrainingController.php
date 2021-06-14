@@ -53,7 +53,7 @@ class TrainingController extends Controller
             'title' => 'required|string|max:50',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'description' => 'required|string|max:10000|min:150',
+            'description' => 'required|string|max:10000|min:50',
             'requirement' => 'required|string|max:10000|min:50',
             'last_date' => 'required|date||after_or_equal:today',
         ]);
@@ -115,7 +115,7 @@ class TrainingController extends Controller
             'title' => 'required|string|max:50',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'description' => 'required|string|max:10000|min:150',
+            'description' => 'required|string|max:10000|min:50',
             'requirement' => 'required|string|max:10000|min:50',
             'last_date' => 'required|date|after:' . $training->created_at,
         ]);

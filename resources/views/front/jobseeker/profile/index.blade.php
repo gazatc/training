@@ -22,8 +22,9 @@
                                          alt="">
                                     @if($jobSeeker->verified == 1)
                                         <svg
-                                            class="text-green-500 fill-current w-6 h-6 absolute bottom-0 left-0 -ml-2 -mb-2"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                class="text-green-500 fill-current w-6 h-6 absolute bottom-0 left-0 -ml-2 -mb-2 rounded-xl bg-white"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                fill="currentColor">
                                             <path fill-rule="evenodd"
                                                   d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                                   clip-rule="evenodd"></path>
@@ -32,9 +33,9 @@
                                     @endif
                                 </div>
                                 <span
-                                    class="flex justify-center text-blue-500 mt-2 text-xl mr-1">{{$jobSeeker->name}}</span>
+                                        class="flex justify-center text-blue-500 mt-2 text-xl mr-1">{{$jobSeeker->name}}</span>
                                 <span
-                                    class="flex justify-center mt-2 font-semibold text-sm">{{$jobSeeker->information->category->name}}</span>
+                                        class="flex justify-center mt-2 font-semibold text-sm">{{$jobSeeker->information->category->name}}</span>
                             </div>
 
                             <hr class="my-2">
@@ -63,8 +64,8 @@
                 <div class="w-full lg:w-3/4">
                     @if(Session::has('success'))
                         <div
-                            class="bg-blue-100 border-t border-b mt-6 lg:mt-0 lg:mr-8  border-blue-500 text-blue-700 px-4 py-3"
-                            role="alert">
+                                class="bg-blue-100 border-t border-b mt-6 lg:mt-0 lg:mr-8  border-blue-500 text-blue-700 px-4 py-3"
+                                role="alert">
                             <p class="font-bold">{{Session::get('success')}}</p>
                         </div>
                     @endif
@@ -81,7 +82,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-blue-500"
                                          viewBox="0 0 20 20" fill="currentColor">
                                         <path
-                                            d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"/>
+                                                d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"/>
                                         <path fill-rule="evenodd"
                                               d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
                                               clip-rule="evenodd"/>
@@ -91,17 +92,12 @@
                             <div class="py-2 px-6 mb-2">
                                 <div>
                                     <h2 class="text-base font-semibold border-r-4 border-blue-900 pr-2">نبذة عني :</h2>
-                                    <p class="mt-2 text-justify">
-                                        {{$jobSeeker->information->bio}}
-                                    </p>
+                                    <textarea x-data="autoheight('job_seeker_bio')" id="job_seeker_bio" class="mt-2 w-full h-full overflow-hidden text-justify resize-none bg-white" disabled>{{$jobSeeker->information->bio}}</textarea>
                                 </div>
                                 <div>
                                     <h2 class="text-base font-semibold border-r-4 border-blue-900 pr-2 mt-4">المهارات
                                         :</h2>
-                                    <p class="mt-2 text-justify">
-                                        {{$jobSeeker->information->skills}}
-
-                                    </p>
+                                    <textarea x-data="autoheight('job_seeker_skills')" id="job_seeker_skills" class="mt-2 w-full h-full overflow-hidden text-justify resize-none bg-white" disabled>{{$jobSeeker->information->skills}}</textarea>
                                 </div>
 
                                 <hr class="my-4">
@@ -144,6 +140,16 @@
                                             empty($jobSeeker->socials->instagram))
                                             <span class="">  لا يوجد</span>
                                         @endif
+                                        @if(!empty($jobSeeker->socials->web))
+                                            <a href="{{$jobSeeker->socials->web}}" target="_blank"
+                                               class="flex p-3 justify-center bg-gray-600 rounded-xl">
+                                                <svg class="w-5 h-5 text-white fill-current"
+                                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 92">
+                                                    <path id="XMLID_1666_"
+                                                          d="M46 0C20.6 0 0 20.6 0 46s20.6 46 46 46 46-20.6 46-46S71.4 0 46 0zm3.7 83.8c-.2 0-.4 0-.7.1V62.2c5.2-.1 9.9-.2 14.2-.5-3.8 11.7-10.9 19.5-13.5 22.1zm-7.4 0c-2.7-2.7-9.7-10.5-13.5-22.1 4.2.3 9 .5 14.2.5v21.7c-.2 0-.4-.1-.7-.1zM8 46c0-2.5.3-5 .7-7.4 2.2-.4 6.4-1 12.3-1.6-.5 2.9-.8 5.9-.8 9.1 0 3.2.3 6.2.7 9-5.8-.6-10.1-1.2-12.3-1.6-.3-2.5-.6-5-.6-7.5zm18.3 0c0-3.4.4-6.6 1-9.6 4.6-.3 9.8-.6 15.7-.6v20.4c-5.8-.1-11.1-.3-15.8-.7-.5-2.9-.9-6.1-.9-9.5zM49.6 8.2c2.7 2.7 9.6 10.7 13.5 22.1-4.2-.3-8.9-.5-14.1-.5V8.1c.2 0 .4.1.6.1zM43 8.1v21.7c-5.2.1-9.9.2-14.1.5 3.8-11.4 10.8-19.4 13.4-22.1.3 0 .5-.1.7-.1zm6 48.1V35.8c5.8.1 11.1.3 15.7.6.6 3 1 6.2 1 9.6 0 3.4-.3 6.6-.9 9.6-4.6.3-9.9.5-15.8.6zM70.9 37c5.9.6 10.1 1.2 12.3 1.6.5 2.4.8 4.9.8 7.4s-.3 5-.7 7.4c-2.2.4-6.4 1-12.3 1.6.5-2.9.7-5.9.7-9.1 0-3-.3-6.1-.8-8.9zm10.5-4.8c-2.8-.4-6.8-.9-11.9-1.4-2.4-8.6-6.6-15.5-10.1-20.4 10.1 3.8 18.1 11.8 22 21.8zM32.6 10.4c-3.6 4.8-7.7 11.7-10.1 20.3-5 .4-9 1-11.9 1.4 3.9-9.9 12-17.9 22-21.7zm-22 49.4c2.8.4 6.8.9 11.8 1.4 2.4 8.6 6.4 15.5 10 20.3-10-3.9-17.9-11.8-21.8-21.7zm49 21.7c3.6-4.8 7.6-11.6 10-20.2 5-.4 9-1 11.8-1.4-3.9 9.8-11.8 17.7-21.8 21.6z"></path>
+                                                </svg>
+                                            </a>
+                                        @endif
                                         @if(!empty($jobSeeker->socials->linkedin))
                                             <a href="{{$jobSeeker->socials->linkedin}}" target="_blank"
                                                class="flex p-3 justify-center bg-blue-900 rounded-xl">
@@ -151,8 +157,8 @@
                                                      xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 32 32">
                                                     <path
-                                                        d="M32 31.292V19.46c0-6.34-3.384-9.29-7.896-9.29-3.641 0-5.273 2.003-6.182 3.409v-2.924h-6.86c.091 1.937 0 20.637 0 20.637h6.86V19.767c0-.615.044-1.232.226-1.672.495-1.233 1.624-2.509 3.518-2.509 2.483 0 3.475 1.892 3.475 4.666v11.041H32v-.001zM3.835 7.838c2.391 0 3.882-1.586 3.882-3.567C7.673 2.247 6.227.707 3.881.707S0 2.246 0 4.271c0 1.981 1.489 3.567 3.792 3.567h.043zm3.43 23.454V10.655H.406v20.637h6.859z"
-                                                        id="Flat_copy"></path>
+                                                            d="M32 31.292V19.46c0-6.34-3.384-9.29-7.896-9.29-3.641 0-5.273 2.003-6.182 3.409v-2.924h-6.86c.091 1.937 0 20.637 0 20.637h6.86V19.767c0-.615.044-1.232.226-1.672.495-1.233 1.624-2.509 3.518-2.509 2.483 0 3.475 1.892 3.475 4.666v11.041H32v-.001zM3.835 7.838c2.391 0 3.882-1.586 3.882-3.567C7.673 2.247 6.227.707 3.881.707S0 2.246 0 4.271c0 1.981 1.489 3.567 3.792 3.567h.043zm3.43 23.454V10.655H.406v20.637h6.859z"
+                                                            id="Flat_copy"></path>
                                                 </svg>
                                             </a>
                                         @endif
@@ -164,8 +170,8 @@
                                                 <svg class="w-5 h-5 text-white fill-current"
                                                      xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 32 32" xml:space="preserve"><path
-                                                        d="M11.848 32h6.612V15.998h4.411l.584-5.514H18.46l.007-2.761c0-1.437.137-2.209 2.2-2.209h2.757V0h-4.412c-5.299 0-7.164 2.675-7.164 7.174v3.311H8.545V16h3.303v16z"
-                                                        id="Full_copy"></path></svg>
+                                                            d="M11.848 32h6.612V15.998h4.411l.584-5.514H18.46l.007-2.761c0-1.437.137-2.209 2.2-2.209h2.757V0h-4.412c-5.299 0-7.164 2.675-7.164 7.174v3.311H8.545V16h3.303v16z"
+                                                            id="Full_copy"></path></svg>
                                             </a>
                                         @endif
                                         @if(!empty($jobSeeker->socials->twitter))
@@ -176,7 +182,7 @@
                                                      xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 30 24">
                                                     <path
-                                                        d="m29.55 2.85c-.841 1.224-1.848 2.26-3.004 3.106l-.036.025q.018.262.018.787c-.004 1.736-.264 3.41-.745 4.987l.032-.122c-.534 1.773-1.272 3.32-2.206 4.724l.04-.065c-.989 1.509-2.132 2.808-3.435 3.927l-.024.02c-1.372 1.153-2.978 2.083-4.73 2.704l-.108.033c-1.765.648-3.803 1.022-5.928 1.022-.045 0-.09 0-.134 0h.007c-.038 0-.082 0-.127 0-3.41 0-6.584-1.015-9.234-2.76l.063.039c.419.048.904.075 1.396.075h.07-.004c.037 0 .082.001.126.001 2.807 0 5.386-.975 7.417-2.606l-.023.018c-2.639-.05-4.861-1.777-5.65-4.157l-.012-.043c.342.057.738.091 1.141.094h.003c.567 0 1.116-.075 1.637-.216l-.044.01c-1.412-.284-2.615-1.034-3.47-2.08l-.008-.011c-.858-1.011-1.379-2.331-1.379-3.773 0-.028 0-.056.001-.084v.004-.075c.788.452 1.726.732 2.727.768h.011c-.822-.553-1.487-1.279-1.953-2.129l-.016-.031c-.46-.835-.731-1.83-.731-2.889 0-1.126.306-2.18.84-3.084l-.015.028c1.5 1.839 3.337 3.341 5.425 4.427l.095.045c2.022 1.067 4.402 1.743 6.927 1.864l.038.001c-.093-.415-.147-.892-.149-1.382v-.001c.004-3.345 2.717-6.055 6.062-6.055 1.74 0 3.309.733 4.415 1.908l.003.003c1.448-.284 2.735-.792 3.893-1.492l-.053.03c-.455 1.431-1.4 2.596-2.635 3.323l-.028.015c1.294-.148 2.475-.479 3.569-.967l-.077.031z"></path>
+                                                            d="m29.55 2.85c-.841 1.224-1.848 2.26-3.004 3.106l-.036.025q.018.262.018.787c-.004 1.736-.264 3.41-.745 4.987l.032-.122c-.534 1.773-1.272 3.32-2.206 4.724l.04-.065c-.989 1.509-2.132 2.808-3.435 3.927l-.024.02c-1.372 1.153-2.978 2.083-4.73 2.704l-.108.033c-1.765.648-3.803 1.022-5.928 1.022-.045 0-.09 0-.134 0h.007c-.038 0-.082 0-.127 0-3.41 0-6.584-1.015-9.234-2.76l.063.039c.419.048.904.075 1.396.075h.07-.004c.037 0 .082.001.126.001 2.807 0 5.386-.975 7.417-2.606l-.023.018c-2.639-.05-4.861-1.777-5.65-4.157l-.012-.043c.342.057.738.091 1.141.094h.003c.567 0 1.116-.075 1.637-.216l-.044.01c-1.412-.284-2.615-1.034-3.47-2.08l-.008-.011c-.858-1.011-1.379-2.331-1.379-3.773 0-.028 0-.056.001-.084v.004-.075c.788.452 1.726.732 2.727.768h.011c-.822-.553-1.487-1.279-1.953-2.129l-.016-.031c-.46-.835-.731-1.83-.731-2.889 0-1.126.306-2.18.84-3.084l-.015.028c1.5 1.839 3.337 3.341 5.425 4.427l.095.045c2.022 1.067 4.402 1.743 6.927 1.864l.038.001c-.093-.415-.147-.892-.149-1.382v-.001c.004-3.345 2.717-6.055 6.062-6.055 1.74 0 3.309.733 4.415 1.908l.003.003c1.448-.284 2.735-.792 3.893-1.492l-.053.03c-.455 1.431-1.4 2.596-2.635 3.323l-.028.015c1.294-.148 2.475-.479 3.569-.967l-.077.031z"></path>
                                                 </svg>
                                             </a>
                                         @endif
@@ -316,11 +322,11 @@
                                     </div>
                                     <ul class="list-disc mr-10">
                                         @foreach($jobSeeker->experience as $exper)
-                                            <div>
-                                                <li class="mt-2">
-                                                    <p class="text-base font-semibold flex justify-between">
-                                                        <span>{{$exper->name}}</span>
-                                                        <span class="flex gap-5">
+
+                                            <li class="mt-2">
+                                                <p class="text-base font-semibold flex justify-between">
+                                                    <span>{{$exper->name}}</span>
+                                                    <span class="flex gap-5">
                                                   <a href="{{route('jobSeeker.profile.experience.edit',$exper->id)}}">
                                                       <svg xmlns="http://www.w3.org/2000/svg"
                                                            class="h-6 w-6 text-blue-500 opacity-50 hover:opacity-100"
@@ -337,16 +343,16 @@
                                                            stroke="currentColor">
                                                           <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2"
-                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                                         </svg>
                                                   </a>
 
                                                     </span>
-                                                    </p>
-                                                    <p class="text-base">{{$exper->company}}</p>
-                                                    <p class="text-sm">{{ date('Y', strtotime($exper->from))}}
-                                                        - {{ date('Y', strtotime($exper->to))}}</p>
-                                                </li>
+                                                </p>
+                                                <p class="text-base">{{$exper->company}}</p>
+                                                <p class="text-sm">{{ date('Y', strtotime($exper->from))}}
+                                                    - {{ date('Y', strtotime($exper->to))}}</p>
+                                            </li>
 
                                         @endforeach
                                     </ul>
@@ -414,13 +420,13 @@
                                     <a href="{{$jobSeeker->information->CVFile}}" target="_blank"
                                        class="flex items-center justify-center text-center rounded-lg my-5 bg-blue-900 text-white font-semibold text-lg px-4 py-2">
                                         <svg class="w-5 h-5 text-white fill-current" xmlns="http://www.w3.org/2000/svg"
-                                             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 52 52">
+                                             viewBox="0 0 52 52">
                                             <g fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round"
                                                stroke-linejoin="round" stroke-miterlimit="10">
                                                 <path
-                                                    d="M29.808 2H10.086c-.885 0-1.603.718-1.603 1.603v44.794c0 .885.718 1.603 1.603 1.603h31.828c.885 0 1.603-.718 1.603-1.603V15.094"></path>
+                                                        d="M29.808 2H10.086c-.885 0-1.603.718-1.603 1.603v44.794c0 .885.718 1.603 1.603 1.603h31.828c.885 0 1.603-.718 1.603-1.603V15.094"></path>
                                                 <path
-                                                    d="M29.808 2v11.49c0 .886.718 1.604 1.603 1.604h12.106L29.808 2z"></path>
+                                                        d="M29.808 2v11.49c0 .886.718 1.604 1.603 1.604h12.106L29.808 2z"></path>
                                                 <path d="M13.985 7.936h9.776v7.594h-9.776z"></path>
                                                 <g>
                                                     <path d="M26 21.444H37.96"></path>

@@ -41,7 +41,7 @@ class JobSeekerProfileController extends Controller
             'phone' => 'required|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
             'age' => 'required|integer|between:15,80',
             'degree' => 'required|string|max:50',
-            'bio' => 'required|string|max:10000|min:150',
+            'bio' => 'required|string|max:10000|min:50',
             'skills' => 'required|string|max:10000|min:25',
             'web' => 'nullable|url|max:70',
             'linkedin' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?linkedin\.com\/.+/i',
