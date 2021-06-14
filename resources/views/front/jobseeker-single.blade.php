@@ -230,22 +230,22 @@
                                         <div class="flex mt-4 gap-x-3">
                                             <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 mt-6 lg:mt-0">
                                                 {{--  Start Single Employer--}}
-                                                @foreach(collect([$team->leader])->merge($team->members) as $jobSeeker)
+                                                @foreach(collect([$team->leader])->merge($team->members) as $js)
                                                     <div class="shadow-lg bg-white rounded-lg  hover:bg-gray-100">
                                                         <div class="px-2 py-4">
 
                                                             <div class="space-y-2">
                                                                 <img class="m-auto rounded w-36 h-36"
-                                                                     @if(!empty($jobSeeker->information->avatar))
-                                                                     src="{{$jobSeeker->information->avatar}}"
+                                                                     @if(!empty($js->information->avatar))
+                                                                     src="{{$js->information->avatar}}"
                                                                      @else
                                                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAMFBMVEXp7vG6vsG3u77s8fTCxsnn7O/f5OfFyczP09bM0dO8wMPk6ezY3eDd4uXR1tnJzdBvAX/cAAACVElEQVR4nO3b23KDIBRA0ShGU0n0//+2KmO94gWZ8Zxmr7fmwWEHJsJUHw8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwO1MHHdn+L3rIoK6eshsNJ8kTaJI07fERPOO1Nc1vgQm2oiBTWJ+d8+CqV1heplLzMRNonED+4mg7L6p591FC+133/xCRNCtd3nL9BlxWP++MOaXFdEXFjZ7r8D9l45C8y6aG0cWtP/SUGhs2d8dA/ZfGgrzYX+TVqcTNRRO9l+fS5eSYzQs85psUcuzk6igcLoHPz2J8gvzWaH/JLS+95RfOD8o1p5CU5R7l5LkfKEp0mQ1UX7hsVXqDpRrifILD/3S9CfmlUQFhQfuFu0STTyJ8gsP3PH7GVxN1FC4t2sbBy4TNRTu7LyHJbqaqKFw+/Q0ncFloo7CjRPwMnCWqKXQZ75El4nKC9dmcJaou9AXOE5UXbi+RGeJygrz8Uf+GewSn9uXuplnWDZJ7d8f24F/s6iq0LYf9olbS3Q8i5oKrRu4S9ybwaQ/aCkqtP3I28QDgeoK7TBya/aXqL5COx67PTCD2grtdOwH+pQV2r0a7YVBgZoKwwIVFQYG6ikMDVRTGByopjD8ATcKb0UhhRTe77sKs2DV7FKSjId18TUEBYVyLhUThWfILHTDqmI85/2RWWjcE/bhP6OD7maT3h20MHsA47JC3PsW0wcwLhv9t0OOPOIkCn21y2bXXwlyylxiYMPk1SuCSmpfK8bNQvIrpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwNX4BCbAju9/X67UAAAAASUVORK5CYII="
                                                                      @endif
                                                                      alt="">
                                                                 <div class="text-base text-center mt-1">
-                                                                    <a href="{{route('jobseeker.show',$jobSeeker)}}"
+                                                                    <a href="{{route('jobseeker.show',$js)}}"
                                                                        class="flex items-center justify-center font-semibold">
-                                                                        <span class="text-blue-500 mr-1">{{$jobSeeker->name}}</span>
+                                                                        <span class="text-blue-500 mr-1">{{$js->name}}</span>
                                                                     </a>
                                                                 </div>
                                                                 <div class="flex text-sm text-center justify-center items-center">
@@ -254,7 +254,7 @@
                                                                         <path fill="#222"
                                                                               d="M49.24,24.26V39.74a9.51,9.51,0,0,1-9.5,9.5H24.26a9.51,9.51,0,0,1-9.5-9.5V24.26a9.51,9.51,0,0,1,9.5-9.5H39.74A9.51,9.51,0,0,1,49.24,24.26Z"></path>
                                                                     </svg>
-                                                                    <span class="mr-1">@if($jobSeeker->teamLeader )
+                                                                    <span class="mr-1">@if($js->teamLeader )
                                                                             مدير @else عضو @endif</span>
                                                                 </div>
 
