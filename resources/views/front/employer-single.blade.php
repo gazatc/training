@@ -9,12 +9,12 @@
                 <div class="w-full lg:w-1/4">
                     <div class="bg-white rounded-lg border border-gray-300 shadow-lg">
                         <h2 class="rounded-t-lg text-gray-800 uppercase text-center tracking-wide text-xl font-semibold mb-2 py-2 bg-gray-100">
-                            بيانات الشركة/المؤسسة
+                            بيانات صاحب العمل
                         </h2>
                         <div class="px-2 py-4">
                             <div>
                                 <div class="m-auto w-36 h-36 relative">
-                                    <img class="rounded w-36 h-36"
+                                    <img class="rounded w-36 h-36 border border-blue-900"
                                          @if(!empty($employer->information->avatar))
                                          src="{{$employer->information->avatar}}"
                                          @else
@@ -25,7 +25,7 @@
                                     @if($employer->verified == 1)
 
                                         <svg
-                                                class="text-green-500 fill-current w-6 h-6 absolute bottom-0 left-0 -ml-2 -mb-2"
+                                                class="text-green-500 fill-current w-6 h-6 absolute bottom-0 left-0 -ml-2 -mb-2 bg-white rounded rounded-xl"
                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                 fill="currentColor">
                                             <path fill-rule="evenodd"
@@ -52,7 +52,7 @@
                             <div class="text-base rounded-lg font-semibold bg-gray-100">
                                 <a href=""
                                    class="flex rounded py-2 hover:bg-gray-200 border-r-4 border-blue-900 text-blue-900">
-                                    <span class="mr-1 w-full text-right px-4">عن الشركة/المؤسسة</span>
+                                    <span class="mr-1 w-full text-right px-4">عن صاحب العمل</span>
                                 </a>
                                 <hr>
                                 <a href="/?employer={{$employer->id}}" class="flex rounded py-2 hover:bg-gray-200">
@@ -75,7 +75,7 @@
                         {{--Start Job Description--}}
                         <div class="justify-between">
                             <h2 class="rounded-t-lg text-gray-800 font-bold uppercase tracking-wide text-lg font-semibold mb-2 py-2 px-6 bg-gray-100">
-                                عن الشركة/المؤسسة
+                                عن صاحب العمل
                             </h2>
                             <div class="py-2 px-6 mb-2">
                                 <div>

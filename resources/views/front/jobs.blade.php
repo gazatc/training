@@ -64,7 +64,7 @@
                             <div class="flex flex-col">
                                 <select name="category"
                                     class="border border-gray-300 w-full text-sm rounded-sm px-2 focus:outline-none focus:border-blue-900">
-                                    <option class="text-gray-500"  disabled selected>كل المجالات</option>
+                                    <option value="" class="text-gray-500"  selected>كل المجالات</option>
                                     @foreach(\App\Category::all() as $category)
                                         <option value="{{$category->id}}" {{ request()->category == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                                     @endforeach
@@ -107,11 +107,11 @@
                 <div class="w-full lg:w-3/4">
                     <div class="shadow-lg bg-white rounded-lg border border-gray-300 mt-6 lg:mt-0 lg:mr-8">
                         {{--Start Single Job--}}
-                        @foreach($jobs as $job)
+                        @forelse($jobs as $job)
                             <div
                                 class="lg:flex items-center justify-between border-b py-4 px-6 hover:bg-gray-100 @if($loop->first)rounded-t-lg @elseif($loop->last) rounded-b-lg @endif">
                                 <div class="flex">
-                                    <img class="rounded w-24 h-24"
+                                    <img class="rounded w-24 h-24 border border-blue-900"
                                          @if(!empty($job->employer->information->avatar))
                                          src="{{$job->employer->information->avatar}}"
                                          @else
@@ -199,9 +199,15 @@
                                     </button>
                                 </form>
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="text-center py-2">
+                                <p>لا يوجد وظائف حاليا</p>
+                            </div>
+                        @endforelse
                         {{--End Single Job--}}
-                        {{$jobs->links()}}
+                    </div>
+                    <div dir="ltr" class="mt-3 px-8">
+                        {{$jobs->appends(request()->query())->links('pagination::tailwind')}}
                     </div>
                 </div>
                 {{--End Jobs Menu--}}

@@ -17,8 +17,7 @@ class EmployerTest extends TestCase
     use RefreshDatabase;
 
     /** @test **/
-    public function not_verified_employer_cant_create_job()
-    {
+    public function not_verified_employer_cant_create_job() {
         $this->withoutExceptionHandling();
 
         $employer = factory(Employer::class)->create(['verified' => 0]);
@@ -42,11 +41,9 @@ class EmployerTest extends TestCase
         $this->post(route('job.store', $employer), $attributes)
             ->assertSessionHas('failed', 'الرجاء توثيق الحساب حتى تتمكن من اضافة الوظائف');
         $this->assertEquals(Job::count(), $count);
-
     }
     /** @test **/
-    public function verified_employer_can_create_job()
-    {
+    public function verified_employer_can_create_job() {
         $this->withoutExceptionHandling();
 
         $employer = factory(Employer::class)->create(['verified' => 1]);
@@ -73,8 +70,7 @@ class EmployerTest extends TestCase
     }
 
     /** @test **/
-    public function not_verified_employer_cant_create_training()
-    {
+    public function not_verified_employer_cant_create_training() {
         $this->withoutExceptionHandling();
 
         $employer = factory(Employer::class)->create(['verified' => 0]);
@@ -94,11 +90,9 @@ class EmployerTest extends TestCase
         $this->post(route('training.store', $employer), $attributes)
             ->assertSessionHas('failed', 'الرجاء توثيق الحساب حتى تتمكن من اضافة التدريب');
         $this->assertEquals(Training::count(), $count);
-
     }
     /** @test **/
-    public function verified_employer_can_create_training()
-    {
+    public function verified_employer_can_create_training() {
         $this->withoutExceptionHandling();
 
         $employer = factory(Employer::class)->create(['verified' => 1]);

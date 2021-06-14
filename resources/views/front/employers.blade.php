@@ -3,7 +3,7 @@
     <main class="py-6">
         <div class="container mx-auto px-4">
             <div class="flex justify-center border border-blue-900 py-6 bg-blue-900 rounded-lg">
-                <span class="text-yellow-300 text-2xl font-semibold">» الشركات «</span>
+                <span class="text-yellow-300 text-2xl font-semibold">» أصحاب العمل «</span>
             </div>
 
             <div class="flex flex-wrap mt-6">
@@ -74,7 +74,7 @@
                         class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-2 mt-6 lg:mt-0 lg:mr-8">
 
                         {{--Start Single Employer--}}
-                        @foreach($employers as $employer)
+                        @forelse($employers as $employer)
                             <div class="shadow-lg bg-white rounded-lg border border-gray-300 hover:bg-gray-100">
                                 <div class="px-2 py-4">
                                     <div class="space-y-2">
@@ -116,9 +116,18 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                        {{--End Single Employer--}}
+                        @empty
 
+                            {{--End Single Employer--}}
+                    </div>
+                    <div class="shadow-lg bg-white rounded-lg border border-gray-300 mt-6 lg:mt-0 lg:mr-8">
+                        <div class="text-center py-2">
+                            <p>لا يوجد أصحاب عمل حاليا</p>
+                        </div>
+                    </div>
+                    @endforelse
+                    <div dir="ltr" class="mt-3 px-8">
+                        {{$employers->appends(request()->query())->links('pagination::tailwind')}}
                     </div>
                 </div>
                 {{--End Employers Menu--}}

@@ -49,7 +49,7 @@ class JobInquireController extends Controller
 //        id	job_seeker_id	message	reply	inquirable_id	inquirable_type	created_at	updated_at
 //        dd($request->all());
         $request->validate([
-            'message' => 'required'
+            'message' => 'required|string|max:1000'
         ]);
         if(auth()->guard('jobSeeker')->check()){
         $jobSeeker = auth()->guard('jobSeeker')->user();

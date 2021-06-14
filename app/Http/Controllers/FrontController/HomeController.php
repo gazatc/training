@@ -19,9 +19,11 @@ class HomeController extends Controller
 
         $jobs = Job::where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
-                return $q->where('title', 'like', '%' . $request->search . '%')
-                    ->orWhere('description', 'like', '%' . $request->search . '%')
-                    ->orWhere('requirement', 'like', '%' . $request->search . '%');
+                return $q->where(function ($query) use ($request) {
+                    $query->where('title', 'like', '%' . $request->search . '%')
+                        ->orWhere('description', 'like', '%' . $request->search . '%')
+                        ->orWhere('requirement', 'like', '%' . $request->search . '%');
+                });
             });
             $query->when($request->target, function ($q2) use ($request) {
                 return $q2->whereIn('for', $request->target);
@@ -64,7 +66,7 @@ class HomeController extends Controller
             })->when($request->verified, function ($q4) use ($request) {
                 return $q4->where('verified', $request->verified);
             });
-        })->inRandomOrder()->get();
+        })->latest()->paginate(4);
 
         return view('front.employers', compact('employers'));
     }
@@ -73,9 +75,11 @@ class HomeController extends Controller
     {
         $trainings = Training::where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
-                return $q->where('title', 'like', '%' . $request->search . '%')
-                    ->orWhere('description', 'like', '%' . $request->search . '%')
-                    ->orWhere('requirement', 'like', '%' . $request->search . '%');
+                return $q->where(function ($query) use ($request) {
+                    return $query->where('title', 'like', '%' . $request->search . '%')
+                        ->orWhere('description', 'like', '%' . $request->search . '%')
+                        ->orWhere('requirement', 'like', '%' . $request->search . '%');
+                });
             });
             $query->when($request->category, function ($q3) use ($request) {
                 return $q3->where('category_id', $request->category);
@@ -94,14 +98,16 @@ class HomeController extends Controller
     {
         $jobSeekers = JobSeeker::with(['information', 'verify'])->where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
-                return $q->where('username', 'like', '%' . $request->search . '%')
-                    ->orWhere('firstName', 'like', '%' . $request->search . '%')
-                    ->orWhere('lastName', 'like', '%' . $request->search . '%')
-                    ->orWhere('email', 'like', '%' . $request->search . '%')
-                    ->orWhereHas('information', function ($query) use ($request) {
-                        $query->where('phone', 'like', '%' . $request->search . '%')
-                            ->orWhere('age', 'like', '%' . $request->search . '%');
-                    });
+                return $q->where(function ($query) use ($request) {
+                    return $query->where('username', 'like', '%' . $request->search . '%')
+                        ->orWhere('firstName', 'like', '%' . $request->search . '%')
+                        ->orWhere('lastName', 'like', '%' . $request->search . '%')
+                        ->orWhere('email', 'like', '%' . $request->search . '%')
+                        ->orWhereHas('information', function ($query) use ($request) {
+                            $query->where('phone', 'like', '%' . $request->search . '%')
+                                ->orWhere('age', 'like', '%' . $request->search . '%');
+                        });
+                });
             })->when($request->region, function ($q2) use ($request) {
                 return $q2->whereHas('information', function ($q2) use ($request) {
                     $q2->where('region_id', $request->region);
@@ -113,18 +119,21 @@ class HomeController extends Controller
             })->when($request->verified, function ($q4) use ($request) {
                 return $q4->where('verified', $request->verified);
             });
-        })->inRandomOrder()->get();
+        })->latest()->paginate(15);
         return view('front.jobSeekers', compact('jobSeekers'));
     }
 
-    function contactForm() {
+    function contactForm()
+    {
         return view('front.contact');
     }
-    function contactSend(Request $request) {
+
+    function contactSend(Request $request)
+    {
         $attributes = $request->validate([
-            'email' =>  'required|email',
-            'title'=>  'required|string',
-            'message'=>  'required|string|max:250'
+            'email' => 'required|email',
+            'title' => 'required|string',
+            'message' => 'required|string|max:250'
         ]);
 
         Message::create([

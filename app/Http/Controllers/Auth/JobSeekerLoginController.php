@@ -50,10 +50,10 @@ class JobSeekerLoginController extends DefaultLoginController
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
             'phone' => 'required|string|max:20',
-            'age' => 'required|max:3',
+            'age' => 'required|integer|between:15,80',
             'degree' => 'required|string|max:50',
-            'bio' => 'required|string|max:350',
-            'skills' => 'required|string|max:350',
+            'bio' => 'required|string|max:10000|min:150',
+            'skills' => 'required|string|max:10000|min:50',
         ]);
             if ($request->avatar) {
                 $attributes['avatar'] = $request->avatar->store('jobSeeker_avatars');

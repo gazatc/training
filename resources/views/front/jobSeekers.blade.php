@@ -3,7 +3,7 @@
     <main class="py-6">
         <div class="container mx-auto px-4">
             <div class="flex justify-center border border-blue-900 py-6 bg-blue-900 rounded-lg">
-                <span class="text-yellow-300 text-2xl font-semibold">» الأشخاص «</span>
+                <span class="text-yellow-300 text-2xl font-semibold">» الباحثين عن عمل «</span>
             </div>
 
             <div class="flex flex-wrap mt-6">
@@ -15,10 +15,10 @@
                         </h2>
                         <form action="{{route('jobSeekers')}}" method="get" class="px-2 py-2">
                             <input
-                                class="border border-gray-300 w-full text-sm rounded-sm px-3 py-1.5 focus:outline-none focus:border-blue-900"
-                                placeholder="إبحث عن موظف/متدرب..."
-                                value="{{ request()->search }}"
-                                type="text" name="search">
+                                    class="border border-gray-300 w-full text-sm rounded-sm px-3 py-1.5 focus:outline-none focus:border-blue-900"
+                                    placeholder="إبحث عن موظف/متدرب..."
+                                    value="{{ request()->search }}"
+                                    type="text" name="search">
 
                             <hr class="my-2">
 
@@ -28,7 +28,7 @@
                             <div class="flex flex-col">
                                 <select name="category"
                                         class="border border-gray-300 w-full text-sm rounded-sm px-2 focus:outline-none focus:border-blue-900">
-                                    <option class="text-gray-500"  disabled selected>كل المجالات</option>
+                                    <option class="text-gray-500" disabled selected>كل المجالات</option>
                                     @foreach(\App\Category::all() as $category)
                                         <option value="{{$category->id}}" {{ request()->category == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                                     @endforeach
@@ -43,8 +43,9 @@
                             <div class="flex flex-col">
                                 @foreach(\App\Region::all() as $region)
                                     <label class="inline-flex items-center">
-                                        <input type="checkbox" name="region[]" value="{{$region->id}}" class="form-checkbox h-3.5 w-3.5" {{ in_array($region->id, request()->region ?? []) ? 'checked' : '' }}><span
-                                            class="mr-2 text-sm text-gray-700">{{$region->name}}</span>
+                                        <input type="checkbox" name="region[]" value="{{$region->id}}"
+                                               class="form-checkbox h-3.5 w-3.5" {{ in_array($region->id, request()->region ?? []) ? 'checked' : '' }}><span
+                                                class="mr-2 text-sm text-gray-700">{{$region->name}}</span>
                                     </label>
                                 @endforeach
 
@@ -54,12 +55,12 @@
 
 
                             <button
-                                class="flex items-center justify-center bg-blue-900 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-opacity-50">
+                                    class="flex items-center justify-center bg-blue-900 w-full text-sm text-white font-semibold rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-opacity-50">
                                 <svg class="w-5 h-5 text-white fill-current" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24">
                                     <path fill="none" d="M0 0h24v24H0V0z"></path>
                                     <path
-                                        d="M15.5 14h-.79l-.28-.27c1.2-1.4 1.82-3.31 1.48-5.34-.47-2.78-2.79-5-5.59-5.34-4.23-.52-7.79 3.04-7.27 7.27.34 2.8 2.56 5.12 5.34 5.59 2.03.34 3.94-.28 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                            d="M15.5 14h-.79l-.28-.27c1.2-1.4 1.82-3.31 1.48-5.34-.47-2.78-2.79-5-5.59-5.34-4.23-.52-7.79 3.04-7.27 7.27.34 2.8 2.56 5.12 5.34 5.59 2.03.34 3.94-.28 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                                 </svg>
                                 <span>بحث</span>
                             </button>
@@ -70,10 +71,9 @@
 
                 {{--Start Employers Menu--}}
                 <div class="w-full lg:w-3/4">
-                    <div
-                        class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-2 mt-6 lg:mt-0 lg:mr-8">
+                    <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-2 mt-6 lg:mt-0 lg:mr-8">
                         {{--Start Single Employer--}}
-                        @foreach($jobSeekers as $jobSeeker)
+                        @forelse($jobSeekers as $jobSeeker)
 
                             <div class="shadow-lg bg-white rounded-lg border border-gray-300 hover:bg-gray-100">
 
@@ -110,7 +110,7 @@
                                         <div class="flex text-center text-sm items-center justify-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 64 64">
                                                 <path
-                                                    d="M 32 10.328125 C 23.715733 10.328125 17 17.043817 17 25.328125 C 17 31.933454 26.537074 46.441396 30.402344 52.050781 C 31.274069 53.315902 32.72598 53.315827 33.597656 52.050781 C 37.462869 46.441509 47 31.933529 47 25.328125 C 47 17.043817 40.284274 10.328125 32 10.328125 z M 32 17.328125 A 7.9999992 7.9999992 0 0 1 40 25.328125 A 7.9999992 7.9999992 0 0 1 32 33.328125 A 7.9999992 7.9999992 0 0 1 24 25.328125 A 7.9999992 7.9999992 0 0 1 32 17.328125 z "></path>
+                                                        d="M 32 10.328125 C 23.715733 10.328125 17 17.043817 17 25.328125 C 17 31.933454 26.537074 46.441396 30.402344 52.050781 C 31.274069 53.315902 32.72598 53.315827 33.597656 52.050781 C 37.462869 46.441509 47 31.933529 47 25.328125 C 47 17.043817 40.284274 10.328125 32 10.328125 z M 32 17.328125 A 7.9999992 7.9999992 0 0 1 40 25.328125 A 7.9999992 7.9999992 0 0 1 32 33.328125 A 7.9999992 7.9999992 0 0 1 24 25.328125 A 7.9999992 7.9999992 0 0 1 32 17.328125 z "></path>
                                             </svg>
                                             <span class="">{{$jobSeeker->information->region->name}}</span>
                                         </div>
@@ -119,9 +119,18 @@
                                 </div>
 
                             </div>
-                        @endforeach
-                        {{--End Single Employer--}}
+                        @empty
 
+                            {{--End Single Employer--}}
+                    </div>
+                    <div class="shadow-lg bg-white rounded-lg border border-gray-300 mt-6 lg:mt-0 lg:mr-8">
+                        <div class="text-center py-2">
+                            <p>لا يوجد باحثين عن عمل حاليا</p>
+                        </div>
+                    </div>
+                    @endforelse
+                    <div dir="ltr" class="mt-3 px-8">
+                        {{$jobSeekers->appends(request()->query())->links('pagination::tailwind')}}
                     </div>
                 </div>
                 {{--End Employers Menu--}}

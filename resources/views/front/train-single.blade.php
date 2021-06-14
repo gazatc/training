@@ -21,7 +21,7 @@
                                      alt="">
                                 <div class="flex justify-center mt-2 font-semibold text-xl">{{$training->title}}</div>
                                 <div class="text-base mt-1">
-                                    <a href="" class="flex items-center justify-center">
+                                    <a href="{{route('employer.show', $training->employer->id)}}" target="_blank" class="flex items-center justify-center">
 
                                         <span class="text-blue-500 mr-1">{{$training->employer->name}}</span>
                                         @if($training->employer->verified == 1)
@@ -89,7 +89,7 @@
                                 @endif
 
                                 @else
-                                    <span class="block text-red-600 pt-3">يرجى تسجيل الدخول للتقديم</span>
+                                    <a href="{{route('jobSeeker.login_form')}}" class="block text-red-600 pt-3 hover:underline">يرجى تسجيل الدخول للتقديم</a>
                                 @endif
                             </div>
                         </div>
@@ -153,8 +153,9 @@
                                     @csrf
                                     <label for="text">
                                     <textarea name="message" id="" cols="50"
-                                              rows="3"
-                                              class="border border-gray-300 w-1/2 text-sm rounded-sm
+                                              rows="5"
+                                              placeholder="اكتب استفسارك هنا..." required
+                                              class="border border-gray-300 w-full text-sm rounded-sm
                                               bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900"></textarea>
                                     </label>
                                     @error('message')

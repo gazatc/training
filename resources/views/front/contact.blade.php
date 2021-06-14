@@ -22,6 +22,10 @@
                                 <input type="text"
                                        name="title"
                                        class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
+                                @error('title')
+                                <span class="block"
+                                      style="color: red; margin-right: 10px">{{ $errors->first('title') }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="py-2">
@@ -30,6 +34,10 @@
                                 <input type="email"
                                        name="email"
                                        class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900">
+                                @error('email')
+                                <span class="block"
+                                      style="color: red; margin-right: 10px">{{ $errors->first('email') }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="py-2">
@@ -37,6 +45,10 @@
                             <div class="pt-3">
                             <textarea name="message" id="" cols="30" rows="5"
                                       class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900"></textarea>
+                                @error('message')
+                                <span class="block"
+                                      style="color: red; margin-right: 10px">{{ $errors->first('message') }}</span>
+                                @enderror
                             </div>
                         </div>
 

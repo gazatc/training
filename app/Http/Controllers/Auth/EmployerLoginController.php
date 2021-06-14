@@ -46,11 +46,11 @@ class EmployerLoginController extends DefaultLoginController
             'avatar' => 'nullable|image',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'phone' => 'required|string|max:20',
+            'phone' => 'required|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
             'type' => 'required|string|max:30',
             'year' => 'required|max:4',
             'address' => 'required|string|max:50',
-            'bio' => 'required|string|max:150',
+            'bio' => 'required|string|max:10000|min:150',
         ]);
 
 

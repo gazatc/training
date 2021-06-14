@@ -38,19 +38,19 @@ class JobSeekerProfileController extends Controller
             'avatar' => 'nullable|image',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'phone' => 'required|string|max:20',
-            'age' => 'required|max:3',
+            'phone' => 'required|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'age' => 'required|integer|between:15,80',
             'degree' => 'required|string|max:50',
-            'bio' => 'required|string|max:350',
-            'skills' => 'required|string|max:350',
-            'web' => 'nullable|url|max:50',
-            'linkedin' => 'nullable|url|max:50',
-            'facebook' => 'nullable|url|max:50',
-            'twitter' => 'nullable|url|max:50',
-            'instagram' => 'nullable|url|max:50',
-            'whatsapp' => 'nullable|url|max:50',
-            'behance' => 'nullable|url|max:50',
-            'github' => 'nullable|url|max:50',
+            'bio' => 'required|string|max:10000|min:150',
+            'skills' => 'required|string|max:10000|min:25',
+            'web' => 'nullable|url|max:70',
+            'linkedin' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?linkedin\.com\/.+/i',
+            'facebook' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?facebook\.com\/.+/i',
+            'twitter' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?twitter\.com\/.+/i',
+            'instagram' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?instagram\.com\/.+/i',
+            'whatsapp' => 'nullable|url|max:70',
+            'behance' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?behance\.net\/.+/i',
+            'github' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?github\.com\/.+/i',
         ]);
 
         if ($request->avatar) {
@@ -137,8 +137,8 @@ class JobSeekerProfileController extends Controller
     {
         $attributes = $request->validate([
             'PID' => 'required|unique:job_seeker_verifies',
-            'PID_image' => 'required|file',
-            'PID_user_image' => 'required|file',
+            'PID_image' => 'required|file|image',
+            'PID_user_image' => 'required|file|image',
         ]);
             $attributes['PID_image'] = $request->PID_image->store('jobseeker_verify');
             $attributes['PID_user_image'] = $request->PID_user_image->store('jobseeker_verify');

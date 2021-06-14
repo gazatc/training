@@ -48,7 +48,7 @@
                                         <select class="form-control z-index show-tick nominate_beneficiary"
                                                 data-live-search="true"
                                                 name="training" required>
-                                            <option selected disabled>- اختيار الوظيفة -</option>
+                                            <option selected disabled>- اختيار التدريب -</option>
                                             @foreach($trainings as $training)
                                                 <option {{ old('training', '' ) === $training->id ? 'selected' : '' }} value="{{ $training->id }}">
                                                     {{ $training->title }}

@@ -8,7 +8,7 @@
                 <div class="w-full lg:w-1/4">
                     <div class="bg-white rounded-lg border border-gray-300 shadow-lg">
                         <h2 class="rounded-t-lg text-gray-800 uppercase text-center tracking-wide text-xl font-semibold mb-2 py-2 bg-gray-100">
-                            بيانات الشخص
+                            بيانات الباحث عن عمل
                         </h2>
                         <div class="px-2 py-4">
                             <div>
@@ -91,7 +91,7 @@
                                     <div class="py-2 px-6 ">
                                         <div class="mt-2 text-justify">
                                             <div class="block my-2">
-                                                <label for="">الجامعة/المعهد/المؤسسة الى اخ...</label>
+                                                <label for="">الجامعة/المعهد/المؤسسة</label>
                                             </div>
                                             <input name="institution"
                                                    class="border border-gray-300 w-full  text-sm rounded-sm px-3 py-2 focus:outline-none focus:border-blue-900"

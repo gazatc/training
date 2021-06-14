@@ -31,14 +31,16 @@ class JobSeekerController extends Controller
         //
         $jobSeekers = JobSeeker::with(['information', 'verify'])->where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
-                return $q->where('username', 'like', '%' . $request->search . '%')
-                    ->orWhere('firstName', 'like', '%' . $request->search . '%')
-                    ->orWhere('lastName', 'like', '%' . $request->search . '%')
-                    ->orWhere('email', 'like', '%' . $request->search . '%')
-                    ->orWhereHas('information', function ($query) use ($request) {
-                        $query->where('phone', 'like', '%' . $request->search . '%')
-                            ->orWhere('age', 'like', '%' . $request->search . '%');
-                    });
+                return $q->where(function ($q2) use ($request) {
+                    $q2->where('username', 'like', '%' . $request->search . '%')
+                        ->orWhere('firstName', 'like', '%' . $request->search . '%')
+                        ->orWhere('lastName', 'like', '%' . $request->search . '%')
+                        ->orWhere('email', 'like', '%' . $request->search . '%')
+                        ->orWhereHas('information', function ($q2) use ($request) {
+                            $q2->where('phone', 'like', '%' . $request->search . '%')
+                                ->orWhere('age', 'like', '%' . $request->search . '%');
+                        });
+                });
             })->when($request->region, function ($q2) use ($request) {
                 return $q2->whereHas('information', function ($q2) use ($request) {
                     $q2->where('region_id', $request->region);
@@ -89,19 +91,19 @@ class JobSeekerController extends Controller
             'avatar' => 'nullable|image',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'phone' => 'required|string|max:20',
-            'age' => 'required|max:3',
+            'phone' => 'required|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'age' => 'required|integer|between:15,80',
             'degree' => 'required|string|max:50',
-            'bio' => 'required|string|max:350',
-            'skills' => 'required|string|max:350',
-            'web' => 'nullable|url|max:50',
-            'linkedin' => 'nullable|url|max:50',
-            'facebook' => 'nullable|url|max:50',
-            'twitter' => 'nullable|url|max:50',
-            'instagram' => 'nullable|url|max:50',
-            'whatsapp' => 'nullable|url|max:50',
-            'behance' => 'nullable|url|max:50',
-            'github' => 'nullable|url|max:50',
+            'bio' => 'required|string|max:10000|min:150',
+            'skills' => 'required|string|max:10000|min:25',
+            'web' => 'nullable|url|max:70',
+            'linkedin' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?linkedin\.com\/.+/i',
+            'facebook' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?facebook\.com\/.+/i',
+            'twitter' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?twitter\.com\/.+/i',
+            'instagram' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?instagram\.com\/.+/i',
+            'whatsapp' => 'nullable|url|max:70',
+            'behance' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?behance\.net\/.+/i',
+            'github' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?github\.com\/.+/i',
         ]);
         try {
             if ($request->avatar) {
@@ -189,19 +191,19 @@ class JobSeekerController extends Controller
             'avatar' => 'nullable|image',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'phone' => 'required|string|max:20',
-            'age' => 'required|max:3',
+            'phone' => 'required|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'age' => 'required|integer|between:15,80',
             'degree' => 'required|string|max:50',
-            'bio' => 'required|string|max:350',
-            'skills' => 'required|string|max:350',
-            'web' => 'nullable|url|max:50',
-            'linkedin' => 'nullable|url|max:50',
-            'facebook' => 'nullable|url|max:50',
-            'twitter' => 'nullable|url|max:50',
-            'instagram' => 'nullable|url|max:50',
-            'whatsapp' => 'nullable|url|max:50',
-            'behance' => 'nullable|url|max:50',
-            'github' => 'nullable|url|max:50',
+            'bio' => 'required|string|max:10000|min:150',
+            'skills' => 'required|string|max:10000|min:25',
+            'web' => 'nullable|url|max:70',
+            'linkedin' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?linkedin\.com\/.+/i',
+            'facebook' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?facebook\.com\/.+/i',
+            'twitter' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?twitter\.com\/.+/i',
+            'instagram' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?instagram\.com\/.+/i',
+            'whatsapp' => 'nullable|url|max:70',
+            'behance' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?behance\.net\/.+/i',
+            'github' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?github\.com\/.+/i',
         ]);
         try {
             if ($request->avatar) {

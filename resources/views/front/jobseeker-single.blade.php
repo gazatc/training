@@ -8,7 +8,7 @@
                 <div class="w-full lg:w-1/4">
                     <div class="bg-white rounded-lg border border-gray-300 shadow-lg">
                         <h2 class="rounded-t-lg text-gray-800 uppercase text-center tracking-wide text-xl font-semibold mb-2 py-2 bg-gray-100">
-                            بيانات الشخص
+                            بيانات الباحث عن العمل
                         </h2>
                         <div class="px-2 py-4">
                             <div>

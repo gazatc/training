@@ -71,11 +71,11 @@
                 <div class="w-full lg:w-3/4">
                     <div class="shadow-lg bg-white rounded-lg border border-gray-300 mt-6 lg:mt-0 lg:mr-8">
                         {{--Start Single Job--}}
-                        @foreach($trainings as $train)
+                        @forelse($trainings as $train)
                             <div
                                 class="lg:flex items-center justify-between border-b py-4 px-6 hover:bg-gray-100 @if($loop->first)rounded-t-lg @elseif($loop->last) rounded-b-lg @endif">
                                 <div class="flex">
-                                    <img class="rounded w-24 h-24"
+                                    <img class="rounded w-24 h-24 border border-blue-900"
                                          @if(!empty($train->employer->information->avatar))
                                          src="{{$train->employer->information->avatar}}"
                                          @else
@@ -143,9 +143,15 @@
                                     </button>
                                 </form>
                             </div>
+                        @empty
+                            <div class="text-center py-2">
+                                <p>لا يوجد تدريبات حاليا</p>
+                            </div>
+                        @endforelse
                             {{--End Single Job--}}
-                        @endforeach
-
+                    </div>
+                    <div dir="ltr" class="mt-3 px-8">
+                        {{$trainings->appends(request()->query())->links('pagination::tailwind')}}
                     </div>
                 </div>
                 {{--End Jobs Menu--}}

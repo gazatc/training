@@ -13,8 +13,11 @@ class RegionSeeder extends Seeder
     {
         //
         $regions = [
-            ['name' => 'region1'],
-            ['name' => 'region2'],
+            ['name' => 'شمال غزة'],
+            ['name' => 'غزة'],
+            ['name' => 'الوسطى'],
+            ['name' => 'خانيونس'],
+            ['name' => 'رفح'],
         ];
         foreach ($regions as $region){
             \App\Region::create($region);

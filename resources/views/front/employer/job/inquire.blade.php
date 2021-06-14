@@ -70,17 +70,17 @@
                                         {{$inquire->jobSeeker->name}}
                                     </a>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4">
                                     {{$inquire->message}}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4">
                                     {{$inquire->reply ?? 'لم يتم الرد بعد'}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{$inquire->created_at}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{$inquire->updated_at}}
+                                    {{ ($inquire->created_at != $inquire->updated_at) ? $inquire->updated_at->toDateString() : '-'}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="{{route('job.reply_to_this_inquire',$inquire)}}" class="text-indigo-600 hover:text-indigo-900 hover:underline">

@@ -11,7 +11,7 @@
                     <div class="bg-white rounded-lg border border-gray-300 shadow-lg">
 
                         <h2 class="rounded-t-lg text-gray-800 uppercase text-center tracking-wide text-xl font-semibold mb-2 py-2 bg-gray-100">
-                            بيانات الشركة/المؤسسة
+                            بيانات صاحب العمل
                         </h2>
                         <div class="px-2 py-4">
                             <div>
@@ -51,7 +51,7 @@
 
                                 <a href=""
                                    class="flex rounded py-2 hover:bg-gray-200 border-r-4 border-blue-900 text-blue-900">
-                                    <span class="mr-1 w-full text-right px-4">عن الشركة/المؤسسة</span>
+                                    <span class="mr-1 w-full text-right px-4">عن صاحب العمل</span>
                                 </a>
                                 <hr>
                                 <a href="{{route('job.index')}}" class="flex rounded py-2 hover:bg-gray-200">

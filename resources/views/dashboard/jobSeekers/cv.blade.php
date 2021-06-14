@@ -76,22 +76,22 @@
                                                                 <input type="text"
                                                                        name="education[{{ $loop->index }}][institution]"
                                                                        class="form-control"
-                                                                       value="{{ $edu->institution }}">
+                                                                       value="{{ $edu->institution }}" required>
                                                             </td>
                                                             <td>
                                                                 <input type="text"
                                                                        name="education[{{ $loop->index }}][degree]"
-                                                                       class="form-control" value="{{ $edu->degree }}">
+                                                                       class="form-control" value="{{ $edu->degree }}" required>
                                                             </td>
                                                             <td>
                                                                 <input type="date"
                                                                        name="education[{{ $loop->index }}][from]"
-                                                                       class="form-control" value="{{ $edu->from }}">
+                                                                       class="form-control" value="{{ $edu->from }}" required>
                                                             </td>
                                                             <td>
                                                                 <input type="date"
                                                                        name="education[{{ $loop->index }}][to]"
-                                                                       class="form-control" value="{{ $edu->to }}">
+                                                                       class="form-control" value="{{ $edu->to }}" required>
                                                             </td>
                                                             <td>
                                                                 <button class="btn btn-sm btn-danger btn-round delete_education"
@@ -104,19 +104,19 @@
                                                         <tr>
                                                             <td>
                                                                 <input type="text" name="education[0][institution]"
-                                                                       class="form-control">
+                                                                       class="form-control" required>
                                                             </td>
                                                             <td>
                                                                 <input type="text" name="education[0][degree]"
-                                                                       class="form-control">
+                                                                       class="form-control" required>
                                                             </td>
                                                             <td>
                                                                 <input type="date" name="education[0][from]"
-                                                                       class="form-control">
+                                                                       class="form-control" required>
                                                             </td>
                                                             <td>
                                                                 <input type="date" name="education[0][to]"
-                                                                       class="form-control">
+                                                                       class="form-control" required>
                                                             </td>
                                                             <td>
                                                                 <button class="btn btn-sm btn-danger btn-round delete_education"
@@ -163,22 +163,22 @@
                                                             <td>
                                                                 <input type="text"
                                                                        name="experience[{{ $loop->index }}][name]"
-                                                                       class="form-control" value="{{ $exp->name }}">
+                                                                       class="form-control" value="{{ $exp->name }}" required>
                                                             </td>
                                                             <td>
                                                                 <input type="text"
                                                                        name="experience[{{ $loop->index }}][company]"
-                                                                       class="form-control" value="{{ $exp->company }}">
+                                                                       class="form-control" value="{{ $exp->company }}" required>
                                                             </td>
                                                             <td>
                                                                 <input type="date"
                                                                        name="experience[{{ $loop->index }}][from]"
-                                                                       class="form-control" value="{{ $exp->from }}">
+                                                                       class="form-control" value="{{ $exp->from }}" required>
                                                             </td>
                                                             <td>
                                                                 <input type="date"
                                                                        name="experience[{{ $loop->index }}][to]"
-                                                                       class="form-control" value="{{ $exp->to }}">
+                                                                       class="form-control" value="{{ $exp->to }}" required>
                                                             </td>
                                                             <td>
                                                                 <button class="btn btn-sm btn-danger btn-round delete_experience"
@@ -191,19 +191,19 @@
                                                         <tr>
                                                             <td>
                                                                 <input type="text" name="experience[0][name]"
-                                                                       class="form-control">
+                                                                       class="form-control" required>
                                                             </td>
                                                             <td>
                                                                 <input type="text" name="experience[0][company]"
-                                                                       class="form-control">
+                                                                       class="form-control" required>
                                                             </td>
                                                             <td>
                                                                 <input type="date" name="experience[0][from]"
-                                                                       class="form-control">
+                                                                       class="form-control" required>
                                                             </td>
                                                             <td>
                                                                 <input type="date" name="experience[0][to]"
-                                                                       class="form-control">
+                                                                       class="form-control" required>
                                                             </td>
                                                             <td>
                                                                 <button class="btn btn-sm btn-danger btn-round delete_experience"
@@ -249,19 +249,19 @@
                                                         <tr>
                                                             <td>
                                                                 <input type="text" name="training[{{ $loop->index }}][name]"
-                                                                       class="form-control" value="{{ $trn->name }}">
+                                                                       class="form-control" value="{{ $trn->name }}" required>
                                                             </td>
                                                             <td>
                                                                 <input type="text" name="training[{{ $loop->index }}][institution]"
-                                                                       class="form-control" value="{{ $trn->institution }}">
+                                                                       class="form-control" value="{{ $trn->institution }}" required>
                                                             </td>
                                                             <td>
                                                                 <input type="date" name="training[{{ $loop->index }}][from]"
-                                                                       class="form-control" value="{{ $trn->from }}">
+                                                                       class="form-control" value="{{ $trn->from }}" required>
                                                             </td>
                                                             <td>
                                                                 <input type="date" name="training[{{ $loop->index }}][to]"
-                                                                       class="form-control" value="{{ $trn->to }}">
+                                                                       class="form-control" value="{{ $trn->to }}" required>
                                                             </td>
                                                             <td>
                                                                 <button class="btn btn-sm btn-danger btn-round delete_training"
@@ -274,19 +274,19 @@
                                                         <tr>
                                                             <td>
                                                                 <input type="text" name="training[0][name]"
-                                                                       class="form-control">
+                                                                       class="form-control" required>
                                                             </td>
                                                             <td>
                                                                 <input type="text" name="training[0][institution]"
-                                                                       class="form-control">
+                                                                       class="form-control" required>
                                                             </td>
                                                             <td>
                                                                 <input type="date" name="training[0][from]"
-                                                                       class="form-control">
+                                                                       class="form-control" required>
                                                             </td>
                                                             <td>
                                                                 <input type="date" name="training[0][to]"
-                                                                       class="form-control">
+                                                                       class="form-control" required>
                                                             </td>
                                                             <td>
                                                                 <button class="btn btn-sm btn-danger btn-round delete_training"
@@ -392,19 +392,19 @@
                     var html = `<tr>
                                    <td>
                                        <input type="text" name="experience[${Exp_count}][name]"
-                                              class="form-control">
+                                              class="form-control" required>
                                    </td>
                                    <td>
                                        <input type="text" name="experience[${Exp_count}][company]"
-                                              class="form-control">
+                                              class="form-control" required>
                                    </td>
                                    <td>
                                        <input type="date" name="experience[${Exp_count}][from]"
-                                              class="form-control">
+                                              class="form-control" required>
                                    </td>
                                    <td>
                                        <input type="date" name="experience[${Exp_count}][to]"
-                                              class="form-control">
+                                              class="form-control" required>
                                    </td>
                                    <td>
                                        <button class="btn btn-sm btn-danger btn-round delete_experience"
@@ -433,19 +433,19 @@
                     var html = `<tr>
                                    <td>
                                        <input type="text" name="training[${Trn_count}][name]"
-                                              class="form-control">
+                                              class="form-control" required>
                                    </td>
                                    <td>
                                        <input type="text" name="training[${Trn_count}][institution]"
-                                              class="form-control">
+                                              class="form-control" required>
                                    </td>
                                    <td>
                                        <input type="date" name="training[${Trn_count}][from]"
-                                              class="form-control">
+                                              class="form-control" required>
                                    </td>
                                    <td>
                                        <input type="date" name="training[${Trn_count}][to]"
-                                              class="form-control">
+                                              class="form-control" required>
                                    </td>
                                    <td>
                                        <button class="btn btn-sm btn-danger btn-round delete_training"

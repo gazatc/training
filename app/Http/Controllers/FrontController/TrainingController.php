@@ -17,7 +17,7 @@ class TrainingController extends Controller
     public function index()
     {
         $employer = auth()->guard('employer')->user();
-        $trainings = Training::orderBy('created_at', 'desc')->where('employer_id', $employer->id)->get();
+        $trainings = Training::orderBy('created_at', 'desc')->where('employer_id', $employer->id)->paginate(15);
 
         return view('front.employer.train.index', compact('trainings'));
     }
@@ -53,8 +53,8 @@ class TrainingController extends Controller
             'title' => 'required|string|max:50',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'description' => 'required|string|max:350',
-            'requirement' => 'required|string|max:350',
+            'description' => 'required|string|max:10000|min:150',
+            'requirement' => 'required|string|max:10000|min:50',
             'last_date' => 'required|date||after_or_equal:today',
         ]);
         try {
@@ -115,8 +115,8 @@ class TrainingController extends Controller
             'title' => 'required|string|max:50',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'description' => 'required|string|max:350',
-            'requirement' => 'required|string|max:350',
+            'description' => 'required|string|max:10000|min:150',
+            'requirement' => 'required|string|max:10000|min:50',
             'last_date' => 'required|date|after:' . $training->created_at,
         ]);
 

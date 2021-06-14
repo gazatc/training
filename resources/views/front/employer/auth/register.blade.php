@@ -14,7 +14,7 @@
             @endif
             <div>
                 <header class="text-right bg-blue-200 py-2 px-2 rounded">
-                    <p class="text-xl font-semibold">بيانات الرئيسية</p>
+                    <p class="text-xl font-semibold">البيانات الرئيسية</p>
                 </header>
                 <div class="py-1">
                     <label for="email">اسم المستخدم</label>
@@ -139,7 +139,7 @@
             </div>
 
             <div class="py-2">
-                <input type="checkbox" class="px-2" required>أوافق على الشروط والأحكام وسياسة الخصوصية
+                <input type="checkbox" class="px-2 ml-2" required>أوافق على الشروط والأحكام وسياسة الخصوصية
             </div>
             <div class="py-2">
                 <button class=" text-sm text-white font-semibold rounded py-2 px-16 ml-2 bg-blue-900

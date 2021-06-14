@@ -13,7 +13,7 @@
           rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{asset('/css/app.css')}}">
     <style>
         * {
             font-family: cairo;
@@ -40,11 +40,11 @@
             </a>
             <ul class="flex mr-0 lg:mr-16 mt-6 lg:mt-0 font-light space-x-8">
                 <li><a href="{{route('jobs')}}"
-                       class="ml-8 hover:text-yellow-300 text-yellow-300 font-semibold">الوظائف</a></li>
-                <li><a href="{{route('trains')}}" class="hover:text-yellow-300">التدريب</a></li>
-                <li><a href="{{route('employers')}}" class="hover:text-yellow-300">الشركات</a></li>
-                <li><a href="{{route('jobSeekers')}}" class="hover:text-yellow-300">العاملين</a></li>
-                <li><a href="{{route('contact-us')}}" class="hover:text-yellow-300">تواصل معنا</a></li>
+                       class="ml-8 hover:text-yellow-300 {{ (request()->is('/')) ? 'text-yellow-300 font-semibold' : '' }}">الوظائف</a></li>
+                <li><a href="{{route('trains')}}" class="hover:text-yellow-300 {{ (request()->is('trainings')) ? 'text-yellow-300 font-semibold' : '' }}">التدريب</a></li>
+                <li><a href="{{route('employers')}}" class="hover:text-yellow-300 {{ (request()->is('employers')) ? 'text-yellow-300 font-semibold' : '' }}">أصحاب العمل</a></li>
+                <li><a href="{{route('jobSeekers')}}" class="hover:text-yellow-300 {{ (request()->is('jobSeekers')) ? 'text-yellow-300 font-semibold' : '' }}">الباحثين عن عمل</a></li>
+                <li><a href="{{route('contact-us')}}" class="hover:text-yellow-300 {{ (request()->is('contact-us')) ? 'text-yellow-300 font-semibold' : '' }}">تواصل معنا</a></li>
             </ul>
         </div>
 
@@ -255,11 +255,11 @@
                 {{--            Start Login & Register--}}
                 <a href="{{route('jobSeeker.login_form')}}"
                    class="bg-white text-sm text-blue-900 font-semibold rounded py-2 px-4 ml-2 hover:bg-blue-900 hover:text-yellow-300 border hover:border-yellow-300">
-                    تسجيل دخول العاملين
+                    تسجيل دخول الباحثين عن عمل
                 </a>
                 <a href="{{route('employer.login_form')}}"
                    class="bg-white text-sm text-blue-900 font-semibold rounded py-2 px-4 hover:bg-blue-900 hover:text-yellow-300 border hover:border-yellow-300">
-                    دخول أصحاب العمل
+                    تسجيل دخول أصحاب العمل
                 </a>
                 {{--            End Login & Register--}}
             @endif
@@ -274,7 +274,7 @@
             <path d="M16,0.5C7.45001,0.5,0.5,7.45001,0.5,16S7.45001,31.5,16,31.5S31.5,24.54999,31.5,16S24.54999,0.5,16,0.5z M14.5,23.5v-1.09003c0-0.83002,0.66998-1.5,1.5-1.5s1.5,0.66998,1.5,1.5V23.5c0,0.82996-0.66998,1.5-1.5,1.5S14.5,24.32996,14.5,23.5z M17.5,18.03998c0,0.82001-0.66998,1.5-1.5,1.5s-1.5-0.67999-1.5-1.5V8.5C14.5,7.66998,15.16998,7,16,7s1.5,0.66998,1.5,1.5V18.03998z">
             </path>
         </svg>
-        <p class="text-sm font-bold">حتى تتمكن من التقدم للوظائف والتدريب الرجاء توثيق حسابك</p>
+        <p class="text-sm font-bold">حتى تتمكن من التقدم للوظائف والتدريب الرجاء <a href="{{route('jobSeeker.verify.create')}}" class="underline"> توثيق حسابك</a></p>
     </div>
 @endif
 

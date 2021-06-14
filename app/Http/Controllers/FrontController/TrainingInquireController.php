@@ -45,7 +45,7 @@ class TrainingInquireController extends Controller
     {
 //        dd($training->getMorphClass());
         $request->validate([
-            'message' => 'required'
+            'message' => 'required|max:1000'
         ]);
         if (auth()->guard('jobSeeker')->check()) {
             $jobSeeker = auth()->guard('jobSeeker')->user();

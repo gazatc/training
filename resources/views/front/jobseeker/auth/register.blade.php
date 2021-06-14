@@ -3,7 +3,7 @@
     <div class="text-center bg-white rounded-lg md:w-1/2 m-auto ">
         <header>
             <h2 class="rounded-t-lg text-gray-800 uppercase text-center tracking-wide
-                text-xl font-semibold mb-2 py-1 bg-gray-100">تسجيل كباحث عن عمل / متدرب</h2>
+                text-xl font-semibold mb-2 py-1 bg-gray-100">تسجيل كباحث عن عمل</h2>
         </header>
 
         <form action="{{route('jobSeeker.register')}}" method="post" class="px-4 py-2" enctype="multipart/form-data">
@@ -15,7 +15,7 @@
             @endif
             <div>
                 <header class="text-right bg-blue-200 py-2 px-2 rounded">
-                    <p class="text-xl font-semibold">بيانات الرئيسية</p>
+                    <p class="text-xl font-semibold">البيانات الرئيسية</p>
                 </header>
                 <div class="py-1">
                     <label for="username">اسم المستخدم</label>
@@ -133,14 +133,14 @@
                 </div>
 
                 <div class="py-2">
-                    <label for="email">نبذة</label>
+                    <label for="email">النبذة</label>
                     <div class="pt-3">
                             <textarea  name="bio" id="" cols="30" required rows="5"
                                       class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900"></textarea>
                     </div>
                 </div>
                 <div class="py-2">
-                    <label for="email">مهارات</label>
+                    <label for="email">المهارات</label>
                     <div class="pt-3">
                             <textarea  name="skills" id="" cols="30" required rows="5"
                                       class="border border-gray-300 w-full text-sm rounded-sm bg-gray-100 px-3 py-1.5 focus:outline-none focus:border-blue-900"></textarea>
@@ -151,7 +151,7 @@
 
 
             <div class="py-2">
-                <input type="checkbox" class="px-2" required>أوافق على الشروط والأحكام وسياسة الخصوصية
+                <input type="checkbox" class="px-2 ml-2" required>أوافق على الشروط والأحكام وسياسة الخصوصية
             </div>
             <div class="py-2">
                 <button class=" text-sm text-white font-semibold rounded py-2 px-16 ml-2 bg-blue-900

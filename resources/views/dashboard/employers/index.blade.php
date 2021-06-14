@@ -121,10 +121,10 @@
                                                 <td>{{ ($employers->currentPage()-1) * $employers->perPage() + $loop->index + 1 }}</td>
                                                 <td>
                                                     <span class="list-icon">
-                                                        <img class="patients-img"
+                                                        <img class="patients-img img-fluid"
                                                              src="{{ $employer->information->avatar }}"
                                                              alt=""
-                                                             style="width: 50px; height: 50px">
+                                                             >
                                                     </span>
                                                 </td>
                                                 <td><span class="list-name">{{ $employer->username }}</span></td>
