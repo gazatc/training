@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a8161c-5ec9-43e9-9c39-65bb33c371a2" name="Default Changelist" comment="" />
+    <list default="true" id="f0a8161c-5ec9-43e9-9c39-65bb33c371a2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/vendor/asm89/stack-cors/" />
     <ignored path="$PROJECT_DIR$/vendor/brick/math/" />
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
@@ -150,22 +152,31 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="16" column="36" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="36" />
+            <state relative-caret-position="-2">
+              <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
               <folding>
+                <element signature="e#7#45#0#PHP" expanded="true" />
                 <element signature="e#1092#1647#1#PHP" />
                 <element signature="e#1728#5182#1#PHP" />
                 <element signature="e#5272#6109#1#PHP" />
-                <element signature="e#6170#10141#1#PHP" />
                 <element signature="e#6802#7816#1#PHP" />
                 <element signature="e#7917#9066#1#PHP" />
                 <element signature="e#9165#9482#1#PHP" />
                 <element signature="e#9583#9819#1#PHP" />
                 <element signature="e#9899#11254#1#PHP" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7797">
+              <caret line="339" selection-start-line="339" selection-end-line="339" />
             </state>
           </provider>
         </entry>
@@ -286,7 +297,6 @@
         <option value="$PROJECT_DIR$/resources/views/front/jobseeker/verify/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/JobSeekerLoginController.php" />
         <option value="$PROJECT_DIR$/resources/views/front/employer/profile/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/front/employer/job/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/front/employer/train/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/front/employer/train/create.blade.php" />
@@ -302,6 +312,7 @@
         <option value="$PROJECT_DIR$/resources/views/front/jobseeker/profile/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/front/jobseeker-single.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
       </list>
     </option>
   </component>
@@ -454,13 +465,20 @@
             <path>
               <item name="GraduateProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="GraduateProject" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GraduateProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="GraduateProject" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GraduateProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GraduateProject" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -628,7 +646,7 @@
       <workItem from="1623327668260" duration="3090000" />
       <workItem from="1623581785227" duration="30611000" />
       <workItem from="1623669730120" duration="12235000" />
-      <workItem from="1623749562210" duration="827000" />
+      <workItem from="1623749562210" duration="1081000" />
     </task>
     <servers />
   </component>
@@ -665,7 +683,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="284552000" />
+    <option name="totallyTimeSpent" value="284806000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -682,12 +700,12 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49848714" weight="0.6062015" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49848714" visible="true" weight="0.6062015" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5015129" side_tool="true" weight="0.6062015" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="bottom" id="Thumbnails" order="12" weight="0.32868218" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="13" visible="true" weight="0.7131783" />
+      <window_info anchor="bottom" id="Terminal" order="13" weight="0.7131783" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -918,13 +936,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1837">
-          <caret line="74" column="25" selection-start-line="74" selection-start-column="25" selection-end-line="74" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/front/employer/train/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="326">
@@ -1097,19 +1108,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="16" column="36" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="36" />
+        <state relative-caret-position="-2">
+          <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
           <folding>
+            <element signature="e#7#45#0#PHP" expanded="true" />
             <element signature="e#1092#1647#1#PHP" />
             <element signature="e#1728#5182#1#PHP" />
             <element signature="e#5272#6109#1#PHP" />
-            <element signature="e#6170#10141#1#PHP" />
             <element signature="e#6802#7816#1#PHP" />
             <element signature="e#7917#9066#1#PHP" />
             <element signature="e#9165#9482#1#PHP" />
             <element signature="e#9583#9819#1#PHP" />
             <element signature="e#9899#11254#1#PHP" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7797">
+          <caret line="339" selection-start-line="339" selection-end-line="339" />
         </state>
       </provider>
     </entry>
