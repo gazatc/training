@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a8161c-5ec9-43e9-9c39-65bb33c371a2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="f0a8161c-5ec9-43e9-9c39-65bb33c371a2" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/vendor/asm89/stack-cors/" />
     <ignored path="$PROJECT_DIR$/vendor/brick/math/" />
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
@@ -156,10 +153,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="26" column="49" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="49" />
+            <state relative-caret-position="40">
+              <caret line="16" column="36" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="36" />
               <folding>
+                <element signature="e#1092#1647#1#PHP" />
                 <element signature="e#1728#5182#1#PHP" />
+                <element signature="e#5272#6109#1#PHP" />
                 <element signature="e#6170#10141#1#PHP" />
                 <element signature="e#6802#7816#1#PHP" />
                 <element signature="e#7917#9066#1#PHP" />
@@ -629,7 +628,7 @@
       <workItem from="1623327668260" duration="3090000" />
       <workItem from="1623581785227" duration="30611000" />
       <workItem from="1623669730120" duration="12235000" />
-      <workItem from="1623749562210" duration="556000" />
+      <workItem from="1623749562210" duration="827000" />
     </task>
     <servers />
   </component>
@@ -666,13 +665,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="284281000" />
+    <option name="totallyTimeSpent" value="284552000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22844176" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22844176" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -689,7 +687,7 @@
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5015129" side_tool="true" weight="0.6062015" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="bottom" id="Thumbnails" order="12" weight="0.32868218" />
-      <window_info anchor="bottom" id="Terminal" order="13" weight="0.7131783" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="13" visible="true" weight="0.7131783" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -1099,10 +1097,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="26" column="49" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="49" />
+        <state relative-caret-position="40">
+          <caret line="16" column="36" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="36" />
           <folding>
+            <element signature="e#1092#1647#1#PHP" />
             <element signature="e#1728#5182#1#PHP" />
+            <element signature="e#5272#6109#1#PHP" />
             <element signature="e#6170#10141#1#PHP" />
             <element signature="e#6802#7816#1#PHP" />
             <element signature="e#7917#9066#1#PHP" />
