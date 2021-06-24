@@ -29,13 +29,10 @@
             </p>
         </div>
     @else
-        @php
-            $team = $jobSeeker->team()->first() !=NULL ? $jobSeeker->team()->first() : $jobSeeker->teamLeader()->first();
-        @endphp
         <div class="flex flex-col ">
             <header class="text-center">
-                <h2>{{$team->first()->name}}</h2>
-                <h2 class="mt-4">{{$team->first()->bio}}</h2>
+                <h2>{{$team->name}}</h2>
+                <h2 class="mt-4">{{$team->bio}}</h2>
             </header>
             @if($jobSeeker->teamLeader)
                 <div class="p-5 flex gap-5">
@@ -43,10 +40,10 @@
                         <a href="{{route('teams.member.create')}}"> إضافة عضو</a>
                     </p>
                     <p class="hover:text-blue-300 hover:underline">
-                        <a href="{{route('teams.edit',$team->first())}}">تعديل بيانات الفريق</a>
+                        <a href="{{route('teams.edit',$team)}}">تعديل بيانات الفريق</a>
                     </p>
                     <p class="text-red-500 hover:underline">
-                        <a href="{{route('teams.destroy',$team->first())}}"> حذف الفريق </a>
+                        <a href="{{route('teams.destroy',$team)}}"> حذف الفريق </a>
                     </p>
                 </div>
             @endif

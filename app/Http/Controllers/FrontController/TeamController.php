@@ -26,8 +26,8 @@ class TeamController extends Controller
     {
         //
         $jobSeeker = auth()->guard('jobSeeker')->user();
-        $team = $jobSeeker->team()->first();
-
+        $team = $jobSeeker->team()->first() !=NULL ? $jobSeeker->team()->first() : $jobSeeker->teamLeader()->first();
+		
         return view('front.jobseeker.teams.index',compact('jobSeeker','team'));
     }
 
