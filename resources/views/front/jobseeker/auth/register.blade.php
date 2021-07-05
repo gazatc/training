@@ -111,7 +111,7 @@
                         </label>
                         @error('avatar')
                         <span class="block"
-                              style="color: red; margin-right: 10px">{{ $errors->first('password') }}</span>
+                              style="color: red; margin-right: 10px">{{ $errors->first('avatar') }}</span>
                         @enderror
                     </div>
                 </div>
