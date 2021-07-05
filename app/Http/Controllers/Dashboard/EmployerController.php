@@ -197,6 +197,9 @@ class EmployerController extends Controller
         try {
             if ($request->avatar) {
                 $attributes['avatar'] = $request->avatar->store('employer_avatars');
+                $employer->information()->update([
+                    'avatar' => $attributes['avatar'] ?? NULL,
+                ]);
             }
 
             $employer->update([
@@ -212,7 +215,6 @@ class EmployerController extends Controller
             $employer->information()->update([
                 'region_id' => $attributes['region'],
                 'category_id' => $attributes['category'],
-                'avatar' => $attributes['avatar'] ?? NULL,
                 'bio' => $attributes['bio'],
                 'phone' => $attributes['phone'],
                 'type' => $attributes['type'],

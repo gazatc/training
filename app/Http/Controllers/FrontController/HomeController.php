@@ -66,7 +66,7 @@ class HomeController extends Controller
             })->when($request->verified, function ($q4) use ($request) {
                 return $q4->where('verified', $request->verified);
             });
-        })->latest()->paginate(4);
+        })->latest()->paginate(15);
 
         return view('front.employers', compact('employers'));
     }

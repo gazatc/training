@@ -208,6 +208,9 @@ class JobSeekerController extends Controller
         try {
             if ($request->avatar) {
                 $attributes['avatar'] = $request->avatar->store('jobSeeker_avatars');
+                $jobSeeker->information()->update([
+                    'avatar' => $attributes['avatar'] ?? NULL,
+                ]);
             }
 
             $jobSeeker->update([
@@ -224,7 +227,6 @@ class JobSeekerController extends Controller
             $jobSeeker->information()->update([
                 'region_id' => $attributes['region'],
                 'category_id' => $attributes['category'],
-                'avatar' => $attributes['avatar'] ?? NULL,
                 'bio' => $attributes['bio'],
                 'skills' => $attributes['skills'],
                 'degree' => $attributes['degree'],
