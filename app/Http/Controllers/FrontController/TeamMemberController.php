@@ -26,7 +26,7 @@ class TeamMemberController extends Controller
         if (empty($jobSeeker)) {
             return back()->with('fail', 'لا يوجد تطابق بالمعلومات');
         } else {
-            if ($jobSeeker->team->first() == null) {
+            if ($jobSeeker->team()->first() == null && $jobSeeker->teamLeader()->first() == null) {
                 TeamMember::create([
                     'team_id' => $team->id,
                     'job_seeker_id' => $jobSeeker->id,
