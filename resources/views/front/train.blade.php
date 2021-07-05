@@ -150,9 +150,9 @@
                         @endforelse
                             {{--End Single Job--}}
                     </div>
-                    <div dir="ltr" class="mt-3 px-8">
-                        {{$trainings->appends(request()->query())->links('pagination::tailwind')}}
-                    </div>
+                </div>
+                <div dir="ltr" class="mt-3 px-8">
+                    {{$trainings->appends(request()->query())->links('pagination::tailwind')}}
                 </div>
                 {{--End Jobs Menu--}}
             </div>

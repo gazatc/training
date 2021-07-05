@@ -129,9 +129,10 @@
                         </div>
                     </div>
                     @endforelse
-                    <div dir="ltr" class="mt-3 px-8">
-                        {{$jobSeekers->appends(request()->query())->links('pagination::tailwind')}}
-                    </div>
+
+                </div>
+                <div dir="ltr" class="mt-3 px-8">
+                    {{$jobSeekers->appends(request()->query())->links('pagination::tailwind')}}
                 </div>
                 {{--End Employers Menu--}}
             </div>
