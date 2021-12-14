@@ -31,8 +31,10 @@ class AdminController extends Controller
         //
         $admins = Admin::whereRoleIs('admin')->where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
-                return $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('email', 'like', '%' . $request->search . '%');
+                return $q->where(function ($q2) use ($request) {
+                    return $q2->where('name', 'like', '%' . $request->search . '%')
+                        ->orWhere('email', 'like', '%' . $request->search . '%');
+                });
             });
             $query->when($request->role, function ($q) use ($request) {
                 return $q->whereHas('roles', function ($q2) use ($request) {

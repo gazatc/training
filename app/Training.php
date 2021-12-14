@@ -24,4 +24,30 @@ class Training extends Model
         return $this->morphMany(Application::class, 'applicationable');
     }
 
+    public function hasAttemptToThisTraining(JobSeeker $jobSeeker = null)
+    {
+        $result = $this->applications()->where('job_seeker_id', @$jobSeeker->id)->exists();
+        return $result;
+    }
+
+    public function numberOFInquire(JobSeeker $jobSeeker)
+    {
+
+//        $count = $this->where('job_seeker_id',$jobSeeker->id)->count();
+        $count = Inquire::where('job_seeker_id',$jobSeeker->id)->where('inquirable_id',$this->id)->where('inquirable_type',$this->getMorphClass())->count();
+        return $count ;
+    }
+
+    public function numberOfAttemptsToThisTraining()
+    {
+        $count = Application::where('applicationable_id',$this->id)->where('applicationable_type',$this->getMorphClass())->count();
+        return $count;
+    }
+
+    public function numberOFInquireToThisTraining()
+    {
+        $count = Inquire::where('inquirable_id',$this->id)->where('inquirable_type',$this->getMorphClass())->count();
+        return $count;
+    }
+
 }

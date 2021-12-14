@@ -49,7 +49,7 @@
                                             <input type="text" name="name" class="form-control"
                                                    placeholder="الإسم" value="{{ $role->name }}">
                                             @error('name')
-                                                <span style="color: red; margin-right: 10px">{{ $errors->first('name') }}</span>
+                                            <span style="color: red; margin-right: 10px">{{ $errors->first('name') }}</span>
                                             @enderror
                                         </div>
                                     </div>
@@ -69,13 +69,14 @@
                                     <tbody>
                                     @foreach($permissions as $category=>$operations)
                                         <tr>
-                                            <td>{{ $category }}</td>
+                                            <td>{{ __('roles.'.$category) }}</td>
                                             <td>
-                                                <select class="form-control z-index show-tick" name="permissions[]" data-live-search="true" multiple>
+                                                <select class="form-control z-index show-tick" name="permissions[]"
+                                                        data-live-search="true" multiple>
                                                     @foreach ($operations as $operate)
                                                         <option value="{{ $operate . '_' . $category }}"
                                                                 {{ $role->hasPermission($operate . '_' . $category) ? 'selected' : '' }}>
-                                                            {{ $operate }}
+                                                            {{ __('roles.'.$operate) }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -84,9 +85,9 @@
                                     @endforeach
                                     </tbody>
                                     <tfoot>
-                                        @error('permissions')
-                                            <span style="color: red; margin-right: 10px">{{ $errors->first('permissions') }}</span>
-                                        @enderror
+                                    @error('permissions')
+                                    <span style="color: red; margin-right: 10px">{{ $errors->first('permissions') }}</span>
+                                    @enderror
                                     </tfoot>
                                 </table>
 
@@ -96,7 +97,8 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-primary btn-round">تعديل</button>
-                                        <button type="reset" class="btn btn-default btn-round btn-simple">إالغاء</button>
+                                        <button type="reset" class="btn btn-default btn-round btn-simple">إالغاء
+                                        </button>
                                     </div>
                                 </div>
                             </form>

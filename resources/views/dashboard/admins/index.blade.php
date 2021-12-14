@@ -98,7 +98,7 @@
                                                 <td>{{ ($admins->currentPage()-1) * $admins->perPage() + $loop->index + 1 }}</td>
                                                 <td>
                                                     <span class="list-icon">
-                                                        <img class="patients-img"
+                                                        <img class="patients-img img-fluid"
                                                              src="{{  $admin->avatar }}"
                                                              alt=""
                                                              style="width: 50px; height: 50px">

@@ -60,7 +60,7 @@
         </li>
 
         <li class="d-none d-lg-inline-block">
-            <a href="/" title="Website">
+            <a href="/" target="_blank" title="Website">
                 <i class="zmdi zmdi-globe-alt"></i>
             </a>
         </li>

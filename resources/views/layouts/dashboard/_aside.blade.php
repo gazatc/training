@@ -11,7 +11,7 @@
                                             alt="User"></a></div>
                             <div class="detail">
                                 <h4>{{auth()->guard('admin')->user()->name}}</h4>
-                                <small>{{auth()->guard('admin')->user()->getRoles()[0]}}</small>
+                                <small>{{__('roles.'.auth()->guard('admin')->user()->getRoles()[0])}}</small>
                             </div>
                         </div>
                     </li>

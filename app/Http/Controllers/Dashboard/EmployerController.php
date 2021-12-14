@@ -30,13 +30,15 @@ class EmployerController extends Controller
         //
         $employers = Employer::with(['information', 'verify'])->where(function ($query) use ($request) {
             $query->when($request->search, function ($q) use ($request) {
-                return $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('username', 'like', '%' . $request->search . '%')
-                    ->orWhere('email', 'like', '%' . $request->search . '%')
-                    ->orWhereHas('information', function ($query) use ($request) {
-                        $query->where('phone', 'like', '%' . $request->search . '%')
-                            ->orWhere('address', 'like', '%' . $request->search . '%');
-                    });
+                return $q->where(function ($q2) use ($request) {
+                    return $q2->where('name', 'like', '%' . $request->search . '%')
+                        ->orWhere('username', 'like', '%' . $request->search . '%')
+                        ->orWhere('email', 'like', '%' . $request->search . '%')
+                        ->orWhereHas('information', function ($query) use ($request) {
+                            $query->where('phone', 'like', '%' . $request->search . '%')
+                                ->orWhere('address', 'like', '%' . $request->search . '%');
+                        });
+                });
             })->when($request->region, function ($q2) use ($request) {
                 return $q2->whereHas('information', function ($q2) use ($request) {
                     $q2->where('region_id', $request->region);
@@ -90,13 +92,13 @@ class EmployerController extends Controller
             'type' => 'required|string|max:30',
             'year' => 'required|max:4',
             'address' => 'required|string|max:50',
-            'bio' => 'required|string|max:150',
-            'web' => 'nullable|url|max:50',
-            'linkedin' => 'nullable|url|max:50',
-            'facebook' => 'nullable|url|max:50',
-            'twitter' => 'nullable|url|max:50',
-            'instagram' => 'nullable|url|max:50',
-            'whatsapp' => 'nullable|url|max:50',
+            'bio' => 'required|string|max:10000|min:50',
+            'web' => 'nullable|url|max:70',
+            'linkedin' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?linkedin\.com\/.+/i',
+            'facebook' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?facebook\.com\/.+/i',
+            'twitter' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?twitter\.com\/.+/i',
+            'instagram' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?instagram\.com\/.+/i',
+            'whatsapp' => 'nullable|url|max:70',
         ]);
         try {
             if ($request->avatar) {
@@ -180,21 +182,24 @@ class EmployerController extends Controller
             'avatar' => 'nullable|image',
             'region' => 'required|exists:regions,id',
             'category' => 'required|exists:categories,id',
-            'phone' => 'required|string|max:20',
+            'phone' => 'required|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
             'type' => 'required|string|max:30',
             'year' => 'required|max:4',
             'address' => 'required|string|max:50',
-            'bio' => 'required|string|max:150',
-            'web' => 'nullable|url|max:50',
-            'linkedin' => 'nullable|url|max:50',
-            'facebook' => 'nullable|url|max:50',
-            'twitter' => 'nullable|url|max:50',
-            'instagram' => 'nullable|url|max:50',
-            'whatsapp' => 'nullable|url|max:50',
+            'bio' => 'required|string|max:10000|min:50',
+            'web' => 'nullable|url|max:70',
+            'linkedin' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?linkedin\.com\/.+/i',
+            'facebook' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?facebook\.com\/.+/i',
+            'twitter' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?twitter\.com\/.+/i',
+            'instagram' => 'nullable|url|max:70|regex:/http(s)?:\/\/(www\.)?instagram\.com\/.+/i',
+            'whatsapp' => 'nullable|url|max:70',
         ]);
         try {
             if ($request->avatar) {
                 $attributes['avatar'] = $request->avatar->store('employer_avatars');
+                $employer->information()->update([
+                    'avatar' => $attributes['avatar'] ?? NULL,
+                ]);
             }
 
             $employer->update([
@@ -210,7 +215,6 @@ class EmployerController extends Controller
             $employer->information()->update([
                 'region_id' => $attributes['region'],
                 'category_id' => $attributes['category'],
-                'avatar' => $attributes['avatar'] ?? NULL,
                 'bio' => $attributes['bio'],
                 'phone' => $attributes['phone'],
                 'type' => $attributes['type'],

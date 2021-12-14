@@ -68,11 +68,11 @@
                                     <tbody>
                                         @foreach($permissions as $category=>$operations)
                                             <tr>
-                                                <td>{{ $category }}</td>
+                                                <td>{{ __('roles.'.$category) }}</td>
                                                 <td>
                                                     <select class="form-control z-index show-tick" name="permissions[]" data-live-search="true" multiple>
                                                         @foreach ($operations as $operate)
-                                                            <option value="{{ $operate . '_' . $category }}">{{ $operate }}</option>
+                                                            <option value="{{ $operate . '_' . $category }}">{{ __('roles.'.$operate) }}</option>
                                                         @endforeach
                                                     </select>
                                                 </td>

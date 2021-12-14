@@ -77,7 +77,7 @@
                                                 <td><span class="list-name">{{$role->name}}</span></td>
                                                 <td>
                                                     @foreach($role->permissions as $permission)
-                                                        <li>{{ $permission->name }}</li>
+                                                        <li>{{ __('roles.'.$permission->name) }}</li>
                                                     @endforeach
                                                 </td>
                                                 <td>{{ $role->users->count() }}</td>
