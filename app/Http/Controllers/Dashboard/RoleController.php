@@ -56,6 +56,7 @@ class RoleController extends Controller
                 }
             }
         }
+//        dd($permissions);
         return view('dashboard.roles.create', compact('permissions'));
     }
 
@@ -72,6 +73,7 @@ class RoleController extends Controller
             'name' => 'required|unique:roles,name',
             'permissions' => 'required|array|min:1'
         ]);
+//        dd($attributes);
         try {
             $role = Role::create($attributes);
             $role->attachPermissions($attributes['permissions']);
