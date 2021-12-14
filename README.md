@@ -14,6 +14,9 @@ This project is divided into two sections, Dashboard(Admin Side) and User Pages(
 1. Abdullah Shublaq
     - Github: [https://github.com/AbdullahShublaq/](https://github.com/AbdullahShublaq/)
     - LinkedIn: [https://www.linkedin.com/in/abdullahshublaq/](https://www.linkedin.com/in/abdullahshublaq/)
+1. Mohammad Waleed
+    - website: [transknow company](https://transknow.tech)
+    - LinkedIn: [https://www.linkedin.com/in/engmohammadwak](https://www.linkedin.com/in/engmohammadwak/)
 1. Mohammed Abuassi
    - Github: [https://github.com/mohamedabuassi99](https://github.com/mohamedabuassi99)
    - LinkedIn: [https://www.linkedin.com/in/mohammedabuassi/](https://www.linkedin.com/in/mohammedabuassi/)
